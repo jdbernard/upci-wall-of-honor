@@ -1,4 +1,4 @@
-import { Component, Vue, Ref } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { Map, Seq } from 'immutable';
 import moment from 'moment';
 import { Minister } from '@/data/minister.model';
@@ -62,7 +62,7 @@ export default class DeceasedMinistersView extends Vue {
     );
   };
 
-  public pauseScroll= () => {
+  public pauseScroll = () => {
     if (this.scrollInterval) {
       clearInterval(this.scrollInterval);
     }
