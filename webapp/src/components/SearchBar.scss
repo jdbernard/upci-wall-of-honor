@@ -1,0 +1,20 @@
+@import "~@/styles/vars.scss";
+
+.search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: $body-font-size-sm;
+  font-weight: 300;
+  margin: $spacer 0;
+  width: 12rem;
+
+  button {
+    padding: 0px 8px 2px 8px;
+  }
+
+  // Keep text baseline aligned with the button text
+  span { padding-bottom: 2px; }
+
+}

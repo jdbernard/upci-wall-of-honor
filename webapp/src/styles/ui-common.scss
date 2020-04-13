@@ -1,5 +1,6 @@
 @import "reset.scss";
 @import "vars.scss";
+@import "fonts.scss";
 
 html {
   background-color: $color-bg;
@@ -9,7 +10,7 @@ html {
 
 body {
   font-family: $body-font-family;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 h1 {
@@ -30,6 +31,18 @@ h2 {
 
   h2 {
     font-family: $body-font-family;
-    font-weight: 400;
+    font-weight: 300;
   }
+}
+
+button {
+  border: solid thin $color-fg;
+  background-color: lighten($color-bg, 10%);
+  border-radius: $spacer-xxs;
+  color: $color-fg;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 4px;
 }
