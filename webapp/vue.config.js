@@ -16,14 +16,12 @@ module.exports = {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        routes: ['/', '/home', '/about']
+        routes: ['/', '/deceased-ministers']
       })
     ]
   },
 
   chainWebpack: config => {
-    config
-      .plugin('define')
-      .tap(args => merge(args, [VERSION]));
+    config.plugin('define').tap(args => merge(args, [VERSION]));
   }
 };
