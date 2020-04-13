@@ -1,0 +1,23 @@
+@import "~@/styles/vars.scss";
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 28rem;
+
+  .left, .right {
+    height: auto;
+    width: 11.5rem;
+    flex-shrink: 1;
+  }
+
+  .right { transform: scaleX(-1); }
+
+  .year-label {
+    font-weight: 500;
+    font-size: $header-font-size-sm;
+    margin: 0 .5rem;
+    width: 4rem;
+  }
+}

@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Index',
     component: IndexView
-  },
+  }
 ];
 
 const router = new VueRouter({

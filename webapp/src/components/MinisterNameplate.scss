@@ -1,0 +1,10 @@
+@import "~@/styles/vars";
+
+.minister-nameplate {
+  padding: $spacer-xs $spacer-sm;
+  width: 13rem;
+
+  .vitals {
+    font-size: $body-font-size-xs;
+  }
+}
