@@ -8,13 +8,22 @@
   font-size: $body-font-size-sm;
   font-weight: 300;
   margin: $spacer 0;
-  width: 12rem;
+  width: 14rem;
 
   button {
     padding: 0px 8px 2px 8px;
   }
 
   // Keep text baseline aligned with the button text
-  span { padding-bottom: 2px; }
+  & > span {
+    margin: 0 $spacer-sm;
+    white-space: nowrap;
+  }
+
+  &.main > span { padding-bottom: 2px; }
+
+  input[type=text] {
+    min-width: 0;
+  }
 
 }

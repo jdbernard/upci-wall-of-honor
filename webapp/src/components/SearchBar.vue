@@ -1,15 +1,19 @@
 <template>
   <div class="search" v-if="byName">
     <span>Search by name:</span>
-    <input (change)="nameFilterChanged" placeholder="e.g. John Smith" />
+    <input
+      @keydown="handleNameUpdate"
+      placeholder="e.g. John Smith"
+      type="text"
+    />
   </div>
   <div class="search" v-else-if="byYear">
     TBD
   </div>
-  <div class="search" v-else>
+  <div class="search main" v-else>
     <span>Search by:</span>
-    <button>name</button>
-    <button>year</button>
+    <button @click="searchByName()">name</button>
+    <button @click="searchByYear()">year</button>
   </div>
 </template>
 <script lang="ts" src="./SearchBar.ts"></script>

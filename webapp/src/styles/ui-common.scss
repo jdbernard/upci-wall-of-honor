@@ -35,14 +35,23 @@ h2 {
   }
 }
 
-button {
-  border: solid thin $color-fg;
-  background-color: lighten($color-bg, 10%);
-  border-radius: $spacer-xxs;
+input[type=text], button {
   color: $color-fg;
-  cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
+}
+
+input[type=text] {
+  background-color: $color-bg;
+  border-bottom: solid thin $color-fg;
+  font-style: italic;
+}
+
+button {
+  background-color: lighten($color-bg, 10%);
+  border: solid thin $color-fg;
+  border-radius: $spacer-xxs;
+  cursor: pointer;
   padding: 4px;
 }
