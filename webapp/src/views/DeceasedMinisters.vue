@@ -4,14 +4,21 @@
       <h1>Wall of Honor</h1>
       <h2>Deceased Ministers of the UPCI</h2>
       <SearchBarComponent></SearchBarComponent>
-      <YearDividerComponent :year="currentYear"></YearDividerComponent>
+      <YearDividerComponent
+        ref="currentYearDivider"
+        :year="currentYear"
+      ></YearDividerComponent>
       <div class="curtain"></div>
     </div>
-    <div @mouseover="pauseScroll()" @mouseout="scroll()" class="ministers-list">
+    <div
+      @mouseover="pauseScroll()"
+      @mouseout="scroll(1000)"
+      class="ministers-list"
+    >
       <ul class="years">
         <li v-for="year in years" :key="year">
           <YearDividerComponent
-            class="divider"
+            :observer="observer"
             :year="year"
           ></YearDividerComponent>
           <ul class="ministers-in-year">

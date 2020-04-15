@@ -1,4 +1,6 @@
-import json, options, random, times, uuids
+import algorithm, json, options, random, tables, times, uuids
+
+randomize()
 
 const dateFormat = "yyyy-MM-dd"
 
@@ -183,12 +185,18 @@ const firstNames = @[
   "Constance", "Vickie", "Evelyn", "Glenda", "Dianne", "Sarah", "Roberta",
   "Maureen", "Anna", "Eileen", "Anita", "Jeanne", "Sylvia " ]
 
-type Minister = object
-  id: UUID
-  firstName: string
-  lastName: string
-  dateOfBirth: DateTime
-  dateOfDeath: Option[DateTime]
+type
+  Minister = ref object
+    id: UUID
+    firstName: string
+    lastName: string
+    dateOfBirth: DateTime
+    dateOfDeath: Option[DateTime]
+
+  MinistersDB = object
+    ministers: seq[Minister]
+
+  DeceasedMinistersView = TableRef[int, seq[Minister]]
 
 proc `%`(m: Minister): JsonNode =
   result = %*{
@@ -201,50 +209,67 @@ proc `%`(m: Minister): JsonNode =
   if m.dateOfDeath.isSome():
     result["dateOfDeath"] = %(m.dateOfDeath.get.format(dateFormat))
 
-when isMainModule:
-  randomize()
+proc `%`(db: MinistersDB): JsonNode =
+  result = %*{
+    "ministers": db.ministers
+  }
 
-  let outputFile = open("ministers.json", fmWrite)
+proc `%`(d: DeceasedMinistersView): JsonNode =
+  result = newJObject()
 
-  outputFile.writeLine("{ \"ministers\": [")
+  for year in d.keys: result[$year] = %d[year]
 
-  const deathYearSpan = (deathMax - deathMin)
+proc generateMinister(deceased = true): Minister =
+  let dateOfDeath: Option[DateTime] =
+    if deceased:
+      some(initDateTime(
+        rand(1..28),
+        cast[Month](rand(1..12)),
+        rand(deathMin..deathMax),
+        0, 0, 0, utc()))
+    else: none[DateTime]()
 
-  for i in (0..<numDeceased):
-    let dateOfDeath = initDateTime(
-      rand(1..28),
-      cast[Month](rand(1..12)),
-      rand(deathMin..deathMax),
-      0, 0, 0, utc())
-
-    let dateOfBirth = initDateTime(
+  let dateOfBirth: DateTime =
+    initDateTime(
       rand(1..28),
       cast[Month](rand(12) + 1),
-      rand(dateOfDeath.year - maxLifespan ..
-           dateOfDeath.year - minLifespan),
+      if deceased: rand(dateOfDeath.get.year - maxLifespan ..
+                        dateOfDeath.get.year - minLifespan)
+      else: rand((now().year - maxLifespan) .. now().year),
       0, 0, 0, utc())
 
-    outputFile.writeLine($(%Minister(
-      id: genUUID(),
-      firstName: firstNames[rand(0..<len(firstNames))],
-      lastName: lastNames[rand(0..<len(lastNames))],
-      dateOfBirth: dateOfBirth,
-      dateOfDeath: some(dateOfDeath)
-    )) & ",")
+  result = Minister(
+    id: genUUID(),
+    firstName: firstNames[rand(0..<len(firstNames))],
+    lastName: lastNames[rand(0..<len(lastNames))],
+    dateOfBirth: dateOfBirth,
+    dateOfDeath: dateOfDeath
+  )
 
-  for i in (0..<numLiving):
-    let dateOfBirth = initDateTime(
-      rand(1..28),
-      cast[Month](rand(1..12)),
-      rand((now().year - maxLifespan) .. now().year),
-      0, 0, 0, utc())
+proc compareDeathDates(a, b: Minister): int =
+  if a < b: result = -1
+  elif a > b: result  = 1
+  else: result = 0
 
-    outputFile.writeLine($(%Minister(
-      id: genUUID(),
-      firstName: firstNames[rand(0..<len(firstNames))],
-      lastName: lastNames[rand(0..<len(lastNames))],
-      dateOfBirth: dateOfBirth,
-      dateOfDeath: none[DateTime]()
-    )) & ",")
+when isMainModule:
 
-  outputFile.writeLine("] }")
+  var db = MinistersDB(ministers: @[])
+  var deceasedMinistersView: DeceasedMinistersView = newTable[int, seq[Minister]]()
+
+  for i in (0..<numDeceased): db.ministers.add(generateMinister(true))
+  for i in (0..<numLiving): db.ministers.add(generateMinister(false))
+
+  writeFile("ministers.json", $(%db))
+
+  for m in db.ministers:
+    if not m.dateOfDeath.isSome(): continue
+    let year = m.dateOfDeath.get.year
+    if not deceasedMinistersView.hasKey(year):
+      deceasedMinistersView[year] = @[m]
+    else:
+      deceasedMinistersView[year].add(m)
+
+  for k in deceasedMinistersView.keys:
+    deceasedMinistersView[k].sort(compareDeathDates)
+
+  writeFile("deceased.ministers.view.json", $(%deceasedMinistersView))

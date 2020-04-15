@@ -1,12 +1,11 @@
-import { Component, Vue } from 'vue-property-decorator';
-import { Map, Seq } from 'immutable';
+import { Component, Ref, Vue } from 'vue-property-decorator';
+import { Collection, Map, List } from 'immutable';
 import moment from 'moment';
 import { Minister } from '@/data/minister.model';
 import MinistersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
-import SearchBarComponent from '@/components/SearchBar.vue';
-import YearDividerComponent from '@/components/YearDivider.vue';
-import { momentComparator } from '@/util';
+import SearchBarComponent from '@/components/common/SearchBar.vue';
+import YearDividerComponent from '@/components/common/YearDivider.vue';
 
 @Component({
   components: {
@@ -17,54 +16,74 @@ import { momentComparator } from '@/util';
 })
 export default class DeceasedMinistersView extends Vue {
   public currentYear = moment().year();
-  public ministers: Minister[] = [];
+  public ministers: List<Minister> = List();
 
-  public deceasedMinisters = Map<number, Minister[]>();
-  public years = Seq<number>([]);
+  public deceasedMinisters = Map<number, List<Minister>>();
+  public years: number[] = [];
 
-  private scrollInterval?: number;
+  private scrolling = true;
+  private lastWindowY = 0;
+  private lastScrollInvoke = 0;
+  private msPerFrame = 32;
+  private pxPerFrame = 1;
 
-  //@Ref() readonly ministersList!: HTMLDivElement;
+  @Ref('currentYearDivider') currentYearDivider!: YearDividerComponent;
+  private observer?: IntersectionObserver;
 
   private async mounted() {
     this.ministers = await MinistersStore.ministers;
-    this.deceasedMinisters = this.groupByYear(this.ministers);
-    this.years = this.deceasedMinisters.keySeq().sort((a, b) => b - a);
-    this.currentYear = this.years.first(moment().year());
+    this.deceasedMinisters = await MinistersStore.deceasedMinistersByYear;
 
-    this.scroll();
+    const allYears = this.deceasedMinisters.keySeq().sort((a, b) => b - a);
+    this.currentYear = allYears.first(moment().year());
+
+    this.observer = new IntersectionObserver(this.handleYearIntersect, {
+      root: this.currentYearDivider.$el,
+      threshold: 0.75
+    });
+
+    this.pageInYears(allYears).then(() => this.scroll(0));
+    return;
   }
 
-  private groupByYear(ministerList: Minister[]): Map<number, Minister[]> {
-    return Map<number, Minister[]>()
-      .withMutations(mutableMap => {
-        ministerList.reduce((map: Map<number, Minister[]>, m: Minister) => {
-          if (!m || !m.dateOfDeath) return map;
-          const year = m.dateOfDeath.year();
-          const yearList = map.get(year);
-          if (yearList) {
-            yearList.push(m);
-          } else {
-            map.set(year, [m]);
-          }
-          return map;
-        }, mutableMap);
-      })
-      .map(v =>
-        v.sort((a, b) => momentComparator(a.dateOfDeath, b.dateOfDeath))
-      );
-  }
+  public scroll = (initialDelay: number) => {
+    this.scrolling = true;
+    this.lastScrollInvoke = Date.now();
 
-  public scroll = () => {
-    this.scrollInterval = setInterval(
-      () => window.scrollBy({ top: 4, behavior: 'smooth' }),
-      50
-    );
+    setTimeout(this.doScroll, initialDelay);
   };
 
   public pauseScroll = () => {
-    if (this.scrollInterval) {
-      clearInterval(this.scrollInterval);
+    this.scrolling = false;
+  };
+
+  private doScroll = () => {
+    if (!this.scrolling) return;
+
+    const curTime = Date.now();
+    const elapsedTime = curTime - this.lastScrollInvoke;
+    if (elapsedTime > this.msPerFrame) {
+      window.scrollBy({ top: this.pxPerFrame });
+      this.lastScrollInvoke = curTime;
     }
+    window.requestAnimationFrame(this.doScroll);
+  };
+
+  private pageInYears = (years: Collection.Indexed<number>): Promise<void> => {
+    return new Promise(resolve => {
+      const nextYear = (remainingYears: Collection.Indexed<number>) => {
+        if (!remainingYears || remainingYears.count() === 0) {
+          resolve();
+        } else {
+          this.years.push(remainingYears.first());
+          setTimeout(() => nextYear(remainingYears.rest()), 50);
+        }
+      };
+      nextYear(years);
+    });
+  };
+
+  private handleYearIntersect = (entries: IntersectionObserverEntry[]) => {
+    console.log(entries);
   };
 }

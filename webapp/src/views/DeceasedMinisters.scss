@@ -49,6 +49,10 @@
       }
     }
 
+    li:first-of-type .divider {
+      margin-bottom: $spacer;
+    }
+
     .divider {
       margin-top: $spacer-md;
     }
