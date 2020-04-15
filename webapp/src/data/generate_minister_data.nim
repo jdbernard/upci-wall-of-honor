@@ -1,3 +1,9 @@
+# generate_minister_data
+#
+# Utility to create a random dataset for the UPCI Wall of Honor project.
+# Creates a single dataset of ministers and a single view of that dataset
+# organized in the way the Deceased Ministers page expects.
+
 import algorithm, json, options, random, tables, times, uuids
 
 randomize()
