@@ -35,6 +35,9 @@
     margin-top: 11.6rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 4rem;
+    opacity: 1;
+    transition: opacity 1s;
     width: 28rem;
 
     ul {
@@ -63,6 +66,10 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
+    }
+
+    &.reset {
+      opacity: 0;
     }
   }
 }

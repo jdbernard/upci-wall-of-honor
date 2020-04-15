@@ -14,6 +14,7 @@
       @mouseover="pauseScroll()"
       @mouseout="scroll(1000)"
       class="ministers-list"
+      :class="scrollReset && 'reset'"
     >
       <ul class="years">
         <li v-for="year in years" :key="year">
