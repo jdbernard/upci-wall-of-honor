@@ -2,6 +2,7 @@ import { Component, Ref, Vue } from 'vue-property-decorator';
 import { Collection, Map, List } from 'immutable';
 import moment from 'moment';
 import { Minister } from '@/data/minister.model';
+import { AutoScrollService } from '@/services/auto-scroll.service.ts';
 import MinistersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
 import SearchBarComponent from '@/components/common/SearchBar.vue';
@@ -21,11 +22,10 @@ export default class DeceasedMinistersView extends Vue {
   public deceasedMinisters = Map<number, List<Minister>>();
   public years: number[] = [];
 
-  private scrolling = true;
-  private lastWindowY = 0;
-  private lastScrollInvoke = 0;
-  private msPerFrame = 32;
-  private pxPerFrame = 1;
+  // TODO: use dependency injection instead (need to figure out the broaders DI
+  // story)
+  private scrollService?: AutoScrollService;
+  private scrollReset = false;
 
   @Ref('currentYearDivider') currentYearDivider!: YearDividerComponent;
   private observer?: IntersectionObserver;
@@ -42,32 +42,62 @@ export default class DeceasedMinistersView extends Vue {
       threshold: 0.75
     });
 
-    this.pageInYears(allYears).then(() => this.scroll(0));
+    const scrollOptions = {
+      msPerPx: 64,
+      onScrollEnd: () => this.onScrollEnd()
+    };
+
+    this.scrollService = new AutoScrollService(scrollOptions);
+    this.pageInYears(allYears).then(this.scrollService.start);
+
     return;
   }
 
-  public scroll = (initialDelay: number) => {
-    this.scrolling = true;
-    this.lastScrollInvoke = Date.now();
-
-    setTimeout(this.doScroll, initialDelay);
-  };
-
-  public pauseScroll = () => {
-    this.scrolling = false;
-  };
-
-  private doScroll = () => {
-    if (!this.scrolling) return;
-
-    const curTime = Date.now();
-    const elapsedTime = curTime - this.lastScrollInvoke;
-    if (elapsedTime > this.msPerFrame) {
-      window.scrollBy({ top: this.pxPerFrame });
-      this.lastScrollInvoke = curTime;
+  private beforeDestroy() {
+    if (this.scrollService) {
+      this.scrollService.stop();
     }
-    window.requestAnimationFrame(this.doScroll);
-  };
+  }
+
+  public scroll(delay: number) {
+    if (this.scrollService) {
+      this.scrollService.start(delay);
+    }
+  }
+
+  public pauseScroll() {
+    if (this.scrollService) {
+      this.scrollService.stop();
+    }
+  }
+
+  private onScrollEnd() {
+    setTimeout(() => {
+      this.scrollReset = true;
+
+      setTimeout(() => {
+        window.scrollTo({ top: 0 });
+        this.scrollReset = false;
+        if (this.scrollService) {
+          setTimeout(this.scrollService.start, 10000);
+        }
+      }, 2000);
+    }, 10000);
+  }
+
+  private afterScrollReset(): Promise<void> {
+    this.scrollReset = false;
+    return new Promise(resolve => setTimeout(resolve, 10000));
+  }
+
+  private beforeScrollReset(): Promise<void> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.scrollReset = true;
+        Vue.nextTick(resolve);
+      }, 10000);
+    });
+  }
 
   private pageInYears = (years: Collection.Indexed<number>): Promise<void> => {
     return new Promise(resolve => {
@@ -79,7 +109,7 @@ export default class DeceasedMinistersView extends Vue {
           setTimeout(() => nextYear(remainingYears.rest()), 50);
         }
       };
-      nextYear(years);
+      Vue.nextTick().then(() => nextYear(years));
     });
   };
 
