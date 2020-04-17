@@ -4,10 +4,6 @@
       <h1>Wall of Honor</h1>
       <h2>Deceased Ministers of the UPCI</h2>
       <SearchBarComponent></SearchBarComponent>
-      <YearDividerComponent
-        ref="currentYearDivider"
-        :year="currentYear"
-      ></YearDividerComponent>
       <div class="curtain"></div>
     </div>
     <div
@@ -18,10 +14,7 @@
     >
       <ul class="years">
         <li v-for="year in years" :key="year">
-          <YearDividerComponent
-            :observer="observer"
-            :year="year"
-          ></YearDividerComponent>
+          <YearDividerComponent :year="year"></YearDividerComponent>
           <ul class="ministers-in-year">
             <li
               v-for="minister in deceasedMinisters.get(year)"
