@@ -7,8 +7,7 @@
   justify-content: space-between;
   font-size: $body-font-size-sm;
   font-weight: 300;
-  margin: $spacer 0;
-  width: 14rem;
+  width: 16rem;
 
   button {
     padding: 0px 8px 2px 8px;
@@ -24,6 +23,30 @@
 
   input[type=text] {
     min-width: 0;
+  }
+
+  &.by-year {
+    width: 23rem;
+
+    svg {
+      cursor: pointer;
+      margin: 0 $spacer-xs;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 18rem;
+
+      li {
+        cursor: pointer;
+        display: inline-block;
+        width: 3rem;
+      }
+    }
   }
 
 }

@@ -1,20 +1,33 @@
 <template>
   <div id="deceased-ministers">
-    <div class="header">
-      <h1>Wall of Honor</h1>
-      <h2>Deceased Ministers of the UPCI</h2>
-      <SearchBarComponent></SearchBarComponent>
-      <div class="curtain"></div>
+    <div class="header curtain">
+      <div class="drapes">
+        <h1>Wall of Honor</h1>
+        <h2>Deceased Ministers of the UPCI</h2>
+        <SearchBarComponent
+          :searchState="searchState"
+          @search="doSearch"
+          :years="years"
+        ></SearchBarComponent>
+      </div>
+      <div class="fringe"></div>
     </div>
     <div
+      v-if="!loading && (searchState !== 'by-name' || !searchState.value)"
       @mouseover="pauseScroll()"
-      @mouseout="scroll(1000)"
+      @mouseout="!hasUser() && scroll(1000)"
       class="ministers-list"
       :class="scrollReset && 'reset'"
     >
       <ul class="years">
-        <li v-for="year in years" :key="year">
-          <YearDividerComponent :year="year"></YearDividerComponent>
+        <li v-for="year in years" :key="year" :data-year="year">
+          <div class="curtain">
+            <YearDividerComponent
+              class="drapes"
+              :year="year"
+            ></YearDividerComponent>
+            <div class="fringe"></div>
+          </div>
           <ul class="ministers-in-year">
             <li
               v-for="minister in deceasedMinisters.get(year)"
@@ -26,6 +39,11 @@
         </li>
       </ul>
     </div>
+    <div
+      v-if="!loading && searchState === 'by-name' && searchState.value"
+      class="name-filter-results"
+    ></div>
+    <div v-if="loading" class="loading">Loading...</div>
   </div>
 </template>
 <script lang="ts" src="./DeceasedMinisters.ts"></script>

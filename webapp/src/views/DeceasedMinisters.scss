@@ -1,38 +1,46 @@
 @import "~@/styles/vars";
 
 #deceased-ministers {
-  .header {
-    background-color: $color-bg;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    opacity: 1;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
 
-    .divider {
-      margin-bottom: -2rem;
+  .curtain {
+    width: 100%;
+
+    .drapes {
+      background-color: $color-bg;
+      opacity: 1;
     }
 
-    .curtain {
+    .fringe {
       background-image: linear-gradient(
         to bottom,
         $color-bg, rgba(18, 24, 32, 0)
       );
-
-      position: relative;
-      top: $spacer-md;
-      height: $spacer-md;
-      width: 100%;
     }
-
   }
 
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+
+    .drapes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      .search {
+        margin-top: $spacer;
+      }
+    }
+
+    .fringe { height: $spacer; }
+  }
+
+
   .ministers-list {
-    margin-top: 11.6rem;
+    margin-top: 9.5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
@@ -52,12 +60,13 @@
       }
     }
 
-    li:first-of-type .divider {
-      margin-bottom: $spacer;
-    }
-
-    .divider {
+    .curtain {
       margin-top: $spacer-md;
+      position: sticky;
+      top: 10rem;
+
+      .drapes { padding-top: 1rem; }
+      .fringe { height: $spacer-md; }
     }
 
     .ministers-in-year {
@@ -72,4 +81,9 @@
       opacity: 0;
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

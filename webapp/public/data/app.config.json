@@ -1,0 +1,4 @@
+{
+  "userInactivityDurationSeconds": 600,
+  "loggingLevel": "TRACE"
+}
