@@ -38,8 +38,7 @@
     .fringe { height: $spacer; }
   }
 
-
-  .ministers-list {
+  .ministers-list, .loading {
     margin-top: 9.5rem;
     margin-left: auto;
     margin-right: auto;
@@ -81,6 +80,22 @@
       opacity: 0;
     }
   }
+
+  .loading {
+    ul.ministers-in-year li {
+      margin-top: 10.5rem;
+      animation: 2s ease-in infinite alternate pulseOpacity;
+      background-color: lighten($color-bg, 8%);
+      border-radius: 4px;
+      height: 4rem;
+      margin: 1rem;
+      width: 12rem;
+    }
+  }
+}
+
+body {
+  scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {

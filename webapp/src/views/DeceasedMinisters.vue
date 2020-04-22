@@ -43,7 +43,16 @@
       v-if="!loading && searchState === 'by-name' && searchState.value"
       class="name-filter-results"
     ></div>
-    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="loading" class="loading">
+      <div class="spinner"></div>
+      <div class="curtain">
+        <YearDividerComponent class="drapes" year="2020"></YearDividerComponent>
+        <div class="frigne"></div>
+      </div>
+      <ul class="ministers-in-year">
+        <li v-for="index in 40" :key="index"></li>
+      </ul>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./DeceasedMinisters.ts"></script>
