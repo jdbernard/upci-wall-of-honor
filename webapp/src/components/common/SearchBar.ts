@@ -24,7 +24,7 @@ export default class SearchBarComponent extends Vue {
     (evt: KeyboardEvent) => {
       const input: HTMLInputElement = evt?.target as HTMLInputElement;
       if (input) {
-        this.search({ type: 'by-name', value: input.value });
+        this.search({ type: 'by-name', value: input.value.toLowerCase() });
       }
     },
     200

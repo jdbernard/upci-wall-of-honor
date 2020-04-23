@@ -21,7 +21,20 @@ const logger = logService.getLogger('/deceased-ministers');
   }
 })
 export default class DeceasedMinistersView extends Vue {
-  public deceasedMinisters = Map<number, List<Minister>>();
+  public deceasedMinistersByYear = Map<number, List<Minister>>();
+  public deceasedMinisters = List<Minister>();
+
+  get matchingMinisters(): List<Minister> {
+    return this.deceasedMinisters.filter(m => {
+      if (this.searchState.type !== 'by-name' || !this.searchState.value) {
+        return true;
+      } else {
+        return m.firstName.toLowerCase().startsWith(this.searchState.value) ||
+               m.lastName.toLowerCase().startsWith(this.searchState.value);
+      }
+    });
+  }
+
   public years: number[] = [];
   public appConfig: AppConfig = defaultConfig;
   public loading = true;
@@ -48,7 +61,7 @@ export default class DeceasedMinistersView extends Vue {
 
       if (search.type === 'by-year' && search.value) {
         const sectionEl = this.$el.querySelector(
-          `li[data-year="${search.value}"] .ministers-in-year`
+          `li[data-year="${search.value}"] .minister-nameplates`
         );
         if (sectionEl) {
           window.scrollTo({
@@ -56,6 +69,8 @@ export default class DeceasedMinistersView extends Vue {
             behavior: 'smooth'
           });
         }
+      } else if (search.type === 'by-name' && search.value) {
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     }
   }
@@ -69,9 +84,14 @@ export default class DeceasedMinistersView extends Vue {
 
   private async mounted() {
     this.appConfig = await AppConfigStore.appConfig;
-    this.deceasedMinisters = await MinistersStore.deceasedMinistersByYear;
+    this.deceasedMinisters = (await MinistersStore.ministers)
+      .filter(m => !!m.dateOfDeath)
+      .sort((a, b) => a.lastName.localeCompare(b.lastName));
+    this.deceasedMinistersByYear = await MinistersStore.deceasedMinistersByYear;
 
-    const allYears = this.deceasedMinisters.keySeq().sort((a, b) => b - a);
+    const allYears = this.deceasedMinistersByYear
+      .keySeq()
+      .sort((a, b) => b - a);
 
     const scrollOptions = {
       msPerPx: 64,

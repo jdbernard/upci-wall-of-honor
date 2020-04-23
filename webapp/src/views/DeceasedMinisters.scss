@@ -68,7 +68,7 @@
       .fringe { height: $spacer-md; }
     }
 
-    .ministers-in-year {
+    .minister-nameplates {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -82,12 +82,13 @@
   }
 
   .loading {
-    ul.ministers-in-year li {
-      margin-top: 10.5rem;
+    ul.minister-nameplates li {
       animation: 2s ease-in infinite alternate pulseOpacity;
       background-color: lighten($color-bg, 8%);
       border-radius: 4px;
+      display: inline-block;
       height: 4rem;
+      margin-top: 10.5rem;
       margin: 1rem;
       width: 12rem;
     }

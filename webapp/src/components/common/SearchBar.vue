@@ -5,6 +5,7 @@
       @keydown="handleNameUpdate"
       placeholder="e.g. John Smith"
       type="text"
+      :value="searchState.value"
     />
   </div>
   <div class="search by-year" v-else-if="searchState.type === 'by-year'">
