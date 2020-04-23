@@ -13,7 +13,7 @@
       <div class="fringe"></div>
     </div>
     <div
-      v-if="!loading && (searchState !== 'by-name' || !searchState.value)"
+      v-if="!loading && !(searchState.type === 'by-name' && searchState.value)"
       @mouseover="pauseScroll()"
       @mouseout="!hasUser() && scroll(1000)"
       class="ministers-list"
@@ -28,9 +28,9 @@
             ></YearDividerComponent>
             <div class="fringe"></div>
           </div>
-          <ul class="ministers-in-year">
+          <ul class="minister-nameplates">
             <li
-              v-for="minister in deceasedMinisters.get(year)"
+              v-for="minister in deceasedMinistersByYear.get(year)"
               :key="minister.id"
             >
               <MinisterNameplate :minister="minister"></MinisterNameplate>
@@ -40,16 +40,26 @@
       </ul>
     </div>
     <div
-      v-if="!loading && searchState === 'by-name' && searchState.value"
-      class="name-filter-results"
-    ></div>
+      class="ministers-list"
+      v-if="!loading && searchState.type === 'by-name' && searchState.value"
+    >
+      <ul>
+        <div class="curtain">
+          <div class="drapes"></div>
+          <div class="fringe"></div>
+        </div>
+        <li v-for="minister in matchingMinisters" :key="minister.id">
+          <MinisterNameplate :minister="minister"></MinisterNameplate>
+        </li>
+      </ul>
+    </div>
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
       <div class="curtain">
         <YearDividerComponent class="drapes" year="2020"></YearDividerComponent>
         <div class="frigne"></div>
       </div>
-      <ul class="ministers-in-year">
+      <ul class="minister-nameplates">
         <li v-for="index in 40" :key="index"></li>
       </ul>
     </div>
