@@ -8,12 +8,7 @@ import { dom as FA_DOM } from '@fortawesome/fontawesome-svg-core';
 Vue.component('fa-icon', FontAwesomeIcon);
 FA_DOM.watch();
 
-import {
-  logService,
-  LogLevel,
-  ApiLogAppender,
-  ConsoleLogAppender
-} from '@/services/logging';
+import { logService, LogLevel, ConsoleLogAppender } from '@/services/logging';
 
 Vue.config.productionTip = false;
 
