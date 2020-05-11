@@ -43,6 +43,12 @@ resource "aws_route53_zone" "project" {
   force_destroy = true
 }
 
+resource "aws_route53_zone" "prod" {
+  name    = "upciwallofhonor.org"
+  comment = "Zone for the UPCI Wall of Honor production environment."
+  force_destroy = true
+}
+
 #resource "aws_iam_policy_document" "build_and_deploy_policy" {
 #  # TODO
 #  statement {
@@ -75,6 +81,11 @@ output "aws_s3_project_bucket" {
 output "aws_route53_project_zone" {
   description = "Route53 Hosted Zone for this project."
   value = aws_route53_zone.project
+}
+
+output "aws_route53_prod_zone" {
+  description = "Route53 Hosted Zone for the production environment."
+  value = aws_route53_zone.prod
 }
 
 #output "aws_iam_role_build_and_deploy" {
