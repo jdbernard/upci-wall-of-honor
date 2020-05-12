@@ -15,6 +15,12 @@ variable "route53_zone" {
   description = "Route53 hosted zone for the deployed environments."
 }
 
+variable "create_env_subdomain" {
+  description = "Should an environment-specific subdomain be created for this module? For example, dev.upci-woh.com"
+  default = true
+  type = bool
+}
+
 variable "additional_cloudfront_aliases" {
   description = "Additional domains on which CloudFront should serve content."
   default = []
@@ -81,6 +87,8 @@ resource "aws_acm_certificate" "cert" {
   domain_name       = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
   validation_method = "DNS"
 
+  subject_alternative_names = var.additional_cloudfront_aliases
+
   tags = {
     Environment = var.environment
   }
@@ -91,18 +99,19 @@ resource "aws_acm_certificate" "cert" {
 }
 
 resource "aws_route53_record" "cert_validation" {
-  provider          = aws.cert
-  name    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_type
-  zone_id = var.route53_zone.zone_id
-  records = [ aws_acm_certificate.cert.domain_validation_options.0.resource_record_value ]
-  ttl     = 60
+  count     = length(var.additional_cloudfront_aliases) + 1
+  provider  = aws.cert
+  name      = aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_name
+  type      = aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_type
+  zone_id   = var.route53_zone.zone_id
+  records   = [ aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_value ]
+  ttl       = 60
 }
 
 resource "aws_acm_certificate_validation" "cert" {
-  provider          = aws.cert
+  provider                = aws.cert
   certificate_arn         = aws_acm_certificate.cert.arn
-  validation_record_fqdns = [ aws_route53_record.cert_validation.fqdn ]
+  validation_record_fqdns = tolist("${aws_route53_record.cert_validation.*.fqdn}")
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
@@ -175,9 +184,25 @@ resource "aws_cloudfront_distribution" "cdn" {
 }
 
 resource "aws_route53_record" "subdomain" {
+  count = var.create_env_subdomain ? 1: 0
   zone_id = var.route53_zone.zone_id
   name = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
   type = "A"
+
+  alias {
+    name    = aws_cloudfront_distribution.cdn.domain_name
+    zone_id = aws_cloudfront_distribution.cdn.hosted_zone_id
+    evaluate_target_health = false
+  }
+
+  depends_on = [aws_cloudfront_distribution.cdn]
+}
+
+resource "aws_route53_record" "alternate_domains" {
+  count   = length(var.additional_cloudfront_aliases)
+  zone_id = var.route53_zone.zone_id
+  name    = var.additional_cloudfront_aliases[count.index]
+  type    = "A"
 
   alias {
     name    = aws_cloudfront_distribution.cdn.domain_name
