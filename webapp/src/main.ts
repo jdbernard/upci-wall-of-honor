@@ -5,10 +5,13 @@ import router from './router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { dom as FA_DOM } from '@fortawesome/fontawesome-svg-core';
 
+import { logService, LogLevel, ConsoleLogAppender } from '@/services/logging';
+import { nameDisplay } from '@/filters/name-display.filter';
+
 Vue.component('fa-icon', FontAwesomeIcon);
 FA_DOM.watch();
 
-import { logService, LogLevel, ConsoleLogAppender } from '@/services/logging';
+Vue.filter('nameDisplay', nameDisplay);
 
 Vue.config.productionTip = false;
 

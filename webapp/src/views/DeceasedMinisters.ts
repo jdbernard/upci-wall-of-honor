@@ -29,8 +29,11 @@ export default class DeceasedMinistersView extends Vue {
       if (this.searchState.type !== 'by-name' || !this.searchState.value) {
         return true;
       } else {
-        return m.firstName.toLowerCase().startsWith(this.searchState.value) ||
-               m.lastName.toLowerCase().startsWith(this.searchState.value);
+        return (
+          m.name.given.toLowerCase().startsWith(this.searchState.value) ||
+          (m.name.surname &&
+            m.name.surname.toLowerCase().startsWith(this.searchState.value))
+        );
       }
     });
   }
@@ -77,21 +80,36 @@ export default class DeceasedMinistersView extends Vue {
 
   private userInteractionTimeout?: number;
 
-  // TODO: use dependency injection instead (need to figure out the broaders DI
+  // TODO: use dependency injection instead (need to figure out the broader DI
   // story)
   private scrollService?: AutoScrollService;
   private scrollReset = false;
 
   private async mounted() {
+    (window as any).DCM = this;
     this.appConfig = await AppConfigStore.appConfig;
     this.deceasedMinisters = (await MinistersStore.ministers)
       .filter(m => !!m.dateOfDeath)
-      .sort((a, b) => a.lastName.localeCompare(b.lastName));
-    this.deceasedMinistersByYear = await MinistersStore.deceasedMinistersByYear;
+      .sort((a, b) =>
+        (a.name.surname || a.name.given).localeCompare(
+          b.name.surname || b.name.given
+        )
+      );
+
+    logger.trace({ function: 'mounted', calcStart: performance.now() });
+
+    // this.deceasedMinistersByYear = this.deceasedMinisters.groupBy(m =>
+    const test = (await this.deceasedMinisters).groupBy(m =>
+      m.dateOfDeath ? m.dateOfDeath.year() : 1900
+    );
+
+    debugger;
 
     const allYears = this.deceasedMinistersByYear
       .keySeq()
       .sort((a, b) => b - a);
+
+    logger.trace({ function: 'mounted', calcEnd: performance.now() });
 
     const scrollOptions = {
       msPerPx: 64,
@@ -99,10 +117,10 @@ export default class DeceasedMinistersView extends Vue {
     };
 
     this.scrollService = new AutoScrollService(scrollOptions);
+    this.loading = false;
     this.pageInYears(allYears).then(() => {
-      this.loading = false;
       Vue.nextTick(() => this.onSearch(this.searchState, this.searchState));
-      logger.trace('mounted');
+      logger.trace({ function: 'mounted', endTime: performance.now() });
     });
 
     return;
