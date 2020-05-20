@@ -9,41 +9,25 @@ export class MinistersStore {
     this.http = Axios.create({});
   }
 
+  private _allMinisters?: Promise<List<Minister>>;
   private _ministers?: Promise<List<Minister>>;
   private _deceasedMinistersByYear?: Promise<Map<number, List<Minister>>>;
   private http: AxiosInstance;
 
   public get ministers(): Promise<List<Minister>> {
     if (!this._ministers) {
-      this._ministers = this.loadMinisters();
+      this._allMinisters = this.loadMinisters();
+      this._ministers = this.loadMinisters().then(allMinisters =>
+        allMinisters.filter(m => m.state === 'published')
+      );
     }
 
     return this._ministers;
   }
 
-  public get deceasedMinistersByYear(): Promise<Map<number, List<Minister>>> {
-    if (!this._deceasedMinistersByYear) {
-      this._deceasedMinistersByYear = this.loadDeceasedMinistersByYear();
-    }
-
-    return this._deceasedMinistersByYear;
-  }
-
   private async loadMinisters(): Promise<List<Minister>> {
     const resp = await this.http.get('/data/ministers.json');
     return List(resp.data.ministers.map(this.ministerFromJson));
-  }
-
-  // prettier-ignore
-  private async loadDeceasedMinistersByYear(): Promise<Map<number, List<Minister>>> {
-    const resp = await this.http.get('/data/deceased-ministers.view.json');
-    return Map<number, List<Minister>>().withMutations(map => {
-      for (const year in resp.data) {
-        if (resp.data.hasOwnProperty(year)) {
-          map.set(parseInt(year), resp.data[year].map(this.ministerFromJson));
-        }
-      }
-    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

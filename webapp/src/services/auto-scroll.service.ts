@@ -10,7 +10,7 @@ export class AutoScrollService {
    *  multiple parallel calls to the self-recursive `scroll` function. Using
    *  this, all calls to `scroll` self-terminate if they do not match the
    *  global `activeScrollId` (which is incremented on every call to `start`),
-   *  leading to only one active "thread" (the one with the current scroll id.
+   *  leading to only one active "thread" (the one with the current scroll id).
    */
   private activeScrollId = 0;
 
@@ -18,6 +18,7 @@ export class AutoScrollService {
    *  Other methods (comparing current position to height, etc.) are unreliable
    *  depending on how the scrolled elements are styled and positioned. */
   private lastY = 0;
+  private lastYChangeTime = 0;
 
   /** Used to control the scrolling "frame-rate". */
   private lastScrollTime = 0;
@@ -49,13 +50,16 @@ export class AutoScrollService {
       });
       this.lastScrollTime = timestamp;
 
-      if (window.scrollY === this.lastY) {
+      // Don't trigger the "end-of-scroll" logic until we've spent a full
+      // second trying to scroll unsuccessfully.
+      if (window.scrollY !== this.lastY) {
+        this.lastY = window.scrollY;
+        this.lastYChangeTime = timestamp;
+      } else if (timestamp - this.lastYChangeTime > 2000) {
         if (this.options.onScrollEnd) {
           this.options.onScrollEnd();
         }
         this.stop();
-      } else {
-        this.lastY = window.scrollY;
       }
     }
     window.requestAnimationFrame(ts => this.scroll(ts, scrollId));

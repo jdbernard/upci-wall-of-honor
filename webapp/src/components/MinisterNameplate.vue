@@ -1,6 +1,6 @@
 <template>
   <div class="minister-nameplate" :id="minister.id">
-    <div class="name">{{ minister.firstName }} {{ minister.lastName }}</div>
+    <div class="name">{{ minister | nameDisplay }}</div>
     <div class="vitals">{{ birthFormatted }} &mdash; {{ deathFormatted }}</div>
   </div>
 </template>
