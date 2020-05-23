@@ -1,5 +1,5 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-import { Collection, Map, List } from 'immutable';
+import { Collection, List } from 'immutable';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
@@ -21,7 +21,10 @@ const logger = logService.getLogger('/deceased-ministers');
   }
 })
 export default class DeceasedMinistersView extends Vue {
-  public deceasedMinistersByYear = Map<number, List<Minister>>();
+  public deceasedMinistersByYear = Collection.Keyed<
+    number,
+    Collection<number, Minister>
+  >([]);
   public deceasedMinisters = List<Minister>();
 
   get matchingMinisters(): List<Minister> {
@@ -98,12 +101,9 @@ export default class DeceasedMinistersView extends Vue {
 
     logger.trace({ function: 'mounted', calcStart: performance.now() });
 
-    // this.deceasedMinistersByYear = this.deceasedMinisters.groupBy(m =>
-    const test = (await this.deceasedMinisters).groupBy(m =>
+    this.deceasedMinistersByYear = this.deceasedMinisters.groupBy(m =>
       m.dateOfDeath ? m.dateOfDeath.year() : 1900
     );
-
-    debugger;
 
     const allYears = this.deceasedMinistersByYear
       .keySeq()
@@ -200,7 +200,7 @@ export default class DeceasedMinistersView extends Vue {
 
   private allowUserInteraction() {
     const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
-    logger.trace(`Allowing user activity for ${timeoutMs} milliseconds.`);
+    logger.trace(`Pausing automated scroll and allowing user activity for ${timeoutMs} milliseconds.`);
 
     if (this.userInteractionTimeout) {
       clearTimeout(this.userInteractionTimeout);
