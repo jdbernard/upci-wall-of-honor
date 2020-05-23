@@ -12,8 +12,8 @@
         ]
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1926,
-      "dateOfDeath": 2014,
+      "dateOfBirth": "1926-09-23",
+      "dateOfDeath": "2014-02-05",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Kilgore_James.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Kilgore_James.jpg",
@@ -32,8 +32,8 @@
         ]
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1915,
-      "dateOfDeath": 2004,
+      "dateOfBirth": "1915-07-20",
+      "dateOfDeath": "2004-06-02",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Chambers_Stanley.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Chambers_Stanley.jpg",
@@ -52,8 +52,8 @@
         ]
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1928,
-      "dateOfDeath": 2010,
+      "dateOfBirth": "1928-09-21",
+      "dateOfDeath": "2010-11-16",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Becton_Cleveland.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Becton_Cleveland.jpg",
@@ -72,8 +72,8 @@
         ]
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1923,
-      "dateOfDeath": 2002,
+      "dateOfBirth": "1923-09-23",
+      "dateOfDeath": "2002-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_McFarland_Robert.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_McFarland_Robert.jpg",
@@ -89,7 +89,7 @@
         "prefix": "Rev."
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1922,
+      "dateOfBirth": "1922-02-14",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Price_Paul.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Price_Paul.jpg",
@@ -108,8 +108,8 @@
         ]
       },
       "oofYearInducted": 2002,
-      "dateOfBirth": 1920,
-      "dateOfDeath": 2005,
+      "dateOfBirth": "1920-08-29",
+      "dateOfDeath": "2005-05-11",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Urshan_Nathaniel.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Urshan_Nathaniel.jpg",
@@ -128,8 +128,8 @@
         ]
       },
       "oofYearInducted": 2003,
-      "dateOfBirth": 1913,
-      "dateOfDeath": 2006,
+      "dateOfBirth": "1913-07-12",
+      "dateOfDeath": "2006-04-22",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Barnes_Tom.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Barnes_Tom.jpg",
@@ -148,8 +148,8 @@
         ]
       },
       "oofYearInducted": 2003,
-      "dateOfBirth": 1920,
-      "dateOfDeath": 1992,
+      "dateOfBirth": "1920-06-17",
+      "dateOfDeath": "1992-06-10",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cooling_William.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cooling_William.jpg",
@@ -169,8 +169,8 @@
         ]
       },
       "oofYearInducted": 2003,
-      "dateOfBirth": 1929,
-      "dateOfDeath": 2007,
+      "dateOfBirth": "1929-10-26",
+      "dateOfDeath": "2007-04-17",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Lumpkin_James.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Lumpkin_James.jpg",
@@ -190,8 +190,8 @@
         ]
       },
       "oofYearInducted": 2004,
-      "dateOfBirth": 1934,
-      "dateOfDeath": 2009,
+      "dateOfBirth": "1934-07-28",
+      "dateOfDeath": "2009-07-27",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cole_William.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cole_William.jpg",
@@ -210,8 +210,8 @@
         ]
       },
       "oofYearInducted": 2003,
-      "dateOfBirth": 1931,
-      "dateOfDeath": 2003,
+      "dateOfBirth": "1931-01-01",
+      "dateOfDeath": "2003-04-09",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Stephenson_Carl.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Stephenson_Carl.jpg",
@@ -230,8 +230,8 @@
         ]
       },
       "oofYearInducted": 2004,
-      "dateOfBirth": 1917,
-      "dateOfDeath": 1999,
+      "dateOfBirth": "1917-01-01",
+      "dateOfDeath": "1999-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Freeman_E.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Freeman_E.jpg",
@@ -250,8 +250,8 @@
         ]
       },
       "oofYearInducted": 2004,
-      "dateOfBirth": 1919,
-      "dateOfDeath": 2010,
+      "dateOfBirth": "1919-01-01",
+      "dateOfDeath": "2010-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Mangun_Gerald.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Mangun_Gerald.jpg",
@@ -271,8 +271,8 @@
         ]
       },
       "oofYearInducted": 2004,
-      "dateOfBirth": 1901,
-      "dateOfDeath": 1967,
+      "dateOfBirth": "1901-08-27",
+      "dateOfDeath": "1967-10-18",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Morgan_Arthur.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Morgan_Arthur.jpg",
@@ -291,8 +291,8 @@
         ]
       },
       "oofYearInducted": 2004,
-      "dateOfBirth": 1923,
-      "dateOfDeath": 2010,
+      "dateOfBirth": "1923-01-01",
+      "dateOfDeath": "2010-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Pugh_J.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Pugh_J.jpg",
@@ -311,8 +311,8 @@
         ]
       },
       "oofYearInducted": 2005,
-      "dateOfBirth": 1883,
-      "dateOfDeath": 1964,
+      "dateOfBirth": "1883-01-01",
+      "dateOfDeath": "1964-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Goss_Howard.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Goss_Howard.jpg",
@@ -331,8 +331,8 @@
         ]
       },
       "oofYearInducted": 2005,
-      "dateOfBirth": 1933,
-      "dateOfDeath": 2018,
+      "dateOfBirth": "1933-12-06",
+      "dateOfDeath": "2018-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Tenney_Tom.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Tenney_Tom.jpg",
@@ -351,8 +351,8 @@
         ]
       },
       "oofYearInducted": 2006,
-      "dateOfBirth": 1898,
-      "dateOfDeath": 1980,
+      "dateOfBirth": "1898-05-22",
+      "dateOfDeath": "1980-07-08",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Fauss_Oliver.jpg",
         "biography": "Oliver Franklin Fauss was born May 22, 1898, in Gage, a small town in northwestern Oklahoma. His family was converted in a Methodist revival meeting when he was just a boy. Many of his memories of his early days are of prayer meetings, revivals and church services. \n\nAround 1905 or 1906 there was a \"holy-roller\" meeting that was held fifteen miles from their home in Gage. They were curious and traveled the distance by wagon. The \"holy-rollers\" they saw were people who preached and believed this Pentecostal message! Young Oliver Fauss could not forget what he heard and saw in that meeting.\n\nIn March 1911 the Pentecostal message came to Ganado. His mother was the first in the family to receive the Holy Ghost. In September 1911 Oliver received the baptism of the Holy Ghost. A few days later, Oliver’s family moved to Houston, Texas. Once there, they attended church at the now famous Brunner Tabernacle.\n\nWhen O. F. Fauss was seventeen years old, he left home to preach. One of his first brush arbor meetings was in Trinity, Texas, in 1915. He also assisted in and attended many camp meetings and revivals in Texas and Louisiana. \n\nIn the late fall of 1915, Oliver Fauss attended a Bible conference held in Elton, Louisiana, that lasted for several weeks. During this meeting, there was much prayer and study on the New Issue and the Oneness of the Godhead. This New Issue was based upon the baptismal formula in Acts 2:38. Oliver Fauss preserved notes taken from Bible studies during the Elton Bible Conference. The truth of the Word of God had come to light, and the Scripture did not teach a trinity of persons in the Godhead but that the Lord our God was one Lord.\n\nNo one in the South had even heard of or believed this message at this point. Then, on December 19, 1915, O.F. Fauss was baptized in Jesus' Name, along with twelve other workers. Robert LaFleur and Oliver Fauss were the first two to wade into a nearby creek and baptize each other. Brother Fauss then baptized Brother S. L. Wise.\n\nOn July 10, 1916, just before going to service in a brush arbor meeting, Oliver Fauss and Miss Jewel Smith were united in marriage. Brother Fauss received his first license to preach on September 2, 1916, from the General Assembly of the Apostolic Assemblies, signed by Daniel C. O. Operrman and Howard A. Goss. He was ordained by the Pentecostal Assemblies of the World, by Brother L. C. Hall on August 3, 1917. This ordination bears the signatures of J. J. Frazier, G. T. Haywood, and Brother Opperman.\n\nThe first nine years of Brother Fauss ministry were spent almost entirely in the evangelistic field in Texas and Louisiana. Brother and Sister Fauss traveled, preaching and conducting revivals in small towns, communities, sawmill camps, and settlements. \n\nBrother Fauss served as chairman of the Apostolic Church of Jesus Christ for two years. He served as chairman over at least two annual conferences of the Pentecostal Assemblies of Jesus Christ (now the UPCI). In 1924 he founded the Pentecostal Witness and was editor for four years. He remained on the editorial staff until his death. (The Pentecostal Witness later became The Pentecostal Outlook, which later became The Pentecostal Herald). He was a member of the Board of Presbyters of the Pentecostal Assemblies of Jesus Christ from its beginning. He also served as chairman of the South Central Council of the Pentecostal Assemblies of Jesus Christ for four years.\n\nIn 1944 the Pentecostal Church, Incorporated and the Pentecostal Assemblies of Jesus Christ appointed committees of three to meet jointly and take preliminary steps toward effecting a merger. W. T. Witherspoon, S. R. Hanby, and Oliver Fauss were appointed from the Pentecostal Church, Incorporated. As the Merger was finalized several months later, the official name of the organization became the United Pentecostal Church.\n\nAfter the Merger, Brother Fauss held the position of assistant general superintendent from 1947 to 1971. He also served as general superintendent, serving out the unexpired term of A. T. Morgan in 1967. At the 1971 General Conference, he was appointed honorary General Board member and held this position until his death on July 8, 1980.\n\nHe successfully pastored a number of great churches: First Pentecostal Church of Port Arthur, Texas; First Pentecostal Church in Bay City, Texas; Calvary Tabernacle in Indianapolis, Indiana; First Pentecostal Church in Pensacola, Florida; and a church in Newcastle, Indiana. He moved to Houston, Texas, in 1928 with a burden for a work for the name of the Lord."
@@ -370,8 +370,8 @@
         ]
       },
       "oofYearInducted": 2006,
-      "dateOfBirth": 1926,
-      "dateOfDeath": 2007,
+      "dateOfBirth": "1926-01-01",
+      "dateOfDeath": "2007-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Mean_Eunilah.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Mean_Eunilah.jpg",
@@ -390,7 +390,7 @@
         ]
       },
       "oofYearInducted": 2005,
-      "dateOfBirth": 1934,
+      "dateOfBirth": "1934-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Scism_Harry.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Scism_Harry.jpg",
@@ -409,7 +409,7 @@
         ]
       },
       "oofYearInducted": 2006,
-      "dateOfBirth": 1932,
+      "dateOfBirth": "1932-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Mean_John.jpg",
         "biography": "The call of God came upon John D. Mean when he was very young. He lived in a country area of Windsor, New Brunswick, with no opportunity to attend high school. Knowing that due to his young age he was not eligible to enter Bible school, he asked for a meeting with the principal, Reverend S. G. Steeves, who was also serving as the first district superintendent of the district of New Brunswick in 1947, just one year after a former full gospel church group had joined the United Pentecostal Church. After this meeting, Brother Steeves asked John Mean to attend the Bible school. After John graduated from the Emmanuel Bible School in 1950, he pastored his home church for a time, then continued in evangelism.\n\nIn 1952, along with the Lewis DeMerchant family, John Mean came to Stewiacke, Nova Scotia, to open the first Apostolic Church in that province. The \"Nilah and Charlotte Evangelistic Team” came to preach the first meetings. Twenty-eight were baptized in the precious name of Jesus Christ during six weeks of revival meetings. The following year he prepared the way for those noted evangelists to crusade in the town of Trenton, where they were threatened with stoning. However, God wrought great victory, and another church was planted.  \n\nIn 1953 they preached the first revival as a new church was opened in the town of Truro. In 1954 John came to Halifax with the same evangelistic team, and another church was founded. After three years in Halifax, he and Sister Nilah Rutledge married and visited many churches in the US, holding revival services for two years. In 1959 they returned to Nova Scotia and opened another church in Amherst, then returned to Halifax the following summer. After returning to Halifax, God helped them to build two other churches in Middleton and Dartmouth, Nova Scotia.\n\nBrother Mean served in the district offices of youth president and Home Missions director and served as district superintendent for twenty-six years. He recently retired from the pastorate of the Halifax assembly after approximately forty-eight years. He and Sister Mean visited the missionary fields in Peru, Brazil, El Salvador, Guatemala, Pakistan, Wales, and Germany, and they also had the great experience of attending the World Conference in Jerusalem."
@@ -428,8 +428,8 @@
         ]
       },
       "oofYearInducted": 2006,
-      "dateOfBirth": 1927,
-      "dateOfDeath": 2014,
+      "dateOfBirth": "1927-08-03",
+      "dateOfDeath": "2014-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Williams_Jesse.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Williams_Jesse.jpg",
@@ -448,8 +448,8 @@
         ]
       },
       "oofYearInducted": 2007,
-      "dateOfBirth": 1915,
-      "dateOfDeath": 2008,
+      "dateOfBirth": "1915-11-01",
+      "dateOfDeath": "2008-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Benson_Lowell.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Benson_Lowell.jpg",
@@ -468,8 +468,8 @@
         ]
       },
       "oofYearInducted": 2007,
-      "dateOfBirth": 1899,
-      "dateOfDeath": 1981,
+      "dateOfBirth": "1899-09-01",
+      "dateOfDeath": "1981-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cook_Ralph.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Cook_Ralph.jpg",
@@ -488,8 +488,8 @@
         ]
       },
       "oofYearInducted": 2007,
-      "dateOfBirth": 1914,
-      "dateOfDeath": 2009,
+      "dateOfBirth": "1914-02-04",
+      "dateOfDeath": "2009-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Kinzie_Fred.jpg",
         "biography": "Frederick E. Kinzie was born to Mr. and Mrs. William Kinzie on February 4, 1914. When he was five years old, his family moved to a farm near Lapaz, Indiana. There, playing with the next door neighborhood kids, Fred met Vera Berger, who later became his wife. They both graduated from Lapaz High School and in 1934 were married.\n\nFred and Vera began life together as farmers, fully expecting to farm for the rest of their lives. In 1936 things dramatically changed when they yielded their lives to the Lord Jesus Christ and received the baptism of the Holy Ghost. They became active in the Plymouth, Indiana, Old Time Religion Tabernacle pastored by Walter D. Mangun. Brother Kinzie became an elder, and Sister Kinzie ministered as a musician in the church. During that time he was superintendent of a non-denominational Sunday school for three years. \n\nIn 1941 Brother Kinzie felt the call to the ministry. In the winter of 1944, the Kinzies took time off from the farm to help Evangelist Earl Gamblin, preaching and singing in meetings in Miami and Pensacola, Florida. Suddenly, rheumatic fever began its throbbing pain in Brother Kinzie while he was driving between the two cities, and he ended up in a hospital in Pensacola, Florida. Finally, in earnest prayer he committed himself to the ministry. That day, Vera wrote letters home informing their folks that they were leaving the farm. The next morning, Brother Kinzie was a healed man. \n\nTwo months later in July 1944, Brother and Sister Kinzie began evangelizing. Pat and Pam McQueen went with them, making a musical team. They sang, preached, and were known as the Kinzie Evangelistic Party throughout the United States and Canada. The group traveled for the next nine years. In 1950, another member was added to the party with the birth of their daughter, Cassandra. \n\nBrother and Sister Kinzie were honored to be a part of the Merger conference in 1945.\n\nMany opportunities to pastor churches in states from California to Florida were offered Brother Kinzie while traveling, but the Lord impressed him to \"keep on doing what you're doing.\" His call to Toledo was so definite that doubts never crossed their minds. They arrived in that city in May 1953 and they helped build three church buildings during their pastorate. \n\nThirty years later Brother Kinzie turned the church over to his son-in-law, J. Mark Jordan and family. Brother Kinzie serves as pastor emeritus.\n\nAfter retiring, Fred Kinzie began writing. Four books were published by Word Aflame Press and many articles printed in the Pentecostal Herald and district magazines.\n\nOn December 16, 2006, Sister Kinzie went on to meet the Lord."
@@ -507,8 +507,8 @@
         ]
       },
       "oofYearInducted": 2018,
-      "dateOfBirth": 1922,
-      "dateOfDeath": 1997,
+      "dateOfBirth": "1922-01-01",
+      "dateOfDeath": "1997-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Crabtree_O.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Crabtree_O.jpg",
@@ -527,7 +527,7 @@
         ]
       },
       "oofYearInducted": 2018,
-      "dateOfBirth": 1939,
+      "dateOfBirth": "1939-01-19",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Vittitow_Gerald.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Vittitow_Gerald.jpg",
@@ -546,8 +546,8 @@
         ]
       },
       "oofYearInducted": 2018,
-      "dateOfBirth": 1957,
-      "dateOfDeath": 2018,
+      "dateOfBirth": "1957-03-26",
+      "dateOfDeath": "2018-03-24",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Paslay II_Norman.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Paslay II_Norman.jpg",
@@ -566,7 +566,7 @@
         ]
       },
       "oofYearInducted": 2007,
-      "dateOfBirth": 1919,
+      "dateOfBirth": "1919-05-03",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Williams_O.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Williams_O.jpg",
@@ -585,8 +585,8 @@
         ]
       },
       "oofYearInducted": 2007,
-      "dateOfBirth": 1928,
-      "dateOfDeath": 2014,
+      "dateOfBirth": "1928-03-28",
+      "dateOfDeath": "2014-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Yonts_Jack.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Yonts_Jack.jpg",
@@ -605,7 +605,7 @@
         ]
       },
       "oofYearInducted": 2008,
-      "dateOfBirth": 1929,
+      "dateOfBirth": "1929-08-17",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Glass_Arless.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Glass_Arless.jpg",
@@ -624,8 +624,8 @@
         ]
       },
       "oofYearInducted": 2008,
-      "dateOfBirth": 1933,
-      "dateOfDeath": 2011,
+      "dateOfBirth": "1933-01-01",
+      "dateOfDeath": "2011-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Hall_J.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Hall_J.jpg",
@@ -644,8 +644,8 @@
         ]
       },
       "oofYearInducted": 2008,
-      "dateOfBirth": 1929,
-      "dateOfDeath": 2003,
+      "dateOfBirth": "1929-09-22",
+      "dateOfDeath": "2003-03-03",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_McKenzie_F.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_McKenzie_F.jpg",
@@ -661,8 +661,8 @@
         "prefix": "Rev."
       },
       "oofYearInducted": 2008,
-      "dateOfBirth": 1903,
-      "dateOfDeath": 1978,
+      "dateOfBirth": "1903-06-29",
+      "dateOfDeath": "1978-08-08",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Vouga_Oscar.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Vouga_Oscar.jpg",
@@ -681,7 +681,7 @@
         ]
       },
       "oofYearInducted": 2008,
-      "dateOfBirth": 1930,
+      "dateOfBirth": "1930-05-02",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Whalen_R.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Whalen_R.jpg",
@@ -700,7 +700,7 @@
         ]
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1931,
+      "dateOfBirth": "1931-12-30",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Craft_Thomas.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Craft_Thomas.jpg",
@@ -719,7 +719,7 @@
         ]
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1926,
+      "dateOfBirth": "1926-12-28",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Foster_Fred.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Foster_Fred.jpg",
@@ -738,8 +738,8 @@
         ]
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1912,
-      "dateOfDeath": 1971,
+      "dateOfBirth": "1912-05-14",
+      "dateOfDeath": "1971-10-14",
       "details": {
         "biography": "Born into the passionately Christian family of Levi and Sophie Haney on May 14, 1912, Clyde was the third child to come into this union. His mother had received the Holy Ghost a few years before his birth, and by the time he joined them, the family, along with Brother Harry Morse, had followed the revelation of the Oneness of God and Jesus Name baptism. \n\nWhen Harry Morse moved to begin a work in Oakland, California, Clyde’s father, Levi Haney, took over the leadership of the work in Stockton. This church, along with a group of churches that came together, experienced unprecedented revival in 1921.\n\nWhen Clyde was fourteen, his father decided to leave the family. At this time, Clyde was very pleased when the chance came to work with his sister and brother-in-law on their ranch up in the foothills above Stockton. \n\nWhen Clyde became ill, the doctor’s dire prediction was that he was going to die and that no doctor or medicine could help him.  It was then Clyde surrendered his life completely and totally to Jesus Christ and he was instantly healed. He began to follow the Lord with a sincere desire to minister in some effective way.\n\nIn 1933, he met Olive Gray, whose parents were dedicated missionaries to the country of Japan. She had traveled to Stockton, to further her Christian training. Married in July of 1934, their family was complete when several years later, four children were added one by one to the circle; Kenneth, Shirley, Evangeline and Joleane. \n\nIn their early married life and during the depression years, Clyde and Olive traveled from Arizona, to Missouri, and back, helping churches and pastors along the way, while sacrificing themselves at every turn. \n\nUpon returning to Stockton, they worked seasonally picking fruit and also helped in the church, Harmony Chapel, pastored by Brother Van Buskirk. Feeling the need for more formal education, they moved to Oakland, California, to attend Pentecostal Training School led by Harry Morse. Determined not to waste this opportunity, it was here that Clyde Haney learned the value of ministerial and Biblical training. \n\nIn 1938, after moving his family to the foothills to be closer to his work, Clyde got a job building roads and was soon asked to be the preacher at a small community church in the nearby gold mining town of Paloma, California. Although they eventually moved back to Stockton to resume helping Brother Van Buskirk, they faithfully continued to visit and hold services for the group in Paloma. \n\nIn 1940, feeling the leading of the Lord, they moved to Pasadena to not only pastor the people there, but to also experience great growth and erect a new building during wartime when it seemed impossible to do so. That church is still standing today. \n\nHowever, it seemed that Brother Haney’s home, Stockton, was to be his destination as six years later he was summoned by telegram to return and take the work there. He pastored there for twenty-five years, built two more church sanctuaries, two Sunday school wings and an overflow building on site. \n\nBrother Haney founded a Bible College in 1949, in the basement of the Harding Way Church. Over time, he built nine buildings to facilitate it. In its sixty years of existence, over 6,000 students have passed through the doors of what was first known as Pentecostal Bible School, and then was later christened Western Apostolic Bible College. Today this institution still stands and is known as Christian Life College. \n\nAdding a high school and eventually an elementary school, he worked hard overseeing and assisting in the construction of a total of fifteen buildings during his ministry. His devout service record included a stint as Youth Director of the Western District of the UPCI, and he founded the first Western District Youth Convention held in Carlsbad, CA. He capably filled the roles of assistant pastor, evangelist, pastor to three fine churches, and Bible College founder and president. \n\nClyde Haney passed from this life on October 14, 1971, at the age of fifty-nine, following a tragic automobile accident while hunting. His memorial service was held in the final church he built on Cherokee Road in Stockton. \n\nOnce again, he made the trip to the foothills he loved so much. Such fitting surroundings for this man with an inherited pioneering spirit, whose life and teachings helped to strengthen and ground this great organization, the United Pentecostal Church International."
       }
@@ -756,8 +756,8 @@
         ]
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1901,
-      "dateOfDeath": 1990,
+      "dateOfBirth": "1901-07-16",
+      "dateOfDeath": "1990-01-01",
       "details": {
         "biography": "On July 16, 1901, at Royalton, Ohio, Frank and Susan Norris had their only child, Stuart Greene. In high school he fell in love with vivacious Jessie Dunn. Their romance continued into college and they were married in 1923.  He enrolled in Ohio State University, majoring in Business Administration, working nights at the Western Union.\n\nDrawing on his sales experience, he joined the National Cash Register Co. Soon he became the branch manager. While under the pastorate of W. T. Witherspoon, Brother Norris became a preacher and developed a great love for the Word of God.\n\nThe Norrises had five children: James, Mary, David, Eleanor and Ruth. Life was wonderful. \n\nAfter moving to New York City, he established a church there. He gained spiritual strength that lasted a lifetime.\n\nHe was commissioned by Reverend Witherspoon to pastor the church in St. Paul, Minnesota. This church had fourteen previous pastors. Into this atmosphere, he moved his family to 464 Pierce St, St. Paul, Minnesota, in 1934. \n\nOctober 1, 1937, Apostolic Bible Institute began. It was housed at Midway Tabernacle, the church he pastored. The foundation of this school was the Word of God. Invincible biblical truths were placed in the lives of students.\n\nTheir faithfulness led to growth. God opened the doors at new locations for Midway Tabernacle and the ABI before miraculously providing the present campus at 6944 Hudson Boulevard. Reverend Norris pastored Midway Tabernacle and officiated as the ABI president and simultaneously served as the Superintendent of the then North Central District. Later his responsibilities also included serving on the board of the UPCI.\n\nHe published the former Pentecostal Outlook, and wrote inspired doctrinal tracts: Gospels, Acts and Epistles, The Mighty God in Christ and others. \n\nHe also developed detailed Bible charts of the Tabernacle Plan and the Book of Revelation. These were designed in large sizes (approximately 12x 24) and required a series of studies."
       }
@@ -771,7 +771,7 @@
         "prefix": "Rev."
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1937,
+      "dateOfBirth": "1937-10-06",
       "details": {
         "biography": "Janet Varnado was born in Lincoln County, Mississippi, on October 6, 1937, to A.D. and Bessie Varnado. She was the sixth and youngest child. \n\nShe recognized the voice of the Lord and at the age of thirteen in Dequincy, Louisiana, she received her call to preach the Gospel. She was licensed by the Louisiana District Board in July 1955, by Superintendent C.G. Weeks\n\nAs a fully appointed missionary to the island of Jamaica, she and her parents arrived on January 23, 1956. Her Dad was the pastor of Pentecostal Tabernacle and Superintendent of the United Pentecostal Church of Jamaica. Her Mom was the Bible school teacher. She was the evangelist and also served as an assistant to her Dad. During their tenure on the island, thirteen church buildings were built in eleven years. \n\nWayne Trout and Janet were married in August 1958, by Brother Howard Goss. For the next two years, they pastored the growing church in Wilmington, Delaware. In 1960, they started driving one hour south to hold Bible studies in the home of John and Ruby Hopkins.\n\nThey resigned the Wilmington Church and moved to Dover, on April 17, 1961. Their son, Anthony, was ten months old. For a year, they rented a VFW Hall and then in 1961, they bought property and built the first building; it was finished and dedicated on Thanksgiving 1961. On July 1, 1964, their daughter, Jeanette, was born.\n\nIn 1965, there were two families driving the long distance to Dover from Oxford, Pennsylvania, on Sunday. This led the Trouts to start Bible studies in the home of Emma Carter in October 1965. The Bible study attendance grew and they rented a Grange Hall to accommodate the growing church. When they outgrew those facilities they moved to the Bayview Council Hall to have space for Sunday School classes. \n\nThe church grew and they bought property and built a church in the town of North East, Maryland, on Route 40, in 1972. They have enlarged the building twice and built a large Family Life Center adjacent to the church.\n\nIn 1967, the Dover church congregation had grown and they bought three acres of property north of Dover. Here, they built the second building and dedicated it on Thanksgiving 1968. Later, an educational building was added to the structure. In 1975, with an urgency to provide a Christian education for the church children, Kent Christian Academy was founded with 105 students the first year. \n\nDuring the Bible college years, The VIEW (Video International Evangelizing the World) program was developed as a Biblical training tool that continues today as the core curriculum for Bible schools around the world. In 2005, Sister Trout was a major player in the establishment of the International Biblical Institute in Jerusalem and Jordan.\n\nIn 1995, Brother and Sister Trout resigned from the Dover church and their son, Anthony, was elected Pastor. The church has since built a new building and continues to grow under Pastor Anthony’s leadership. Brother and Sister Trout continue to pastor the North East, Maryland church.\n\nIn December 1998, Sister Trout started Bible studies in Georgetown, Delaware. The first building there was bought in 1999. After the renovations were complete, it was put on the market and sold. The church rented for three years and then bought a second property with the proceeds from the sale of the first property. \n\nBrother and Sister Trout have written and recorded over 75 songs and Sister Trout has written eight books. \n\nBrother Trout served as District Superintendent for the New Jersey Delaware District for twenty-five years. He currently serves as an honorary board member on both the district and national boards of the United Pentecostal Church. Sister Trout serves as the Home Missions Director for the New Jersey-Delaware District UPCI and the National Director of the Amish-Mennonite Ministry. She is the Treasurer of the Board of Trustees and a founding board member for Urshan Graduate School of Theology.\n\nIn recognition of high scholastic achievement, Sister Trout was inducted into the Sigma Beta Delta, the International Honor Society in Business, Management, and Administration by Wilmington University with a 4.0 GPA."
       }
@@ -785,8 +785,8 @@
         "prefix": "Rev."
       },
       "oofYearInducted": 2009,
-      "dateOfBirth": 1933,
-      "dateOfDeath": 2019,
+      "dateOfBirth": "1933-01-30",
+      "dateOfDeath": "2019-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Trout_Wayne.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Trout_Wayne.jpg",
@@ -805,8 +805,8 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1930,
-      "dateOfDeath": 2015,
+      "dateOfBirth": "1930-12-16",
+      "dateOfDeath": "2015-01-01",
       "details": {
         "biography": "Charles R. Grisham was born December 16, 1930.  He married Frances, on October 16, 1948, and out of that union came six children: Terry Lynn Grisham Bass, Lorna Kathleen Grisham Danvers (who died in 1995), Mark Anthony Grisham, Cheryl Denise Grisham Becton, Gregory Brent Grisham, and Daren Shane Grisham. Also, there are ten grandchildren and five great-grandchildren. \n\nBrother Grisham was called to the ministry during the mid-fifties and has served in various capacities over the years in the church as well as the business world. These experiences include time served as an evangelist, associate pastor, and pastor. He later was elected to the Executive Board of the UPCI, as well as presbyter on the district board in the Michigan District.\n\nIn 1975, the Grishams moved to Hammond, Indiana.  From there it was on to Fargo, North Dakota, where they pioneered their first home missions endeavor in their living room.  He also became a pioneer missionary in the Great Plains development program of the UPCI. Brother Grisham was invited to come to World Evangelism Center and served two years as Home Missions Outreach Director.\n\nIn 1975, the Grishams made yet one more move to assume the pastorate of New Life Apostolic Church in Detroit, Michigan, where they remained some thirty-one years until retirement.\n\nBrother Grisham helped to develop training materials on marriage and family, and young minister’s seminars.  He wrote many articles and booklets that have been a blessing through the years.\n\nIn 2002, Brother Grisham suffered multiple strokes.  After more strokes in 2008, and three heart attacks in 2009, this couple is still together and much in love.  The Lord has spared his life and he and Sister Grisham are enjoying quiet, yet deeply spiritual, times in their home and at their daughter and son-in-law, Ron Becton’s, church in West Nashville, Tennessee."
       }
@@ -823,7 +823,7 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1906,
+      "dateOfBirth": "1906-10-06",
       "details": {
         "biography": "Vily Guidroz was born October 6, 1906, in Louisa, Louisiana, of very humble beginnings.  Reared as a Methodist in the lower Louisiana swamplands, his godly mother guided his spiritual journey. He received the Holy Ghost and was baptized in Jesus' name at age fifteen and began preaching at age seventeen.\n \nBrother Vily, as he was called, married a beautiful, gospel worker and school teacher, Dora Emily Raggio. Vily and Dora had nine children, six daughters and three sons: Glory, Grace, Billye, Faith, Judy, and Wanda, Vily Arlen, Ronald Leslie, and Lowell David. All three sons became UPCI ministers. Three of his grandsons, Eldredge Guidroz, Kerry Hammer, and Lucky Guidroz, are also licensed with the UPCI.\n \nHe was ordained by the Pentecostal Assemblies of the World on October 15, 1926, at approximately twenty years of age and later joined the Pentecostal Ministerial Alliance. \n\nBrother Guidroz joined the Pentecostal Assemblies of Jesus Christ in 1931. He pushed for the merger of the Pentecostal Church Incorporated and the Pentecostal Assemblies of Jesus Christ and he was present at the United Pentecostal Church Incorporated merger conference in 1945. Brother Guidroz was elected Texas District superintendent in 1952, and served for over nineteen years, until 1972.\n \nBrother Guidroz provided much of the inspiration for the purchase and development of the Texas District Camp Ground, which is now dedicated to his memory. \n  \nIn his early years, he traveled widely in evangelistic ministry, especially serving a ''circuit'' of churches in the Northern States.  \n\nHis most notable revival was an outdoor meeting in Leesville, Louisiana, in 1928. The whole city turned out and over 200 received the Holy Ghost. He was the Founding Superintendent of Texas Bible College, and developed it into a formidable training center for ministers.\n \nAfter serving as pastor of several churches in Louisiana and Texas, he founded Peace Tabernacle at Goose Creek, Texas, which is now Baytown.\n \nAbove all, Vily Able Guidroz was a preacher of never-to-be-forgotten sermons. He spent many days at courthouses to hear presentations from lawyers in order to better learn how to communicate. \n \nWhile Brother Guidroz was preaching a revival for A. D. Urshan in New York City, the young Columbia University student, Nathaniel Urshan, gave his heart to God and received the Baptism of the Holy Ghost.\n\nHe was a motivated and driven man; a man who never lost sight of the road ahead and he won his race."
       }
@@ -840,8 +840,8 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1937,
-      "dateOfDeath": 2011,
+      "dateOfBirth": "1937-07-18",
+      "dateOfDeath": "2011-01-01",
       "details": {
         "biography": "On July 18, 1937, Kenneth was born to the parents of Reverend Clyde and Olive Haney in Stockton, California.  At the young age of seven, he received the gift of the Holy Ghost and was baptized in Jesus name. \n\nAt age twelve, he received the call to preach at a service conducted by Ruby Keyes at the Bend, Oregon, camp meeting where his father was the Bible Teacher for the day services. At age fifteen, he preached his first message in a church, and at age seventeen, he received his ministerial license with the United Pentecostal Church International.  He was ordained June 19, 1959. \n\nIn the earlier years of his ministry, he served as Associate Pastor with his father for eleven years at the First Pentecostal Church in Stockton, as well as traveled for WABC, recruiting students in the summer, and preaching revivals and singing.\n\nKenneth Haney and Joy McDonald married October 14, 1961, and to this union were born five children: Sherrie, Nathaniel, Stephenie, Elizabeth, and Angela. All five children are serving the Lord and are involved in ministry. \n\nAs a young man, he was involved in organizational work.  In 1963, at the age of twenty-five, he was elected Western District Youth President and served in this office for seven years. In 1963 and also 1964, he received the first place award from the Western District as being first in the nation for Sheaves for Christ giving. Under his leadership the Western District was the first district to have Bible Quizzing.\n\nIn 1969, he was elected UPCI National Youth President.  While serving in this capacity he started several programs.  They were: The Youth Redemption Center (a place for troubled youth with drug problems), Pentecostal Student Fellowship International- (Campus Ministry), IYC, and the magazine, HOMELIFE, for young married couples. He was elected for two terms in this office, but upon the untimely death of his father and at the request of the church board, and after much prayer and deliberation, he resigned and returned to Stockton, where he was elected pastor. At the same time, he also became President of Western Apostolic Bible College, which during his time of service there, the name of the church was changed to Christian Life Center and the college to Christian Life College\n\nDuring his early years of assisting his father, he organized and set up an elementary school that is still operating successfully. Also during this time, his dream was to own a radio station that would air good gospel music and gospel programming. With much help and hard work, a ten watt KCJH aired its first program in1975.   The call letters have changed to KYCC and the wattage has increased to 50,000 watts and has eighteen stations and translator stations and is the largest station in the city. \n\nHe started the Good Samaritan Center which was instrumental to help and feed the poor.  Under his pastorate he started fourteen daughter works.  \n\nHe served in organizational work for approximately twenty-five years: seven years as Western District Youth President, one year as Western District Sunday School Director, two and a half years as UPCI National Youth President, six years as Assistant General Superintendent of the western zone, and eight years as UPCI General Superintendent.\n\nFollowing are the extra accomplishments and achievements during the eight year tenure of General Superintendent Kenneth F. Haney from January 1, 2002 through January 1, 2010. Here are just a few:\n\n 1. Created Global Impact\n 2. Instituted a program for acknowledgement of the faithfulness of our ministers by honoring them for years of service: ten years, twenty years, thirty years, forty years, and fifty years with a personalized letter from the general superintendent and a certificate of honor\n 3. Began a full service Stewardship Department\n 4. Instituted the Pentecostal Music Association (PMA) to honor the great musicians and singers in the organization.\n 5. Completely restructured the PENTECOSTAL HERALD with a new look and new format.\n 6. Developed the UPCI Flag for the funerals of all licensed ministers \n 7. To give honor and dignity to those who serve the UPCI, he created a pictorial display of all executive board members and all general board members which are beautifully displayed on the wall at WEC in the third floor lobby area.\n 8. Began the program named: Order of the Faith \n9. Established monthly division heads meetings for better communication and staying on target.\n 10. Published three books to instill the vision and mission of the organization. They are (1). ONE VISION, One God, One World, One Church  \n (2). IRRESISTIBLE WAVE   (3). TURNING THE WORLD UPSIDE DOWN\n11. Restructured General Conference, including changing the format of the Wednesday evening service, beginning an outreach for souls over the weekend, and holding a city wide Holy Ghost rally on Sunday evening to reach the lost.\n 12. Developed the Division of Publications.\n 13. Recorded a monthly web cast\n 14. Established Men’s Ministry as a division.\n 15. Developed TALK POINTS - a program for integrating and including younger ministers into the movement beginning with the PASSING THE MANTLE service.  \n 16. Organized the annual Thirty days of Prayer and Fasting."
       }
@@ -858,8 +858,8 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1919,
-      "dateOfDeath": 2012,
+      "dateOfBirth": "1919-03-04",
+      "dateOfDeath": "2012-01-01",
       "details": {
         "biography": "On March 4, 1919, Ruby Bosworth Keyes was born to William John and Eliza Kate Bosworth Keyes, the second oldest of six children, three boys and three girls. Ruby received the baptism of the Holy Spirit at age twelve or thirteen, and remembers the age of fourteen as a time when she settled a lot of things with the Lord and determined to go all the way with Him.\n\nThe family began traveling in evangelistic work when Ruby was seventeen. She was the speaker and the other children would sing.\n\nIn 1940, Ruby began traveling on her own and received her General License with the Pentecostal Church, Incorporated. She made many good friends who believed in the oneness of God. Among them were the Ellis Scism and Ernest Moyer families. They shared scriptures with her and she was baptized in Jesus' Name.\n\nRuby was a part of the United Pentecostal Church since its merger in 1945, and was ordained around 1948, at the insistence of Howard Goss. She was elected the National Youth Secretary around 1947, and served for seven years. Prior to her appointment, she served as Youth President of the Northwest District for seven years.\n\nJohn E. Klemin, Youth President of the Western District, sent a letter to Ruby in 1954, requesting that they begin a Christian correspondence and they later married on May 28, 1955. Brother Klemin was pastoring in Oakland, California, at the time of their marriage.\n\nRuby was soon very busy in a brand new role, as their first daughter, Marla, was born on May 22, 1956. Their family was complete when another daughter, Marilyn, joined them on July 3, 1958.\n\nThrough the years, Ruby was an active part of her husband's ministry, which led them to pastorates in Portland, Oregon, and Vancouver, Washington, and the presidency of Conquerors Bible College, the mission’s field in Argentina, and dean of the Bible School in London, England.\n\nRetiring back to Portland, Oregon, in 1992, they re-opened a home missionary church in Sandy, Oregon, where they pastored until Brother Klemin’s death on January 27, 1995. \n\nAt age ninety-one, she makes her home in Portland, Oregon, with her oldest daughter, Marla, and son-in-law, David Van Beek. She is a vital part of their ministry and until recently, played the piano for each church service."
       }
@@ -876,8 +876,8 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1931,
-      "dateOfDeath": 2011,
+      "dateOfBirth": "1931-07-29",
+      "dateOfDeath": "2011-01-01",
       "details": {
         "biography": "William Coffey Parkey was born on July 29, 1931, on a farm near Paoli, Oklahoma, in the Randolph Community in Garvin County, Oklahoma.   He was the son of Robert Olen and Nellie Fay Parkey.  \n\nIn 1934, C. P. Kilgore held a revival in the Randolph Community and Olen and Fay Parkey received the baptism of the Holy Spirit.  From that time on, the family was involved in the apostolic movement and was part of the Pentecostal Church.  In 1940, W. C. was baptized in Jesus Name and in 1941, at the age of ten, he received the baptism of the Holy Ghost. \n\nW. C. graduated from the Moore, District 66 grade school, and in 1949, he graduated from the Paoli, Oklahoma High School.  In 1954, he graduated from Oklahoma University in Norman, Oklahoma, with a B. A. degree with a major in history, and a minor in English. \n\nIn 1953, while a Junior at O. U., he was given his ministerial license with the UPC and became the Secretary of the Oklahoma Youth Department and in 1955, became the President of the Oklahoma Youth Department and continued in this position for the next eight years.\n\nShortly after graduating from O. U., he preached his first revival in Hope, Arkansas.  In September of 1958, he became pastor of the Oneness Pentecostal Church of Sperry, Oklahoma.  He was pastoring the church without a wife, until September 23 1961, when he married Betty Lou Morgans, of Claremore, Oklahoma.  \n\nIn 1962, Pastor W. C. Parkey and the Sperry Church started a daughter work in Independence, Kansas.  Also, in 1962, Brother Parkey had become a member of the Radio Commission that was attempting to start a radio broadcast called \"Harvestime\".  At the Dallas, Texas, General Conference the first broadcast of Harvestime was aired.  The special song on the first 'Harvestime' broadcast was a song written by author W. C. Parkey, \"Don't Let Me Forget (What the Lord's done for Me).”  \n\nOn February 7, 1963, Elizabeth Elaine was born to the Parkey Family.  \n\nIn December of 1963, Brother Parkey resigned his church to become the Promotional Director of the Harvestime Broadcast at the United Pentecostal Church headquarters, at 2645 South Grand in St. Louis, Missouri. During this year, he not only traveled promoting Harvestime, but also he was the editor for the periodical \"Harvest-Home\".  At this time, he was serving as the editor of the Youth Magazine, \"The Conqueror's Tread!”.\n\nIn 1964, he became pastor at The First Pentecostal Church of Kansas City, Missouri, where he served for ten years. At this same time he was the editor of the Missouri District publication, The Missouri District VOICE! \n\nOn December 30, 1965 Barbara Lois was born to the Parkey family.  \n\nIn 1967, the Missouri District voted to have a Bible School.  The name, \"Gateway College of Evangelism\" was chosen, and W. C. Parkey was asked to be the president. During this time he was asked to serve both on the Curriculum Committee and the Board of Publication of the United Pentecostal Church.  He also served on the Campus Evangelism committee.\n\nOn November 7, 1968, William Robert was born to the Parkey family. On October 27, 1972, Bryan Henry was born.  Then in 1974, Brother Parkey was asked once again to return as the president of Gateway College.  By this time, it was obvious that in order to guide the school efficiently and effectively it could no longer be a part-time job; so reluctantly, Brother Parkey resigned as pastor to become the President of Gateway College.\n\nIn his second term as President, a high school and distance learning program was added.  Gateway sponsored a trip to the Holy Land and a publication, called \"The Panorama,\" was instituted with W. C. Parkey as the editor.\n\nIn 1980, he became the pastor at First United Pentecostal Church of Poplar Bluff, Missouri.  A new church building was built and in 1983 Cornerstone Tabernacle was dedicated. During his time in Poplar Bluff, he served one term as Executive Presbyter of the UPCI, becoming a member of the General Board and the Executive Board.  \n\nIn the year 2000, his son, Bryan Parkey, became his co-pastor at Cornerstone Tabernacle.  In 2002, Brother Parkey retired as pastor and was given the title of Bishop by his church.  Since that time, he has completed a book on Proverbs entitled \"Treasures and Truths\", has completed and published a book of poetry entitled, “Sentimental Journey”, and has completed the manuscript of a book on Ecclesiastes, called \"Devotion and Duty\", which is ready for print."
       }
@@ -894,8 +894,8 @@
         ]
       },
       "oofYearInducted": 2010,
-      "dateOfBirth": 1938,
-      "dateOfDeath": 2009,
+      "dateOfBirth": "1938-08-08",
+      "dateOfDeath": "2009-09-07",
       "details": {
         "biography": "Glen Ray ''G.R.'' Travis was born in Walthall County, near Tylertown, Mississippi, on August 8, 1938, to Tom J. and Lena Dillon Travis. He was the youngest son and had four sisters and five brothers. \n\nHis family attended Stateline United Pentecostal Church, Tylertown, Mississippi, pastored by the late Reverend Earl Carney. It was in this church that Glen Ray received the Holy Ghost on June 22, 1952, under the ministry of the late Reverend Arlie Holmes. In 1955, at the age of seventeen, Brother Travis heard the call of God to preach the gospel. \n\nOn February 1, 1958, Brother Travis married the love of his life, Delilah Keene. They were blessed with three daughters and ten grandchildren.\n\nIn September 1958, shortly after his twentieth birthday, he was elected to his first pastorate at the Second United Pentecostal Church of Bogalusa, Louisiana. \n\nBeing a Mississippian at heart, Brother Travis returned to his home state in February 1960, where he assumed the pastorate of Powell’s Grove United Pentecostal Church, Jayess, Mississippi, pastoring there until November 1963. \n\nIn June 1968, he became pastor of Pleasant Hill United Pentecostal Church and served there until April 1971. In April 1971, Brother Travis assumed the pastorate of First United Pentecostal Church of Vicksburg, Mississippi, where he remained for 18 years, resigning in August 1989, to serve full-time as Mississippi District Superintendent.\n\nBrother Travis served for a total of twenty one and one-half years. In May 2003, he retired as District Superintendent and was later asked to serve as pastor at Heritage Apostolic Church in Holly Springs, Mississippi, where he stayed from 2005 until 2007.\n\nAfter his retirement as Mississippi District Superintendent, the honor of becoming an Honorary Member was bestowed upon him by both the Mississippi District Board and the UPCI General Board. He was a member of the Mississippi District Board for a total of thirty-four years and the UPCI General Board for approximately twenty-eight years.\n\nBrother Travis did not limit himself to ministry related service. He served on the Board of Nursing under Governor Cliff Finch, and was honored on several occasions to bring the invocation at the legislative opening sessions and for Governor Kirk Fordice’s inaugural day prayer service. \n\nOn the occasion of his sixtieth birthday, based on his life experience, Brother Fred Foster presented him with a Doctorate of Theology from Twin Cities University of West Monroe.\n\nOn September 7, 2009, after a four-month battle with metastatic cancer, Brother Travis completed his work on earth and moved into the heavenly realm where he met the one Lord and Savior he loved so much. \n\nMississippi Governor Haley Barbour stated, ''Mississippi has lost a great Christian leader.'' \n\nIn the words of Mississippi District Superintendent, David Tipton, who considered Brother Travis to be his mentor, ''Passion was what made him a leader. There was no insincerity in him at all. He was real. He never put his family on the back shelf; they were on his calendar before anyone else.''\n\nHe was a leader of leaders, a man of impeccable character, known for his wit and wisdom, but first of all, a Christian in the truest sense of the word. As the epitaph inscribed on his monument reads, ''He served his generation well.''"
       }
@@ -912,8 +912,8 @@
         ]
       },
       "oofYearInducted": 2011,
-      "dateOfBirth": 1937,
-      "dateOfDeath": 2017,
+      "dateOfBirth": "1937-08-16",
+      "dateOfDeath": "2017-01-01",
       "details": {
         "thumbnailUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Breithaupt_Ernest.jpg",
         "photoUri": "https://s3-us-west-2.amazonaws.com/upci-oof-production/images/THUMB_Breithaupt_Ernest.jpg",
@@ -932,8 +932,8 @@
         ]
       },
       "oofYearInducted": 2011,
-      "dateOfBirth": 1915,
-      "dateOfDeath": 1976,
+      "dateOfBirth": "1915-09-29",
+      "dateOfDeath": "1976-02-02",
       "details": {
         "biography": "Arthur Lee Clanton was born September 29, 1915, in Iredell, Texas, to Pickford and Julia Clanton.  His brother, R. C., had been born two years earlier. When Arthur was two, his father died, leaving Julia to tend their farm. A year or so later, Julia married a widower, John Lee, who worked for the Santa Fe Railroad in Ft. Worth, Texas.  \n\nWhile Arthur was still in elementary school, his step-father moved the family to Walnut Springs, Texas, where John found employment with the Missouri-Kansas-Texas Railroad. The Clanton family quickly joined the Baptist Church and became active members. In 1931, at age sixteen, Arthur graduated from Walnut Springs High School, one year ahead of his class. \n \nLater in the summer of 1932, Arthur Lee Clanton received the baptism of the Holy Ghost.  He immediately became involved in street evangelism - both in Walnut Springs and other nearby towns. He joined other young people to attend revival services almost every night, where they would help with music, singing and altar work. Soon, he was joining \"evangelistic parties\" for revivals in the hills and prairies of nearby Texas towns. At age seventeen, he preached his first sermon in a small community called County Line.\n\nIn 1937, Brother Clanton was called to be the pastor of the church in Rosepine, Louisiana. It was there that he met Grace Lance, whom he would later marry. In 1938, at age twenty-three, Brother Clanton was ordained into the ministry with the Pentecostal Church Incorporated.\n\n In 1940, Brother Clanton left Rosepine, to serve as assistant pastor of the church in Alexandria, with Brother A. T. Morgan. About a year later, he was asked to move to Houston, Texas, to assist Brother W. E. Kidson as editor of the Apostolic Herald at the PCI headquarters. It was during this time that he and Grace Lance were married in February, 1942.\n\nIn May, 1942, Brother Howard Goss, Superintendent of the Pentecostal Church Incorporated, asked Brother Clanton to consider the pastorate of a church in Shreveport, Louisiana, a position he held until late 1947, at which time he returned to Alexandria, Louisiana, to assume the pastorate there. It was while in Alexandria, that Brother & Sister Clanton's first son, Charles, was born. \n\nBrother Clanton wrote more than fifty gospel songs. The most well-known of these include “I Know I'm Saved” and of course, “My Thanks To Him”. It was in 1951, while in Shady Grove, that Stephen, the Clanton's second child was born. \n\nAt the General Conference in 1955, held in Tulsa, Oklahoma, Brother Clanton was appointed Editor-in-Chief of the UPCI, a position he held until his untimely death on February 2, 1976.  In addition to his editorial duties, he also single-handedly wrote the Adult Sunday School manual for several years, and was the author of a number of tracts. In 1970, after several years of exhaustive research and writing, the original edition of his book, United We Stand, was published."
       }
@@ -950,7 +950,7 @@
         ]
       },
       "oofYearInducted": 2011,
-      "dateOfBirth": 1941,
+      "dateOfBirth": "1941-01-01",
       "details": {
         "biography": "At sixteen years of age, Bennie DeMerchant and Theresa Shomberg felt God’s call to the mission field of Brazil, although they had never met and were separated by 1,500 miles. Theresa went to ABI and graduated before Bennie arrived from New Brunswick, Canada in 1959.  He acquired a private pilot’s license, married Theresa and graduated in 1962. After a three year pastorate in New Brunswick, Canada, in 1965, this couple journeyed to Manaus, capital of the huge Amazon state in Northern Brazil with their six month old daughter, Beth, where they studied Portuguese and built the home in which they still live. \n  \nIn 1970, Sheaves for Christ helped Brother DeMerchant purchase a Cessna 172 seaplane that still flies after 10,000 hours, which is more than a million miles.  A larger Cessna 206 was purchased in 1977 and has logged 5,000 hours. When he is not flying seaplanes, Brother DeMerchant evangelizes using a fleet of wooden and aluminum canoes, portable cement block forms and hundreds of trained workers as they plant churches in Amazon cities, towns, villages, on islands, lakes, and among Indian tribes. \n\nManaus has a present population of about two million souls with some 200 United Pentecostal Churches. A UPCI convention center has been built on the north side of the Amazon River near the floating seaplane hangar and accommodates up to seven thousand people for special events.  \n\nTheresa DeMerchant, national director of Bible schools, coordinates the work of translating, printing and the curriculum for eighty-two Bible school locations with 292 teachers.  The late Robert Norris started this ministry in Rio de Janeiro.  There are 1,121 two-year students registered and 5,500 alumni in these schools which are all named ABI. \n\nBrother DeMerchant was elected bishop of the UPC of Brazil in 1989, by the thirty-two districts and 1,200 church congregations. Approximately 750 churches are located in the Amazon Basin, the northern half of Brazil.  This hot, equatorial zone is equivalent in size to all the United States east of the Mississippi River.  \n\nFull Throttle, (a Pentecostal Publishing House publication) records the adventures, challenges and fears of flying thousands of hours while opening for evangelism the world’s largest standing forest for His kingdom."
       }
