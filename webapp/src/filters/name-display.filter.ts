@@ -21,6 +21,9 @@ export function nameDisplay(
     }
   } else {
     nameParts.push(value.name.given);
+    if (value.name.additional) {
+      nameParts = nameParts.concat(value.name.additional);
+    }
     if (value.name.surname) {
       nameParts.push(value.name.surname);
     }
