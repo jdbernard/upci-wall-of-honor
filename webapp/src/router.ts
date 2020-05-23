@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
+import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
 import IndexView from '@/views/Index.vue';
 import { parseSearchQuery } from '@/data/search.model';
 
@@ -11,6 +12,12 @@ const routes: Array<RouteConfig> = [
     path: '/deceased-ministers',
     name: 'DeceasedMinisters',
     component: DeceasedMinistersView,
+    props: route => ({ searchState: parseSearchQuery(route) })
+  },
+  {
+    path: '/order-of-the-faith',
+    name: 'OrderOfTheFaith',
+    component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
   },
   {
