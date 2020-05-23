@@ -39,7 +39,7 @@ describe('nameDisplay filter', () => {
   };
 
   it('correctly formats short names', () => {
-    expect(nameDisplay(fullExample)).toEqual('John Smith Jr.');
+    expect(nameDisplay(fullExample)).toEqual('John G M Smith Jr.');
   });
 
   it('correctly formats full names', () => {
