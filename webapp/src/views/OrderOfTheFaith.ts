@@ -1,6 +1,6 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { List } from 'immutable';
-import SearchBarComponent from '@/components/common/SearchBar.vue';
+import SearchBarComponent from '@/components/SearchBar.vue';
 import { Minister } from '@/data/minister.model';
 import { SearchState, toQuery } from '@/data/search.model';
 import { logService } from '@/services/logging';
