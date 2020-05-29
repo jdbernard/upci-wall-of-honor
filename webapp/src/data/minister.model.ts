@@ -13,7 +13,7 @@ export interface Minister {
   };
   dateOfBirth: Moment;
   dateOfDeath?: Moment;
-  oofYearInducted?: number;
+  ootfYearInducted?: number;
   details?: {
     thumbnailUri: string;
     photoUri: string;
