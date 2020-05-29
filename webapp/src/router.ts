@@ -11,12 +11,21 @@ const routes: Array<RouteConfig> = [
   {
     path: '/deceased-ministers',
     name: 'DeceasedMinisters',
+    meta: { title: 'Deceased Ministers - UPCI Wall Of Honor' },
     component: DeceasedMinistersView,
     props: route => ({ searchState: parseSearchQuery(route) })
   },
   {
     path: '/order-of-the-faith',
     name: 'OrderOfTheFaith',
+    meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
+    component: OrderOfTheFaithView,
+    props: route => ({ searchState: parseSearchQuery(route) })
+  },
+  {
+    path: '/order-of-the-faith/:year/:page',
+    name: 'OrderOfTheFaithByYear',
+    meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
   },
@@ -31,6 +40,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || 'UPCI Wall Of Honor';
+  next();
 });
 
 export default router;

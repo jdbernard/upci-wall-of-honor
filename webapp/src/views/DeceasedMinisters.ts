@@ -21,14 +21,14 @@ const logger = logService.getLogger('/deceased-ministers');
   }
 })
 export default class DeceasedMinistersView extends Vue {
-  public deceasedMinistersByYear = Collection.Keyed<
+  public ministersByYear = Collection.Keyed<
     number,
     Collection<number, Minister>
   >([]);
-  public deceasedMinisters = List<Minister>();
+  public ministers = List<Minister>();
 
   get matchingMinisters(): List<Minister> {
-    return this.deceasedMinisters.filter(m => {
+    return this.ministers.filter(m => {
       if (this.searchState.type !== 'by-name' || !this.searchState.value) {
         return true;
       } else {
@@ -89,9 +89,9 @@ export default class DeceasedMinistersView extends Vue {
   private scrollReset = false;
 
   private async mounted() {
-    (window as any).DCM = this;
+    // (window as any).DCM = this;
     this.appConfig = await AppConfigStore.appConfig;
-    this.deceasedMinisters = (await MinistersStore.ministers)
+    this.ministers = (await MinistersStore.ministers)
       .filter(m => !!m.dateOfDeath)
       .sort((a, b) =>
         (a.name.surname || a.name.given).localeCompare(
@@ -101,11 +101,11 @@ export default class DeceasedMinistersView extends Vue {
 
     logger.trace({ function: 'mounted', calcStart: performance.now() });
 
-    this.deceasedMinistersByYear = this.deceasedMinisters.groupBy(m =>
+    this.ministersByYear = this.ministers.groupBy(m =>
       m.dateOfDeath ? m.dateOfDeath.year() : 1900
     );
 
-    const allYears = this.deceasedMinistersByYear
+    const allYears = this.ministersByYear
       .keySeq()
       .sort((a, b) => b - a);
 

@@ -30,7 +30,7 @@
           </div>
           <ul class="minister-nameplates">
             <li
-              v-for="minister in deceasedMinistersByYear.get(year)"
+              v-for="minister in ministersByYear.get(year)"
               :key="minister.id"
             >
               <MinisterNameplate :minister="minister"></MinisterNameplate>

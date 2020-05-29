@@ -8,10 +8,59 @@
     align-items: center;
     justify-content: flex-start;
     margin-bottom: $spacer;
+    padding-top: $spacer-md;
     width: 100%;
 
     .search {
       margin-top: $spacer;
     }
+
+    .logo-and-title {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .ootf-logo {
+        height: $spacer-xl;
+      }
+
+    }
   }
+
+  .overview {
+    margin: $spacer-md auto;
+    text-align: left;
+    width: 26rem;
+
+    .ootf-logo {
+      float: left;
+      margin: $spacer-lg $spacer-md $spacer-lg 0;
+    }
+
+    .button-bar {
+      margin: $spacer-md;
+      text-align: center;
+
+      .button.action {
+        margin: $spacer-md auto;
+      }
+    }
+  }
+
+  .ministers-page {
+    margin: $spacer auto;
+    width: 28rem;
+
+    h2 {
+      font-family: $header-font-family;
+      font-size: 1.5rem;
+    }
+  }
+
+  .ootf-logo, .ootf-logo * {
+    fill: $color-fg;
+    stroke: $color-fg;
+  }
+
 }
