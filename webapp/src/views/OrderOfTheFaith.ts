@@ -12,6 +12,8 @@ import OotFLogo from '@/assets/svg-components/OotFLogo.vue';
 
 const logger = logService.getLogger('/order-of-the-faith');
 
+const PAGE_SIZE = 4;
+
 @Component({
   components: {
     OotFLogo,
@@ -56,11 +58,19 @@ export default class OrderOfTheFaithView extends Vue {
       .sort()
       .reverse()
       .toJS();
+
+    logger.trace({ function: 'mounted', mby: this.ministersByYear });
   }
 
   public doSearch(search: SearchState) {
     logger.trace({ function: 'doSearch', search });
     const query = toQuery(search);
     this.$router.push({ path: '/order-of-the-faith', query });
+  }
+
+  public page(year: number, page: number) {
+    logger.trace({ function: 'page', params: { year, page } });
+    const ministersInYear = this.ministersByYear.get(year) || [];
+    ministersInYear.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   }
 }
