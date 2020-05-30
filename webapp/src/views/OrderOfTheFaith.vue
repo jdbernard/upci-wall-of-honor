@@ -36,7 +36,10 @@
       <div class="button-bar">
         <router-link
           class="action button"
-          :to="{ name: 'OrderOfTheFaithByYear', params: { year: years[0], page: 1 } }"
+          :to="{
+            name: 'OrderOfTheFaithByYear',
+            params: { year: years[0], page: 1 }
+          }"
         >
           Start
         </router-link>
@@ -45,6 +48,12 @@
     <div class="ministers-page" v-if="$route.params.year">
       <YearDividerComponent :year="$route.params.year"></YearDividerComponent>
       <h4>Inductees</h4>
+      <div
+        v-for="minister in page($route.params.year, $route.params.page)"
+        :key="minister.id"
+      >
+        {{ minister | nameDisplay }}
+      </div>
     </div>
   </div>
 </template>
