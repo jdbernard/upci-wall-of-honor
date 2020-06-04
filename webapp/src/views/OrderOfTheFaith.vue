@@ -52,7 +52,7 @@
         v-for="minister in page($route.params.year, $route.params.page)"
         :key="minister.id"
       >
-        {{ minister | nameDisplay }}
+        <OotFEntry :minister="minister"></OotFEntry>
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ export default class OrderOfTheFaithView extends Vue {
   public appConfig: AppConfig = defaultConfig;
 
   public async mounted() {
-    // (window as any).OotF = this;
+    (window as any).OotF = this;
     this.appConfig = await AppConfigStore.appConfig;
     this.ministers = (await MinistersStore.ministers)
       .filter(m => !!m.ootfYearInducted)
@@ -71,6 +71,6 @@ export default class OrderOfTheFaithView extends Vue {
   public page(year: number, page: number) {
     logger.trace({ function: 'page', params: { year, page } });
     const ministersInYear = this.ministersByYear.get(year) || [];
-    ministersInYear.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+    return ministersInYear.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   }
 }
