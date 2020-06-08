@@ -16,7 +16,13 @@ export interface Minister {
   ootfYearInducted?: number;
   details?: {
     thumbnailUri: string;
-    photoUri: string;
+    photo: {
+      uri: string;
+      widthInPx?: number;
+      heightInPx?: number;
+      xOffsetInPx?: number;
+      yOffsetInPx?: number;
+    };
     biography: string;
   };
 }

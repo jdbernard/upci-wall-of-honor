@@ -45,14 +45,49 @@
         </router-link>
       </div>
     </div>
-    <div class="ministers-page" v-if="$route.params.year">
+    <div class="ministers-page" :class="{ updating }" v-if="$route.params.year">
       <YearDividerComponent :year="$route.params.year"></YearDividerComponent>
       <h4>Inductees</h4>
-      <div
-        v-for="minister in page($route.params.year, $route.params.page)"
-        :key="minister.id"
-      >
-        <OotFEntry :minister="minister"></OotFEntry>
+      <div class="entries">
+        <OotFEntry
+          v-for="minister in page($route.params.year, $route.params.page)"
+          :key="minister.id"
+          :minister="minister"
+        ></OotFEntry>
+      </div>
+
+      <div class="button-bar">
+        <router-link
+          class="button"
+          v-if="prevPage"
+          :to="{
+            name: 'OrderOfTheFaithByYear',
+            params: { year: years[0], page: 1 }
+          }"
+        >
+          First ({{ years[0] }})
+        </router-link>
+        <router-link
+          class="button"
+          v-if="prevPage"
+          :to="{
+            name: 'OrderOfTheFaithByYear',
+            params: prevPage
+          }"
+        >
+          Prev ({{ prevPage.year }})
+        </router-link>
+        <router-link
+          v-if="nextPage"
+          class="action button"
+          :to="{
+            name: 'OrderOfTheFaithByYear',
+            params: nextPage
+          }"
+        >
+          Next ({{ nextPage.year
+          }}{{ nextPage.year == $route.params.year ? ' cont.' : '' }})
+        </router-link>
       </div>
     </div>
   </div>

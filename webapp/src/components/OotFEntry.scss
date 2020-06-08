@@ -1,0 +1,17 @@
+@import "~@/styles/vars";
+
+.ootf-entry {
+
+  color: $color-fg;
+  display: inline-block;
+  margin: $spacer $spacer-sm;
+  text-decoration: none;
+
+  .photo-frame {
+    margin: 0 auto;
+  }
+
+  .minister-nameplate {
+    margin-top: 0.625rem;
+  }
+}
