@@ -2,7 +2,7 @@
   <div id="minister-biography">
     <div v-if="minister && minister.ootfYearInducted" class="header">
       <div class="logo-and-title">
-        <OotFLogo v-if="$route.params.year" />
+        <OotFLogo />
         <div>
           <h1>Order of the Faith</h1>
           <h2>United Pentecostal Church International</h2>
