@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
 import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
 import IndexView from '@/views/Index.vue';
+import MinisterBiographyView from '@/views/MinisterBiography.vue';
 import { parseSearchQuery } from '@/data/search.model';
 
 Vue.use(VueRouter);
@@ -28,6 +29,12 @@ const routes: Array<RouteConfig> = [
     meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
+  },
+  {
+    path: '/minister-bio/:slug',
+    name: 'MinisterBiography',
+    meta: { title: "Minister's Biography - UPCI Wall of Honor" },
+    component: MinisterBiographyView
   },
   {
     path: '/',
