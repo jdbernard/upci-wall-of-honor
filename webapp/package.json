@@ -5,7 +5,8 @@
   "description": "UPCI Wall of Honor display application.",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "npx servor dist",
+    "vue-serve": "vue-cli-service serve",
     "build": "npm run test:unit && npm run test:e2e && vue-cli-service build",
     "build-dev": "vue-cli-service test:unit && vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
@@ -54,6 +55,7 @@
     "prerender-spa-plugin": "^3.4.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
+    "servor": "^4.0.2",
     "typescript": "~3.8.3",
     "vue-template-compiler": "^2.6.11"
   }
