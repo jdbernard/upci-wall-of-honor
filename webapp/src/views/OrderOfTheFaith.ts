@@ -67,8 +67,11 @@ export default class OrderOfTheFaithView extends Vue {
       .reverse()
       .toJS();
 
-    this.updateNextAndPrev(this.$route.params);
     logger.trace({ function: 'mounted', mby: this.ministersByYear });
+  }
+
+  public beforeUpdate() {
+    this.updateNextAndPrev(this.$route.params);
   }
 
   public beforeRouteUpdate(to: Route, from: Route, next: () => void) {
@@ -78,7 +81,6 @@ export default class OrderOfTheFaithView extends Vue {
       this.updating = true;
       setTimeout(() => {
         this.updating = false;
-        this.updateNextAndPrev(to.params);
         next();
       }, 500);
     }
