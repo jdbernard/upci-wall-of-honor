@@ -1,13 +1,14 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { logService } from '@/services/logging';
+import { Minister } from '@/data/minister.model';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
-
-const logger = logService.getLogger('/order-of-the-faith');
+import MinisterPhoto from '@/components/MinisterPhoto.vue';
 
 @Component({
   components: {
-    MinisterNameplate
+    MinisterNameplate,
+    MinisterPhoto
   }
 })
-export default class OotfEntryComponent extends Vue {
+export default class OotFEntryComponent extends Vue {
+  @Prop() minister!: Minister;
 }

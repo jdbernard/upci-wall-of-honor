@@ -1,0 +1,17 @@
+.photo-frame {
+  background: #464225;
+  padding: 0.125rem;
+  width: 11.625rem
+}
+
+.photo-holder {
+  border: solid 0.125rem #5B552E; // TODO: magic numbers
+  height: 15.3125rem;
+  overflow: hidden;
+  width: 11.375rem;
+
+  img {
+    width: 11.375rem;
+    height: auto;
+  }
+}

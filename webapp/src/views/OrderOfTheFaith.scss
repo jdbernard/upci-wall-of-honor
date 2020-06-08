@@ -12,6 +12,7 @@
     width: 100%;
 
     .search {
+      opacity: 0; // TODO: remove
       margin-top: $spacer;
     }
 
@@ -50,12 +51,42 @@
 
   .ministers-page {
     margin: $spacer auto;
+    transition: opacity 0.5s;
     width: 28rem;
+
+    &.updating {
+      opacity: 0;
+    }
 
     h4 {
       font-family: $header-font-family;
       font-size: 1.5rem;
       font-weight: 300;
+    }
+
+    .entries {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .button-bar {
+      position: fixed;
+      bottom: 2.5rem;
+      width: 28rem;
+
+      display: flex;
+      flex-direction: row;
+
+      .button {
+        margin: $spacer-sm;
+      }
+
+      .button.action {
+        margin-left: auto;
+      }
     }
   }
 
