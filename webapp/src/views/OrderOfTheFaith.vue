@@ -2,7 +2,7 @@
   <div id="order-of-the-faith">
     <div class="header">
       <div class="logo-and-title">
-        <OotFLogo v-if="$route.params.year" />
+        <OotFLogo v-if="!onOverview" />
         <div>
           <h1>Order of the Faith</h1>
           <h2>United Pentecostal Church International</h2>
@@ -14,10 +14,10 @@
         :years="years"
       ></SearchBarComponent>
     </div>
-    <div v-if="!$route.params.year" class="divider">
+    <div v-if="onOverview" class="divider">
       <img src="../assets/img/decorative-line.svg" />
     </div>
-    <div v-if="!$route.params.year" class="overview">
+    <div v-if="onOverview" class="overview">
       <OotFLogo />
 
       <p>
@@ -45,7 +45,7 @@
         </router-link>
       </div>
     </div>
-    <div class="ministers-page" :class="{ updating }" v-if="$route.params.year">
+    <div class="ministers-page" :class="{ updating }" v-if="!onOverview">
       <YearDividerComponent :year="$route.params.year"></YearDividerComponent>
       <h4>Inductees</h4>
       <div class="entries">
