@@ -1,0 +1,57 @@
+@import "~@/styles/vars";
+
+#minister-biography {
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: $spacer;
+    padding-top: $spacer-md;
+    width: 100%;
+
+    .logo-and-title {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .ootf-logo {
+        height: $spacer-xl;
+      }
+
+    }
+  }
+
+  .photo-frame {
+    float: left;
+    margin-right: $spacer-md;
+    margin-bottom: $spacer-sm;
+  }
+
+  .bio-content {
+    margin: $spacer-lg auto;
+    text-align: left;
+    width: 28rem;
+
+
+    h3 {
+      font-family: $header-font-family;
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+
+    label {
+      font-style: italic;
+    }
+
+  }
+
+  .button-bar {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    margin: $spacer 0;
+  }
+}
