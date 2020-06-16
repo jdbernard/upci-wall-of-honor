@@ -1,7 +1,7 @@
 {
   "name": "upci-wall-of-honor",
   "version": "0.1.0",
-  "author": "Jonathan Bernard <jonathan@jdbernard.com",
+  "author": "Jonathan Bernard <jonathan@jdbernard.com>",
   "description": "UPCI Wall of Honor display application.",
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {

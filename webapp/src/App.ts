@@ -22,7 +22,7 @@ library.add(
 
 @Component({})
 export default class App extends Vue {
-  public version = process.env.UPCI_WOH_VERSION;
+  public version = process.env.VUE_APP_UPCI_WOH_VERSION || 'unavailable';
 
   private appConfig: AppConfig = defaultConfig;
   private consoleLogAppender!: ConsoleLogAppender;

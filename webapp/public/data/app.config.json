@@ -1,4 +1,5 @@
 {
-  "userInactivityDurationSeconds": 600,
-  "loggingLevel": "TRACE"
+  "loggingLevel": "WARN",
+  "pageDurationSeconds": 300,
+  "userInactivityDurationSeconds": 600
 }

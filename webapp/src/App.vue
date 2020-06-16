@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!--<span id="upci-woh-version" hidden>{{ version }}</span>-->
+    <span id="upci-woh-version" hidden>{{ version }}</span>
     <router-view />
   </div>
 </template>
