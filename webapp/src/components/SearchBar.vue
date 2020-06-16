@@ -7,6 +7,7 @@
       type="text"
       :value="searchState.value"
     />
+    <fa-icon @click="close()" icon="times"></fa-icon>
   </div>
   <div class="search by-year" v-else-if="searchState.type === 'by-year'">
     <fa-icon @click="leftMore()" icon="angle-double-left"></fa-icon>
@@ -23,6 +24,7 @@
     </ul>
     <fa-icon @click="right()" icon="angle-right"></fa-icon>
     <fa-icon @click="rightMore()" icon="angle-double-right"></fa-icon>
+    <fa-icon @click="close()" icon="times"></fa-icon>
   </div>
   <div class="search main" v-else>
     <span>Search by:</span>
