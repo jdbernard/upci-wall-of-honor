@@ -17,15 +17,8 @@ const routes: Array<RouteConfig> = [
     props: route => ({ searchState: parseSearchQuery(route) })
   },
   {
-    path: '/order-of-the-faith',
+    path: '/order-of-the-faith/:year?/:page?',
     name: 'OrderOfTheFaith',
-    meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
-    component: OrderOfTheFaithView,
-    props: route => ({ searchState: parseSearchQuery(route) })
-  },
-  {
-    path: '/order-of-the-faith/:year/:page',
-    name: 'OrderOfTheFaithByYear',
     meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
