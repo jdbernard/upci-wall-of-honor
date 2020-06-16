@@ -28,6 +28,14 @@
     }
   }
 
+  .divider, .overview, .ministers-page {
+    transition: opacity 0.5s;
+
+    &.updating {
+      opacity: 0;
+    }
+  }
+
   .overview {
     margin: $spacer-md auto;
     text-align: left;
@@ -50,12 +58,7 @@
 
   .ministers-page {
     margin: $spacer auto;
-    transition: opacity 0.5s;
     width: 28rem;
-
-    &.updating {
-      opacity: 0;
-    }
 
     h4 {
       font-family: $header-font-family;

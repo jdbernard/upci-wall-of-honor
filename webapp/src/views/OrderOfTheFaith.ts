@@ -1,5 +1,5 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Route, RawLocation } from 'vue-router';
+import { Route } from 'vue-router';
 import { Collection, List } from 'immutable';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
@@ -84,6 +84,7 @@ export default class OrderOfTheFaithView extends Vue {
       .reverse()
       .toJS();
 
+    this.startKioskDisplay();
     logger.trace({ function: 'mounted', mby: this.ministersByYear });
   }
 
@@ -91,38 +92,40 @@ export default class OrderOfTheFaithView extends Vue {
     this.updateNextAndPrev(this.$route.params);
   }
 
-  public beforeRouteUpdate(to: Route, from: Route, next: () => void) {
-    if (to.params === from.params) {
-      next();
+  public doSearch(search: SearchState) {
+    logger.trace({ function: 'doSearch', search });
+
+    if (search.type === 'none') {
+      this.$router.push(this.$route.path);
+      this.startKioskDisplay();
     } else {
-      this.updating = true;
-      setTimeout(() => {
-        this.updating = false;
-        next();
-      }, 500);
+      this.allowUserInteraction();
+      if (search.type === 'by-year' && search.value) {
+        this.$router.push({
+          name: 'OrderOfTheFaith',
+          params: { year: search.value, page: '1' }
+        });
+      } else if (search.type === 'by-name' && search.value) {
+        this.$router.push({
+          name: 'OrderOfTheFaith',
+          query: toQuery(search)
+        });
+      } else {
+        this.$router.push({
+          name: 'OrderOfTheFaith',
+          params: this.$route.params,
+          query: toQuery(search)
+        });
+      }
     }
   }
 
-  public doSearch(search: SearchState) {
-    logger.trace({ function: 'doSearch', search });
-    const query = toQuery(search);
-
-    if (this.onOverview) {
-      this.$router.push({
-        name: 'OrderOfTheFaith',
-        query
-      });
-    } else {
-      this.$router.push({
-        name: 'OrderOfTheFaithByYear',
-        params: this.$route.params,
-        query
-      });
-    }
+  public get hasNameResults(): boolean {
+    return this.searchState.type === 'by-name' && !!this.searchState.value;
   }
 
   public get onOverview(): boolean {
-    return !this.$route.params.year;
+    return !this.$route.params.year && !this.hasNameResults;
   }
 
   public page(year: string | number, page: string | number) {
@@ -174,7 +177,71 @@ export default class OrderOfTheFaithView extends Vue {
         this.nextPage = null;
       }
     } else {
-      this.prevPage = this.nextPage = null;
+      this.prevPage = null;
+      this.nextPage = { year: this.years[0], page: 1 };
     }
+  }
+
+  public startKioskDisplay(delay?: number) {
+    delay = delay || this.appConfig.pageDurationSeconds * 1000;
+
+    if (this.nextPageTimeout) {
+      logger.trace({
+        function: 'startKioskDisplay',
+        status: 'already in kiosk mode'
+      });
+      return;
+    } else {
+      logger.trace({
+        function: 'startKioskDisplay',
+        status: `starting in ${delay} ms`
+      });
+      setTimeout(this.autoAdvance, delay);
+    }
+  }
+
+  private autoAdvance() {
+    this.updating = true;
+    setTimeout(() => {
+      if (this.nextPage) {
+        this.$router.push({
+          name: 'OrderOfTheFaith',
+          params: {
+            // TODO: gross toString
+            year: this.nextPage.year.toString(),
+            page: this.nextPage.page.toString()
+          }
+        });
+      } else {
+        this.$router.push({ name: 'OrderOfTheFaith' });
+      }
+
+      this.nextPageTimeout = setTimeout(
+        this.autoAdvance,
+        this.appConfig.pageDurationSeconds * 1000
+      );
+
+      this.updating = false;
+    }, 500);
+  }
+
+  private allowUserInteraction() {
+    const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
+    logger.trace(
+      `Pausing kiosk mode  and allowing user activity for ${timeoutMs} milliseconds.`
+    );
+
+    if (this.userInteractionTimeout) {
+      clearTimeout(this.userInteractionTimeout);
+    }
+
+    if (this.nextPageTimeout) {
+      clearTimeout(this.nextPageTimeout);
+      this.nextPageTimeout = null;
+    }
+    this.userInteractionTimeout = setTimeout(() => {
+      delete this.userInteractionTimeout;
+      this.doSearch({ type: 'none' });
+    }, this.appConfig.userInactivityDurationSeconds * 1000);
   }
 }
