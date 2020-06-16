@@ -74,11 +74,11 @@ export class Logger {
     this.doLog(LogLevel.WARN, message, stacktrace);
   }
 
-  public error(message: MessageType, stacktrace?: string): void {
+  public error(message: Error | MessageType, stacktrace?: string): void {
     this.doLog(LogLevel.ERROR, message, stacktrace);
   }
 
-  public fatal(message: MessageType, stacktrace?: string): void {
+  public fatal(message: Error | MessageType, stacktrace?: string): void {
     this.doLog(LogLevel.FATAL, message, stacktrace);
   }
 

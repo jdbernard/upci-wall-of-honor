@@ -14,10 +14,15 @@ FA_DOM.watch();
 
 Vue.filter('nameDisplay', nameDisplay);
 
-Vue.config.productionTip = false;
-
 const consoleLogAppender = new ConsoleLogAppender(LogLevel.ALL);
 logService.ROOT_LOGGER.appenders.push(consoleLogAppender);
+
+const logger = logService.getLogger('main');
+
+Vue.config.productionTip = false;
+Vue.config.errorHandler = function(err, vm, info) {
+  logger.error({ err, vm, info });
+};
 
 new Vue({
   router,
