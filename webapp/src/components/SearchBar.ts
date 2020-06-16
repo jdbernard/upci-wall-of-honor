@@ -34,6 +34,10 @@ export default class SearchBarComponent extends Vue {
     this.search({ type: 'by-year', value: year.toString() });
   }
 
+  public close() {
+    this.search({ type: 'none' });
+  }
+
   public left() {
     this.yearListEl.scrollBy({ behavior: 'smooth', left: -5 * 32 * 3 });
   }

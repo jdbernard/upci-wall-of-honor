@@ -46,6 +46,23 @@ export default class OrderOfTheFaithView extends Vue {
   public prevPage: { year: number; page: number } | null = null;
   public nextPage: { year: number; page: number } | null = null;
 
+  private nextPageTimeout: number | null = null;
+  private userInteractionTimeout: number | null = null;
+
+  get matchingMinisters(): List<Minister> {
+    return this.ministers.filter(m => {
+      if (this.searchState.type !== 'by-name' || !this.searchState.value) {
+        return true;
+      } else {
+        return (
+          m.name.given.toLowerCase().startsWith(this.searchState.value) ||
+          (m.name.surname &&
+            m.name.surname.toLowerCase().startsWith(this.searchState.value))
+        );
+      }
+    });
+  }
+
   public async mounted() {
     (window as any).OotF = this;
     this.appConfig = await AppConfigStore.appConfig;

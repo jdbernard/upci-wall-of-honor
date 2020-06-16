@@ -90,6 +90,23 @@
         </router-link>
       </div>
     </div>
+
+    <div
+      class="ministers-search-results"
+      v-if="hasNameResults"
+    >
+      <div class="divider">
+        <img src="../assets/img/decorative-line.svg" />
+      </div>
+
+      <div class="entries">
+        <OotFEntry
+          v-for="minister in matchingMinisters"
+          :key="minister.id"
+          :minister="minister"
+        ></OotFEntry>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./OrderOfTheFaith.ts"></script>

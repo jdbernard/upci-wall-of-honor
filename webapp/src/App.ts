@@ -8,10 +8,17 @@ import {
   faAngleLeft,
   faAngleRight,
   faAngleDoubleLeft,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faAngleLeft, faAngleRight, faAngleDoubleLeft, faAngleDoubleRight);
+library.add(
+  faAngleLeft,
+  faAngleRight,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faTimes
+);
 
 @Component({})
 export default class App extends Vue {
