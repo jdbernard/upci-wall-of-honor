@@ -8,6 +8,7 @@ import { parseSearchQuery } from '@/data/search.model';
 
 Vue.use(VueRouter);
 
+// Routes for the app when served from oof.upci.org
 const routes: Array<RouteConfig> = [
   {
     path: '/deceased-ministers',
@@ -36,10 +37,21 @@ const routes: Array<RouteConfig> = [
   }
 ];
 
+// Routes for the app when served from oof.upci.org
+const oofRoutes: Array<RouteConfig> = [
+  {
+    path: '/:year?/:page?',
+    name: 'OrderOfTheFaith',
+    meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
+    component: OrderOfTheFaithView,
+    props: route => ({ searchState: parseSearchQuery(route) })
+  }
+];
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: window.location.host === 'oof.upci.org' ? oofRoutes : routes
 });
 
 router.beforeEach((to, from, next) => {

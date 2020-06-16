@@ -161,8 +161,10 @@ export default class DeceasedMinistersView extends Vue {
 
   public doSearch(search: SearchState) {
     logger.trace({ function: 'doSearch', search });
-    const query = toQuery(search);
-    this.$router.push({ path: '/deceased-ministers', query });
+    this.$router.push({
+      name: 'DeceasedMinisters',
+      query: toQuery(search)
+    });
   }
 
   private afterScrollReset(): Promise<void> {
