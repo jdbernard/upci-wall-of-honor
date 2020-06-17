@@ -1,11 +1,10 @@
 <template>
-  <ul>
-    <router-link to="/executive-leadership">Executive Leadership</router-link>
-    <router-link to="/deceased-ministers">Deceased Ministers</router-link>
-    <router-link :to="{ name: 'OrderOfTheFaith' }"
-      >Order of the Faith</router-link
-    >
-  </ul>
+  <div id="coming-soon">
+    <div class="header general">
+      <h1>Wall of Honor</h1>
+      <h2>Coming soon at General Conference 2020</h2>
+    </div>
+  </div>
 </template>
 <script lang="ts" src="./index.ts"></script>
 <style lang="scss" src="./index.scss"></style>
