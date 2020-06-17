@@ -2,7 +2,9 @@
   <div id="order-of-the-faith">
     <div class="header">
       <div class="logo-and-title">
-        <OotFLogo v-if="!onOverview" />
+        <router-link :to="{ name: 'OrderOfTheFaith' }">
+          <OotFLogo v-if="!onOverview" />
+        </router-link>
         <div>
           <h1>Order of the Faith</h1>
           <h2>United Pentecostal Church International</h2>
