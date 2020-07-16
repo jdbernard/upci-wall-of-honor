@@ -1,6 +1,16 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Minister } from '@/data/minister.model';
 
+interface PhotoPositioningCss {
+  position?: string;
+  left?: string;
+  right?: string;
+  top?: string;
+  bottom?: string;
+  width?: string;
+  height?: string;
+}
+
 @Component({})
 export default class MinisterPhotoComponent extends Vue {
   @Prop() minister!: Minister;
@@ -10,7 +20,7 @@ export default class MinisterPhotoComponent extends Vue {
       return {};
     }
 
-    const styleObj: any = {};
+    const styleObj: PhotoPositioningCss = {};
     const photo = this.minister.details.photo;
     if (photo.xOffsetInPx || photo.yOffsetInPx) {
       styleObj.position = 'relative';
