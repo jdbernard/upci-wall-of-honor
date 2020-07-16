@@ -1,5 +1,4 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Route } from 'vue-router';
 import { Collection, List } from 'immutable';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
