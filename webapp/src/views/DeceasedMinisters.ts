@@ -105,9 +105,7 @@ export default class DeceasedMinistersView extends Vue {
       m.dateOfDeath ? m.dateOfDeath.year() : 1900
     );
 
-    const allYears = this.ministersByYear
-      .keySeq()
-      .sort((a, b) => b - a);
+    const allYears = this.ministersByYear.keySeq().sort((a, b) => b - a);
 
     logger.trace({ function: 'mounted', calcEnd: performance.now() });
 
@@ -202,7 +200,9 @@ export default class DeceasedMinistersView extends Vue {
 
   private allowUserInteraction() {
     const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
-    logger.trace(`Pausing automated scroll and allowing user activity for ${timeoutMs} milliseconds.`);
+    logger.trace(
+      `Pausing automated scroll and allowing user activity for ${timeoutMs} milliseconds.`
+    );
 
     if (this.userInteractionTimeout) {
       clearTimeout(this.userInteractionTimeout);
