@@ -45,13 +45,23 @@ const oofRoutes: Array<RouteConfig> = [
     meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
+  },
+  {
+    path: '/minister-bio/:slug',
+    name: 'MinisterBiography',
+    meta: { title: "Minister's Biography - UPCI Wall of Honor" },
+    component: MinisterBiographyView
   }
 ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: window.location.host === 'oof.upci.org' ? oofRoutes : routes
+  routes:
+    window.location.host === 'oof.upci.org' ||
+    process.env.VUE_APP_UPCI_WOH_FORCE_OOTF
+      ? oofRoutes
+      : routes
 });
 
 router.beforeEach((to, from, next) => {
