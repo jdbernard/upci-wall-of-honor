@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <span id="upci-woh-version" hidden>{{ version }}</span>
+    <ul id="upci-woh-version" hidden>
+      <li class="version">{{ version }}</li>
+      <li class="hash">{{ gitVersion.hash }}</li>
+      <li class="raw">{{ gitVersion.raw }}</li>
+    </ul>
     <router-view />
   </div>
 </template>

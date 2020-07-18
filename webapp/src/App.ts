@@ -20,9 +20,17 @@ library.add(
   faTimes
 );
 
+interface GitHash {
+  hash: string;
+  raw: string;
+}
+
 @Component({})
 export default class App extends Vue {
   public version = process.env.VUE_APP_UPCI_WOH_VERSION || 'unavailable';
+  public gitVersion: GitHash = process.env.VUE_APP_UPCI_WOH_GIT_HASH
+    ? JSON.parse(process.env.VUE_APP_UPCI_WOH_GIT_HASH)
+    : { hash: 'missing', raw: 'missing' };
 
   private appConfig: AppConfig = defaultConfig;
   private consoleLogAppender!: ConsoleLogAppender;

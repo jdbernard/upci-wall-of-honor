@@ -119,10 +119,7 @@
       </div>
     </div>
 
-    <div
-      class="ministers-search-results"
-      v-if="hasNameResults"
-    >
+    <div class="ministers-search-results" v-if="hasNameResults">
       <div class="divider">
         <img src="../assets/img/decorative-line.svg" />
       </div>
