@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "npx servor dist",
     "vue-serve": "vue-cli-service serve",
-    "build": "npm run test:unit && npm run test:e2e && vue-cli-service build",
+    "build": "npm run test:unit && vue-cli-service build",
     "build-no-test": "vue-cli-service build",
     "build-dev": "vue-cli-service test:unit && vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
