@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - cd webapp && npm install
+  build:
+    commands:
+      #CWD is $repo/webapp
+      - echo "Build started by $CODEBUILD_INITIATOR"
+      - codebuild/build.sh
+  post_build:
+    commands:
+      # CWD is $repo/webapp
+      - codebuild/deploy.sh
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: webapp/dist
+  name: upci-wall-of-honor-$(git describe --always --dirty).zip
+
+cache:
+  paths:
+    - 'webapp/node_modules'
