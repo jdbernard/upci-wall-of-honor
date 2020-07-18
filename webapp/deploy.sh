@@ -5,6 +5,8 @@
 # This script is called during the post_build phase of te CodeBuild project.
 # It's job is to inspec the build environment to determine whether this build
 # should be deployed to on of the environments and to perfom the deploy if so.
+#
+# This script expects to be in the /webapp directory when it is run.
 
 # Exit on all errors. Keep track of the last command and print an error message
 # when exiting on errors.
@@ -12,51 +14,27 @@ set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'if [ $? -ne 0 ]; then echo "\"${last_command}\" command failed with exit code $?."; fi' EXIT
 
-target_env=""
-
 cat << BANNER
 Deploy script for UPCI Wall of Honor webapp
 -------------------------------------------
 
 Inspecting the build environment for deploy target:
-  CODEBUILD_WEBHOOK_EVENT = ${CODEBUILD_WEBHOOK_EVENT}
-  CODEBUILD_WEBHOOK_BASE_REF = ${CODEBUILD_WEBHOOK_BASE_REF}
   UPCI_WOH_TARGET_ENV = ${UPCI_WOH_TARGET_ENV}
 BANNER
 
-# There are 3 scenarios:
-#
-# 1. Code is pushed to either the develop or master branches. In this case,
-#    CodeBuild is triggered by a webhoo. We need to inspect the base ref to
-#    find the target environment.
-if [[ -n $CODEBUILD_WEBHOOK_EVENT && -n $CODEBUILD_WEBHOOK_BASE_REF ]]; then
-
-  if [[ $CODEBUILD_WEBHOOK_BASE_REF == *'develop' ]]; then
-    target_env="dev"
-  elif [[ $CODEBUILD_WEBHOOK_BASE_REF == *'master' ]]; then
-    target_env="prod"
-  else
-    echo "Code was pushed to $CODE_WEBHOOK_BASE_REF, no deployment."
-    exit 0
-  fi
-
-elif [[ -z $CODEBUILD_WEBHOOK_EVENT && -n $UPCI_WOH_TARGET_ENV ]]; then
-  target_env="$UPCI_WOH_TARGET_ENV"
-
-  # All builds should fit on of the above categories.
-else
+if [[ -z $UPCI_WOH_TARGET_ENV ]]; then
   >&2 cat << ERRMSG
-Unrecognized deploy invocation. This script expects either the
-CODEBUILD_WEBHOOK_EVENT or UPCI_WOH_TARGET_ENV environment variable to be set.
+Unrecognized deploy invocation. This script expects UPCI_WOH_TARGET_ENV
+environment variable to be set.
 ERRMSG
 
   exit 1
 fi
 
 # Now we can perform the actual deploy.
-target_domain="${target_env}.upci-woh.jdb-labs.com"
-if [[ $target_env == "prod" ]]; then target_domain="www.upciwallofhonor.org"; fi
-echo "Deploy target is ${target_env}. Deploying to ${target_domain}."
+target_domain="${UPCI_WOH_TARGET_ENV}.upci-woh.jdb-labs.com"
+if [[ $UPCI_WOH_TARGET_ENV == "prod" ]]; then target_domain="www.upciwallofhonor.org"; fi
+echo "Deploy target is ${UPCI_WOH_TARGET_ENV}. Deploying to ${target_domain}."
 aws s3 sync ./dist/ "s3://${target_domain}"
 aws s3 cp ./dist/index.html "s3://${target_domain}/index.html" \
   --metadata "Cache-Control=no-store"
@@ -108,7 +86,7 @@ fi
 
 echo "Found distribution ID ${cloudfront_distribution_id}."
 
-echo "Invalidating the CloudFront cache for ${target_env}."
+echo "Invalidating the CloudFront cache for ${UPCI_WOH_TARGET_ENV}."
 invalidation_id=$(aws cloudfront create-invalidation \
   --query 'Invalidation.Id' \
   --distribution-id "${cloudfront_distribution_id}" \
