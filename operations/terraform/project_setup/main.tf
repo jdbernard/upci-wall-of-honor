@@ -24,8 +24,8 @@ resource "aws_s3_bucket" "project" {
 resource "aws_dynamodb_table" "dynamodb_terraform_state_lock" {
   name = "terraform-state-lock.upci-wall-of-honor"
   hash_key = "LockID"
-  read_capacity = 20
-  write_capacity = 20
+  read_capacity = 2
+  write_capacity = 2
 
   attribute {
     name = "LockID"
@@ -34,6 +34,18 @@ resource "aws_dynamodb_table" "dynamodb_terraform_state_lock" {
 
   tags = {
     Name = "Terraform DynamoDB State Lock Table"
+  }
+}
+
+resource "aws_dynamodb_table" "admin_edit_lock" {
+  name            = "admin-edit-locks.upci-wall-of-honor"
+  hash_key        = "LockID"
+  read_capacity   = 10
+  write_capacity  = 10
+
+  attribute {
+    name = "LockID"
+    type = "S"
   }
 }
 
