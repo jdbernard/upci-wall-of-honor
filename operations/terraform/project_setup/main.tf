@@ -49,72 +49,10 @@ resource "aws_route53_zone" "prod" {
   force_destroy = true
 }
 
-#resource "aws_iam_policy_document" "build_and_deploy_policy" {
-#  # TODO
-#  statement {
-#  }
-#}
-
 resource "aws_codecommit_repository" "repo" {
   repository_name = "upci-wall-of-honor"
   description = "UPCI Wall of Honor display and administrative application."
   default_branch = "master"
-}
-
-#resource "aws_iam_role" "build_and_deploy" {
-#  name = "BuildAndDeploy"
-#  assume_role_policy = data.aws_iam_policy_document.build_and_deploy_policy.json
-#}
-
-resource "aws_cloudwatch_log_group" "codebuild" {
-  name = "CodeBuildLogs"
-}
-
-resource "aws_cloudwatch_log_stream" "build_frontend" {
-  name            = "FrontendBuild"
-  log_group_name  = aws_cloudwatch_log_group.codebuild.name
-}
-
-resource "aws_codebuild_project" "frontend" {
-  name          = "upci-wall-of-honor-frontend"
-  description   = "UPCI Wall of Honor frontend CI/CD pipeline."
-  build_timeout = "10"
-  badge_enabled = true
-  service_role  = "arn:aws:iam::067134085733:role/service-role/codebuild-test-service-role" # aws_iam_role.codebuild.arn
-
-  artifacts {
-    type = "NO_ARTIFACTS"
-  }
-
-  cache {
-    type      = "S3"
-    location  = "${aws_s3_bucket.project.id}/codebuild/cache"
-  }
-
-  environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:4.0"
-    type                        = "LINUX_CONTAINER"
-  }
-
-  logs_config {
-    cloudwatch_logs {
-      group_name  = aws_cloudwatch_log_group.codebuild.name
-      stream_name = aws_cloudwatch_log_stream.build_frontend.name
-    }
-
-    s3_logs {
-      status    = "ENABLED"
-      location  = "${aws_s3_bucket.project.id}/codebuild/logs"
-    }
-  }
-
-  source {
-    type            = "CODECOMMIT"
-    buildspec       = "webapp/codecommit/buildspec.yaml"
-    location        = "upci-wall-of-honor"
-    git_clone_depth = 1
-  }
 }
 
 output "aws_s3_project_bucket" {
