@@ -33,7 +33,13 @@
               v-for="minister in ministersByYear.get(year)"
               :key="minister.id"
             >
-              <MinisterNameplate :minister="minister"></MinisterNameplate>
+              <a v-if="minister.details">
+                <MinisterNameplate :minister="minister"></MinisterNameplate>
+              </a>
+              <MinisterNameplate
+                v-else
+                :minister="minister"
+              ></MinisterNameplate>
             </li>
           </ul>
         </li>
