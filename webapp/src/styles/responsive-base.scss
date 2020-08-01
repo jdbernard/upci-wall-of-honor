@@ -1,0 +1,15 @@
+$brkMobile: 400px;
+$brkTablet: 800px;
+$brkDesktop: 1080px;
+
+@media screen and (width <= $brkMobile) {
+}
+
+@media screen and ($brkMobile < width <= $brkTablet) {
+}
+
+@media screen and ($brkTablet < width < $brkDesktop) {
+}
+
+@media screen and (width >= $brkDesktop) {
+}
