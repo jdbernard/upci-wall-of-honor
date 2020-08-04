@@ -2,14 +2,14 @@ $brkMobile: 400px;
 $brkTablet: 800px;
 $brkDesktop: 1080px;
 
-@media screen and (width <= $brkMobile) {
+@media screen and (max-width: $brkMobile) {
 }
 
-@media screen and ($brkMobile < width <= $brkTablet) {
+@media screen and (max-width: $brkTablet) {
 }
 
-@media screen and ($brkTablet < width < $brkDesktop) {
+@media screen and (max-width: $brkDesktop) {
 }
 
-@media screen and (width >= $brkDesktop) {
+@media screen and (min-width: $brkDesktop) {
 }
