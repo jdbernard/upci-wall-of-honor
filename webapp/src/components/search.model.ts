@@ -1,5 +1,5 @@
 import { Route } from 'vue-router';
-import { logService } from '@/services/logging';
+import { logService } from '@jdbernard/logging';
 
 export type SearchType = 'none' | 'by-name' | 'by-year';
 

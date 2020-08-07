@@ -7,7 +7,7 @@ import YearDividerComponent from '@/components/YearDivider.vue';
 import { Minister } from '@/data/minister.model';
 import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { SearchState, toQuery } from '@/data/search.model';
-import { logService } from '@/services/logging';
+import { logService } from '@jdbernard/logging';
 import OotFEntry from '@/components/OotFEntry.vue';
 import OotFLogo from '@/assets/svg-components/OotFLogo.vue';
 

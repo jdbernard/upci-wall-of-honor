@@ -1,6 +1,6 @@
 import { default as Axios, AxiosInstance } from 'axios';
 import { AppConfig, defaultConfig } from './app.config.model';
-import { LogLevel } from '@/services/logging';
+import { LogLevel } from '@jdbernard/logging';
 
 export class AppConfigStore {
   constructor() {
