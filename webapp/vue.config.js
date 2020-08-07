@@ -1,6 +1,5 @@
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const path = require('path');
-const merge = require('deepmerge');
 
 process.env.VUE_APP_UPCI_WOH_VERSION = JSON.stringify(
   require('./package.json').version
