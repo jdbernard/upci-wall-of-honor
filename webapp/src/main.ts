@@ -6,7 +6,7 @@ import router from './router';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { dom as FA_DOM } from '@fortawesome/fontawesome-svg-core';
 
-import { logService, LogLevel, ConsoleLogAppender } from '@/services/logging';
+import { logService, LogLevel, ConsoleLogAppender } from '@jdbernard/logging';
 import { nameDisplay } from '@/filters/name-display.filter';
 
 Vue.component('fa-icon', FontAwesomeIcon);

@@ -1,4 +1,4 @@
-import { LogLevel } from '@/services/logging';
+import { LogLevel } from '@jdbernard/logging';
 
 export interface AppConfig {
   loggingLevel: LogLevel;

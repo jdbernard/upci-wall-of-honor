@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import AppConfigStore from '@/data/app.config.store';
 import { AppConfig, defaultConfig } from '@/data/app.config.model';
-import { logService, ConsoleLogAppender } from '@/services/logging';
+import { logService, ConsoleLogAppender } from '@jdbernard/logging';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {

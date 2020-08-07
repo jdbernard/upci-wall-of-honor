@@ -9,7 +9,7 @@ import { Minister } from '@/data/minister.model';
 import { AutoScrollService } from '@/services/auto-scroll.service.ts';
 import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { SearchState, toQuery } from '@/data/search.model';
-import { logService } from '@/services/logging';
+import { logService } from '@jdbernard/logging';
 
 const logger = logService.getLogger('/deceased-ministers');
 
