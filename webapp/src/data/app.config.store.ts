@@ -1,6 +1,8 @@
 import { default as Axios, AxiosInstance } from 'axios';
 import { AppConfig, defaultConfig } from './app.config.model';
-import { LogLevel } from '@jdbernard/logging';
+import { logService, LogLevel } from '@jdbernard/logging';
+
+const logger = logService.getLogger('/data/app.config.store');
 
 export class AppConfigStore {
   constructor() {
@@ -19,14 +21,20 @@ export class AppConfigStore {
   }
 
   private async loadAppConfig(): Promise<AppConfig> {
-    const resp = await this.http.get('/data/app.config.json');
-    const config = { ...defaultConfig, ...resp.data };
+    try {
+      const resp = await this.http.get('/data/app.config.json');
+      const config = { ...defaultConfig, ...resp.data };
 
-    config.loggingLevel = (LogLevel[
-      config.loggingLevel
-    ] as unknown) as LogLevel;
+      config.loggingLevel = (LogLevel[
+        config.loggingLevel
+      ] as unknown) as LogLevel;
 
-    return config;
+      return config;
+    } catch (e) {
+      logger.error('Unable to load application configuration: ' + e.message);
+      logger.trace(e);
+      return defaultConfig;
+    }
   }
 }
 
