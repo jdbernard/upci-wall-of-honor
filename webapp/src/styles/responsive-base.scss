@@ -1,15 +1,7 @@
-$brkMobile: 400px;
-$brkTablet: 800px;
-$brkDesktop: 1080px;
+@import "forSize.mixin";
 
-@media screen and (max-width: $brkMobile) {
-}
-
-@media screen and (max-width: $brkTablet) {
-}
-
-@media screen and (max-width: $brkDesktop) {
-}
-
-@media screen and (min-width: $brkDesktop) {
+@include forSize(tablet) {
+  html {
+    font-size: 24px;
+  }
 }
