@@ -22,7 +22,9 @@
     <article v-if="minister" class="bio-content">
       <MinisterPhoto :minister="minister"></MinisterPhoto>
       <h3>{{ minister | nameDisplay }}</h3>
-      <div class="vital-date"><label>Born:</label> {{ birthFormatted }}</div>
+      <div v-if="minister.dateOfBirth" class="vital-date">
+        <label>Born:</label> {{ birthFormatted }}
+      </div>
       <div v-if="minister.dateOfDeath" class="vital-date">
         <label>Passed:</label> {{ deathFormatted }}
       </div>

@@ -12,6 +12,6 @@ export default class MinisterNameplateComponent extends Vue {
   }
 
   public get birthFormatted(): string {
-    return this.minister.dateOfBirth.format(dateFormat);
+    return this.minister.dateOfBirth?.format(dateFormat) || 'unknown';
   }
 }

@@ -31,7 +31,7 @@ export default class MinisterBiographyView extends Vue {
   }
 
   public get birthFormatted(): string {
-    if (this.minister) {
+    if (this.minister && this.minister.dateOfBirth) {
       return this.minister.dateOfBirth.format(dateFormat);
     } else {
       return '';
