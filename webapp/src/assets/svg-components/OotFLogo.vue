@@ -481,12 +481,3 @@
     </g>
   </svg>
 </template>
-<style lang="scss">
-.ootf-logo,
-.ootf-logo * {
-  @import '~@/styles/vars';
-
-  fill: $color-fg;
-  stroke: $color-fg;
-}
-</style>
