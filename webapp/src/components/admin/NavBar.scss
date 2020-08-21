@@ -1,0 +1,172 @@
+@import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
+
+nav {
+  background-color: $color-admin-accent1;
+  color: $color-admin-bg;
+
+  ul {
+    list-style: none;
+
+    li {
+      font-family: "Gotham XNarrow";
+      font-size: 1rem;
+      font-weight: 500;
+
+      a {
+        color: $color-admin-bg;
+        display: flex;
+        align-items: center;
+        padding: $spacer-xs $spacer $spacer-xs $spacer;
+        text-align: left;
+        text-decoration: none;
+        height: 1.75rem;
+        width: 100%;
+
+        div {
+          display: flex;
+          align-content: center;
+          justify-content: center;
+          width: 1.4rem;
+        }
+
+        &.router-link-exact-active {
+          background-color: $color-admin-bg;
+          color: $color-admin-accent1;
+
+          div svg.ootf-icon {
+            fill: $color-admin-accent1;
+            stroke: $color-admin-accent1;
+          }
+        }
+
+        &:hover {
+          background-color: $color-admin-accent2;
+          color: $color-admin-bg;
+
+          div svg.ootf-icon {
+            fill: $color-admin-bg;
+            stroke: $color-admin-bg;
+          }
+        }
+
+        svg {
+          height: auto;
+
+          &.ootf-icon {
+            fill: $color-admin-bg;
+            stroke: $color-admin-bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include forSize(notMobile) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .upci-logo, .upci-icon {
+      height: auto;
+      width: var(--nav-width);
+      fill: $color-admin-bg;
+    }
+
+    h1 {
+      border-bottom: solid thin $color-admin-bg;
+      font-family: "Gotham";
+      font-weight: 500;
+      font-size: 1.125rem;
+      margin: 0 1em;
+      text-align: start;
+      width: calc(100% - 2.5rem);
+    }
+
+    ul {
+      padding: $spacer-xs 0;
+
+      a svg {
+        width: 1em;
+        &.ootf-icon { width: 1.2rem; }
+      }
+    }
+
+    button.collapse, button.expand {
+      align-self: end;
+      background-color: $color-admin-accent1;
+      color: $color-admin-bg;
+      font-family: "Gotham XNarrow";
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: auto;
+      margin-bottom: 1em;
+      padding: 0 $spacer-sm;
+
+      &:hover {
+        background-color: $color-admin-accent2;
+      }
+    }
+
+    button.collapse { margin-right: 1em; }
+
+    button.expand {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button.expand, .upci-icon { display: none; }
+  }
+
+  nav.collapsed {
+    button.collapse,
+    .upci-logo {
+      display: none;
+    }
+
+    button.expand, .upci-icon { display: block; }
+
+    .link-title, h1 { display: none; }
+
+    ul {
+      padding: $spacer 0;
+
+      a {
+        padding: 0.25rem 0;
+
+        div {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@include forSize(mobile) {
+  nav {
+
+    .upci-logo, .upci-icon, h1, .link-title, .expand, .collapse {
+      display: none;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-content: stretch;
+      justify-content: space-between;
+      padding: 0;
+      height: 100%;
+
+      li a {
+        height: 100%;
+
+        div svg {
+          width: 1.2rem;
+        }
+      }
+    }
+  }
+}
