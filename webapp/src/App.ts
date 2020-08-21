@@ -9,7 +9,9 @@ import {
   faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
-  faTimes
+  faSitemap,
+  faTimes,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -17,7 +19,9 @@ library.add(
   faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
-  faTimes
+  faSitemap,
+  faTimes,
+  faUser
 );
 
 interface GitHash {
