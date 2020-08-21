@@ -5,6 +5,7 @@ import moment from 'moment';
 describe('nameDisplay filter', () => {
   const fullExample: Minister = {
     id: '0e005523-a61c-4510-808c-e69409133ce7',
+    isDeceased: false,
     slug: 'john-g-m-smith',
     state: 'published',
     dateOfBirth: moment(),
@@ -19,6 +20,7 @@ describe('nameDisplay filter', () => {
 
   const allFieldsMissing: Minister = {
     id: '9724883d-a600-4dcc-942d-ce3d2be3b603',
+    isDeceased: false,
     slug: 'bob',
     state: 'published',
     dateOfBirth: moment(),
@@ -29,6 +31,7 @@ describe('nameDisplay filter', () => {
 
   const someFieldsMissing: Minister = {
     id: 'efd937fe-bed0-4594-a41a-f877f527c8d7',
+    isDeceased: false,
     slug: 'dr-charles',
     state: 'published',
     dateOfBirth: moment(),

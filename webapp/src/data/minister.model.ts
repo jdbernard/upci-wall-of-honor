@@ -11,11 +11,11 @@ export interface Minister {
     suffix?: string;
     additional?: string[];
   };
-  dateOfBirth: Moment;
+  isDeceased: boolean;
+  dateOfBirth?: Moment;
   dateOfDeath?: Moment;
   ootfYearInducted?: number;
   details?: {
-    thumbnailUri: string;
     photo: {
       uri: string;
       widthInPx?: number;
