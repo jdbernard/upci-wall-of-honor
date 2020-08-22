@@ -4,6 +4,7 @@
       :collapsed="navCollapsed"
       @collapse="handleNavCollapse"
     ></AdminNavBarComponent>
+    <div id="measuring-stick"></div>
     <router-view></router-view>
   </div>
 </template>

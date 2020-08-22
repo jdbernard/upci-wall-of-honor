@@ -34,7 +34,7 @@ a.button, input[type=text], button {
 }
 
 input[type=text] {
-  background-color: $color-bg;
+  background-color: unset;
   border-bottom: solid thin $color-fg;
   font-style: italic;
 }

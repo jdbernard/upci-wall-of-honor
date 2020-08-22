@@ -1,8 +1,13 @@
 @import "~@/styles/vars";
 @import "~@/styles/forSize.mixin";
 
+html { font-size: 16px; }
+
+@include forSize(tablet) { html { font-size: 12px; } }
+
 #administration {
-  background-color: white;
+  background-color: $admin-color-bg;
+  color: $admin-color-fg;
   min-height: 100vh;
 
   display: grid;
@@ -11,6 +16,8 @@
 
   h1 {
     text-shadow: none;
+    font-family: $admin-header-font-family;
+    font-weight: 500;
   }
 
   nav {
@@ -19,29 +26,80 @@
 
   }
 
-  button {
+  button, .button {
+    background-color: $admin-color-bg;
     border: none;
+    color: $admin-color-fg;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+    font-weight: 500;
+
+    &.active {
+      background-color: $admin-color-accent3;
+      color: $admin-color-bg;
+    }
+
+    &:focus {
+      background-color: $admin-color-accent2;
+      color: $admin-color-bg;
+    }
   }
 }
 
-@media screen and (max-width: $maxMobileWidth) {
+@include forSize(mobile) {
   #administration {
     grid-template-columns: auto;
-    grid-template-rows: auto 2rem;
+    grid-template-rows: auto 4rem;
     grid-template-areas: "main" "nav";
   }
 
-  nav {
-    width: 100%;
+  h1 { font-size: 2rem; }
+
+  nav { width: 100%; }
+}
+
+@include forSize(notMobile) {
+  #administration {
+    --nav-width: 22.5rem;
+    &.navCollapsed { --nav-width: 4rem; }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    button, .button {
+      border-radius: $spacer-xs;
+      font-size: 2rem;
+      padding: $spacer-xs $spacer;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 1.76rem;
+    }
   }
 }
 
-@media screen and (min-width: $maxMobileWidth + 1) {
-  #administration { --nav-width: 11.25rem; }
-  #administration.navCollapsed { --nav-width: 2rem; }
+@include forSize(ultrawide) {
+  #administration {
+    --nav-width: 32rem;
+    &.navCollapsed { --nav-width: 4rem; }
+
+    h1 { font-size: 4rem; }
+
+    button, .button { font-size: 2.5rem; }
+
+    .header { margin-top: 2.7rem; }
+  }
 }
 
-@media screen and (min-width: $ultrawideMinWidth) {
-  #administration { --nav-width: 16.875rem; }
-  #administration.navCollapsed { --nav-width: 2rem; }
+#measuring-stick {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 17.2rem;
+  border-top: solid thin red;
 }

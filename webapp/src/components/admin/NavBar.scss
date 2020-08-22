@@ -1,52 +1,50 @@
 @import "~@/styles/vars";
 @import "~@/styles/forSize.mixin";
 
-nav {
-  background-color: $color-admin-accent1;
-  color: $color-admin-bg;
+#administration nav {
+  background-color: $admin-color-accent1;
+  color: $admin-color-bg;
 
   ul {
     list-style: none;
 
     li {
-      font-family: "Gotham XNarrow";
-      font-size: 1rem;
-      font-weight: 500;
+      font-size: 2rem;
 
       a {
-        color: $color-admin-bg;
+        color: $admin-color-bg;
         display: flex;
         align-items: center;
-        padding: $spacer-xs $spacer $spacer-xs $spacer;
+        font-family: "Gotham XNarrow";
         text-align: left;
         text-decoration: none;
-        height: 1.75rem;
+        height: 3.5rem;
         width: 100%;
 
         div {
           display: flex;
           align-content: center;
           justify-content: center;
-          width: 1.4rem;
+          width: 3.1rem;
         }
 
         &.router-link-exact-active {
-          background-color: $color-admin-bg;
-          color: $color-admin-accent1;
+          background-color: $admin-color-bg;
+          color: $admin-color-accent1;
 
           div svg.ootf-icon {
-            fill: $color-admin-accent1;
-            stroke: $color-admin-accent1;
+            fill: $admin-color-accent1;
+            stroke: $admin-color-accent1;
           }
         }
 
         &:hover {
-          background-color: $color-admin-accent2;
-          color: $color-admin-bg;
+          background-color: $admin-color-accent2;
+          color: $admin-color-bg;
 
           div svg.ootf-icon {
-            fill: $color-admin-bg;
-            stroke: $color-admin-bg;
+            fill: $admin-color-bg;
+            stroke: $admin-color-bg;
           }
         }
 
@@ -54,8 +52,8 @@ nav {
           height: auto;
 
           &.ootf-icon {
-            fill: $color-admin-bg;
-            stroke: $color-admin-bg;
+            fill: $admin-color-bg;
+            stroke: $admin-color-bg;
           }
         }
       }
@@ -64,7 +62,7 @@ nav {
 }
 
 @include forSize(notMobile) {
-  nav {
+  #administration nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -72,41 +70,46 @@ nav {
     .upci-logo, .upci-icon {
       height: auto;
       width: var(--nav-width);
-      fill: $color-admin-bg;
+      fill: $admin-color-bg;
     }
 
     h1 {
-      border-bottom: solid thin $color-admin-bg;
+      border-bottom: solid thin $admin-color-bg;
       font-family: "Gotham";
       font-weight: 500;
-      font-size: 1.125rem;
+      font-size: 2.25rem;
       margin: 0 1em;
       text-align: start;
-      width: calc(100% - 2.5rem);
+      width: calc(100% - 5rem);
     }
 
     ul {
-      padding: $spacer-xs 0;
+      padding: $spacer-sm 0;
 
-      a svg {
-        width: 1em;
-        &.ootf-icon { width: 1.2rem; }
+      a {
+        padding: $spacer-sm $spacer-md $spacer-sm $spacer-md;
+
+        svg {
+          width: 1em;
+          &.ootf-icon { width: 2.4rem; }
+        }
       }
     }
 
     button.collapse, button.expand {
       align-self: end;
-      background-color: $color-admin-accent1;
-      color: $color-admin-bg;
+      background-color: $admin-color-accent1;
+      filter: none;
+      color: $admin-color-bg;
       font-family: "Gotham XNarrow";
-      font-size: 1rem;
+      font-size: 2rem;
       font-weight: 500;
       margin-top: auto;
       margin-bottom: 1em;
       padding: 0 $spacer-sm;
 
       &:hover {
-        background-color: $color-admin-accent2;
+        background-color: $admin-color-accent2;
       }
     }
 
@@ -121,7 +124,7 @@ nav {
     button.expand, .upci-icon { display: none; }
   }
 
-  nav.collapsed {
+  #administration nav.collapsed {
     button.collapse,
     .upci-logo {
       display: none;
@@ -135,7 +138,7 @@ nav {
       padding: $spacer 0;
 
       a {
-        padding: 0.25rem 0;
+        padding: 0.5rem 0;
 
         div {
           margin: 0 auto;
@@ -145,8 +148,12 @@ nav {
   }
 }
 
+@include forSize(ultrawide) {
+  #administration nav h1 { font-size: 2.5rem; }
+}
+
 @include forSize(mobile) {
-  nav {
+  #administration nav {
 
     .upci-logo, .upci-icon, h1, .link-title, .expand, .collapse {
       display: none;
@@ -160,11 +167,16 @@ nav {
       padding: 0;
       height: 100%;
 
-      li a {
-        height: 100%;
+      li {
+        flex-grow: 1;
 
-        div svg {
-          width: 1.2rem;
+        a {
+          height: 100%;
+          justify-content: center;
+
+          div svg {
+            width: 2.4rem;
+          }
         }
       }
     }

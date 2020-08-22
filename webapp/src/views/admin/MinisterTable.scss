@@ -1,2 +1,117 @@
 @import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
 
+#ministers-table {
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .header .button {
+    white-space: nowrap;
+  }
+
+  .table-container {
+    overflow-y: auto;
+    flex: 1 1;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: $admin-body-font-family;
+    width: 100%;
+
+    thead {
+      background-color: $admin-color-bg;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:nth-child(2n) {
+      background-color: darken($admin-color-bg, 5%);
+    }
+
+    th {
+      border-bottom: solid thin $admin-color-fg;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    td {
+      padding-left: 1rem;
+    }
+  }
+}
+
+@include forSize(mobile) {
+  #ministers-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+}
+
+@include forSize(notMobile) {
+  #ministers-table {
+    padding: $spacer-md $spacer-md $spacer-md $spacer;
+
+    .header {
+
+      & > div {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+
+      h1 { margin-right: $spacer-lg; }
+
+      .search {
+        flex: 1 1;
+        font-size: 1.5rem;
+        max-width: 18em;
+        min-width: 10em;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        border-bottom: solid thin $admin-color-fg;
+
+        input[type="text"] {
+          color: $admin-color-fg;
+          border: none;
+          padding: 0 $spacer;
+          font-style: unset;
+          flex: 1 1;
+          width: 100%;
+        }
+      }
+
+      .button { margin-left: $spacer-lg; }
+    }
+
+    &.ootf .header h1 { font-size: 2.5rem; }
+
+    .table-container { margin-top: 3.7rem; }
+    table { font-size: 1.25rem; }
+
+  }
+}
+
+@include forSize(ultrawide) {
+  #ministers-table {
+    padding: $spacer-lg $spacer-lg $spacer-lg $spacer-md;
+
+    .header {
+      h1 { margin-right: $spacer-xl; }
+      .search { font-size: 2rem; }
+      .button { margin-left: $spacer-xl; }
+    }
+
+    .table-container { margin-top: 4.8rem; }
+    table { font-size: 1.5rem; }
+  }
+}

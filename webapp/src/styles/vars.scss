@@ -6,12 +6,6 @@ $ultrawideMinWidth: 1920px;
 $color-fg: #C2B560;
 $color-bg: #262729;
 
-$color-admin-bg: #FFFFFF;
-$color-admin-fg: #262729;
-$color-admin-accent1: #1C5A7D;
-$color-admin-accent2: #006098;
-$color-admin-accent3: #2D7150;
-
 $header-font-family: 'EB Garamond';
 $body-font-family: 'Gotham';
 
@@ -29,3 +23,13 @@ $spacer: 1rem;
 $spacer-md: 2rem;
 $spacer-lg: 3rem;
 $spacer-xl: 4rem;
+
+// Admin UI Scheme
+$admin-color-bg: #FFFFFF;
+$admin-color-fg: #262729;
+$admin-color-accent1: #1C5A7D;
+$admin-color-accent2: #006098;
+$admin-color-accent3: #2D7150;
+
+$admin-header-font-family: 'Gotham';
+$admin-body-font-family: 'Montserrat';

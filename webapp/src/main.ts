@@ -5,6 +5,7 @@ import router from './router';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { dom as FA_DOM } from '@fortawesome/fontawesome-svg-core';
+import SmartTable from 'vuejs-smart-table';
 
 import { logService, LogLevel, ConsoleLogAppender } from '@jdbernard/logging';
 import { nameDisplay } from '@/filters/name-display.filter';
@@ -13,6 +14,7 @@ Vue.component('fa-icon', FontAwesomeIcon);
 FA_DOM.watch();
 
 Vue.filter('nameDisplay', nameDisplay);
+Vue.use(SmartTable);
 
 const consoleLogAppender = new ConsoleLogAppender(LogLevel.ALL);
 logService.ROOT_LOGGER.appenders.push(consoleLogAppender);
