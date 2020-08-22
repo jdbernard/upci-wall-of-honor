@@ -3,15 +3,19 @@ import AppConfigStore from '@/data/app.config.store';
 import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { logService, ConsoleLogAppender } from '@jdbernard/logging';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library, IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
 import {
   faAngleLeft,
   faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
+  faCheck,
+  faSearch,
   faSitemap,
   faTimes,
-  faUser
+  faUser,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -19,9 +23,14 @@ library.add(
   faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
+  faCheck,
+  faCheckSquare as IconDefinition,
+  faSearch,
   faSitemap,
+  faSquare as IconDefinition,
   faTimes,
-  faUser
+  faUser,
+  faUserPlus
 );
 
 interface GitHash {
