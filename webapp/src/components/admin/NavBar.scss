@@ -2,8 +2,8 @@
 @import "~@/styles/forSize.mixin";
 
 #administration nav {
-  background-color: $admin-color-accent1;
-  color: $admin-color-bg;
+  background-color: var(--admin-color-accent1);
+  color: var(--admin-color-bg);
 
   ul {
     list-style: none;
@@ -12,7 +12,7 @@
       font-size: 2rem;
 
       a {
-        color: $admin-color-bg;
+        color: var(--admin-color-bg);
         display: flex;
         align-items: center;
         font-family: "Gotham XNarrow";
@@ -29,22 +29,22 @@
         }
 
         &.router-link-exact-active {
-          background-color: $admin-color-bg;
-          color: $admin-color-accent1;
+          background-color: var(--admin-color-bg);
+          color: var(--admin-color-accent1);
 
           div svg.ootf-icon {
-            fill: $admin-color-accent1;
-            stroke: $admin-color-accent1;
+            fill: var(--admin-color-accent1);
+            stroke: var(--admin-color-accent1);
           }
         }
 
         &:hover {
-          background-color: $admin-color-accent2;
-          color: $admin-color-bg;
+          background-color: var(--admin-color-accent2);
+          color: var(--admin-color-bg);
 
           div svg.ootf-icon {
-            fill: $admin-color-bg;
-            stroke: $admin-color-bg;
+            fill: var(--admin-color-bg);
+            stroke: var(--admin-color-bg);
           }
         }
 
@@ -52,8 +52,8 @@
           height: auto;
 
           &.ootf-icon {
-            fill: $admin-color-bg;
-            stroke: $admin-color-bg;
+            fill: var(--admin-color-bg);
+            stroke: var(--admin-color-bg);
           }
         }
       }
@@ -70,11 +70,11 @@
     .upci-logo, .upci-icon {
       height: auto;
       width: var(--nav-width);
-      fill: $admin-color-bg;
+      fill: var(--admin-color-bg);
     }
 
     h1 {
-      border-bottom: solid thin $admin-color-bg;
+      border-bottom: solid thin var(--admin-color-bg);
       font-family: "Gotham";
       font-weight: 500;
       font-size: 2.25rem;
@@ -98,9 +98,9 @@
 
     button.collapse, button.expand {
       align-self: end;
-      background-color: $admin-color-accent1;
+      background-color: var(--admin-color-accent1);
       filter: none;
-      color: $admin-color-bg;
+      color: var(--admin-color-bg);
       font-family: "Gotham XNarrow";
       font-size: 2rem;
       font-weight: 500;
@@ -109,7 +109,7 @@
       padding: 0 $spacer-sm;
 
       &:hover {
-        background-color: $admin-color-accent2;
+        background-color: var(--admin-color-accent2);
       }
     }
 

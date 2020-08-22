@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="upci-woh-app">
     <ul id="upci-woh-version" hidden>
       <li class="version">{{ version }}</li>
       <li class="hash">{{ gitVersion.hash }}</li>

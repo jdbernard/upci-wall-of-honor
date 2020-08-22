@@ -6,8 +6,19 @@ html { font-size: 16px; }
 @include forSize(tablet) { html { font-size: 12px; } }
 
 #administration {
-  background-color: $admin-color-bg;
-  color: $admin-color-fg;
+
+  --admin-color-bg: #FFFFFF;
+  --admin-color-fg: #262729;
+  --admin-color-accent1: #1C5A7D;
+  --admin-color-accent2: #006098;
+  --admin-color-accent3: #2D7150;
+
+  --admin-header-font-family: 'Gotham';
+  --admin-body-font-family: 'Montserrat';
+
+
+  background-color: var(--admin-color-bg);
+  color: var(--admin-color-fg);
   min-height: 100vh;
 
   display: grid;
@@ -16,7 +27,7 @@ html { font-size: 16px; }
 
   h1 {
     text-shadow: none;
-    font-family: $admin-header-font-family;
+    font-family: var(--admin-header-font-family);
     font-weight: 500;
   }
 
@@ -27,20 +38,20 @@ html { font-size: 16px; }
   }
 
   button, .button {
-    background-color: $admin-color-bg;
+    background-color: var(--admin-color-bg);
     border: none;
-    color: $admin-color-fg;
+    color: var(--admin-color-fg);
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
     font-weight: 500;
 
     &.active {
-      background-color: $admin-color-accent3;
-      color: $admin-color-bg;
+      background-color: var(--admin-color-accent3);
+      color: var(--admin-color-bg);
     }
 
     &:focus {
-      background-color: $admin-color-accent2;
-      color: $admin-color-bg;
+      background-color: var(--admin-color-accent2);
+      color: var(--admin-color-bg);
     }
   }
 }
