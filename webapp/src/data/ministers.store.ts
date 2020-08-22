@@ -33,7 +33,9 @@ export class MinistersStore {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ministerFromJson(json: any): Minister {
     const result: Minister = { ...json };
-    result.dateOfBirth = moment(result.dateOfBirth);
+    if (result.dateOfBirth) {
+      result.dateOfBirth = moment(result.dateOfBirth);
+    }
     if (result.dateOfDeath) {
       result.dateOfDeath = moment(result.dateOfDeath);
     }
