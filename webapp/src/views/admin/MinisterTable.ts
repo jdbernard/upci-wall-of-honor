@@ -11,6 +11,7 @@ const logger = logService.getLogger('/admin/minister-table');
 const DATE_FORMAT = 'MMM. D, YYYY';
 
 export interface MinisterRowData {
+  id: string;
   displayName: string;
   isOotF: boolean;
   hasBio: boolean;
@@ -27,8 +28,8 @@ export default class MinisterTableView extends Vue {
   public filter!: string;
 
   public currentPage = 1;
-  public pageSize = 30;
-  public totalPages!: number;
+  public pageSize = 100;
+  public totalPages = 0;
 
   @Watch('filter')
   onFilterChange(val: string) {
@@ -36,6 +37,7 @@ export default class MinisterTableView extends Vue {
       ? this.ministers.filter(m => !!m.ootfYearInducted)
       : this.ministers
     ).map(m => ({
+      id: m.id,
       displayName: nameDisplay(m),
       isOotF: !!m.ootfYearInducted,
       hasBio: !!m.details,
