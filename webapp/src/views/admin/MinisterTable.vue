@@ -48,10 +48,27 @@
         </tbody>
       </v-table>
     </div>
-    <smart-pagination
-      :currentPage.sync="currentPage"
-      :totalPages="totalPages"
-    ></smart-pagination>
+    <div class="pagination-container">
+      <div class="page-size">
+        page size:
+        <select v-model.number="pageSize">
+          <option v-for="n in [25, 50, 100, 200, 1000]" :key="n">{{
+            n
+          }}</option>
+        </select>
+      </div>
+      <div class="page-select">
+        Page:
+        <select v-model.number="currentPage">
+          <option v-for="n in totalPages" :key="n">{{ n }}</option>
+        </select>
+      </div>
+      <smart-pagination
+        :currentPage.sync="currentPage"
+        :maxPageLinks="6"
+        :totalPages="totalPages"
+      ></smart-pagination>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./MinisterTable.ts"></script>
