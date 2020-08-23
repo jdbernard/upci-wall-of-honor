@@ -6,7 +6,7 @@
     width: 100%;
 
     .drapes {
-      background-color: $color-bg;
+      background-color: var(--color-bg);
       opacity: 1;
       padding-top: $spacer-md;
     }
@@ -14,7 +14,7 @@
     .fringe {
       background-image: linear-gradient(
         to bottom,
-        $color-bg, rgba(18, 24, 32, 0)
+        var(--color-bg), rgba(18, 24, 32, 0)
       );
     }
   }
@@ -86,7 +86,7 @@
   .loading {
     ul.minister-nameplates li {
       animation: 2s ease-in infinite alternate pulseOpacity;
-      background-color: lighten($color-bg, 8%);
+      background-color: var(--color-accent1);
       border-radius: 4px;
       height: 4rem;
       margin-top: 10.5rem;

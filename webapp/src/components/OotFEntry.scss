@@ -2,7 +2,7 @@
 
 .ootf-entry {
 
-  color: $color-fg;
+  color: var(--color-fg);
   display: inline-block;
   margin: $spacer $spacer-sm;
   text-decoration: none;

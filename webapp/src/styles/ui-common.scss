@@ -2,19 +2,35 @@
 @import "vars.scss";
 @import "fonts.scss";
 
-html {
-  background-color: $color-bg;
-  color: $color-fg;
-  font-size: 32px;
+:root {
+  --base-font-size: 32px;
+
+  --color-fg: #C2B560;
+  --color-bg: #262729;
+  --color-accent1: #3f4043;
+
+  --header-font-family: 'EB Garamond';
+  --body-font-family: 'Gotham';
+  --header-font-size: 3rem;
+  --header-font-size-sm: 1.5rem;
+  --body-font-size: 1rem;
+  --body-font-size-sm: .75rem;
+  --body-font-size-xs: .625rem;
 }
 
-body {
-  font-family: $body-font-family;
+html {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-size: var(--base-font-size);
+}
+
+body, select, option {
+  font-family: var(--body-font-family);
   font-weight: 300;
 }
 
 h1 {
-  font-family: $header-font-family;
+  font-family: var(--header-font-family);
   font-size: 3rem;
   font-weight: 400;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -22,12 +38,12 @@ h1 {
 
 h2 {
   font-size: 1rem;
-  font-family: $body-font-family;
+  font-family: var(--body-font-family);
   font-weight: 300;
 }
 
 a.button, input[type=text], button {
-  color: $color-fg;
+  color: var(--color-fg);
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -35,13 +51,13 @@ a.button, input[type=text], button {
 
 input[type=text] {
   background-color: unset;
-  border-bottom: solid thin $color-fg;
+  border-bottom: solid thin var(--color-fg);
   font-style: italic;
 }
 
 a.button, button {
-  background-color: lighten($color-bg, 10%);
-  border: solid thin $color-fg;
+  background-color: var(--color-accent1);
+  border: solid thin var(--color-fg);
   border-radius: $spacer-xxs;
   cursor: pointer;
   padding: 4px;
@@ -49,8 +65,8 @@ a.button, button {
 }
 
 a.button.action, button.action {
-  background-color: $color-fg;
-  color: $color-bg;
+  background-color: var(--color-fg);
+  color: var(--color-bg);
   font-weight: 500;
 }
 

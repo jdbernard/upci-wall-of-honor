@@ -19,8 +19,8 @@
 
       .ootf-logo {
         height: $spacer-xl;
-        fill: $color-fg;
-        stroke: $color-fg;
+        fill: var(--color-fg);
+        stroke: var(--color-fg);
       }
 
     }
@@ -39,7 +39,7 @@
 
 
     h3 {
-      font-family: $header-font-family;
+      font-family: var(--header-font-family);
       font-size: 1.5rem;
       font-weight: 300;
     }

@@ -1,24 +1,28 @@
 @import "~@/styles/vars";
 @import "~@/styles/forSize.mixin";
 
-html { font-size: 16px; }
-
-@include forSize(tablet) { html { font-size: 12px; } }
+@include forSize(tablet) {
+  html {
+    font-size: calc(var(--base-font-size) * 0.75);
+  }
+}
 
 #administration {
 
-  --admin-color-bg: #FFFFFF;
-  --admin-color-fg: #262729;
-  --admin-color-accent1: #1C5A7D;
-  --admin-color-accent2: #006098;
-  --admin-color-accent3: #2D7150;
+  --color-bg: #FFFFFF;
+  --color-fg: #262729;
+  --color-accent1: #1C5A7D;
+  --color-accent2: #006098;
+  --color-accent3: #2D7150;
+  --color-accent4: #a7d2eb;
 
-  --admin-header-font-family: 'Gotham';
-  --admin-body-font-family: 'Montserrat';
+  --header-font-family: 'Gotham';
+  --body-font-family: 'Montserrat';
 
 
-  background-color: var(--admin-color-bg);
-  color: var(--admin-color-fg);
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--body-font-family);
   min-height: 100vh;
 
   display: grid;
@@ -27,31 +31,31 @@ html { font-size: 16px; }
 
   h1 {
     text-shadow: none;
-    font-family: var(--admin-header-font-family);
+    font-family: var(--header-font-family);
     font-weight: 500;
   }
 
-  nav {
+  #admin-nav {
     grid-area: nav;
     width: var(--nav-width);
 
   }
 
   button, .button {
-    background-color: var(--admin-color-bg);
+    background-color: var(--color-bg);
     border: none;
-    color: var(--admin-color-fg);
+    color: var(--color-fg);
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
     font-weight: 500;
 
     &.active {
-      background-color: var(--admin-color-accent3);
-      color: var(--admin-color-bg);
+      background-color: var(--color-accent3);
+      color: var(--color-bg);
     }
 
     &:focus {
-      background-color: var(--admin-color-accent2);
-      color: var(--admin-color-bg);
+      background-color: var(--color-accent4);
+      color: var(--color-fg);
     }
   }
 }
@@ -65,7 +69,7 @@ html { font-size: 16px; }
 
   h1 { font-size: 2rem; }
 
-  nav { width: 100%; }
+  #admin-nav { width: 100%; }
 }
 
 @include forSize(notMobile) {

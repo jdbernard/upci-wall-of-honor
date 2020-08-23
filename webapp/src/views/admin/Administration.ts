@@ -17,8 +17,13 @@ export default class AdministrationView extends Vue {
   }
 
   private mounted() {
+    document.documentElement.style.setProperty('--base-font-size', '16px');
     if (window.innerWidth <= 480) {
       this.navCollapsed = true;
     }
+  }
+
+  private destroyed() {
+    document.documentElement.style.setProperty('--base-font-size', '32px');
   }
 }

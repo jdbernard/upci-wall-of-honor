@@ -1,5 +1,5 @@
 <template>
-  <nav :class="{ collapsed: collapsed }">
+  <nav id="admin-nav" :class="{ collapsed: collapsed }">
     <UPCILogo></UPCILogo>
     <UPCIIcon></UPCIIcon>
     <h1>Wall Of Honor</h1>

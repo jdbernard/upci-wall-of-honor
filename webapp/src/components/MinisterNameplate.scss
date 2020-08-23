@@ -5,6 +5,6 @@
   width: 13rem;
 
   .vitals {
-    font-size: $body-font-size-xs;
+    font-size: var(--body-font-size-xs);
   }
 }
