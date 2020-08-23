@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: $body-font-size-sm;
+  font-size: var(--body-font-size-sm);
   font-weight: 300;
   width: 16rem;
 

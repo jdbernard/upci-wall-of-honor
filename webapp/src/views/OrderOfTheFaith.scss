@@ -23,8 +23,8 @@
 
       .ootf-logo {
         height: $spacer-xl;
-        fill: $color-fg;
-        stroke: $color-fg;
+        fill: var(--color-fg);
+        stroke: var(--color-fg);
       }
 
     }
@@ -46,8 +46,8 @@
     .ootf-logo {
       float: left;
       margin: $spacer-lg $spacer-md $spacer-lg 0;
-      fill: $color-fg;
-      stroke: $color-fg;
+      fill: var(--color-fg);
+      stroke: var(--color-fg);
     }
 
     .button-bar {
@@ -65,7 +65,7 @@
     width: 28rem;
 
     h4 {
-      font-family: $header-font-family;
+      font-family: var(--header-font-family);
       font-size: 1.5rem;
       font-weight: 300;
     }

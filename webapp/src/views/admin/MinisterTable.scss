@@ -19,11 +19,11 @@
   table {
     border-collapse: separate;
     border-spacing: 0;
-    font-family: var(--admin-body-font-family);
+    font-family: var(--body-font-family);
     width: 100%;
 
     thead {
-      background-color: var(--admin-color-bg);
+      background-color: var(--color-bg);
       position: sticky;
       top: 0;
     }
@@ -33,7 +33,7 @@
     }
 
     th {
-      border-bottom: solid thin var(--admin-color-fg);
+      border-bottom: solid thin var(--color-fg);
       font-weight: 400;
       text-align: left;
     }
@@ -78,10 +78,10 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-        border-bottom: solid thin var(--admin-color-fg);
+        border-bottom: solid thin var(--color-fg);
 
         input[type="text"] {
-          color: var(--admin-color-fg);
+          color: var(--color-fg);
           border: none;
           padding: 0 $spacer;
           font-style: unset;
