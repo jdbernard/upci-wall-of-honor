@@ -6,7 +6,7 @@
     }"
     class="ootf-entry"
   >
-    <MinisterPhoto :minister="minister"></MinisterPhoto>
+    <MinisterPhoto :photo="minister.details.photo"></MinisterPhoto>
     <MinisterNameplate :minister="minister"></MinisterNameplate>
   </router-link>
 </template>

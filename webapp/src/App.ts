@@ -12,8 +12,11 @@ import {
   faAngleDoubleRight,
   faCheck,
   faSearch,
+  faSearchMinus,
+  faSearchPlus,
   faSitemap,
   faTimes,
+  faUpload,
   faUser,
   faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
@@ -26,9 +29,12 @@ library.add(
   faCheck,
   faCheckSquare as IconDefinition,
   faSearch,
+  faSearchMinus,
+  faSearchPlus,
   faSitemap,
   faSquare as IconDefinition,
   faTimes,
+  faUpload,
   faUser,
   faUserPlus
 );

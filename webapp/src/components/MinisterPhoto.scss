@@ -1,17 +1,62 @@
-.photo-frame {
-  background: #464225;
-  padding: 0.125rem;
-  width: 11.625rem
+@import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
+
+// Notice that this component very purposefully measures things in ems so that
+// it all scales together. The baseline, assumed font size is 32px (1rem for
+// the main display). Accordingly, Changing the font-size of the .photo-frame
+// element will scale all the rest appropriately. The dynamic positioning of
+// the image uses the same em-based positioning to allow it to also scale
+// appropriately.
+.minister-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 11.625em;
+  font-size: 32px;
+
+  .photo-frame {
+    background: #464225;
+    border-radius: 2px;
+    margin-bottom: $spacer;
+    padding: 0.125em;
+    width: 11.625em;
+
+    .photo-holder {
+      border: solid 0.125em #5B552E; // TODO: magic numbers
+      height: 15.3125em;
+      overflow: hidden;
+      width: 11.375em;
+
+      img {
+        width: 11.375em;
+        height: auto;
+      }
+    }
+  }
+
+  .edit-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    > * { margin: 0 $spacer-sm $spacer-sm $spacer-sm; }
+  }
+
+  &.allowEdit img { cursor: move; }
 }
 
-.photo-holder {
-  border: solid 0.125rem #5B552E; // TODO: magic numbers
-  height: 15.3125rem;
-  overflow: hidden;
-  width: 11.375rem;
+@include forSize(notMobile) {
+  .minister-photo {
+    .edit-controls { font-size: 1.25rem; }
+  }
 
-  img {
-    width: 11.375rem;
-    height: auto;
+}
+
+@include forSize(ultrawide) {
+  .minister-photo {
+    .photo-frame { margin-bottom: $spacer-md; }
+    .edit-controls { font-size: 1.5rem; }
   }
 }

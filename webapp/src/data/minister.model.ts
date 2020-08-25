@@ -1,5 +1,13 @@
 import { Moment } from 'moment';
 
+export interface Photo {
+  uri?: string;
+  widthInPx?: number;
+  heightInPx?: number;
+  xOffsetInPx?: number;
+  yOffsetInPx?: number;
+}
+
 export interface Minister {
   id: string;
   slug: string;
@@ -16,13 +24,7 @@ export interface Minister {
   dateOfDeath?: Moment;
   ootfYearInducted?: number;
   details?: {
-    photo: {
-      uri: string;
-      widthInPx?: number;
-      heightInPx?: number;
-      xOffsetInPx?: number;
-      yOffsetInPx?: number;
-    };
+    photo: Photo;
     biography: string;
   };
 }
