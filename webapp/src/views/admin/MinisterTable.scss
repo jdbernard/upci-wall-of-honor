@@ -1,16 +1,9 @@
 @import "~@/styles/vars";
 @import "~@/styles/forSize.mixin";
 
-#ministers-table {
+#ministers-table.admin-content-view {
 
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
-  .header .button {
-    white-space: nowrap;
-  }
 
   .table-container {
     overflow-y: auto;
@@ -41,14 +34,24 @@
 
     td {
       padding-left: 1rem;
+
+      a {
+        color: inherit;
+        display: inline-block;
+        text-decoration: none;
+        width: 100%;
+      }
     }
   }
 
   .pagination-container {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     justify-content: flex-end;
     padding-top: $spacer-sm;
+
+    & > * { margin-left: $spacer-md; }
 
     ul.pagination {
       list-style: none;
@@ -80,17 +83,12 @@
 }
 
 @include forSize(mobile) {
-  #ministers-table {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
+  #ministers-table.admin-content-view {
   }
 }
 
 @include forSize(notMobile) {
-  #ministers-table {
-    padding: $spacer-md $spacer-md $spacer-md $spacer;
+  #ministers-table.admin-content-view {
 
     .header {
 
@@ -102,8 +100,6 @@
         align-items: baseline;
         justify-content: space-between;
       }
-
-      h1 { margin-right: $spacer-lg; }
 
       .search {
         flex: 1 1;
@@ -131,23 +127,18 @@
     &.ootf .header h1 { font-size: 2.5rem; }
 
     .table-container { margin-top: 3.7rem; }
-    table, .pagination-container { font-size: 1.25rem; }
-
   }
 }
 
 @include forSize(ultrawide) {
-  #ministers-table {
+  #ministers-table.admin-content-view {
     padding: $spacer-lg $spacer-lg $spacer-lg $spacer-md;
 
     .header {
-      h1 { margin-right: $spacer-xl; }
       .search { font-size: 2rem; }
       .button { margin-left: $spacer-xl; }
     }
 
     .table-container { margin-top: 4.8rem; }
-    table, .pagination-container { font-size: 1.5rem; }
-
   }
 }

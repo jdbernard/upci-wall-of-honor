@@ -1,5 +1,5 @@
 <template>
-  <div id="ministers-table" :class="filter">
+  <div id="ministers-table" class="admin-content-view" :class="filter">
     <div class="header">
       <div>
         <h1 v-if="filter == 'all'">All Ministers</h1>
@@ -14,7 +14,7 @@
           />
         </div>
       </div>
-      <router-link class="button active" :to="{}">
+      <router-link class="button action" :to="{}">
         <fa-icon icon="user-plus"></fa-icon> Add
       </router-link>
     </div>
@@ -39,7 +39,12 @@
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
           <tr v-for="row in displayData" :key="row.id">
-            <td>{{ row.displayName }}</td>
+            <td>
+              <router-link
+                :to="{ name: 'AdminEditMinister', params: { slug: row.slug } }"
+                >{{ row.displayName }}</router-link
+              >
+            </td>
             <td>{{ row.displayDOB }}</td>
             <td>{{ row.displayDOD }}</td>
             <td><fa-icon v-if="row.isOotF" icon="check"></fa-icon></td>
@@ -50,14 +55,14 @@
     </div>
     <div class="pagination-container">
       <div class="page-size">
-        page size:
+        Page size:
         <select v-model.number="pageSize">
           <option v-for="n in [25, 50, 100, 200, 1000]" :key="n">{{
             n
           }}</option>
         </select>
       </div>
-      <div class="page-select">
+      <div class="page-select" v-if="totalPages > 1">
         Page:
         <select v-model.number="currentPage">
           <option v-for="n in totalPages" :key="n">{{ n }}</option>

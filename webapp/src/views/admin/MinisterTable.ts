@@ -20,6 +20,7 @@ export interface MinisterRowData {
   isDeceased: boolean;
   displayDOB: string;
   displayDOD: string;
+  slug: string;
 }
 
 @Component({})
@@ -47,7 +48,8 @@ export default class MinisterTableView extends Vue {
       displayDOB: m.dateOfBirth?.format(DATE_FORMAT) || 'unknown',
       displayDOD: m.isDeceased
         ? m.dateOfDeath?.format(DATE_FORMAT) || 'unknown'
-        : 'living'
+        : 'living',
+      slug: m.slug
     }));
   }
 
