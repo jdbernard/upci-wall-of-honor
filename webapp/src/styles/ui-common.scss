@@ -24,7 +24,7 @@ html {
   font-size: var(--base-font-size);
 }
 
-body, select, option {
+body, select, option, input {
   font-family: var(--body-font-family);
   font-weight: 300;
 }
@@ -62,6 +62,16 @@ a.button, button {
   cursor: pointer;
   padding: 4px;
   text-decoration: none;
+
+  &.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100% !important;
+    padding: 0 !important;
+    height: 2em;
+    width: 2em;
+  }
 }
 
 a.button.action, button.action {
@@ -72,6 +82,41 @@ a.button.action, button.action {
 
 p {
   margin-top: $spacer;
+}
+
+select {
+  cursor: pointer;
+  display: inline-block;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: inherit;
+  position: relative;
+
+  option {
+    font-size: inherit;
+  }
+}
+
+
+.file-input {
+  position: relative;
+  text-align: center;
+  height: 1.5em;
+
+  input {
+    width: 0;
+    height: 0;
+  }
+
+  .button {
+    cursor: pointer;
+    display: inline-block;
+    font-size: inherit;
+    white-space: nowrap;
+
+    svg { margin-left: 0.5rem; }
+  }
 }
 
 @keyframes pulseOpacity {

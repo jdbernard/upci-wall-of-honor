@@ -20,7 +20,10 @@
     </div>
 
     <article v-if="minister" class="bio-content">
-      <MinisterPhoto :minister="minister"></MinisterPhoto>
+      <MinisterPhotoComponent
+        v-if="minister.details"
+        :photo="minister.details.photo"
+      ></MinisterPhotoComponent>
       <h3>{{ minister | nameDisplay }}</h3>
       <div v-if="minister.dateOfBirth" class="vital-date">
         <label>Born:</label> {{ birthFormatted }}

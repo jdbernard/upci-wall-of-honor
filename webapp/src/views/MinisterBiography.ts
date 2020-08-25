@@ -2,14 +2,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Minister } from '@/data/minister.model';
 import MinistersStore from '@/data/ministers.store';
 import OotFLogo from '@/assets/svg-components/OotFLogo.vue';
-import MinisterPhoto from '@/components/MinisterPhoto.vue';
+import MinisterPhotoComponent from '@/components/MinisterPhoto.vue';
 
 const dateFormat = 'MMM. D, YYYY';
 
 @Component({
   components: {
     OotFLogo,
-    MinisterPhoto
+    MinisterPhotoComponent
   }
 })
 export default class MinisterBiographyView extends Vue {

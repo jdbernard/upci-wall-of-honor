@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="364" height="490" version="1.1" viewBox="0 0 96.308 129.65" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <radialGradient id="radialGradient864" cx="47.708" cy="65.147" r="47.839" gradientTransform="matrix(1 0 0 1.3618 0 -23.57)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-color="#fff" stop-opacity=".74118" offset=".84615"/>
+   <stop stop-color="#fff" stop-opacity="0" offset="1"/>
+  </radialGradient>
+ </defs>
+ <g>
+  <ellipse cx="47.708" cy="65.147" rx="47.839" ry="65.147" fill="url(#radialGradient864)" stroke-width=".361" style="mix-blend-mode:normal"/>
+  <text x="48.096786" y="60.842358" fill="#000000" font-family="Gotham" font-size="10.583px" font-weight="300" stroke-width=".26458" text-anchor="middle" style="line-height:1.25" xml:space="preserve"><tspan x="48.096786" y="60.842358" text-align="center" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Image</tspan><tspan x="48.096786" y="74.497292" text-align="center" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Missing</tspan></text>
+ </g>
+</svg>
