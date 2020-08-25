@@ -35,7 +35,6 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/admin',
-    name: 'Administration',
     meta: { title: 'Administration - UPCI Wall of Honor' },
     component: AdministrationView,
     children: [
@@ -78,17 +77,17 @@ const routes: Array<RouteConfig> = [
 // Routes for the app when served from oof.upci.org
 const oofRoutes: Array<RouteConfig> = [
   {
+    path: '/minister-bio/:slug',
+    name: 'MinisterBiography',
+    meta: { title: "Minister's Biography - UPCI Wall of Honor" },
+    component: MinisterBiographyView
+  },
+  {
     path: '/:year?/:page?',
     name: 'OrderOfTheFaith',
     meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
-  },
-  {
-    path: '/minister-bio/:slug',
-    name: 'MinisterBiography',
-    meta: { title: "Minister's Biography - UPCI Wall of Honor" },
-    component: MinisterBiographyView
   }
 ];
 

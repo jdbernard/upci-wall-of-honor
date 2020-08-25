@@ -17,7 +17,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'Administration' }">
+        <router-link :to="{ name: 'AdminAllMinistersTable' }">
           <div><fa-icon icon="sitemap"></fa-icon></div>
           <span class="link-title">Executive Leadership</span>
         </router-link>
