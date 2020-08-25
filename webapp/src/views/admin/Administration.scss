@@ -41,6 +41,15 @@
 
   }
 
+  .admin-content-view {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .header .button { white-space: nowrap; }
+
+  }
+
   button, .button {
     background-color: var(--color-bg);
     border: none;
@@ -48,7 +57,12 @@
     filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
     font-weight: 500;
 
-    &.active {
+    &.primary {
+      background-color: var(--color-accent2);
+      color: var(--color-bg);
+    }
+
+    &.action {
       background-color: var(--color-accent3);
       color: var(--color-bg);
     }
@@ -70,6 +84,11 @@
   h1 { font-size: 2rem; }
 
   #admin-nav { width: 100%; }
+
+  .admin-view-content {
+    align-items: center;
+    padding: $spacer;
+  }
 }
 
 @include forSize(notMobile) {
@@ -83,16 +102,24 @@
 
     button, .button {
       border-radius: $spacer-xs;
-      font-size: 2rem;
       padding: $spacer-xs $spacer;
     }
 
-    .header {
-      display: flex;
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-top: 1.76rem;
+    .admin-content-view {
+
+      font-size: 1.25rem;
+      padding: $spacer-md;
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-top: 1.76rem;
+
+        h1 { margin-right: $spacer-lg; }
+        button, .button { font-size: 2rem; }
+      }
     }
   }
 }
@@ -104,9 +131,18 @@
 
     h1 { font-size: 4rem; }
 
-    button, .button { font-size: 2.5rem; }
+    .admin-content-view {
 
-    .header { margin-top: 2.7rem; }
+      font-size: 1.5rem;
+      padding: $spacer-lg;
+
+      .header {
+        margin-top: 2.7rem;
+
+        h1 { margin-right: $spacer-xl; }
+        button, .button { font-size: 2.5rem; }
+      }
+    }
   }
 }
 
