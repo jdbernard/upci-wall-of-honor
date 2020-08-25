@@ -1,2 +1,115 @@
 @import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
 
+#edit-minister.admin-content-view {
+  .header {
+    align-items: flex-end;
+    border-bottom: solid thin var(--color-fg);
+  }
+
+  .minister-details {
+    font-weight: 400;
+
+    .minister-photo {
+      font-size: 32px;
+
+      .photo-frame { background-color: var(--color-accent1); }
+      .photo-holder { border-color: var(--color-accent2); }
+    }
+  }
+}
+
+@include forSize(notMobile) {
+  #edit-minister.admin-content-view {
+    .header {
+      margin-top: 7.05rem;
+
+      .record-options > * { display: block; }
+    }
+
+    .minister-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex: 1 1;
+
+      margin-top: $spacer-md;
+
+      .basic-details {
+        margin: 0 $spacer-md;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1;
+
+        > label {
+          display: block;
+          margin-bottom: $spacer;
+
+          span { display: inline-block; }
+        }
+
+        .name {
+          padding-left: 4em;
+          position: relative;
+
+          span {
+            position: absolute;
+            left: 0;
+            top: 0.1em;
+          }
+
+          input { margin-right: 0.5em; }
+          input[name=prefix], input[name=suffix] { width: 3em; }
+          input[name=given], input[name=surname] { width: 7em; }
+          input.middle { width: 5em; }
+        }
+
+        .dateOfBirth,
+        .dateOfDeath,
+        .recordState,
+        .slug,
+        .ootfYearInducted { span { width: 8em; } }
+
+        .ootfYearInducted input {
+          border: solid thin var(--color-fg);
+          border-radius: 2px;
+          padding-left: 0.5em;
+          width: 4.5em;
+        }
+
+        .biography {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          flex: 1 1;
+
+          textarea {
+            align-self: stretch;
+            flex: 1 1;
+            margin-top: 1em;
+            margin-left: 4em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include forSize(tablet) {
+  #edit-minister.admin-content-view {
+    .minister-details .minister-photo { font-size: 22px; }
+  }
+}
+
+@include forSize(ultrawide) {
+  #edit-minister.admin-content-view {
+    .header { margin-top: 9.45rem; }
+
+    .minister-details {
+      margin-top: $spacer-lg;
+      .minister-photo { font-size: 40px; }
+    }
+  }
+}

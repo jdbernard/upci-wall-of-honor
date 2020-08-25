@@ -55,6 +55,16 @@ input[type=text] {
   font-style: italic;
 }
 
+input[type=date] {
+  border: solid thin var(--color-fg);
+  border-radius: 2px;
+  width: 7.5em;
+}
+
+select, option, input {
+  font-size: inherit;
+}
+
 a.button, button {
   background-color: var(--color-accent1);
   border: solid thin var(--color-fg);
