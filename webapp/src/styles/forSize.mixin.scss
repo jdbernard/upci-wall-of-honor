@@ -9,7 +9,7 @@
   @else if $size == desktop {
     @media screen and (min-width: $maxTabletWidth + 1) and (max-width: $largeDesktopMinWidth) { @content; } }
   @else if $size == ultrawide {
-    @media screen and (min-width: $largeDesktopMinWidth + 1) { @content; } }
+    @media screen and (min-width: $ultrawideMinWidth + 1) { @content; } }
   @else if $size == notMobile {
     @media screen and (min-width: $maxMobileWidth + 1) { @content; } }
 }
