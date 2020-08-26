@@ -3,7 +3,9 @@
     <div class="header">
       <h1>{{ minister | nameDisplay }}</h1>
       <div class="record-options">
-        <Checkbox v-model="ootfChecked">Order of the Faith</Checkbox>
+        <Checkbox :checked="ootfChecked" @change="setOotF"
+          >Order of the Faith</Checkbox
+        >
         <Checkbox
           :checked="bioChecked"
           :disabled="ootfChecked"
@@ -97,9 +99,19 @@
         </label>
         <label class="biography" v-if="bioChecked">
           <span>Biography:</span>
-          <textarea v-model="minister.details.biography"></textarea>
+          <div
+            class="editor"
+            contenteditable
+            v-html="minister.details.biography"
+            @blur="this.minister.details = $event.target.innerHTML"
+          ></div>
         </label>
       </div>
+    </div>
+    <div class="actions">
+      <button>Back</button>
+      <button :disabled="!isModified" class="cancel">Cancel</button>
+      <button :disabled="!isModified" class="save action">Save</button>
     </div>
   </div>
   <div v-else class="admin-content-view"></div>

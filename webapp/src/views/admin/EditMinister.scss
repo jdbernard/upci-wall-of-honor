@@ -17,10 +17,22 @@
       .photo-holder { border-color: var(--color-accent2); }
     }
   }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      margin: 0 $spacer;
+      &.cancel { margin-left: auto; }
+    }
+  }
 }
 
 @include forSize(notMobile) {
   #edit-minister.admin-content-view {
+    height: 100vh;
+
     .header {
       margin-top: 7.05rem;
 
@@ -32,16 +44,19 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-      flex: 1 1;
 
+      flex: 1 1;
       margin-top: $spacer-md;
+      min-height: 0;
 
       .basic-details {
-        margin: 0 $spacer-md;
         align-self: stretch;
+        flex: 1 1;
+        margin: 0 $spacer-md;
+        min-height: 0;
+
         display: flex;
         flex-direction: column;
-        flex: 1 1;
 
         > label {
           display: block;
@@ -83,17 +98,25 @@
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          flex: 1 1;
 
-          textarea {
+          flex: 1 1;
+          min-height: 0;
+
+          .editor {
             align-self: stretch;
+            border: solid thin var(--color-fg);
             flex: 1 1;
+            font-weight: 300;
             margin-top: 1em;
             margin-left: 4em;
+            padding: 0.5em;
+            overflow-y: auto;
           }
         }
       }
     }
+
+    .actions button { font-size: 2rem; }
   }
 }
 
@@ -106,10 +129,7 @@
 @include forSize(ultrawide) {
   #edit-minister.admin-content-view {
     .header { margin-top: 9.45rem; }
-
-    .minister-details {
-      margin-top: $spacer-lg;
-      .minister-photo { font-size: 40px; }
-    }
+    .minister-details { margin-top: $spacer-lg; }
+    .actions button { font-size: 2.5rem; }
   }
 }

@@ -1,8 +1,5 @@
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import AdminNavBarComponent from '@/components/admin/NavBar.vue';
-import { logService } from '@jdbernard/logging';
-
-const logger = logService.getLogger('/admin');
 
 @Component({
   components: {
