@@ -1,5 +1,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Collection, List } from 'immutable';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import SearchBarComponent from '@/components/SearchBar.vue';
@@ -48,6 +50,8 @@ export default class OrderOfTheFaithView extends Vue {
   private nextPageTimeout: number | null = null;
   private userInteractionTimeout: number | null = null;
 
+  private destroyed$ = new Subject();
+
   get matchingMinisters(): List<Minister> {
     return this.ministers.filter(m => {
       if (this.searchState.type !== 'by-name' || !this.searchState.value) {
@@ -63,10 +67,25 @@ export default class OrderOfTheFaithView extends Vue {
   }
 
   public async mounted() {
-    (window as any).OotF = this;
+    // (window as any).OotF = this;
     this.appConfig = await AppConfigStore.appConfig;
-    this.ministers = (await MinistersStore.ministers)
-      .filter(m => !!m.ootfYearInducted)
+    MinistersStore.ministers$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.updateMinisters);
+  }
+
+  private beforeDestroyed() {
+    this.stopKioskDisplay();
+  }
+
+  private destroyed() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  public updateMinisters(list: List<Minister>) {
+    this.ministers = list
+      .filter(m => m.state === 'published' && !!m.ootfYearInducted)
       .sort((a, b) =>
         (a.name.surname || a.name.given).localeCompare(
           b.name.surname || b.name.given
@@ -84,7 +103,6 @@ export default class OrderOfTheFaithView extends Vue {
       .toJS();
 
     this.startKioskDisplay();
-    logger.trace({ function: 'mounted', mby: this.ministersByYear });
   }
 
   public beforeUpdate() {
@@ -195,7 +213,14 @@ export default class OrderOfTheFaithView extends Vue {
         function: 'startKioskDisplay',
         status: `starting in ${delay} ms`
       });
-      setTimeout(this.autoAdvance, delay);
+      this.nextPageTimeout = setTimeout(this.autoAdvance, delay);
+    }
+  }
+
+  public stopKioskDisplay() {
+    if (this.nextPageTimeout) {
+      clearTimeout(this.nextPageTimeout);
+      this.nextPageTimeout = null;
     }
   }
 
@@ -227,17 +252,15 @@ export default class OrderOfTheFaithView extends Vue {
   private allowUserInteraction() {
     const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
     logger.trace(
-      `Pausing kiosk mode  and allowing user activity for ${timeoutMs} milliseconds.`
+      `Pausing kiosk mode and allowing user activity for ${timeoutMs} milliseconds.`
     );
 
     if (this.userInteractionTimeout) {
       clearTimeout(this.userInteractionTimeout);
     }
 
-    if (this.nextPageTimeout) {
-      clearTimeout(this.nextPageTimeout);
-      this.nextPageTimeout = null;
-    }
+    this.stopKioskDisplay();
+
     this.userInteractionTimeout = setTimeout(() => {
       delete this.userInteractionTimeout;
       this.doSearch({ type: 'none' });

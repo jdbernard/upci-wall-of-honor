@@ -1,6 +1,8 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { List } from 'immutable';
 import { logService } from '@jdbernard/logging';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import { AppConfig, defaultConfig } from '@/data/app.config.model';
@@ -32,6 +34,8 @@ export default class MinisterTableView extends Vue {
   public pageSize = 100;
   public totalPages = 0;
 
+  private destroyed$ = new Subject();
+
   @Watch('filter')
   onFilterChange(val: string) {
     this.filteredMinisters = (val === 'ootf'
@@ -51,6 +55,10 @@ export default class MinisterTableView extends Vue {
         : 'living',
       slug: m.slug
     }));
+    logger.trace({
+      function: 'onFilterChange',
+      ministersMappedAt: performance.now()
+    });
   }
 
   public ministers = List<Minister>();
@@ -70,8 +78,21 @@ export default class MinisterTableView extends Vue {
 
   private async mounted() {
     this.appConfig = await AppConfigStore.appConfig;
-    this.ministers = await MinistersStore.ministers;
-    this.onFilterChange(this.filter);
-    logger.trace({ function: 'mounted', calcStart: performance.now() });
+    MinistersStore.ministers$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((list: List<Minister>) => {
+        this.ministers = list;
+        this.onFilterChange(this.filter);
+        logger.trace({
+          function: 'mounted',
+          ministersLoadedAt: performance.now()
+        });
+      });
+    logger.trace({ function: 'mounted', mountedAt: performance.now() });
+  }
+
+  private destroyed() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

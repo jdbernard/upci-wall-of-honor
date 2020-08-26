@@ -1,5 +1,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Collection, List } from 'immutable';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
@@ -26,6 +28,8 @@ export default class DeceasedMinistersView extends Vue {
     Collection<number, Minister>
   >([]);
   public ministers = List<Minister>();
+
+  private destroyed$ = new Subject();
 
   get matchingMinisters(): List<Minister> {
     return this.ministers.filter(m => {
@@ -91,23 +95,9 @@ export default class DeceasedMinistersView extends Vue {
   private async mounted() {
     // (window as any).DCM = this;
     this.appConfig = await AppConfigStore.appConfig;
-    this.ministers = (await MinistersStore.ministers)
-      .filter(m => !!m.dateOfDeath)
-      .sort((a, b) =>
-        (a.name.surname || a.name.given).localeCompare(
-          b.name.surname || b.name.given
-        )
-      );
-
-    logger.trace({ function: 'mounted', calcStart: performance.now() });
-
-    this.ministersByYear = this.ministers.groupBy(m =>
-      m.dateOfDeath ? m.dateOfDeath.year() : 1900
-    );
-
-    const allYears = this.ministersByYear.keySeq().sort((a, b) => b - a);
-
-    logger.trace({ function: 'mounted', calcEnd: performance.now() });
+    MinistersStore.ministers$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.updateMinisters);
 
     const scrollOptions = {
       msPerPx: 64,
@@ -115,19 +105,58 @@ export default class DeceasedMinistersView extends Vue {
     };
 
     this.scrollService = new AutoScrollService(scrollOptions);
-    this.loading = false;
-    this.pageInYears(allYears).then(() => {
-      Vue.nextTick(() => this.onSearch(this.searchState, this.searchState));
-      logger.trace({ function: 'mounted', endTime: performance.now() });
-    });
 
-    return;
+    logger.trace({ function: 'mounted', mountedAt: performance.now() });
+  }
+
+  private destroyed() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   private beforeDestroy() {
     if (this.scrollService) {
       this.scrollService.stop();
     }
+  }
+
+  private updateMinisters(list: List<Minister>) {
+    logger.trace({ function: 'updateMinisters', startedAt: performance.now() });
+
+    this.loading = true;
+    this.pauseScroll();
+
+    this.ministers = list
+      .filter(m => m.state === 'published' && !!m.dateOfDeath)
+      .sort((a, b) =>
+        (a.name.surname || a.name.given).localeCompare(
+          b.name.surname || b.name.given
+        )
+      );
+
+    logger.trace({
+      function: 'updateMinisters',
+      filteredAt: performance.now()
+    });
+
+    this.ministersByYear = this.ministers.groupBy(m =>
+      m.dateOfDeath ? m.dateOfDeath.year() : 1900
+    );
+
+    const allYears = this.ministersByYear.keySeq().sort((a, b) => b - a);
+
+    logger.trace({ function: 'updateMinisters', mappedAt: performance.now() });
+
+    this.loading = false;
+    this.pageInYears(allYears).then(() => {
+      Vue.nextTick(() => this.onSearch(this.searchState, this.searchState));
+      logger.trace({
+        function: 'updateMinisters',
+        finishedAt: performance.now()
+      });
+    });
+
+    return;
   }
 
   public scroll(delay: number) {

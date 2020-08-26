@@ -1,6 +1,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { logService } from '@jdbernard/logging';
 import moment from 'moment';
+import { take } from 'rxjs/operators';
 import { Minister } from '@/data/minister.model';
 import Checkbox from '@/components/admin/Checkbox.vue';
 import MinistersStore from '@/data/ministers.store';
@@ -20,12 +21,16 @@ export default class EditMinisterView extends Vue {
   public minister: Minister | null = null;
   public ootfChecked = false;
   public bioChecked = false;
+  public isModified = false;
 
-  public async mounted() {
-    this.minister =
-      (await MinistersStore.ministers).find(
-        m => m.slug === this.$route.params.slug
-      ) || null;
+  public mounted() {
+    MinistersStore.ministers$
+      .pipe(take(1))
+      .subscribe(
+        list =>
+          (this.minister =
+            list.find(m => m.slug === this.$route.params.slug) || null)
+      );
   }
 
   public setOotF(val: boolean) {
