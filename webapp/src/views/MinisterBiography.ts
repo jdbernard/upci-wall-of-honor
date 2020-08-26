@@ -1,4 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator';
+import { take } from 'rxjs/operators';
 import { Minister } from '@/data/minister.model';
 import MinistersStore from '@/data/ministers.store';
 import OotFLogo from '@/assets/svg-components/OotFLogo.vue';
@@ -16,10 +17,12 @@ export default class MinisterBiographyView extends Vue {
   public minister: Minister | null = null;
 
   public async mounted() {
-    this.minister =
-      (await MinistersStore.ministers).find(
-        m => m.slug === this.$route.params.slug
-      ) || null;
+    MinistersStore.ministers$.pipe(take(1)).subscribe(list => {
+      this.minister =
+        list.find(
+          m => m.state === 'published' && m.slug === this.$route.params.slug
+        ) || null;
+    });
   }
 
   public get deathFormatted(): string {

@@ -1,46 +1,45 @@
 /* eslint-disable no-prototype-builtins */
 import { default as Axios, AxiosInstance } from 'axios';
-import { List, Map } from 'immutable';
-import { Minister } from '@/data/minister.model';
-import moment from 'moment';
+import { List } from 'immutable';
+import { ReplaySubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { Minister, fromDTO } from '@/data/minister.model';
 
 export class MinistersStore {
   constructor() {
     this.http = Axios.create({});
   }
 
-  private _allMinisters?: Promise<List<Minister>>;
-  private _ministers?: Promise<List<Minister>>;
-  private _deceasedMinistersByYear?: Promise<Map<number, List<Minister>>>;
+  public _ministers$ = new ReplaySubject<List<Minister>>(1);
+  private hasInitialData = false;
+
   private http: AxiosInstance;
 
-  public get ministers(): Promise<List<Minister>> {
-    if (!this._ministers) {
-      this._allMinisters = this.loadMinisters();
-      this._ministers = this.loadMinisters().then(allMinisters =>
-        allMinisters.filter(m => m.state === 'published')
-      );
+  public get ministers$(): Observable<List<Minister>> {
+    if (!this.hasInitialData) {
+      this.hasInitialData = true;
+      this.fetchMinisters();
     }
-
-    return this._ministers;
+    return this._ministers$;
   }
 
-  private async loadMinisters(): Promise<List<Minister>> {
+  public persistMinister(m: Minister) {
+    // TODO: Add logic to actually persist the change via the API
+
+    // Update our local cache of ministers
+    this.ministers$.pipe(take(1)).subscribe(list => {
+      const existingIdx = list.findIndex(x => x.id === m.id);
+      if (existingIdx < 0) {
+        this._ministers$.next(list.push(m));
+      } else {
+        this._ministers$.next(list.set(existingIdx, m));
+      }
+    });
+  }
+
+  private async fetchMinisters() {
     const resp = await this.http.get('/data/ministers.json');
-    return List(resp.data.ministers.map(this.ministerFromJson));
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private ministerFromJson(json: any): Minister {
-    const result: Minister = { ...json };
-    if (result.dateOfBirth) {
-      result.dateOfBirth = moment(result.dateOfBirth);
-    }
-    if (result.dateOfDeath) {
-      result.dateOfDeath = moment(result.dateOfDeath);
-    }
-
-    return result;
+    this._ministers$.next(List(resp.data.ministers.map(fromDTO)));
   }
 }
 
