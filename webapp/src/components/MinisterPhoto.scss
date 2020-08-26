@@ -8,11 +8,17 @@
 // the image uses the same em-based positioning to allow it to also scale
 // appropriately.
 .minister-photo {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
   width: 11.625em;
   font-size: 32px;
+
+  &.allowEdit {
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    img { cursor: move; }
+  }
 
   .photo-frame {
     background: #464225;
@@ -44,19 +50,14 @@
     > * { margin: 0 $spacer-sm $spacer-sm $spacer-sm; }
   }
 
-  &.allowEdit img { cursor: move; }
 }
 
 @include forSize(notMobile) {
   .minister-photo {
-    .edit-controls { font-size: 1.25rem; }
+    .edit-controls { font-size: 0.625em; }
   }
-
 }
 
 @include forSize(ultrawide) {
-  .minister-photo {
-    .photo-frame { margin-bottom: $spacer-md; }
-    .edit-controls { font-size: 1.5rem; }
-  }
+  .minister-photo .photo-frame { margin-bottom: $spacer-md; }
 }

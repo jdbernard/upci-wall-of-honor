@@ -28,12 +28,23 @@ export default class EditMinisterView extends Vue {
       ) || null;
   }
 
-  public setHasBio(val: boolean): void {
+  public setOotF(val: boolean) {
+    if (this.minister) {
+      this.ootfChecked = val;
+      if (val) {
+        this.setHasBio(true);
+        if (!this.minister.ootfYearInducted) {
+          this.minister.ootfYearInducted = moment().year();
+        }
+      }
+    }
+  }
+  public setHasBio(val: boolean) {
     if (val && this.minister) {
       if (!this.minister.details) {
         this.minister.details = {
           photo: {},
-          biography: 'Add biography here...'
+          biography: '<p>Add biography here...</p>'
         };
       }
 
@@ -46,6 +57,12 @@ export default class EditMinisterView extends Vue {
   public setDateOfBirth(val: string) {
     if (this.minister) {
       this.minister.dateOfBirth = moment(val);
+    }
+  }
+
+  public bioChanged(evt: InputEvent) {
+    if (this.minister?.details) {
+      this.minister.details.biography = (evt.target as HTMLElement).innerHTML;
     }
   }
 
@@ -90,10 +107,6 @@ export default class EditMinisterView extends Vue {
   }
 
   public get formattedDateOfBirth(): string | undefined {
-    logger.trace({
-      function: 'get formattedDateOfBirth',
-      value: this.minister?.dateOfBirth?.format(DATE_FORMAT)
-    });
     return this.minister?.dateOfBirth?.format(DATE_FORMAT);
   }
 
@@ -104,11 +117,5 @@ export default class EditMinisterView extends Vue {
   @Watch('minister') public onMinisterChange(val: Minister) {
     this.bioChecked = !!val.details;
     this.ootfChecked = !!val.ootfYearInducted;
-  }
-
-  @Watch('ootfChecked') public ootfCheckedChange(val: boolean) {
-    if (val) {
-      this.setHasBio(true);
-    }
   }
 }

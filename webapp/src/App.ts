@@ -6,10 +6,10 @@ import { logService, ConsoleLogAppender } from '@jdbernard/logging';
 import { library, IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
 import {
-  faAngleLeft,
-  faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
+  faAngleLeft,
+  faAngleRight,
   faCheck,
   faSearch,
   faSearchMinus,
@@ -22,10 +22,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-  faAngleLeft,
-  faAngleRight,
   faAngleDoubleLeft,
   faAngleDoubleRight,
+  faAngleLeft,
+  faAngleRight,
   faCheck,
   faCheckSquare as IconDefinition,
   faSearch,
