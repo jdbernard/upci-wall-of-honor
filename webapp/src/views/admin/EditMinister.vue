@@ -1,28 +1,35 @@
 <template>
-  <div id="edit-minister" class="admin-content-view" v-if="minister">
+  <form id="edit-minister" class="admin-content-view" v-if="minister">
     <div class="header">
       <h1>{{ minister | nameDisplay }}</h1>
       <div class="record-options">
-        <Checkbox :checked="ootfChecked" @change="setOotF"
-          >Order of the Faith</Checkbox
+        <CheckboxComponent :checked="ootfChecked" @change="setOotF"
+          >Order of the Faith</CheckboxComponent
         >
-        <Checkbox
+        <CheckboxComponent
           :checked="bioChecked"
           :disabled="ootfChecked"
           @change="setHasBio"
-          >Include a biography</Checkbox
+          >Include a biography</CheckboxComponent
         >
       </div>
     </div>
-    <div class="minister-details">
+    <div class="minister-details" v-if="minister">
       <MinisterPhotoComponent
+        v-if="bioChecked"
         v-model="minister.details.photo"
         :allowEdit="true"
       ></MinisterPhotoComponent>
 
       <div class="basic-details">
         <label class="name">
-          <span>Name:</span>
+          <span>
+            Name:
+            <TooltipComponent>
+              The minister's full name. Only the given name is required. Any
+              number of middle names, initials, or nicknames may be entered.
+            </TooltipComponent>
+          </span>
           <input
             name="prefix"
             type="text"
@@ -34,6 +41,7 @@
             type="text"
             v-model="minister.name.given"
             placeholder="given name"
+            required
           />
           <input
             v-for="idx in minister.name.additional.length + 1"
@@ -58,6 +66,9 @@
             v-model="minister.name.suffix"
             placeholder="suffix"
           />
+          <TooltipComponent type="error">
+            A minister must have at least a given name.
+          </TooltipComponent>
         </label>
         <label class="dateOfBirth">
           <span>Date of birth:</span>
@@ -66,7 +77,11 @@
             type="date"
             :value="formattedDateOfBirth"
             @input="setDateOfBirth"
+            required
           />
+          <TooltipComponent type="error">
+            This field is required.
+          </TooltipComponent>
         </label>
         <label class="dateOfDeath">
           <span>Date of death:</span>
@@ -77,43 +92,115 @@
             :value="formattedDateOfDeath"
             @input="setDateOfDeath"
           />
-          <Checkbox :checked="!minister.isDeceased" @change="setLiving">
+          <CheckboxComponent
+            :checked="!minister.isDeceased"
+            @change="setLiving"
+          >
             still living
-          </Checkbox>
+          </CheckboxComponent>
         </label>
         <label class="recordState">
-          <span>Record state:</span>
-          <select v-model="minister.state">
+          <span>
+            Record state:
+            <TooltipComponent>
+              <p>
+                This controls the visibility of this minister record in the
+                public-facing Wall of Honor displays.
+              </p>
+              <p>
+                <strong>Published</strong> records are visible on the
+                public-facing displays.
+              </p>
+              <p>
+                <strong>Draft</strong> records are not visible on the
+                public-facing displays. This is intended to be used when a
+                record is being created but is not yet complete (maybe the bio
+                is still being gathered).
+              </p>
+              <p>
+                <strong>Archived</strong> records are not visible on the
+                public-facing displays. This is inteded for cases where we want
+                to remove the record from the public Wall of Honor but retain
+                the data.
+              </p></TooltipComponent
+            ></span
+          >
+
+          <select v-model="minister.state" required>
             <option>draft</option>
             <option>published</option>
             <option>archived</option>
           </select>
         </label>
         <label class="slug">
-          <span>Short URL:</span>
-          <input type="text" v-model="minister.slug" />
+          <span>
+            Short URL:
+            <TooltipComponent>
+              <p>
+                The <i>slug</i> is the URL-friendly version of the minister's
+                name that will be used to create the bookmark-able links to
+                their bio (and admin edit page).
+              </p>
+              <p>
+                This <strong>must be unique across all ministers</strong> and
+                can only contain letters, numbers, and '-'.
+              </p>
+              <p>
+                We will try to generate a slug for you based on the minister's
+                name but you may need to tweak this when two ministers share the
+                same name. For example, you may add '-1', '-2', or some other
+                distinguishing text to the end of one.
+              </p>
+            </TooltipComponent>
+          </span>
+          <input type="text" :value="minister.slug" @input="setSlug" required />
+          <TooltipComponent type="error">
+            This field is required and must be unique.
+          </TooltipComponent>
         </label>
         <label class="ootfYearInducted" v-if="ootfChecked">
           <span>Year Inducted:</span>
-          <input type="number" v-model="minister.ootfYearInducted" />
+          <TooltipComponent type="error">
+            This is a required field for ministers inducted into the Order of
+            the Faith and represents the year that they were inducted.
+          </TooltipComponent>
+          <input type="number" v-model="minister.ootfYearInducted" required />
+          <TooltipComponent type="error">
+            This field is required because you have "Order of the Faith"
+            selected at the top of the page.
+          </TooltipComponent>
         </label>
         <label class="biography" v-if="bioChecked">
-          <span>Biography:</span>
+          <span>
+            Biography:
+            <TooltipComponent>
+              This editor allows rich-text. If you have biography content with
+              formatting (from Word, for example), you should be able to copy
+              and paste that content here to preserve the formatting.
+            </TooltipComponent>
+          </span>
           <div
+            ref="bio-editor"
+            @blur="bioChanged"
             class="editor"
             contenteditable
+            required
             v-html="minister.details.biography"
-            @blur="this.minister.details = $event.target.innerHTML"
           ></div>
+          <TooltipComponent type="error">
+            This field is required because you have "Include a biography"
+            selected at the top of the page.
+          </TooltipComponent>
         </label>
       </div>
     </div>
     <div class="actions">
-      <button>Back</button>
-      <button :disabled="!isModified" class="cancel">Cancel</button>
-      <button :disabled="!isModified" class="save action">Save</button>
+      <button @click="$router.go(-1)">Cancel</button>
+      <button :disabled="!isModified" @click="save" class="save action">
+        Save
+      </button>
     </div>
-  </div>
+  </form>
   <div v-else class="admin-content-view"></div>
 </template>
 <script lang="ts" src="./EditMinister.ts"></script>

@@ -1,4 +1,5 @@
 import { default as moment, Moment } from 'moment';
+import { uuid } from '@cfworker/uuid';
 
 export interface Photo {
   uri?: string;
@@ -8,22 +9,38 @@ export interface Photo {
   yOffsetInPx?: number;
 }
 
+export interface Name {
+  given: string;
+  surname?: string;
+  prefix?: string;
+  suffix?: string;
+  additional: string[];
+}
+
 interface MinisterBase {
   id: string;
   slug: string;
   state: 'published' | 'draft' | 'archived';
-  name: {
-    given: string;
-    surname?: string;
-    prefix?: string;
-    suffix?: string;
-    additional?: string[];
-  };
+  name: Name;
   isDeceased: boolean;
   ootfYearInducted?: number;
   details?: {
     photo: Photo;
     biography: string;
+  };
+}
+
+export function newMinister(): Minister {
+  return {
+    id: uuid(),
+    isDeceased: true,
+    name: {
+      given: 'John',
+      additional: ['Q.'],
+      surname: 'Minister'
+    },
+    slug: 'john-q-minister',
+    state: 'draft'
   };
 }
 
@@ -66,4 +83,12 @@ export function toDTO(m: Minister): MinisterDTO {
 
 export function clone(m: Minister): Minister {
   return fromDTO(JSON.parse(JSON.stringify(toDTO(m))));
+}
+
+export function exactEquals(a: Minister | null, b: Minister | null): boolean {
+  if (a !== null && b !== null) {
+    return JSON.stringify(toDTO(a)) === JSON.stringify(toDTO(b));
+  } else {
+    return a === b;
+  }
 }

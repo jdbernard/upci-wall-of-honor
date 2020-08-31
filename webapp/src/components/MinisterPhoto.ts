@@ -35,16 +35,18 @@ export default class MinisterPhotoComponent extends Vue {
     }
 
     const styleObj: PhotoPositioningCss = {};
-    if (this.photo.xOffsetInPx || this.photo.yOffsetInPx) {
-      styleObj.position = 'relative';
-    }
+    styleObj.position = 'relative';
 
     if (this.photo.xOffsetInPx) {
       styleObj.left = (this.photo.xOffsetInPx / 32).toFixed(4) + 'em';
+    } else {
+      styleObj.left = '0px';
     }
 
     if (this.photo.yOffsetInPx) {
       styleObj.top = (this.photo.yOffsetInPx / 32).toFixed(4) + 'em';
+    } else {
+      styleObj.top = '0px';
     }
 
     if (this.photo.widthInPx || this.photo.heightInPx) {
@@ -67,8 +69,8 @@ export default class MinisterPhotoComponent extends Vue {
 
     const style = window.getComputedStyle(this.$refs.image);
 
-    this.moveData.imgX = pxToNumber(style.left);
-    this.moveData.imgY = pxToNumber(style.top);
+    this.moveData.imgX = style.left === 'auto' ? 0 : pxToNumber(style.left);
+    this.moveData.imgY = style.top === 'auto' ? 0 : pxToNumber(style.top);
     this.moveData.moving = true;
 
     if (isTouchEvent(e)) {
@@ -146,8 +148,10 @@ export default class MinisterPhotoComponent extends Vue {
     return {
       uri: this.$refs.image.attributes.getNamedItem('src')?.textContent || '',
       widthInPx: pxToNumber(style.width) * scaleFactor,
-      xOffsetInPx: pxToNumber(style.left) * scaleFactor,
-      yOffsetInPx: pxToNumber(style.top) * scaleFactor
+      xOffsetInPx:
+        style.left === 'auto' ? 0 : pxToNumber(style.left) * scaleFactor,
+      yOffsetInPx:
+        style.top === 'auto' ? 0 : pxToNumber(style.top) * scaleFactor
     };
   }
 

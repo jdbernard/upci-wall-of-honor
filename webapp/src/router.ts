@@ -61,7 +61,7 @@ const routes: Array<RouteConfig> = [
       },
       {
         path: 'add-minister',
-        name: 'AdminAddUser',
+        name: 'AdminAddMinister',
         component: EditMinisterView,
         meta: { title: 'Add Minister - UPCI Wall of Honor' }
       }

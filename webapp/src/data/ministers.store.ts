@@ -7,6 +7,7 @@ import { Minister, fromDTO } from '@/data/minister.model';
 
 export class MinistersStore {
   constructor() {
+    (window as any).MinistersStore = this;
     this.http = Axios.create({});
   }
 
@@ -23,7 +24,7 @@ export class MinistersStore {
     return this._ministers$;
   }
 
-  public persistMinister(m: Minister) {
+  public async persistMinister(m: Minister): Promise<Minister> {
     // TODO: Add logic to actually persist the change via the API
 
     // Update our local cache of ministers
@@ -35,6 +36,8 @@ export class MinistersStore {
         this._ministers$.next(list.set(existingIdx, m));
       }
     });
+
+    return m;
   }
 
   private async fetchMinisters() {
