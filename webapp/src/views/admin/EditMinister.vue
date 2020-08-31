@@ -1,5 +1,10 @@
 <template>
-  <form id="edit-minister" class="admin-content-view" v-if="minister">
+  <form
+    id="edit-minister"
+    class="admin-content-view"
+    v-if="minister"
+    onsubmit="return;"
+  >
     <div class="header">
       <h1>{{ minister | nameDisplay }}</h1>
       <div class="record-options">
@@ -196,7 +201,7 @@
     </div>
     <div class="actions">
       <button @click="$router.go(-1)">Cancel</button>
-      <button :disabled="!isModified" @click="save" class="save action">
+      <button :disabled="!isModified" @click.prevent="save" class="save action">
         Save
       </button>
     </div>
