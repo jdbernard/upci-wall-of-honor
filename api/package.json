@@ -1,0 +1,19 @@
+{
+  "name": "upci-wall-of-honor-api",
+  "version": "0.1.0-dev",
+  "description": "UPCI Wall of Honor API.",
+  "main": "openapi/openapi.yaml",
+  "scripts": {
+    "build": "mkdir dist && npx openapi bundle openapi/openapi.yaml > dist/openapi.yaml",
+    "test": "npx openapi lint openapi/openapi.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.jdb-labs.com/jdb-labs/upci-wall-of-honor.git"
+  },
+  "author": "Jonathan Bernard <jonathan@jdbernard.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "@redocly/openapi-cli": "^1.0.0-beta.9"
+  }
+}

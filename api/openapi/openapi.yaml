@@ -1,0 +1,55 @@
+---
+openapi: 3.0.3
+
+info:
+  version: '1.0.0'
+  title: UPCI Wall of Honor API
+  description: API to the UPCI Wall of Honor display.
+  # termsOfService: https://www.upciwallofhonor.com/terms-of-service # TODO
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    name: Jonathan Bernard
+    email: jdb@jdb-tech.com
+
+servers:
+  - url: https://api.dev.upci-woh.jdb-labs.com/v1
+    description: Development server
+  - url: https://api.demo.upci-woh.jdb-labs.com/v1
+    description: Demo server
+  - url: https://api.upciwallofhonor.org/v1
+    description: Production server
+
+paths:
+  /ministers:
+
+    get:
+      summary: List all ministers records.
+      operationId: listMinisters
+      responses:
+        200:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: './models/Minister.yaml'
+
+    post:
+      summary: Create a new minister record.
+      operationId: createMinister
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: './models/Minister.yaml'
+      responses:
+        200:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: './models/Minister.yaml'
