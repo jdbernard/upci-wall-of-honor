@@ -58,7 +58,7 @@ input[type=text] {
 input[type=date] {
   border: solid thin var(--color-fg);
   border-radius: 2px;
-  width: 7.5em;
+  width: 8em;
 }
 
 select, option, input {
@@ -91,7 +91,7 @@ a.button.action, button.action {
 }
 
 p {
-  margin-top: $spacer;
+  margin-bottom: $spacer;
 }
 
 select {

@@ -24,7 +24,7 @@
 
     button {
       margin: 0 $spacer;
-      &.cancel { margin-left: auto; }
+      &.save { margin-left: auto; }
     }
   }
 }
@@ -46,13 +46,14 @@
       align-items: flex-start;
 
       flex: 1 1;
-      margin-top: $spacer-md;
+      margin: $spacer-md 0;
       min-height: 0;
+
+      .minister-photo { margin-right: $spacer-md; }
 
       .basic-details {
         align-self: stretch;
         flex: 1 1;
-        margin: 0 $spacer-md;
         min-height: 0;
 
         display: flex;
@@ -62,11 +63,24 @@
           display: block;
           margin-bottom: $spacer;
 
-          span { display: inline-block; }
+          span {
+            display: inline-block;
+
+            .tooltip { opacity: 0; }
+          }
+
+          &:hover, &:focus, &:focus-within {
+            span .tooltip { opacity: 1; }
+          }
         }
 
+        .tooltip.error { display: none; }
+
+        input:invalid:not(:focus) ~ .tooltip.error,
+        .invalid:not(:focus) ~ .tooltip.error { display: inline-block; }
+
         .name {
-          padding-left: 4em;
+          padding-left: 5.5em;
           position: relative;
 
           span {
@@ -85,7 +99,7 @@
         .dateOfDeath,
         .recordState,
         .slug,
-        .ootfYearInducted { span { width: 8em; } }
+        .ootfYearInducted { span { width: 9em; } }
 
         .ootfYearInducted input {
           border: solid thin var(--color-fg);
@@ -110,7 +124,13 @@
             margin-top: 1em;
             margin-left: 4em;
             padding: 0.5em;
+            order: 1;
             overflow-y: auto;
+          }
+
+          > .tooltip {
+            margin-left: 4em;
+            margin-top: 1em;
           }
         }
       }
@@ -129,7 +149,11 @@
 @include forSize(ultrawide) {
   #edit-minister.admin-content-view {
     .header { margin-top: 9.45rem; }
-    .minister-details { margin-top: $spacer-lg; }
+    .minister-details {
+      margin-top: $spacer-lg 0;
+
+      .minister-photo { margin-right: $spacer-lg; }
+    }
     .actions button { font-size: 2.5rem; }
   }
 }

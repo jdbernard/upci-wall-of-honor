@@ -14,7 +14,7 @@
           />
         </div>
       </div>
-      <router-link class="button action" :to="{}">
+      <router-link class="button action" :to="{ name: 'AdminAddMinister' }">
         <fa-icon icon="user-plus"></fa-icon> Add
       </router-link>
     </div>
@@ -35,6 +35,7 @@
             <v-th sortKey="dod"><span class="title">Date of Death</span></v-th>
             <v-th sortKey="isOotF"><span class="title">OotF</span></v-th>
             <v-th sortKey="hasBio"><span class="title">Bio</span></v-th>
+            <v-th sortKey="state"><span class="title">State</span></v-th>
           </tr>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
@@ -49,6 +50,7 @@
             <td>{{ row.displayDOD }}</td>
             <td><fa-icon v-if="row.isOotF" icon="check"></fa-icon></td>
             <td><fa-icon v-if="row.hasBio" icon="check"></fa-icon></td>
+            <td>{{ row.state }}</td>
           </tr>
         </tbody>
       </v-table>

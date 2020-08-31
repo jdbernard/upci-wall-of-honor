@@ -34,6 +34,11 @@ export default class MinisterTableView extends Vue {
   public pageSize = 100;
   public totalPages = 0;
 
+  public ministers = List<Minister>();
+  public appConfig: AppConfig = defaultConfig;
+  public ministerRowData: MinisterRowData[] = [];
+
+  private filteredMinisters = List<MinisterRowData>();
   private destroyed$ = new Subject();
 
   @Watch('filter')
@@ -53,17 +58,15 @@ export default class MinisterTableView extends Vue {
       displayDOD: m.isDeceased
         ? m.dateOfDeath?.format(DATE_FORMAT) || 'unknown'
         : 'living',
-      slug: m.slug
+      slug: m.slug,
+      state: m.state
     }));
+    this.ministerRowData = this.filteredMinisters.toJS();
     logger.trace({
       function: 'onFilterChange',
       ministersMappedAt: performance.now()
     });
   }
-
-  public ministers = List<Minister>();
-  private filteredMinisters = List<MinisterRowData>();
-  public appConfig: AppConfig = defaultConfig;
 
   public tableFilters = {
     name: {
@@ -71,10 +74,6 @@ export default class MinisterTableView extends Vue {
       keys: ['displayName']
     }
   };
-
-  public get ministerRowData(): MinisterRowData[] {
-    return this.filteredMinisters.toJS();
-  }
 
   private async mounted() {
     this.appConfig = await AppConfigStore.appConfig;

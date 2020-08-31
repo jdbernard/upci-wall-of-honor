@@ -24,6 +24,7 @@
         class="icon"
         @click="changeWidth(-10)"
         aria-label="decrease photo size"
+        v-if="photo.uri"
       >
         <fa-icon icon="search-minus"></fa-icon>
       </button>
@@ -37,11 +38,12 @@
         class="icon"
         @click="changeWidth(10)"
         aria-label="increase photo size"
+        v-if="photo.uri"
       >
         <fa-icon icon="search-plus"></fa-icon>
       </button>
-      <button @click="fitHeight">Fit Height</button>
-      <button @click="fitWidth">Fit Width</button>
+      <button v-if="photo.uri" @click="fitHeight">Fit Height</button>
+      <button v-if="photo.uri" @click="fitWidth">Fit Width</button>
     </div>
   </div>
 </template>

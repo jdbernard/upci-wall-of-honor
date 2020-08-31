@@ -25,6 +25,7 @@ describe('nameDisplay filter', () => {
     state: 'published',
     dateOfBirth: moment(),
     name: {
+      additional: [],
       given: 'Bob'
     }
   };
@@ -37,6 +38,7 @@ describe('nameDisplay filter', () => {
     dateOfBirth: moment(),
     name: {
       prefix: 'Dr.',
+      additional: [],
       given: 'Charles'
     }
   };
