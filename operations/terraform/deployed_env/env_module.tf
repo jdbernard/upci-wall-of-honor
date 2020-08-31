@@ -212,3 +212,49 @@ resource "aws_route53_record" "alternate_domains" {
 
   depends_on = [aws_cloudfront_distribution.cdn]
 }
+
+#resource "aws_cognito_identity_pool" "identities" {
+#  identity_pool_name                = "upci-wall-of-honor-${var.environment}-identities"
+#  allow_unauthenticated_identities  = false
+#}
+
+resource "aws_cognito_user_pool" "users" {
+  name                      = "upci-wall-of-honor-${var.environment}-users"
+  auto_verified_attributes  = ["email"]
+  username_attributes       = ["email"]
+
+  admin_create_user_config {
+    allow_admin_create_user_only  = true
+  }
+
+  password_policy {
+    minimum_length    = 12
+    require_lowercase = true
+    require_uppercase = true
+    require_numbers   = true
+  }
+
+  schema {
+    name                = "email"
+    attribute_data_type = "String"
+    required            = "true"
+  }
+
+  schema {
+    name                = "given name"
+    attribute_data_type = "String"
+    required            = "true"
+  }
+
+  schema {
+    name                = "family name"
+    attribute_data_type = "String"
+    required            = "true"
+  }
+
+  schema {
+    name                = "admin"
+    attribute_data_type = "Boolean"
+    required            = "true"
+  }
+}
