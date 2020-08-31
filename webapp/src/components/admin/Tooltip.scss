@@ -1,0 +1,38 @@
+@import "~@/styles/vars";
+
+.tooltip {
+  display: inline-block;
+  margin: 0 0.5em;
+  position: relative;
+
+  .tooltip-container {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    background-color: var(--color-bg);
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+    font-size: 0.75em;
+    top: -0.125em;
+    left: 2em;
+    padding: 0.25em;
+    width: 30ch;
+    z-index: 1;
+  }
+
+  &.error {
+    svg { color: var(--color-error); }
+    .tooltip-container {
+      text-decoration: underline var(--color-error);
+    }
+  }
+
+  &:hover, &:focus, &:focus-within, &.alwaysVisible {
+    opacity: 1;
+
+    .tooltip-container {
+      display: block;
+    }
+  }
+}
