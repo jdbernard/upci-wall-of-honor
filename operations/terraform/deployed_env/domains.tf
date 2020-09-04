@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "cert" {
   provider          = aws.cert
-  domain_name       = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
+  domain_name       = local.domain_name
   validation_method = "DNS"
 
   subject_alternative_names = concat(var.additional_cloudfront_aliases, [local.api_domain_name])
@@ -40,7 +40,7 @@ resource "aws_acm_certificate_validation" "cert" {
 resource "aws_route53_record" "subdomain" {
   count = var.create_env_subdomain ? 1: 0
   zone_id = var.route53_zone.zone_id
-  name = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
+  name = local.domain_name
   type = "A"
 
   alias {

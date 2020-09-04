@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "users" {
-  name                      = "upci-wall-of-honor-${var.environment}-users"
+  name                      = local.domain_name
   auto_verified_attributes  = ["email"]
   username_attributes       = ["email"]
 
