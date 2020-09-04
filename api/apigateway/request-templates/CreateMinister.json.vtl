@@ -1,0 +1,12 @@
+{
+  "TableName": "%TABLE_NAME%",
+  "Item": {
+    "id": {"S": "$input.path('$.id')"},
+    "state": {"S": "$input.path('$.state')"},
+    "isDeceased": {"BOOL": "$input.path('$.isDeceased')"},
+    "isOotF": {
+      "BOOL": "#if($input.path('$.ootfYearInducted'))true#{else}false#end"
+    },
+    "record": {"S": "$util.escapeJavaScript($input.json('$'))"}
+  }
+}

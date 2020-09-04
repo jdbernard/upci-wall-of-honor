@@ -1,0 +1,13 @@
+{
+	 "TableName":"%TABLE_NAME%"
+#if ($method.request.querystring.state.length() > 0) ,
+    "FilterExpression": "#S = :stateVal",
+    "ExpressionAttributeNames" : {"#S": "state"},
+    "ExpressionAttributeValues": {
+			":stateVal": { "S": "$method.request.querystring.state" }
+    }
+#end
+#if ($method.request.querystring.startAfter.length() > 0) ,
+    "ExclusiveStartKey": "$method.request.querystring.startAfter"
+#end
+}

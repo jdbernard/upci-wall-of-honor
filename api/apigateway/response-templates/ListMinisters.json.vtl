@@ -1,0 +1,10 @@
+#set($inputRoot = $input.path('$'))
+{
+  "count": "$input.path('$.Count'),
+  "ministers": [
+    #foreach ($m in $input.path('$.Items[*].record.S'))
+      $m #if($foreach.hasnext),#end
+    #end
+  ]#if ($input.path('$.LastEvaluatedKey')),
+  "nextPageStartsAfter": $input.json('$.LastEvaluatedKey') #end
+}
