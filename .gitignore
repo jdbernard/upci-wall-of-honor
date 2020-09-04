@@ -25,3 +25,7 @@ yarn-error.log*
 
 # Terraform local state
 .terraform/
+
+# Build artifacts
+webapp/dist
+api/dist
