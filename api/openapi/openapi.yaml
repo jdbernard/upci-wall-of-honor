@@ -33,9 +33,23 @@ paths:
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: './models/Minister.yaml'
+                $ref: ./models/ArrayOfMinister.yaml
+          parameters:
+            - name: state
+              in: query
+              description: Filter minister records and only return those in
+                the given state.
+              required: false
+              schema:
+                type: string
+              style: form
+            - name: startAfter
+              in: query
+              description: When fetching multiple pages of results this should
+                be the ID of the last minister returned in the previous page.
+              schema:
+                type: string
+              style: form
 
     post:
       summary: Create a new minister record.
@@ -45,7 +59,7 @@ paths:
         content:
           'application/json':
             schema:
-              $ref: './models/Minister.yaml'
+              $ref: ./models/Minister.yaml
       responses:
         200:
           description: Success
