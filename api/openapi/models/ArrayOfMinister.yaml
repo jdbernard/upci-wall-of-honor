@@ -1,0 +1,21 @@
+---
+type: object
+required: ['count', 'ministers']
+properties:
+
+  count:
+    description: Number of ministers returned in this response.
+    type: number
+
+  ministers:
+    description: The array of matching ministers.
+    type: array
+    items:
+      $ref: ./Minister.yaml
+
+  nextPageStartsAfter:
+    description: ID of the last minister returned. The presence of this value
+      indicates that there are more results than were returned in this request.
+      This value can be passed into the `startAfter` parameter of a new
+      `GET /ministers` request to fetch the next page.
+    type: string
