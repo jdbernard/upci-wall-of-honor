@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "deploy" {
-  bucket        = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
+  bucket        = local.domain_name
   acl           = "private"
   force_destroy = true
 
@@ -22,30 +22,6 @@ resource "aws_s3_bucket_public_access_block" "deploy" {
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "OAI for ${var.environment} environment."
-}
-
-data "aws_iam_policy_document" "deploy_bucket_access_policy" {
-  statement {
-    actions   = [ "s3:GetObject" ]
-    effect    = "Allow"
-    resources = [ "${aws_s3_bucket.deploy.arn}/*" ]
-
-    principals {
-      type = "AWS"
-      identifiers = [ aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn ]
-    }
-  }
-
-  statement {
-    actions   = [ "s3:ListBucket" ]
-    effect    = "Allow"
-    resources = [ aws_s3_bucket.deploy.arn ]
-
-    principals {
-      type = "AWS"
-      identifiers = [ aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn ]
-    }
-  }
 }
 
 resource "aws_s3_bucket_policy" "deploy_bucket_access_policy" {
@@ -74,7 +50,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     prefix          = "logs/${var.environment}/cloudfront/"
   }
 
-  aliases = concat(["${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"], var.additional_cloudfront_aliases)
+  aliases = concat([local.domain_name], var.additional_cloudfront_aliases)
 
   default_cache_behavior {
     allowed_methods   = [ "GET", "HEAD", "OPTIONS" ]
