@@ -4,7 +4,7 @@
   "description": "UPCI Wall of Honor API.",
   "main": "openapi/openapi.yaml",
   "scripts": {
-    "build": "mkdir dist && npx openapi bundle openapi/openapi.yaml > dist/openapi.yaml",
+    "build": "mkdir dist; npx openapi bundle openapi/openapi.yaml > dist/openapi.yaml",
     "test": "npx openapi lint openapi/openapi.yaml"
   },
   "repository": {
