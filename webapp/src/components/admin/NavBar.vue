@@ -24,9 +24,28 @@
       </li>
     </ul>
 
+    <div class="debug-info">
+      <div class="responsive-size">
+        <span class="mobile">mobile</span>
+        <span class="tablet">tablet</span>
+        <span class="desktop">desktop</span>
+        <span class="ultrawide">ultrawide</span>
+      </div>
+      <ul class="version-info">
+        <li class="hash">
+          <label>Commit: </label><span>{{ version.hash }}</span>
+        </li>
+        <li class="version">
+          <label>Version: </label><span> {{ version.version }}</span>
+        </li>
+      </ul>
+      <div class="version-abbr">{{ version.version }}</div>
+    </div>
+
     <button @click="$emit('collapse', false)" class="expand">
       <fa-icon icon="angle-right"></fa-icon>
     </button>
+
     <button @click="$emit('collapse', true)" class="collapse">
       Collapse <fa-icon icon="angle-left"></fa-icon>
     </button>

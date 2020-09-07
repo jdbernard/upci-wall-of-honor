@@ -2,6 +2,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import UPCILogo from '@/assets/svg-components/UPCILogo.vue';
 import UPCIIcon from '@/assets/svg-components/UPCIIcon.vue';
 import OotFIcon from '@/assets/svg-components/OotFIcon.vue';
+import VERSION from '@/version-info';
 
 @Component({
   components: {
@@ -13,4 +14,6 @@ import OotFIcon from '@/assets/svg-components/OotFIcon.vue';
 export default class AdminNavBarComponent extends Vue {
   @Prop()
   public collapsed!: boolean;
+
+  public version = VERSION;
 }

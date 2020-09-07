@@ -1,5 +1,8 @@
 @import "vars";
 
+// --- mobMaxW --- tabMaxW --------------- ultrawideMinW
+//     mobile   |   tablet  |  desktop  |  ultrawide
+
 @mixin forSize($size) {
 
   @if $size == mobile {
@@ -7,7 +10,7 @@
   @else if $size == tablet {
     @media screen and (min-width: $maxMobileWidth + 1) and (max-width: $maxTabletWidth) { @content; } }
   @else if $size == desktop {
-    @media screen and (min-width: $maxTabletWidth + 1) and (max-width: $largeDesktopMinWidth) { @content; } }
+    @media screen and (min-width: $maxTabletWidth + 1) and (max-width: $ultrawideMinWidth) { @content; } }
   @else if $size == ultrawide {
     @media screen and (min-width: $ultrawideMinWidth + 1) { @content; } }
   @else if $size == notMobile {

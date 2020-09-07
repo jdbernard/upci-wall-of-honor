@@ -59,6 +59,20 @@
       }
     }
   }
+
+  .debug-info {
+    opacity: 0.25;
+    transition: opacity 0.25s;
+    .responsive-size, .version-info { display: none; }
+
+    &:hover {
+      opacity: 1;
+      .responsive-size, .version-info { display: block; }
+      .version-abbr { display: none; }
+    }
+
+    .responsive-size * { display: none; }
+  }
 }
 
 @include forSize(notMobile) {
@@ -104,7 +118,6 @@
       font-family: "Gotham XNarrow";
       font-size: 2rem;
       font-weight: 500;
-      margin-top: auto;
       margin-bottom: 1em;
       padding: 0 $spacer-sm;
 
@@ -123,6 +136,22 @@
     }
 
     button.expand, .upci-icon { display: none; }
+
+    .debug-info {
+      margin: auto 1rem 1rem auto;
+      font-size: 1em;
+      text-align: right;
+
+      .version-info li {
+        font-size: 1em;
+
+        label { font-weight: 400; }
+        span {
+          display: inline-block;
+          width: 5em;
+        }
+      }
+    }
   }
 
   #administration #admin-nav.collapsed {
@@ -147,10 +176,11 @@
       }
     }
   }
-}
 
-@include forSize(ultrawide) {
-  #administration #admin-nav h1 { font-size: 2.5rem; }
+  .debug-info {
+    margin: auto 1rem 1rem 1rem;
+    font-size: 0.75em;
+  }
 }
 
 @include forSize(mobile) {
@@ -181,5 +211,26 @@
         }
       }
     }
+
+    .debug-info .responsive-size .mobile { display: inline-block; }
+  }
+}
+
+@include forSize(tablet) {
+  #administration #admin-nav .debug-info .responsive-size .tablet {
+    display: inline-block;
+  }
+}
+
+@include forSize(desktop) {
+  #administration #admin-nav .debug-info .responsive-size .desktop {
+    display: inline-block;
+  }
+}
+
+@include forSize(ultrawide) {
+  #administration #admin-nav {
+    h1 { font-size: 2.5rem; }
+    .debug-info .responsive-size .ultrawide { display: inline-block; }
   }
 }
