@@ -9,9 +9,10 @@ import {
   newMinister
 } from '@/data/minister.model';
 import CheckboxComponent from '@/components/admin/Checkbox.vue';
-import TooltipComponent from '@/components/admin/Tooltip.vue';
-import MinistersStore from '@/data/ministers.store';
+import MinisterBiographyComponent from '@/components/MinisterBiography.vue';
 import MinisterPhotoComponent from '@/components/MinisterPhoto.vue';
+import MinistersStore from '@/data/ministers.store';
+import TooltipComponent from '@/components/admin/Tooltip.vue';
 import { slugify } from '@/filters/slugify.filter';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -21,8 +22,9 @@ const logger = logService.getLogger('/admin/edit-minister');
 @Component({
   components: {
     CheckboxComponent,
-    TooltipComponent,
-    MinisterPhotoComponent
+    MinisterBiographyComponent,
+    MinisterPhotoComponent,
+    TooltipComponent
   }
 })
 export default class EditMinisterView extends Vue {
@@ -32,8 +34,9 @@ export default class EditMinisterView extends Vue {
   public autoGenSlug = true;
   public isModified = false;
 
-  private origMinister: Minister | null = null;
   @Ref('bio-editor') private bioEditor!: HTMLElement;
+  private origMinister: Minister | null = null;
+  private preview = false;
 
   public mounted() {
     if (this.$route.path.indexOf('edit-minister') > 0) {

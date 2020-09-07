@@ -1,0 +1,25 @@
+@import "~@/styles/vars";
+
+.bio-content {
+  margin: 3em auto;
+  text-align: left;
+  width: 28em;
+
+  .photo-frame {
+    float: left;
+    margin-right: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  p:first-of-type { margin-top: 1em; }
+
+  h3 {
+    font-family: var(--header-font-family);
+    font-size: 1.5em;
+    font-weight: 300;
+  }
+
+  label {
+    font-style: italic;
+  }
+}

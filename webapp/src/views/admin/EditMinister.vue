@@ -2,6 +2,7 @@
   <form
     id="edit-minister"
     class="admin-content-view"
+    :class="{ preview }"
     v-if="minister"
     onsubmit="return;"
   >
@@ -142,19 +143,19 @@
             Short URL:
             <TooltipComponent>
               <p>
-                The <i>slug</i> is the URL-friendly version of the minister's
-                name that will be used to create the bookmark-able links to
-                their bio (and admin edit page).
+                The <i>short URL</i> is the URL-friendly version of the
+                minister's name that will be used to create the bookmark-able
+                links to their bio (and admin edit page).
               </p>
               <p>
                 This <strong>must be unique across all ministers</strong> and
                 can only contain letters, numbers, and '-'.
               </p>
               <p>
-                We will try to generate a slug for you based on the minister's
-                name but you may need to tweak this when two ministers share the
-                same name. For example, you may add '-1', '-2', or some other
-                distinguishing text to the end of one.
+                We will try to generate a short URL for you based on the
+                minister's name but you may need to tweak this when two
+                ministers share the same name. For example, you may add '-1',
+                '-2', or some other distinguishing text to the end of one.
               </p>
             </TooltipComponent>
           </span>
@@ -200,10 +201,21 @@
       </div>
     </div>
     <div class="actions">
-      <button @click="$router.go(-1)">Cancel</button>
-      <button :disabled="!isModified" @click.prevent="save" class="save action">
+      <button @click.prevent="$router.go(-1)" class="cancel">Cancel</button>
+      <button @click.prevent="preview = true" v-if="minister && bioChecked">
+        Preview
+      </button>
+      <button @click.prevent="save" class="action" :disabled="!isModified">
         Save
       </button>
+    </div>
+    <div class="preview-content" v-if="preview">
+      <div class="glass-pane" @click="preview = false"></div>
+      <MinisterBiographyComponent
+        :minister="minister"
+        class="theme-primary"
+      ></MinisterBiographyComponent>
+      <button @click.prevent="preview = false">Close Preview</button>
     </div>
   </form>
   <div v-else class="admin-content-view"></div>

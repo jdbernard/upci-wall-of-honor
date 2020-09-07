@@ -1,5 +1,9 @@
 <template>
-  <div id="administration" :class="{ navCollapsed: navCollapsed }">
+  <div
+    id="administration"
+    :class="{ navCollapsed: navCollapsed }"
+    class="theme-admin"
+  >
     <AdminNavBarComponent
       :collapsed="navCollapsed"
       @collapse="handleNavCollapse"
