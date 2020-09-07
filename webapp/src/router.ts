@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
+import { take } from 'rxjs/operators';
+import AdminLoginView from '@/views/admin/AdminLogin.vue';
 import AdministrationView from '@/views/admin/Administration.vue';
 import EditMinisterView from '@/views/admin/EditMinister.vue';
 import MinisterTableView from '@/views/admin/MinisterTable.vue';
@@ -8,6 +10,7 @@ import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
 import IndexView from '@/views/Index.vue';
 import MinisterBiographyView from '@/views/MinisterBiography.vue';
 import { parseSearchQuery } from '@/data/search.model';
+import UserStore from '@/data/user.store';
 
 Vue.use(VueRouter);
 
@@ -34,6 +37,12 @@ const routes: Array<RouteConfig> = [
     component: MinisterBiographyView
   },
   {
+    path: '/admin/login',
+    meta: { title: 'Administration - UPCI Wall of Honor' },
+    name: 'AdminLogin',
+    component: AdminLoginView
+  },
+  {
     path: '/admin',
     meta: { title: 'Administration - UPCI Wall of Honor' },
     component: AdministrationView,
@@ -43,27 +52,39 @@ const routes: Array<RouteConfig> = [
         path: 'all-ministers',
         name: 'AdminAllMinistersTable',
         component: MinisterTableView,
-        meta: { title: 'All Ministers - UPCI Wall of Honor' },
+        meta: {
+          authRequired: true,
+          title: 'All Ministers - UPCI Wall of Honor'
+        },
         props: { filter: 'all' }
       },
       {
         path: 'order-of-the-faith',
         name: 'AdminOrderOfTheFaithTable',
         component: MinisterTableView,
-        meta: { title: 'Order of the Faith - UPCI Wall of Honor' },
+        meta: {
+          authRequired: true,
+          title: 'Order of the Faith - UPCI Wall of Honor'
+        },
         props: { filter: 'ootf' }
       },
       {
         path: 'edit-minister/:slug',
         name: 'AdminEditMinister',
         component: EditMinisterView,
-        meta: { title: 'Edit Minister - UPCI Wall of Honor' }
+        meta: {
+          authRequired: true,
+          title: 'Edit Minister - UPCI Wall of Honor'
+        }
       },
       {
         path: 'add-minister',
         name: 'AdminAddMinister',
         component: EditMinisterView,
-        meta: { title: 'Add Minister - UPCI Wall of Honor' }
+        meta: {
+          authRequired: true,
+          title: 'Add Minister - UPCI Wall of Honor'
+        }
       }
     ]
   },
@@ -102,8 +123,14 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'UPCI Wall Of Honor';
-  next();
+  UserStore.isAuthenticated$.pipe(take(1)).subscribe(isAuthed => {
+    if (to.meta.authRequired && !isAuthed) {
+      next({ name: 'AdminLogin' });
+    } else {
+      document.title = to.meta.title || 'UPCI Wall Of Honor';
+      next();
+    }
+  });
 });
 
 export default router;
