@@ -1,9 +1,9 @@
 <template>
-  <div id="upci-woh-app">
+  <div id="upci-woh-app" class="theme-primary">
     <ul id="upci-woh-version" hidden>
-      <li class="version">{{ version }}</li>
-      <li class="hash">{{ gitVersion.hash }}</li>
-      <li class="raw">{{ gitVersion.raw }}</li>
+      <li class="version">{{ version.version }}</li>
+      <li class="hash">{{ version.hash }}</li>
+      <li class="raw">{{ version.raw }}</li>
     </ul>
     <router-view />
   </div>
