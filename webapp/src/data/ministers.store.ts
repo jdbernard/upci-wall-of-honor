@@ -1,20 +1,19 @@
-/* eslint-disable no-prototype-builtins */
-import { default as Axios, AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
 import { List } from 'immutable';
 import { ReplaySubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Minister, fromDTO } from '@/data/minister.model';
+import apiHttp from '@/data/api-client';
 
 export class MinistersStore {
-  constructor() {
-    (window as any).MinistersStore = this;
-    this.http = Axios.create({});
+  constructor(http: AxiosInstance) {
+    // (window as any).MinistersStore = this;
+    this.http = http;
   }
 
-  public _ministers$ = new ReplaySubject<List<Minister>>(1);
-  private hasInitialData = false;
-
   private http: AxiosInstance;
+  private _ministers$ = new ReplaySubject<List<Minister>>(1);
+  private hasInitialData = false;
 
   public get ministers$(): Observable<List<Minister>> {
     if (!this.hasInitialData) {
@@ -46,4 +45,4 @@ export class MinistersStore {
   }
 }
 
-export default new MinistersStore();
+export default new MinistersStore(apiHttp);
