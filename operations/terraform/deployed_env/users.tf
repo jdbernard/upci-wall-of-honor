@@ -53,6 +53,21 @@ resource "aws_cognito_user_pool" "users" {
   }
 }
 
+resource "aws_cognito_user_pool_domain" "users" {
+  domain            = local.auth_domain_name
+  certificate_arn   = aws_acm_certificate.cert.arn
+  user_pool_id      = aws_cognito_user_pool.users.id
+}
+
+resource "aws_cognito_user_pool_client" "users" {
+  name          = "UPCI Wall of Honor ${var.environment} Admin"
+  user_pool_id  = aws_cognito_user_pool.users.id
+
+  explicit_auth_flows = [
+    "ALLOW_REFRESH_TOKEN_AUTH",
+    "ALLOW_USER_SRP_AUTH"
+  ]
+}
 
 #resource "aws_cognito_identity_pool" "identities" {
 #  identity_pool_name                = "upci_wall_of_honor_${var.environment}_identities"

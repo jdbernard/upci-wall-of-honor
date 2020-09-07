@@ -3,7 +3,10 @@ resource "aws_acm_certificate" "cert" {
   domain_name       = local.domain_name
   validation_method = "DNS"
 
-  subject_alternative_names = concat(var.additional_cloudfront_aliases, [local.api_domain_name])
+  subject_alternative_names = concat(
+		var.additional_cloudfront_aliases,
+		[local.api_domain_name, local.auth_domain_name]
+  )
 
   tags = {
     Environment = var.environment
@@ -61,6 +64,18 @@ resource "aws_route53_record" "api_domain" {
     evaluate_target_health  = true
     name                    = aws_api_gateway_domain_name.api.cloudfront_domain_name
     zone_id                 = aws_api_gateway_domain_name.api.cloudfront_zone_id
+  }
+}
+
+resource "aws_route53_record" "auth_domain" {
+  name = local.auth_domain_name
+  type = "A"
+  zone_id = var.route53_zone.zone_id
+
+  alias {
+    evaluate_target_health  = true
+    name                    = aws_cognito_user_pool_domain.users.cloudfront_distribution_arn
+    zone_id                 = "Z2FDTNDATAQYW2"  // Hard-coded, Zone ID for all Cognito user pool domains.
   }
 }
 
