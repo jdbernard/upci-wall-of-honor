@@ -198,17 +198,40 @@ resource "aws_api_gateway_method_response" "ListMinisters_200" {
   }
 }
 
+resource "aws_api_gateway_stage" "live" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  deployment_id = aws_api_gateway_deployment.api.id
+  stage_name    = "live"
 
-#resource "aws_api_gateway_deployment" "api" {
-#  rest_api_id   = aws_api_gateway_rest_api.api.id
-#  stage_name    = "live"
-#
-#  depends_on = [aws_api_gateway_integration.FetchMinisters]
-#}
-#
-#resource "aws_api_gateway_base_path_mapping" "api" {
-#  api_id      = aws_api_gateway_rest_api.api.id
-#  stage_name  = aws_api_gateway_deployment.api.stage_name
-#  domain_name = aws_api_gateway_domain_name.api.domain_name
-#  base_path   = "v1"
-#}
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_deployment" "api" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  stage_name    = "live"
+
+  variables = {
+    deployed_hash = sha1(join(",", [
+      local.models.minister,
+      local.models.array_of_minister,
+      local.request_templates.create_minister,
+      local.request_templates.list_ministers,
+      local.response_templates.create_minister,
+      local.response_templates.list_ministers
+    ]))
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.CreateMinister,
+    aws_api_gateway_integration.ListMinisters
+  ]
+}
+
+resource "aws_api_gateway_base_path_mapping" "api" {
+  api_id      = aws_api_gateway_rest_api.api.id
+  stage_name  = aws_api_gateway_deployment.api.stage_name
+  domain_name = aws_api_gateway_domain_name.api.domain_name
+  base_path   = "v1"
+}
