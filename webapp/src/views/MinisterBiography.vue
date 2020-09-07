@@ -19,29 +19,14 @@
       <img src="../assets/img/decorative-line.svg" />
     </div>
 
-    <article v-if="minister" class="bio-content">
-      <MinisterPhotoComponent
-        v-if="minister.details"
-        :photo="minister.details.photo"
-      ></MinisterPhotoComponent>
-      <h3>{{ minister | nameDisplay }}</h3>
-      <div v-if="minister.dateOfBirth" class="vital-date">
-        <label>Born:</label> {{ birthFormatted }}
-      </div>
-      <div v-if="minister.dateOfDeath" class="vital-date">
-        <label>Passed:</label> {{ deathFormatted }}
-      </div>
-      <div v-if="minister.ootfYearInducted" class="vital-date">
-        <label>Inducted:</label> {{ minister.ootfYearInducted }}
-      </div>
-      <hr />
+    <MinisterBiographyComponent
+      v-if="minister"
+      :minister="minister"
+    ></MinisterBiographyComponent>
 
-      <span v-html="minister.details.biography"></span>
-
-      <div class="button-bar">
-        <a class="action button" href="#" @click.prevent="$router.back">Back</a>
-      </div>
-    </article>
+    <div class="button-bar">
+      <a class="action button" href="#" @click.prevent="$router.back">Back</a>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./MinisterBiography.ts"></script>

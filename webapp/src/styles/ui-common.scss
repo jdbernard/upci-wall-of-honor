@@ -2,20 +2,36 @@
 @import "vars.scss";
 @import "fonts.scss";
 
-:root {
+:root, .theme-primary {
   --base-font-size: 32px;
+
+  --header-font-family: 'EB Garamond';
+  --header-font-size: 3rem;
+  --header-font-size-sm: 1.5rem;
+
+  --body-font-family: 'Gotham';
+  --body-font-size: 1rem;
+  --body-font-size-sm: .75rem;
+  --body-font-size-xs: .625rem;
 
   --color-fg: #C2B560;
   --color-bg: #262729;
   --color-accent1: #3f4043;
+}
 
-  --header-font-family: 'EB Garamond';
-  --body-font-family: 'Gotham';
-  --header-font-size: 3rem;
-  --header-font-size-sm: 1.5rem;
-  --body-font-size: 1rem;
-  --body-font-size-sm: .75rem;
-  --body-font-size-xs: .625rem;
+.theme-admin {
+  --base-font-size: 16px;
+
+  --color-bg: #FFFFFF;
+  --color-fg: #262729;
+  --color-error: #CC421C;
+  --color-accent1: #1C5A7D;
+  --color-accent2: #006098;
+  --color-accent3: #2D7150;
+  --color-accent4: #a7d2eb;
+
+  --header-font-family: 'Gotham';
+  --body-font-family: 'Montserrat';
 }
 
 html {
