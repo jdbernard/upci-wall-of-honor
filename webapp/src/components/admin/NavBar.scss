@@ -152,6 +152,11 @@
         }
       }
     }
+
+    .user-info {
+      margin: 0  $spacer $spacer-xl auto;
+      .short { display: none; }
+    }
   }
 
   #administration #admin-nav.collapsed {
@@ -175,11 +180,18 @@
         }
       }
     }
-  }
 
-  .debug-info {
-    margin: auto 1rem 1rem 1rem;
-    font-size: 0.75em;
+    .user-info {
+      margin: 0 auto $spacer-xl auto;
+
+      .full { display: none; }
+      .short { display: inline; }
+    }
+
+    .debug-info {
+      margin: auto 1rem 1rem 1rem;
+      font-size: 0.75em;
+    }
   }
 }
 

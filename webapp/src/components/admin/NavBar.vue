@@ -42,6 +42,13 @@
       <div class="version-abbr">{{ version.version }}</div>
     </div>
 
+    <div v-if="user" class="user-info">
+      <span class="full">{{ user.given_name }} {{ user.family_name }}</span>
+      <span class="short"
+        >{{ user.given_name[0] }}{{ user.family_name[0] }}</span
+      >
+    </div>
+
     <button @click="$emit('collapse', false)" class="expand">
       <fa-icon icon="angle-right"></fa-icon>
     </button>

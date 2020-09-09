@@ -1,5 +1,6 @@
 import '@/class-component-hooks';
 import Vue from 'vue';
+import Auth from '@okta/okta-vue';
 import App from './App.vue';
 import router from './router';
 import AppConfigStore from './data/app.config.store';
@@ -34,6 +35,15 @@ AppConfigStore.appConfig.then(cfg => {
   Vue.use(vueCtor => {
     vueCtor.prototype.$appConfig = cfg;
   });
+
+  Vue.use(Auth, {
+    ...cfg.okta,
+    scopes: ['openid', 'profile', 'email'],
+    responseType: ['code'],
+    pkce: true
+  });
+
+  router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
 
   new Vue({
     router,
