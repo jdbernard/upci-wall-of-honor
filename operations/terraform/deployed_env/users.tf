@@ -63,10 +63,18 @@ resource "aws_cognito_user_pool_client" "users" {
   name          = "UPCI Wall of Honor ${var.environment} Admin"
   user_pool_id  = aws_cognito_user_pool.users.id
 
+  allowed_oauth_flows   = [ "code" ]
+  allowed_oauth_scopes  = [ "openid", "profile", "email" ]
   explicit_auth_flows = [
     "ALLOW_REFRESH_TOKEN_AUTH",
     "ALLOW_USER_SRP_AUTH"
   ]
+
+  allowed_oauth_flows_user_pool_client = true
+
+  callback_urls = [ "https://${local.domain_name}/admin/login" ]
+  logout_urls   = [ "https://${local.domain_name}/admin/logout" ]
+  supported_identity_providers = [ "COGNITO" ]
 }
 
 #resource "aws_cognito_identity_pool" "identities" {
