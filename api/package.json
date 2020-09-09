@@ -4,7 +4,10 @@
   "description": "UPCI Wall of Honor API.",
   "main": "openapi/openapi.yaml",
   "scripts": {
-    "build": "mkdir dist; npx openapi bundle openapi/openapi.yaml > dist/openapi.yaml",
+    "clean": "rm -r dist; rm lambda/verify_jwt.zip",
+    "build": "npm run build-api-spec && npm run build-verify_jwt",
+    "build-api-spec": "mkdir dist; npx openapi bundle openapi/openapi.yaml > dist/openapi.yaml",
+    "build-verify_jwt": "(cd lambda/verify_jwt && npm install && zip -r ../verify_jwt.zip .)",
     "test": "npx openapi lint openapi/openapi.yaml"
   },
   "repository": {
@@ -15,5 +18,6 @@
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.9"
-  }
+  },
+  "dependencies": {}
 }

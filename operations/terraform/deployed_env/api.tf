@@ -56,6 +56,24 @@ resource "aws_api_gateway_authorizer" "user_pool_auth" {
   provider_arns = [ aws_cognito_user_pool.users.arn ]
 }
 
+resource "aws_lambda_function" "verify_jwt" {
+  function_name = "verify_jwt"
+  filename      = "../../../../api/lambda/verify_jwt.zip"
+  role          = aws_iam_role.lambda_verifier.arn
+  runtime       = "nodejs12.x"
+  handler       = "index.handler"
+
+  source_code_hash  = filebase64sha256("../../../../api/lambda/verify_jwt.zip")
+}
+
+resource "aws_api_gateway_authorizer" "lambda_okta_jwt" {
+  name                    = "okta-${local.api_domain_name}"
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  type                    = "TOKEN"
+  authorizer_uri          = aws_lambda_function.verify_jwt.invoke_arn
+  authorizer_credentials  = aws_iam_role.invoke_lambda_verifier.arn
+}
+
 resource "aws_api_gateway_request_validator" "Parameters" {
   name                        = "Validate Request Params (${local.domain_name})"
   rest_api_id                 = aws_api_gateway_rest_api.api.id
@@ -92,8 +110,8 @@ resource "aws_api_gateway_method" "CreateMinister" {
   rest_api_id           = aws_api_gateway_rest_api.api.id
   resource_id           = aws_api_gateway_resource.ministers.id
   http_method           = "POST"
-  authorization         = "COGNITO_USER_POOLS"
-  authorizer_id         = aws_api_gateway_authorizer.user_pool_auth.id
+  authorization         = "CUSTOM"
+  authorizer_id         = aws_api_gateway_authorizer.lambda_okta_jwt.id
   request_validator_id  = aws_api_gateway_request_validator.Body.id
 
   request_models = {
@@ -202,6 +220,10 @@ resource "aws_api_gateway_stage" "live" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   deployment_id = aws_api_gateway_deployment.api.id
   stage_name    = "live"
+
+  variables = {
+    environment = var.environment
+  }
 
   lifecycle {
     create_before_destroy = true
