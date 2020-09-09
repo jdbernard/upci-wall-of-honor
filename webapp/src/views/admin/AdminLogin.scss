@@ -47,6 +47,7 @@
   }
 
   h2, input { margin-bottom: 0.5rem; }
+  p { font-size: 0.75em; }
 }
 
 @include forSize(notMobile) {

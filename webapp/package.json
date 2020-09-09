@@ -25,6 +25,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@jdbernard/logging": "^1.0.0",
+    "@okta/okta-vue": "^2.1.1",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.groupby": "^4.6.6",
     "axios": "^0.19.2",
