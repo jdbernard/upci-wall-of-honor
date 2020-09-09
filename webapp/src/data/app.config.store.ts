@@ -7,18 +7,11 @@ const logger = logService.getLogger('/data/app.config.store');
 export class AppConfigStore {
   constructor() {
     this.http = Axios.create({});
+    this.appConfig = this.loadAppConfig();
   }
 
-  private _appConfig?: Promise<AppConfig>;
+  public appConfig: Promise<AppConfig>;
   private http: AxiosInstance;
-
-  public get appConfig(): Promise<AppConfig> {
-    if (!this._appConfig) {
-      this._appConfig = this.loadAppConfig();
-    }
-
-    return this._appConfig;
-  }
 
   private async loadAppConfig(): Promise<AppConfig> {
     try {

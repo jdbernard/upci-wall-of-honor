@@ -2,12 +2,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Collection, List } from 'immutable';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import SearchBarComponent from '@/components/SearchBar.vue';
 import YearDividerComponent from '@/components/YearDivider.vue';
 import { Minister } from '@/data/minister.model';
-import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { SearchState, toQuery } from '@/data/search.model';
 import { logService } from '@jdbernard/logging';
 import OotFEntry from '@/components/OotFEntry.vue';
@@ -40,7 +38,6 @@ export default class OrderOfTheFaithView extends Vue {
   public searchState!: SearchState;
 
   public years: number[] = [];
-  public appConfig: AppConfig = defaultConfig;
 
   public updating = false;
 
@@ -68,7 +65,6 @@ export default class OrderOfTheFaithView extends Vue {
 
   public async mounted() {
     // (window as any).OotF = this;
-    this.appConfig = await AppConfigStore.appConfig;
     MinistersStore.ministers$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(this.updateMinisters);
@@ -200,7 +196,7 @@ export default class OrderOfTheFaithView extends Vue {
   }
 
   public startKioskDisplay(delay?: number) {
-    delay = delay || this.appConfig.pageDurationSeconds * 1000;
+    delay = delay || this.$appConfig.pageDurationSeconds * 1000;
 
     if (this.nextPageTimeout) {
       logger.trace({
@@ -242,7 +238,7 @@ export default class OrderOfTheFaithView extends Vue {
 
       this.nextPageTimeout = setTimeout(
         this.autoAdvance,
-        this.appConfig.pageDurationSeconds * 1000
+        this.$appConfig.pageDurationSeconds * 1000
       );
 
       this.updating = false;
@@ -250,7 +246,7 @@ export default class OrderOfTheFaithView extends Vue {
   }
 
   private allowUserInteraction() {
-    const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
+    const timeoutMs = this.$appConfig.userInactivityDurationSeconds * 1000;
     logger.trace(
       `Pausing kiosk mode and allowing user activity for ${timeoutMs} milliseconds.`
     );
@@ -264,6 +260,6 @@ export default class OrderOfTheFaithView extends Vue {
     this.userInteractionTimeout = setTimeout(() => {
       delete this.userInteractionTimeout;
       this.doSearch({ type: 'none' });
-    }, this.appConfig.userInactivityDurationSeconds * 1000);
+    }, this.$appConfig.userInactivityDurationSeconds * 1000);
   }
 }
