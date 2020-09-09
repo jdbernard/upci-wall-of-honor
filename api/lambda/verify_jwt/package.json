@@ -1,0 +1,15 @@
+{
+  "name": "verify_jwt",
+  "version": "1.0.0",
+  "description": "Lambda that uses the Okta JWT library to verify JWT tokens for UPCI WOH API environments.",
+  "main": "index.js",
+  "dependencies": {
+    "@okta/jwt-verifier": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Bernard <jdb@jdb-labs.com>",
+  "license": "UNLICENSED"
+}
