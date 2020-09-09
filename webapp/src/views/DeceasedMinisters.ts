@@ -2,14 +2,12 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Collection, List } from 'immutable';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
 import SearchBarComponent from '@/components/SearchBar.vue';
 import YearDividerComponent from '@/components/YearDivider.vue';
 import { Minister } from '@/data/minister.model';
 import { AutoScrollService } from '@/services/auto-scroll.service.ts';
-import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { SearchState, toQuery } from '@/data/search.model';
 import { logService } from '@jdbernard/logging';
 
@@ -46,7 +44,6 @@ export default class DeceasedMinistersView extends Vue {
   }
 
   public years: number[] = [];
-  public appConfig: AppConfig = defaultConfig;
   public loading = true;
 
   public hasUser(): boolean {
@@ -94,7 +91,6 @@ export default class DeceasedMinistersView extends Vue {
 
   private async mounted() {
     // (window as any).DCM = this;
-    this.appConfig = await AppConfigStore.appConfig;
     MinistersStore.ministers$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(this.updateMinisters);
@@ -228,7 +224,7 @@ export default class DeceasedMinistersView extends Vue {
   };
 
   private allowUserInteraction() {
-    const timeoutMs = this.appConfig.userInactivityDurationSeconds * 1000;
+    const timeoutMs = this.$appConfig.userInactivityDurationSeconds * 1000;
     logger.trace(
       `Pausing automated scroll and allowing user activity for ${timeoutMs} milliseconds.`
     );
@@ -241,6 +237,6 @@ export default class DeceasedMinistersView extends Vue {
     this.userInteractionTimeout = setTimeout(() => {
       delete this.userInteractionTimeout;
       this.doSearch({ type: 'none' });
-    }, this.appConfig.userInactivityDurationSeconds * 1000);
+    }, this.$appConfig.userInactivityDurationSeconds * 1000);
   }
 }

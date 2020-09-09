@@ -3,9 +3,7 @@ import { List } from 'immutable';
 import { logService } from '@jdbernard/logging';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import AppConfigStore from '@/data/app.config.store';
 import MinistersStore from '@/data/ministers.store';
-import { AppConfig, defaultConfig } from '@/data/app.config.model';
 import { Minister } from '@/data/minister.model';
 import { nameDisplay } from '@/filters/name-display.filter';
 
@@ -35,7 +33,6 @@ export default class MinisterTableView extends Vue {
   public totalPages = 0;
 
   public ministers = List<Minister>();
-  public appConfig: AppConfig = defaultConfig;
   public ministerRowData: MinisterRowData[] = [];
 
   private filteredMinisters = List<MinisterRowData>();
@@ -76,7 +73,6 @@ export default class MinisterTableView extends Vue {
   };
 
   private async mounted() {
-    this.appConfig = await AppConfigStore.appConfig;
     MinistersStore.ministers$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((list: List<Minister>) => {
