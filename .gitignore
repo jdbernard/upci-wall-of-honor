@@ -30,3 +30,7 @@ yarn-error.log*
 webapp/dist
 api/dist
 api/lambda/verify_jwt.zip
+
+# Local copies of assets that should live in S3 or in other places
+webapp/public/data/app.config.json
+webapp/public/img/
