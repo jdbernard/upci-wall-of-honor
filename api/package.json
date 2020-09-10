@@ -1,6 +1,6 @@
 {
   "name": "upci-wall-of-honor-api",
-  "version": "0.1.0-dev",
+  "version": "0.2.0-dev",
   "description": "UPCI Wall of Honor API.",
   "main": "openapi/openapi.yaml",
   "scripts": {
