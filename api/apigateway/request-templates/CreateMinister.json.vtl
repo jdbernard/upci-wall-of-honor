@@ -7,6 +7,6 @@
     "isOotF": {
       "BOOL": "#if($input.path('$.ootfYearInducted'))true#{else}false#end"
     },
-    "record": {"S": "$util.escapeJavaScript($input.json('$'))"}
+    "record": {"S": "$util.base64Encode($input.json('$'))"}
   }
 }
