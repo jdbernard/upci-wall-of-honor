@@ -29,3 +29,4 @@ yarn-error.log*
 # Build artifacts
 webapp/dist
 api/dist
+api/lambda/verify_jwt.zip
