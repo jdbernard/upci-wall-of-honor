@@ -40,33 +40,14 @@ data "aws_iam_policy_document" "api_can_assume_role" {
 
 ## - Lambda Verifier & Invokation Roles & Policy
 
-data "aws_iam_policy_document" "lambda_verifier" {
-  statement {
-    effect  = "Allow"
-
-    actions = [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents"
-    ]
-
-    resources = [ "arn:aws:logs:*:*:*" ]
-  }
-}
-
-resource "aws_iam_policy" "lambda_verifier" {
-  name    = "verify_jwt_policy"
-  policy  = data.aws_iam_policy_document.lambda_verifier.json
-}
-
-resource "aws_iam_role" "lambda_verifier" {
-  name                = "lambda_verify_jwt"
+resource "aws_iam_role" "cloudwatch_logger" {
+  name                = "${local.domain_name}_cloudwatch_logger"
   assume_role_policy  = data.aws_iam_policy_document.api_can_assume_role.json
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_verifier" {
-  role        = aws_iam_role.lambda_verifier.name
-  policy_arn  = aws_iam_policy.lambda_verifier.arn
+resource "aws_iam_role_policy_attachment" "cloudwatch_logger" {
+  role        = aws_iam_role.cloudwatch_logger.name
+  policy_arn  = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
 
 data "aws_iam_policy_document" "invoke_lambda_verifier" {
@@ -78,12 +59,12 @@ data "aws_iam_policy_document" "invoke_lambda_verifier" {
 }
 
 resource "aws_iam_policy" "invoke_lambda_verifier" {
-  name    = "call_lambda_verify_jwt"
+  name    = "${local.domain_name}_call_lambda_verify_jwt"
   policy  = data.aws_iam_policy_document.invoke_lambda_verifier.json
 }
 
 resource "aws_iam_role" "invoke_lambda_verifier" {
-  name                = "call_lambda_verify_jwt"
+  name                = "${local.domain_name}_call_lambda_verify_jwt"
   assume_role_policy  = data.aws_iam_policy_document.api_can_assume_role.json
 }
 
