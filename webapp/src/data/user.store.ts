@@ -1,23 +1,32 @@
-import { AxiosInstance } from 'axios';
-import { ReplaySubject } from 'rxjs';
-import apiHttp from '@/data/api-client';
 import { User } from '@/data/user.model';
 
-export class UserStore {
-  constructor(http: AxiosInstance) {
-    this.http = http;
+export interface OktaAuth {
+  isAuthenticated: () => Promise<boolean>;
+  getUser: () => Promise<User>;
+  getAccessToken: () => Promise<string>;
+}
 
-    this.loadInitialUser();
+export class UserStore {
+  private auth: OktaAuth | null = null;
+
+  public setAuth(auth: OktaAuth) {
+    this.auth = auth;
   }
 
-  private http: AxiosInstance;
+  public async isAuthenticated(): Promise<boolean> {
+    if (!this.auth) return false;
+    return this.auth.isAuthenticated();
+  }
 
-  public user$ = new ReplaySubject<User | null>(1);
-  public isAuthenticated$ = new ReplaySubject<boolean>(1);
+  public async getUser(): Promise<User | null> {
+    if (!this.auth) return null;
+    return this.auth.getUser();
+  }
 
-  private async loadInitialUser() {
-    this.user$.next(null);
-    this.isAuthenticated$.next(false);
+  public async getAccessToken(): Promise<string | null> {
+    if (!this.auth) return null;
+    return this.auth.getAccessToken();
   }
 }
-export default new UserStore(apiHttp);
+
+export default new UserStore();

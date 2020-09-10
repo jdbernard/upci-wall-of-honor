@@ -1,9 +1,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import AdminNavBarComponent from '@/components/admin/NavBar.vue';
+import ToasterComponent from '@/components/admin/Toaster.vue';
 
 @Component({
   components: {
-    AdminNavBarComponent
+    AdminNavBarComponent,
+    ToasterComponent
   }
 })
 export default class AdministrationView extends Vue {

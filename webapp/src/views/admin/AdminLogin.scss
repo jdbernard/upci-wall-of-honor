@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
 
-  > * { filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)); }
+  > * { filter: drop-shadow(0 4px 4px var(--color-shadow)); }
 
   .upci-logo {
     height: auto;
@@ -23,7 +23,7 @@
     border: none;
     background-color: var(--color-accent3);
     color: var(--color-bg);
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0 4px 4px var(--color-shadow));
     font-weight: 500;
     padding: 0.125rem 0.5rem 0.25rem 0.5rem;
 
@@ -34,7 +34,7 @@
 
     &:disabled {
       cursor: not-allowed;
-      filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) grayscale(100%);
+      filter: drop-shadow(0 4px 4px var(--color-shadow)) grayscale(100%);
       opacity: 0.7;
     }
   }

@@ -4,16 +4,18 @@ import moment from 'moment';
 import { take } from 'rxjs/operators';
 import {
   Minister,
-  clone,
+  deepClone,
   exactEquals,
   newMinister
 } from '@/data/minister.model';
 import CheckboxComponent from '@/components/admin/Checkbox.vue';
 import MinisterBiographyComponent from '@/components/MinisterBiography.vue';
 import MinisterPhotoComponent from '@/components/MinisterPhoto.vue';
-import MinistersStore from '@/data/ministers.store';
+import ministersStore from '@/data/ministers.store';
 import TooltipComponent from '@/components/admin/Tooltip.vue';
 import { slugify } from '@/filters/slugify.filter';
+import { nameDisplay } from '@/filters/name-display.filter';
+import toastService from '@/components/admin/toast.service';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -33,6 +35,7 @@ export default class EditMinisterView extends Vue {
   public bioChecked = false;
   public autoGenSlug = true;
   public isModified = false;
+  public saving = false;
 
   @Ref('bio-editor') private bioEditor!: HTMLElement;
   private origMinister: Minister | null = null;
@@ -40,11 +43,11 @@ export default class EditMinisterView extends Vue {
 
   public mounted() {
     if (this.$route.path.indexOf('edit-minister') > 0) {
-      MinistersStore.ministers$.pipe(take(1)).subscribe(list => {
+      ministersStore.ministers$.pipe(take(1)).subscribe(list => {
         this.origMinister =
           list.find(m => m.slug === this.$route.params.slug) || null;
         if (this.origMinister) {
-          this.minister = clone(this.origMinister);
+          this.minister = deepClone(this.origMinister);
           this.bioChecked = !!this.origMinister.details;
           this.ootfChecked = !!this.origMinister.ootfYearInducted;
           this.autoGenSlug =
@@ -196,17 +199,38 @@ export default class EditMinisterView extends Vue {
   public save() {
     if (this.minister) {
       logger.trace({ function: 'save' });
-      this.origMinister = clone(this.minister);
-      MinistersStore.persistMinister(this.minister).then(() => {
-        this.isModified = false;
-        this.$router.go(-1); // TODO: rethink this approach
-      });
+      this.origMinister = deepClone(this.minister);
+      this.saving = true;
+      ministersStore
+        .persistMinister(this.minister)
+        .then(() => {
+          toastService.makeToast({
+            type: 'success',
+            duration: 5000,
+            message:
+              (this.minister ? nameDisplay(this.minister) : 'Minster') +
+              ' saved.'
+          });
+          this.isModified = false;
+          this.saving = false;
+          this.$router.go(-1); // TODO: rethink this approach
+        })
+        .catch(() => {
+          this.saving = false;
+          toastService.makeToast({
+            type: 'error',
+            duration: 10000,
+            message:
+              'Unable to save ' +
+              (this.minister ? nameDisplay(this.minister) : 'minister.')
+          });
+        });
     }
   }
 
   public cancel() {
     if (this.origMinister) {
-      this.minister = clone(this.origMinister);
+      this.minister = deepClone(this.origMinister);
       this.bioChecked = !!this.origMinister.details;
       this.ootfChecked = !!this.origMinister.ootfYearInducted;
     }
