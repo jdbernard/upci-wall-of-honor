@@ -57,9 +57,9 @@ resource "aws_api_gateway_authorizer" "user_pool_auth" {
 }
 
 resource "aws_lambda_function" "verify_jwt" {
-  function_name = "verify_jwt"
+  function_name = "${var.environment}_verify_jwt"
   filename      = "../../../../api/lambda/verify_jwt.zip"
-  role          = aws_iam_role.lambda_verifier.arn
+  role          = aws_iam_role.cloudwatch_logger.arn
   runtime       = "nodejs12.x"
   handler       = "index.handler"
 
@@ -106,6 +106,65 @@ resource "aws_api_gateway_resource" "ministers" {
   path_part     = "ministers"
 }
 
+resource "aws_api_gateway_method" "Options" {
+  rest_api_id           = aws_api_gateway_rest_api.api.id
+  resource_id           = aws_api_gateway_resource.ministers.id
+  http_method           = "OPTIONS"
+  authorization         = "NONE"
+}
+
+resource "aws_api_gateway_integration" "Options" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.ministers.id
+  http_method             = aws_api_gateway_method.Options.http_method
+  type                    = "MOCK"
+  cache_key_parameters    = []
+  request_parameters      = {}
+  passthrough_behavior    = "WHEN_NO_MATCH"
+
+  request_templates = {
+    "application/json" = jsonencode({
+      statusCode = 200
+    })
+  }
+
+  depends_on = [aws_dynamodb_table.database]
+}
+
+resource "aws_api_gateway_integration_response" "Options" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.ministers.id
+  http_method             = aws_api_gateway_method.Options.http_method
+  status_code             = 200
+
+  response_templates = {
+    "application/json" = ""
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST'"
+  }
+}
+
+resource "aws_api_gateway_method_response" "Options" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.ministers.id
+  http_method             = aws_api_gateway_method.Options.http_method
+  status_code             = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+    "method.response.header.Access-Control-Allow-Headers" = false
+    "method.response.header.Access-Control-Allow-Methods" = false
+  }
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
 resource "aws_api_gateway_method" "CreateMinister" {
   rest_api_id           = aws_api_gateway_rest_api.api.id
   resource_id           = aws_api_gateway_resource.ministers.id
@@ -148,6 +207,10 @@ resource "aws_api_gateway_integration_response" "CreateMinister" {
   response_templates = {
     "application/json" = local.response_templates.create_minister
   }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
 }
 
 resource "aws_api_gateway_method_response" "CreateMinister_200" {
@@ -160,6 +223,10 @@ resource "aws_api_gateway_method_response" "CreateMinister_200" {
   #response_models = {
   #  "application/json" = aws_api_gateway_model.StatusResponse.name
   #}
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+  }
 }
 
 resource "aws_api_gateway_method" "ListMinisters" {
@@ -171,6 +238,7 @@ resource "aws_api_gateway_method" "ListMinisters" {
 
   request_parameters = {
     "method.request.querystring.state" = false
+    "method.request.querystring.startAfter" = false
   }
 }
 
@@ -203,6 +271,10 @@ resource "aws_api_gateway_integration_response" "ListMinisters" {
   response_templates = {
     "application/json" = local.response_templates.list_ministers
   }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
 }
 
 resource "aws_api_gateway_method_response" "ListMinisters_200" {
@@ -213,6 +285,10 @@ resource "aws_api_gateway_method_response" "ListMinisters_200" {
 
   response_models = {
     "application/json" = aws_api_gateway_model.ArrayOfMinister.name
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
   }
 }
 
