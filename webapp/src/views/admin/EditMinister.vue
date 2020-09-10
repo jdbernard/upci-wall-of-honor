@@ -201,12 +201,15 @@
       </div>
     </div>
     <div class="actions">
-      <button @click.prevent="$router.go(-1)" class="cancel">Cancel</button>
+      <button @click.prevent="$router.go(-1)" class="cancel" :disabled="saving">
+        Cancel
+      </button>
       <button @click.prevent="preview = true" v-if="minister && bioChecked">
         Preview
       </button>
       <button @click.prevent="save" class="action" :disabled="!isModified">
-        Save
+        <div v-if="saving">saving <fa-icon icon="spinner" spin></fa-icon></div>
+        <span v-else>Save</span>
       </button>
     </div>
     <div class="preview-content" v-if="preview">

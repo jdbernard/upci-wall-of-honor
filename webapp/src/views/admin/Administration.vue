@@ -10,6 +10,7 @@
     ></AdminNavBarComponent>
     <div id="measuring-stick"></div>
     <router-view></router-view>
+    <ToasterComponent></ToasterComponent>
   </div>
 </template>
 <script lang="ts" src="./Administration.ts"></script>

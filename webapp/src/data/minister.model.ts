@@ -17,10 +17,14 @@ export interface Name {
   additional: string[];
 }
 
+export type RecordState = 'published' | 'draft' | 'archived';
+
+export const RECORD_STATES: RecordState[] = ['published', 'draft', 'archived'];
+
 interface MinisterBase {
   id: string;
   slug: string;
-  state: 'published' | 'draft' | 'archived';
+  state: RecordState;
   name: Name;
   isDeceased: boolean;
   ootfYearInducted?: number;
@@ -56,33 +60,55 @@ export interface MinisterDTO extends MinisterBase {
   dateOfDeath?: string;
 }
 
+export function deepClone(m: Minister): Minister {
+  const clone = {
+    ...m,
+    name: {
+      ...m.name,
+      additional: m.name.additional.slice()
+    }
+  };
+
+  if (m.details) {
+    clone.details = {
+      ...m.details,
+      photo: { ...m.details.photo }
+    };
+  }
+
+  return clone;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function fromDTO(dto: MinisterDTO): Minister {
-  const m: Minister = { ...(dto as MinisterBase) };
-  if (dto.dateOfBirth) {
-    m.dateOfBirth = moment(dto.dateOfBirth);
+  // deep clone the DTO
+  const m: Minister = JSON.parse(JSON.stringify(dto));
+
+  // transform necessary fields
+  if (m.dateOfBirth) {
+    m.dateOfBirth = moment(m.dateOfBirth);
   }
-  if (dto.dateOfDeath) {
-    m.dateOfDeath = moment(dto.dateOfDeath);
+  if (m.dateOfDeath) {
+    m.dateOfDeath = moment(m.dateOfDeath);
   }
 
   return m;
 }
 
 export function toDTO(m: Minister): MinisterDTO {
-  const dto: MinisterDTO = { ...(m as MinisterBase) };
-  if (m.dateOfBirth) {
-    dto.dateOfBirth = m.dateOfBirth.format(DATE_FORMAT);
+  // deep clone the minister object
+  const mCopy = deepClone(m);
+  const dto: MinisterDTO = { ...(mCopy as MinisterBase) };
+
+  // transform necessary fields
+  if (mCopy.dateOfBirth) {
+    dto.dateOfBirth = mCopy.dateOfBirth.format(DATE_FORMAT);
   }
-  if (m.dateOfDeath) {
-    dto.dateOfDeath = m.dateOfDeath.format(DATE_FORMAT);
+  if (mCopy.dateOfDeath) {
+    dto.dateOfDeath = mCopy.dateOfDeath.format(DATE_FORMAT);
   }
 
   return dto;
-}
-
-export function clone(m: Minister): Minister {
-  return fromDTO(JSON.parse(JSON.stringify(toDTO(m))));
 }
 
 export function exactEquals(a: Minister | null, b: Minister | null): boolean {

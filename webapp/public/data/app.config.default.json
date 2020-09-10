@@ -1,5 +1,16 @@
 {
   "loggingLevel": "WARN",
   "pageDurationSeconds": 300,
-  "userInactivityDurationSeconds": 600
+  "userInactivityDurationSeconds": 600,
+  "apiBaseUrl": "",
+  "auth": {
+    "loginUrl": "/login",
+    "clientId": ""
+  },
+  "okta": {
+    "issuer": "",
+    "clientId": "",
+    "redirectUri": "",
+    "postLoginRedirectUri": ""
+  }
 }

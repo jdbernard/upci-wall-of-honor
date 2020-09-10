@@ -18,7 +18,7 @@
         <fa-icon icon="user-plus"></fa-icon> Add
       </router-link>
     </div>
-    <div class="table-container" pageSize="50">
+    <div v-if="!loading" class="table-container" pageSize="50">
       <v-table
         :data="ministerRowData"
         :filters="tableFilters"
@@ -55,7 +55,7 @@
         </tbody>
       </v-table>
     </div>
-    <div class="pagination-container">
+    <div v-if="!loading" class="pagination-container">
       <div class="page-size">
         Page size:
         <select v-model.number="pageSize">
@@ -75,6 +75,16 @@
         :maxPageLinks="6"
         :totalPages="totalPages"
       ></smart-pagination>
+    </div>
+    <div v-if="loading" class="loading-placeholder">
+      <div>Loading ministers...</div>
+      <div class="loading-animation">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
     </div>
   </div>
 </template>

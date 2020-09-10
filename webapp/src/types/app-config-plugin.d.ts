@@ -6,8 +6,9 @@ declare module 'vue/types/vue' {
   interface Vue {
     $appConfig: AppConfig;
     $auth: {
-      isAuthenticated: () => boolean;
-      getUser: () => User;
+      isAuthenticated: () => Promise<boolean>;
+      getUser: () => Promise<User>;
+      getAccessToken: () => Promise<string>;
     };
   }
 }

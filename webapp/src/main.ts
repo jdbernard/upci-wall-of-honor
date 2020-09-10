@@ -4,13 +4,12 @@ import Auth from '@okta/okta-vue';
 import App from './App.vue';
 import router from './router';
 import AppConfigStore from './data/app.config.store';
-
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { dom as FA_DOM } from '@fortawesome/fontawesome-svg-core';
 import SmartTable from 'vuejs-smart-table';
-
 import { logService, LogLevel, ConsoleLogAppender } from '@jdbernard/logging';
 import { nameDisplay } from '@/filters/name-display.filter';
+import userStore from '@/data/user.store';
 
 const consoleLogAppender = new ConsoleLogAppender(LogLevel.ALL);
 logService.ROOT_LOGGER.appenders.push(consoleLogAppender);
@@ -44,6 +43,7 @@ AppConfigStore.appConfig.then(cfg => {
   });
 
   router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
+  userStore.setAuth(Vue.prototype.$auth);
 
   new Vue({
     router,

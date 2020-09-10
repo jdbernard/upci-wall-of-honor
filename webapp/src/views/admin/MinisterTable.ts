@@ -3,7 +3,7 @@ import { List } from 'immutable';
 import { logService } from '@jdbernard/logging';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import MinistersStore from '@/data/ministers.store';
+import ministersStore from '@/data/ministers.store';
 import { Minister } from '@/data/minister.model';
 import { nameDisplay } from '@/filters/name-display.filter';
 
@@ -37,6 +37,7 @@ export default class MinisterTableView extends Vue {
 
   private filteredMinisters = List<MinisterRowData>();
   private destroyed$ = new Subject();
+  private loading = true;
 
   @Watch('filter')
   onFilterChange(val: string) {
@@ -73,7 +74,7 @@ export default class MinisterTableView extends Vue {
   };
 
   private async mounted() {
-    MinistersStore.ministers$
+    ministersStore.ministers$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((list: List<Minister>) => {
         this.ministers = list;
@@ -82,6 +83,7 @@ export default class MinisterTableView extends Vue {
           function: 'mounted',
           ministersLoadedAt: performance.now()
         });
+        Vue.nextTick(() => (this.loading = false));
       });
     logger.trace({ function: 'mounted', mountedAt: performance.now() });
   }

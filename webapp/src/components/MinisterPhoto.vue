@@ -22,7 +22,7 @@
     <div class="edit-controls" v-if="allowEdit">
       <button
         class="icon"
-        @click="changeWidth(-10)"
+        @click.prevent="changeWidth(-10)"
         aria-label="decrease photo size"
         v-if="photo.uri"
       >
@@ -36,7 +36,7 @@
       </label>
       <button
         class="icon"
-        @click="changeWidth(10)"
+        @click.prevent="changeWidth(10)"
         aria-label="increase photo size"
         v-if="photo.uri"
       >
