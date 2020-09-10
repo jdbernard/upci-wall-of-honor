@@ -3,8 +3,9 @@
   "count": $inputRoot.Count,
   "ministers": [
     #foreach ($m in $input.path('$.Items[*].record.S'))
-      $m #if($foreach.hasNext),#end
+      #if($foreach.index!=0),#end $util.base64Decode($m)
     #end
-  ]#if($inputRoot.LastEvaluatedKey.length() > 2),
-  "nextPageStartsAfter": $inputRoot.LastEvaluatedKey #end
+  ] #if($input.path('$.LastEvaluatedKey')),
+  "nextPageStartsAfter": $input.json('$.LastEvaluatedKey.id.S')
+  #end
 }
