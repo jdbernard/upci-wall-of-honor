@@ -27,6 +27,18 @@ variable "additional_cloudfront_aliases" {
   type = list(string)
 }
 
+variable "verify_jwt_lambda" {
+  description = "Lambda for use in verifying the authorization of API requests."
+}
+
+variable "jwt_verifier_role" {
+  description = "IAM role which grants invoke permission on the JWT verifier Lambda function."
+}
+
+variable "cloudwatch_logger_role" {
+  description = "IAM role which grants permission to create CloudWatch log groups and entries."
+}
+
 locals {
   domain_name       = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
   api_domain_name   = var.create_env_subdomain ? "api.${var.environment}.${trimsuffix(var.route53_zone.name, ".")}" : "api.${trimsuffix(var.route53_zone.name, ".")}"

@@ -16,27 +16,6 @@ terraform {
   }
 }
 
-resource "aws_s3_bucket" "project" {
-  bucket = "upci-wall-of-honor"
-  acl = "log-delivery-write"
-}
-
-resource "aws_dynamodb_table" "dynamodb_terraform_state_lock" {
-  name = "terraform-state-lock.upci-wall-of-honor"
-  hash_key = "LockID"
-  read_capacity = 2
-  write_capacity = 2
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-
-  tags = {
-    Name = "Terraform DynamoDB State Lock Table"
-  }
-}
-
 resource "aws_dynamodb_table" "admin_edit_lock" {
   name            = "admin-edit-locks.upci-wall-of-honor"
   hash_key        = "LockID"
@@ -46,6 +25,32 @@ resource "aws_dynamodb_table" "admin_edit_lock" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+}
+
+resource "aws_codecommit_repository" "repo" {
+  repository_name = "upci-wall-of-honor"
+  description = "UPCI Wall of Honor display and administrative application."
+  default_branch = "master"
+}
+
+resource "aws_s3_bucket" "project" {
+  bucket = "upci-wall-of-honor"
+  acl = "log-delivery-write"
+}
+
+resource "aws_dynamodb_table" "dynamodb_terraform_state_lock" {
+  name          = "terraform-state-lock.upci-wall-of-honor"
+  hash_key      = "LockID"
+  billing_mode  = "PAY_PER_REQUEST"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  tags = {
+    Name = "Terraform DynamoDB State Lock Table"
   }
 }
 
@@ -61,10 +66,14 @@ resource "aws_route53_zone" "prod" {
   force_destroy = true
 }
 
-resource "aws_codecommit_repository" "repo" {
-  repository_name = "upci-wall-of-honor"
-  description = "UPCI Wall of Honor display and administrative application."
-  default_branch = "master"
+resource "aws_lambda_function" "verify_jwt" {
+  function_name = "verify_jwt"
+  filename      = "../../../api/lambda/verify_jwt.zip"
+  role          = aws_iam_role.cloudwatch_logger.arn
+  runtime       = "nodejs12.x"
+  handler       = "index.handler"
+
+  source_code_hash  = filebase64sha256("../../../api/lambda/verify_jwt.zip")
 }
 
 output "aws_s3_project_bucket" {
@@ -82,7 +91,17 @@ output "aws_route53_prod_zone" {
   value = aws_route53_zone.prod
 }
 
-#output "aws_iam_role_build_and_deploy" {
-#  description = "ARN of the Build and Deploy IAM role."
-#  value = aws_iam_role.build_and_deploy
-#}
+output "aws_iam_role_cloudwatch_logger" {
+  description = "IAM role for services which need to log to CloudWatch."
+  value = aws_iam_role.cloudwatch_logger
+}
+
+output "aws_lambda_jwt_verifier" {
+  description = "Lambda function that verifies an Okta token."
+  value = aws_lambda_function.verify_jwt
+}
+
+output "aws_iam_role_jwt_verifier" {
+  description = "IAM role that allows principals to invoke to the Lambda-based JWT verifier."
+  value = aws_iam_role.invoke_lambda_verifier
+}

@@ -56,22 +56,12 @@ resource "aws_api_gateway_authorizer" "user_pool_auth" {
   provider_arns = [ aws_cognito_user_pool.users.arn ]
 }
 
-resource "aws_lambda_function" "verify_jwt" {
-  function_name = "${var.environment}_verify_jwt"
-  filename      = "../../../../api/lambda/verify_jwt.zip"
-  role          = aws_iam_role.cloudwatch_logger.arn
-  runtime       = "nodejs12.x"
-  handler       = "index.handler"
-
-  source_code_hash  = filebase64sha256("../../../../api/lambda/verify_jwt.zip")
-}
-
 resource "aws_api_gateway_authorizer" "lambda_okta_jwt" {
   name                    = "okta-${local.api_domain_name}"
   rest_api_id             = aws_api_gateway_rest_api.api.id
   type                    = "TOKEN"
-  authorizer_uri          = aws_lambda_function.verify_jwt.invoke_arn
-  authorizer_credentials  = aws_iam_role.invoke_lambda_verifier.arn
+  authorizer_uri          = var.verify_jwt_lambda.invoke_arn
+  authorizer_credentials  = var.jwt_verifier_role.arn
 }
 
 resource "aws_api_gateway_request_validator" "Parameters" {
