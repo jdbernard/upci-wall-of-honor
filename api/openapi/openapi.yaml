@@ -28,7 +28,7 @@ paths:
       summary: List all ministers records.
       operationId: listMinisters
       responses:
-        200:
+        2XX:
           description: Success
           content:
             'application/json':
@@ -50,7 +50,12 @@ paths:
               schema:
                 type: string
               style: form
-
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
     post:
       summary: Create a new minister record.
       operationId: createMinister
@@ -61,9 +66,15 @@ paths:
             schema:
               $ref: ./models/Minister.yaml
       responses:
-        200:
+        2XX:
           description: Success
           content:
             'application/json':
               schema:
                 $ref: './models/Minister.yaml'
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
