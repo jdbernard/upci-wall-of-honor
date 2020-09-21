@@ -91,3 +91,28 @@ resource "aws_iam_role_policy_attachment" "db_write" {
   role        = aws_iam_role.db_write.name
   policy_arn  = aws_iam_policy.db_write.arn
 }
+
+## -- S3 Bucket Access (image upload)
+
+data "aws_iam_policy_document" "minister_photo_upload" {
+  statement {
+    actions   = [ "s3:PutObject" ]
+    effect    = "Allow"
+    resources = [ "${aws_s3_bucket.deploy.arn}/img/minister-photos/*" ]
+  }
+}
+
+resource "aws_iam_policy" "minister_photo_upload" {
+  name    = "${local.domain_name}_minister_photo_upload"
+  policy  = data.aws_iam_policy_document.minister_photo_upload.json
+}
+
+resource "aws_iam_role" "minister_photo_upload" {
+  name                = "${local.domain_name}_minister_photo_upload"
+  assume_role_policy  = data.aws_iam_policy_document.api_can_assume_role.json
+}
+
+resource "aws_iam_role_policy_attachment" "minister_photo_upload" {
+  role        = aws_iam_role.minister_photo_upload.name
+  policy_arn  = aws_iam_policy.minister_photo_upload.arn
+}
