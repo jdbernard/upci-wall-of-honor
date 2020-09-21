@@ -25,7 +25,9 @@ exports.handler = async function(event, context, callback) {
   }
 
   const token = headerVal.substr(7);
-  const apiId = event.methodArn.match(/^([^:]+:){5}([^:/]+)\//)[2];
+  const methodArnMatcher = event.methodArn.match(/^(([^:]+:){5}([^:/]+))\//)
+  const apiId = methodArnMatcher[3];
+  const methodPrefix = methodArnMatcher[1] + '/*';
 
   const oktaJwtVerifier = new OktaJwtVerifier({
     issuer: environments[apiId].issuer
