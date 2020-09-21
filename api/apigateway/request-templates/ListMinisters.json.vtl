@@ -6,7 +6,7 @@
   "ExpressionAttributeNames" : {"#S": "state"},
   "ExpressionAttributeValues": {
     ":stateVal": { "S": "$method.request.querystring.state" }
-  },
+  }
 #end
 #if ($method.request.querystring.startAfter.length() > 0) ,
   "ExclusiveStartKey": {
