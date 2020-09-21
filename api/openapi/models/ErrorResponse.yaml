@@ -1,0 +1,12 @@
+---
+type: object
+required: ['description', 'details']
+properties:
+
+  description:
+    description: Description of the error.
+    type: string
+
+  details:
+    description: Detailed information about the error.
+    type: string
