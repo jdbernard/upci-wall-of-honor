@@ -54,8 +54,8 @@
       >
         <fa-icon icon="search-plus"></fa-icon>
       </button>
-      <button v-if="photo.uri" @click="fitHeight">Fit Height</button>
-      <button v-if="photo.uri" @click="fitWidth">Fit Width</button>
+      <button v-if="photo.uri" @click.prevent="fitHeight">Fit Height</button>
+      <button v-if="photo.uri" @click.prevent="fitWidth">Fit Width</button>
     </div>
   </div>
 </template>

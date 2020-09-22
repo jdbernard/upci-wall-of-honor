@@ -1,10 +1,11 @@
 <template>
   <form
+    data-try="df"
     id="edit-minister"
     class="admin-content-view"
     :class="{ preview }"
     v-if="minister"
-    @submit.prevent=""
+    @submit.prevent.stop=""
   >
     <div class="header">
       <h1>{{ minister | nameDisplay }}</h1>
@@ -41,12 +42,14 @@
             type="text"
             v-model="minister.name.prefix"
             placeholder="prefix"
+            @keydown.enter.prevent=""
           />
           <input
             name="given"
             type="text"
             v-model="minister.name.given"
             placeholder="given name"
+            @keydown.enter.prevent=""
             required
           />
           <input
@@ -59,18 +62,21 @@
             type="text"
             @blur="cleanupAdditionalNames"
             @input="additionalNameChanged($event, idx - 1)"
+            @keydown.enter.prevent=""
           />
           <input
             name="surname"
             type="text"
             v-model="minister.name.surname"
             placeholder="surname"
+            @keydown.enter.prevent=""
           />
           <input
             name="suffix"
             type="text"
             v-model="minister.name.suffix"
             placeholder="suffix"
+            @keydown.enter.prevent=""
           />
           <TooltipComponent type="error">
             A minister must have at least a given name.
@@ -159,7 +165,13 @@
               </p>
             </TooltipComponent>
           </span>
-          <input type="text" :value="minister.slug" @input="setSlug" required />
+          <input
+            type="text"
+            :value="minister.slug"
+            @input="setSlug"
+            @keydown.enter.prevent=""
+            required
+          />
           <TooltipComponent type="error">
             This field is required and must be unique.
           </TooltipComponent>
@@ -170,7 +182,12 @@
             This is a required field for ministers inducted into the Order of
             the Faith and represents the year that they were inducted.
           </TooltipComponent>
-          <input type="number" v-model="minister.ootfYearInducted" required />
+          <input
+            type="number"
+            v-model="minister.ootfYearInducted"
+            @keydown.enter.prevent=""
+            required
+          />
           <TooltipComponent type="error">
             This field is required because you have "Order of the Faith"
             selected at the top of the page.
