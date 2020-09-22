@@ -31,8 +31,7 @@ ERRMSG
   exit 1
 fi
 
-target_domain="${UPCI_WOH_TARGET_ENV}.upci-woh.jdb-labs.com"
-if [[ $UPCI_WOH_TARGET_ENV == "prod" ]]; then target_domain="www.upciwallofhonor.org"; fi
+target_domain="${UPCI_WOH_TARGET_ENV}.upciwallofhonor.org"
 echo "Deploy target is ${UPCI_WOH_TARGET_ENV}. Deploying to ${target_domain}."
 aws s3 sync ./dist/ "s3://${target_domain}"
 aws s3 cp ./dist/index.html "s3://${target_domain}/index.html" \
