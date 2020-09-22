@@ -60,13 +60,6 @@ resource "aws_api_gateway_rest_api" "api" {
   }
 }
 
-resource "aws_api_gateway_authorizer" "user_pool_auth" {
-  name          = local.api_domain_name
-  rest_api_id   = aws_api_gateway_rest_api.api.id
-  type          = "COGNITO_USER_POOLS"
-  provider_arns = [ aws_cognito_user_pool.users.arn ]
-}
-
 resource "aws_api_gateway_authorizer" "lambda_okta_jwt" {
   name                    = "okta-${local.api_domain_name}"
   rest_api_id             = aws_api_gateway_rest_api.api.id
@@ -483,7 +476,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.request_templates.list_ministers,
       local.response_templates.create_minister,
       local.response_templates.list_ministers,
-      "force"
+      ""
     ]))
   }
 

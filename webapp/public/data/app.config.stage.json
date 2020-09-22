@@ -2,15 +2,15 @@
   "loggingLevel": "WARN",
   "pageDurationSeconds": 300,
   "userInactivityDurationSeconds": 600,
-  "apiBaseUrl": "https://api.upciwallofhonor.org/v1",
+  "apiBaseUrl": "https://api.staging.upciwallofhonor.org/v1",
   "auth": {
     "loginUrl": "https://auth.upciwallofhonor.org/login",
     "clientId": "3l438vhlu4dd9i4oa3ln2f5vv8"
   },
   "okta": {
     "issuer": "https://auth.upciwallofhonor.org/oauth2/default",
-    "clientId": "0oa115r9k51XsRUAN4x7",
-    "redirectUri": "https://www.upciwallofhonor.org/admin/login",
-    "postLoginRedirectUri": "https://www.upciwallofhonor.org"
+    "clientId": "0oa115qg74kLONp5Y4x7",
+    "redirectUri": "https://staging.upciwallofhonor.org/admin/login",
+    "postLoginRedirectUri": "staging://www.upciwallofhonor.org"
   }
 }
