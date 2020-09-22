@@ -42,7 +42,6 @@ variable "cloudwatch_logger_role" {
 locals {
   domain_name       = "${var.environment}.${trimsuffix(var.route53_zone.name, ".")}"
   api_domain_name   = var.create_env_subdomain ? "api.${var.environment}.${trimsuffix(var.route53_zone.name, ".")}" : "api.${trimsuffix(var.route53_zone.name, ".")}"
-  auth_domain_name  = var.create_env_subdomain ? "auth.${var.environment}.${trimsuffix(var.route53_zone.name, ".")}" : "auth.${trimsuffix(var.route53_zone.name, ".")}"
 }
 
 output "aws_cloudfront_distribution" {

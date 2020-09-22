@@ -9,6 +9,10 @@
   },
 	"bai1lyqiq2": {
     "name": "prod",
-    "issuer": "https://dev-960994.okta.com/oauth2/default"
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default"
+  },
+  "nwx8gj7xg6": {
+    "name": "staging",
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default"
   }
 }
