@@ -1,0 +1,29 @@
+DONE- the "i" next to name: don't need first sentence. Keep: "Only the given name is required. However, any number of middle names, initials, or nicknames may be entered."
+
+DONE- Pushing "Enter" when entering the name takes you back to the main screen
+
+DONE- Prefix does not display in the name at the top
+
+Have "add biography here" disappear when the box is clicked on
+
+DONE-add comma between "name" and "but" in the "i" blurb next to the short-url
+
+DONE- select minister from anywhere on the bar (not just their name)
+
+have a way to go directly to the display website from each minister's page
+
+explain why you must have a bio when selecting Ootf
+
+DONE- "Fix height" goes back to main screen
+
+DONE- "fix width" does not work. Makes the image disappear.
+
+"image missing" font-- maybe smaller and in italics?
+
+deceased minister's page- have a way to show which names have bios with them
+
+when was the record last modified and by whom
+
+Ootf while browsing it will randomly jump back to the start page
+
+If there are modifications, page should warn you before you jump away
