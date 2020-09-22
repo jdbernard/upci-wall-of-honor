@@ -49,6 +49,27 @@
     > * { margin: 0 $spacer-sm $spacer-sm $spacer-sm; }
   }
 
+  .file-input .uploading {
+    display: inline-block;
+    border: solid thin var(--color-fg);
+    border-radius: $spacer-xs;
+    position: relative;
+    overflow: hidden;
+
+    div { padding: $spacer-xs $spacer; }
+
+    .progress {
+      background-color: var(--color-accent3);
+      color: var(--color-bg);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      overflow: hidden;
+      width: 0;
+      white-space: nowrap;
+    }
+  }
 }
 
 @include forSize(notMobile) {

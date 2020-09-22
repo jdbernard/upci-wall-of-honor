@@ -29,8 +29,20 @@
         <fa-icon icon="search-minus"></fa-icon>
       </button>
       <label class="file-input">
-        <input type="file" aria-label="Upload minister photo" />
-        <div class="button primary">
+        <input
+          aria-label="Upload minister photo"
+          type="file"
+          :accept="supportedImageExtensions"
+          :disabled="uploading"
+          @change="uploadPhoto"
+        />
+        <div v-if="uploading" class="uploading">
+          <div>uploading... <fa-icon icon="spinner" spin></fa-icon></div>
+          <div class="progress" :style="'width:' + uploadProgress + '%;'">
+            uploading... <fa-icon icon="spinner" spin></fa-icon>
+          </div>
+        </div>
+        <div v-else class="button primary">
           Upload Photo <fa-icon icon="upload"></fa-icon>
         </div>
       </label>

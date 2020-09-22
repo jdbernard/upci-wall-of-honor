@@ -37,11 +37,12 @@
         <li class="hash">
           <label>Commit: </label><span>{{ version.hash }}</span>
         </li>
-        <li class="version">
+        <li class="version" @click="enablePowerTools">
           <label>Version: </label><span> {{ version.version }}</span>
         </li>
       </ul>
       <div class="version-abbr">{{ version.version }}</div>
+      <PowerToolsComponent v-if="powerToolsEnabled"></PowerToolsComponent>
     </div>
 
     <div v-if="user" class="user-info">

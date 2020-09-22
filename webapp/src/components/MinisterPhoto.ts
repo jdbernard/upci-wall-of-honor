@@ -1,4 +1,10 @@
 import { Component, Emit, Model, Prop, Vue } from 'vue-property-decorator';
+import throttle from 'lodash.throttle';
+import {
+  default as ministerPhotoUploadService,
+  SUPPORTED_EXTENSIONS
+} from '@/data/minister-photo-upload.service';
+import toastService from '@/components/admin/toast.service';
 import { Photo } from '@/data/minister.model';
 import { isTouchEvent, isMouseEvent, pxToNumber } from '@/util';
 
@@ -19,7 +25,11 @@ export default class MinisterPhotoComponent extends Vue {
 
   $refs!: { image: HTMLImageElement };
 
-  moveData = {
+  public supportedImageExtensions = SUPPORTED_EXTENSIONS;
+  public uploading = false;
+  public uploadProgress = 0;
+
+  private moveData = {
     moving: false,
     originX: 0,
     originY: 0,
@@ -135,6 +145,38 @@ export default class MinisterPhotoComponent extends Vue {
     this.$refs.image.style.width = curWidth + amount + 'px';
 
     this.emitChange();
+  }
+
+  public uploadPhoto(event: InputEvent) {
+    const fileInput = event?.target as HTMLInputElement;
+    const file: File | null = (fileInput?.files || [])[0];
+    if (!file) return;
+
+    this.uploading = true;
+    this.uploadProgress = 0;
+    ministerPhotoUploadService
+      .uploadPhoto(file, throttle(this.onUploadProgress, 100))
+      .then(photo => {
+        toastService.makeToast({
+          type: 'success',
+          duration: 5000,
+          message: 'Photo upload finished.'
+        });
+        this.$emit('change', photo);
+        this.uploading = false;
+      })
+      .catch(err => {
+        toastService.makeToast({
+          type: 'error',
+          duration: 10000,
+          message: 'Photo upload failed.'
+        });
+        this.uploading = false;
+      });
+  }
+
+  public onUploadProgress(evt: ProgressEvent) {
+    this.uploadProgress = (evt.loaded / evt.total) * 100;
   }
 
   @Emit('change')

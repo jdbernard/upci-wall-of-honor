@@ -86,11 +86,14 @@ export default class EditMinisterView extends Vue {
       if (!this.minister.ootfYearInducted) {
         Vue.set(this.minister, 'ootfYearInducted', moment().year());
       }
+    } else {
+      Vue.delete(this.minister, 'ootfYearInducted');
     }
   }
 
   public setHasBio(val: boolean) {
-    if (val && this.minister) {
+    if (!this.minister) return;
+    if (val) {
       if (!this.minister.details) {
         Vue.set(this.minister, 'details', {
           photo: {},
@@ -101,6 +104,7 @@ export default class EditMinisterView extends Vue {
       this.bioChecked = true;
     } else if (!this.ootfChecked) {
       this.bioChecked = false;
+      Vue.delete(this.minister, 'details');
     }
   }
 

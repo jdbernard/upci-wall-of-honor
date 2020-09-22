@@ -1,0 +1,16 @@
+{
+  "loggingLevel": "TRACE",
+  "pageDurationSeconds": 300,
+  "userInactivityDurationSeconds": 600,
+  "apiBaseUrl": "https://api.dev.upci-woh.jdb-labs.com/v1",
+  "auth": {
+    "loginUrl": "https://auth.dev.upci-woh.jdb-labs.com/login",
+    "clientId": "3l438vhlu4dd9i4oa3ln2f5vv8"
+  },
+  "okta": {
+    "issuer": "https://dev-960994.okta.com/oauth2/default",
+    "clientId": "0oa5fesdso8t8RuMF357",
+    "redirectUri": "https://dev.upci-woh.jdb-labs.com/admin/login",
+    "postLoginRedirectUri": "https://dev.upci-woh.jdb-labs.com"
+  }
+}
