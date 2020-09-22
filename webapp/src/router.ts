@@ -91,11 +91,7 @@ const routes: Array<RouteConfig> = [
       }
     ]
   },
-  {
-    path: '/',
-    name: 'Index',
-    component: IndexView
-  }
+  { path: '/', redirect: { name: 'OrderOfTheFaith' } }
 ];
 
 // Routes for the app when served from oof.upci.org

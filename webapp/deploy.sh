@@ -31,18 +31,6 @@ ERRMSG
   exit 1
 fi
 
-# Before we push the build, use the environment-specific config file (if it
-# exists).
-if [[ -f "./dist/data/app.config.${UPCI_WOH_TARGET_ENV}.json" ]]; then
-  mv "./dist/data/app.config.${UPCI_WOH_TARGET_ENV}.json" "./dist/data/app.config.json"
-fi
-
-# Remove app configs for all other environments.
-if [[ -f ./dist/data/app.config.*.json ]]; then
-  rm ./dist/data/app.config.*.json
-fi
-
-# Now we can perform the actual deploy.
 target_domain="${UPCI_WOH_TARGET_ENV}.upci-woh.jdb-labs.com"
 if [[ $UPCI_WOH_TARGET_ENV == "prod" ]]; then target_domain="www.upciwallofhonor.org"; fi
 echo "Deploy target is ${UPCI_WOH_TARGET_ENV}. Deploying to ${target_domain}."
@@ -105,6 +93,7 @@ invalidation_id=$(aws cloudfront create-invalidation \
     '/index.html' \
     '/deceased-ministers/index.html' \
     '/order-of-the-faith/index.html' \
+    '/data/app.config.json' \
     '/executive-leadership/index.html')
 
 if [[ $? -ne 0 || -z "${invalidation_id}" ]]; then

@@ -40,3 +40,15 @@ fi
 echo "Building for $buildMode mode, deploying to $UPCI_WOH_TARGET_ENV."
 npm run test:unit
 npx vue-cli-service build --mode "$buildMode"
+
+# Use the environment-specific config file (if it exists).
+if [[ -f "./dist/data/app.config.${UPCI_WOH_TARGET_ENV}.json" ]]; then
+  mv "./dist/data/app.config.${UPCI_WOH_TARGET_ENV}.json" "./dist/data/app.config.json"
+fi
+
+# Remove app configs for all other environments.
+for cfgFile in ./dist/data/app.config.*.json; do
+  if [[ -f $cfgFile ]]; then
+    rm $cfgFile
+  fi
+done
