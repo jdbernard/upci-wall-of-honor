@@ -78,18 +78,3 @@ resource "aws_route53_record" "auth_domain" {
     zone_id                 = "Z2FDTNDATAQYW2"  // Hard-coded, Zone ID for all Cognito user pool domains.
   }
 }
-
-resource "aws_route53_record" "alternate_domains" {
-  count   = length(var.additional_cloudfront_aliases)
-  zone_id = var.route53_zone.zone_id
-  name    = var.additional_cloudfront_aliases[count.index]
-  type    = "A"
-
-  alias {
-    name    = aws_cloudfront_distribution.cdn.domain_name
-    zone_id = aws_cloudfront_distribution.cdn.hosted_zone_id
-    evaluate_target_health = false
-  }
-
-  depends_on = [aws_cloudfront_distribution.cdn]
-}
