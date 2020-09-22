@@ -44,3 +44,8 @@ locals {
   api_domain_name   = var.create_env_subdomain ? "api.${var.environment}.${trimsuffix(var.route53_zone.name, ".")}" : "api.${trimsuffix(var.route53_zone.name, ".")}"
   auth_domain_name  = var.create_env_subdomain ? "auth.${var.environment}.${trimsuffix(var.route53_zone.name, ".")}" : "auth.${trimsuffix(var.route53_zone.name, ".")}"
 }
+
+output "aws_cloudfront_distribution" {
+  description = "CloudFront CDN for the application."
+  value = aws_cloudfront_distribution.cdn
+}

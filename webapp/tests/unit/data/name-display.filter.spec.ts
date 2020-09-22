@@ -43,21 +43,15 @@ describe('nameDisplay filter', () => {
     }
   };
 
-  it('correctly formats short names', () => {
-    expect(nameDisplay(fullExample)).toEqual('John G M Smith Jr.');
-  });
-
   it('correctly formats full names', () => {
-    expect(nameDisplay(fullExample, 'full')).toEqual('Rev. John G M Smith Jr.');
+    expect(nameDisplay(fullExample)).toEqual('Rev. John G M Smith Jr.');
   });
 
-  it('correctly handles missing fields in short names', () => {
+  it('correctly handles missing fields in names', () => {
     expect(nameDisplay(allFieldsMissing)).toEqual('Bob');
-    expect(nameDisplay(allFieldsMissing, 'full')).toEqual('Bob');
   });
 
   it('correctly handles partial fields', () => {
-    expect(nameDisplay(someFieldsMissing)).toEqual('Charles');
-    expect(nameDisplay(someFieldsMissing, 'full')).toEqual('Dr. Charles');
+    expect(nameDisplay(someFieldsMissing)).toEqual('Dr. Charles');
   });
 });

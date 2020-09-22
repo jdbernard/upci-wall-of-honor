@@ -4,7 +4,7 @@
     class="admin-content-view"
     :class="{ preview }"
     v-if="minister"
-    onsubmit="return;"
+    @submit.prevent=""
   >
     <div class="header">
       <h1>{{ minister | nameDisplay }}</h1>
@@ -32,8 +32,8 @@
           <span>
             Name:
             <TooltipComponent>
-              The minister's full name. Only the given name is required. Any
-              number of middle names, initials, or nicknames may be entered.
+              Only the given name is required. Any number of middle names,
+              initials, or nicknames may be entered.
             </TooltipComponent>
           </span>
           <input
@@ -110,8 +110,8 @@
             Record state:
             <TooltipComponent>
               <p>
-                This controls the visibility of this minister record in the
-                public-facing Wall of Honor displays.
+                The <em>record state</em> controls the visibility of this
+                minister record in the public-facing Wall of Honor displays.
               </p>
               <p>
                 <strong>Published</strong> records are visible on the
@@ -125,7 +125,7 @@
               </p>
               <p>
                 <strong>Archived</strong> records are not visible on the
-                public-facing displays. This is inteded for cases where we want
+                public-facing displays. This is intended for cases where we want
                 to remove the record from the public Wall of Honor but retain
                 the data.
               </p></TooltipComponent
@@ -153,7 +153,7 @@
               </p>
               <p>
                 We will try to generate a short URL for you based on the
-                minister's name but you may need to tweak this when two
+                minister's name, but you may need to tweak this when two
                 ministers share the same name. For example, you may add '-1',
                 '-2', or some other distinguishing text to the end of one.
               </p>

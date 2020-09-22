@@ -225,7 +225,7 @@ resource "aws_api_gateway_integration_response" "CreateMinister" {
   resource_id             = aws_api_gateway_resource.ministers.id
   http_method             = aws_api_gateway_method.CreateMinister.http_method
   status_code             = 201
-  selection_pattern       = "2.."
+  selection_pattern       = "20[01]"
 
   response_templates = {
     "application/json" = local.response_templates.create_minister
@@ -307,7 +307,7 @@ resource "aws_api_gateway_integration_response" "ListMinisters" {
   resource_id             = aws_api_gateway_resource.ministers.id
   http_method             = aws_api_gateway_method.ListMinisters.http_method
   status_code             = 200
-  selection_pattern       = "2.."
+  selection_pattern       = "20[01]"
 
   response_templates = {
     "application/json" = local.response_templates.list_ministers
@@ -483,7 +483,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.request_templates.list_ministers,
       local.response_templates.create_minister,
       local.response_templates.list_ministers,
-      ""
+      "force"
     ]))
   }
 

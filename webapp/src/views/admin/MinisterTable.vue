@@ -39,7 +39,16 @@
           </tr>
         </thead>
         <tbody slot="body" slot-scope="{ displayData }">
-          <tr v-for="row in displayData" :key="row.id">
+          <tr
+            v-for="row in displayData"
+            :key="row.id"
+            @click="
+              $router.push({
+                name: 'AdminEditMinister',
+                params: { slug: row.slug }
+              })
+            "
+          >
             <td>
               <router-link
                 :to="{ name: 'AdminEditMinister', params: { slug: row.slug } }"

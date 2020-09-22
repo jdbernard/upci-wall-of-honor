@@ -94,7 +94,8 @@ invalidation_id=$(aws cloudfront create-invalidation \
     '/deceased-ministers/index.html' \
     '/order-of-the-faith/index.html' \
     '/data/app.config.json' \
-    '/executive-leadership/index.html')
+    '/executive-leadership/index.html' \
+    '/admin/index.html')
 
 if [[ $? -ne 0 || -z "${invalidation_id}" ]]; then
   >&2 echo "Unable to create the CloudFront invalidation."
