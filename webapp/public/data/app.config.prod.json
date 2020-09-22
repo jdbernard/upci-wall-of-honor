@@ -9,7 +9,7 @@
   },
   "okta": {
     "issuer": "https://dev-960994.okta.com/oauth2/default",
-    "clientId": "0oa5fesdso8t8RuMF357",
+    "clientId": "0oa5j7aepfCCT06Kf357",
     "redirectUri": "https://www.upciwallofhonor.org/admin/login",
     "postLoginRedirectUri": "https://www.upciwallofhonor.org"
   }
