@@ -35,8 +35,8 @@ exports.handler = async function(event, context, callback) {
   
   try {
     const jwt = await oktaJwtVerifier.verifyAccessToken(token, 'api://default');
-    console.log('Valid token. email=' + jwt.claims.sub);
-    return generatePolicy(jwt.claims.sub, event.methodArn);
+    console.log('Valid token. email=' + jwt.claims.sub + ' allowedMethods=' + methodPrefix);
+    return generatePolicy(jwt.claims.sub, methodPrefix);
   } catch (err) {
     console.log("Auth error: " + JSON.stringify(err));
     throw('Error: Invalid token');

@@ -20,6 +20,7 @@ Build Script for UPCI Wall of Honor webapp
 
 Inspecting the build environment for the deploy target:
   UPCI_WOH_TARGET_ENV = ${UPCI_WOH_TARGET_ENV}
+  UPCI_WOH_BUILD_MODE = ${UPCI_WOH_BUILD_MODE}
 
 BANNER
 
@@ -33,6 +34,10 @@ ERRMSG
 fi
 
 buildMode="development";
+if [[ ! -z $UPCI_WOH_BUILD_MODE ]]; then
+  buildMode=$UPCI_WOH_BUILD_MODE
+fi
+
 if [[ $UPCI_WOH_TARGET_ENV == "prod" ]]; then
   buildMode="production"
 fi
