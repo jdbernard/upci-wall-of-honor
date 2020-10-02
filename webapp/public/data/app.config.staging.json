@@ -3,10 +3,6 @@
   "pageDurationSeconds": 300,
   "userInactivityDurationSeconds": 600,
   "apiBaseUrl": "https://api.staging.upciwallofhonor.org/v1",
-  "auth": {
-    "loginUrl": "https://auth.upciwallofhonor.org/login",
-    "clientId": "3l438vhlu4dd9i4oa3ln2f5vv8"
-  },
   "okta": {
     "issuer": "https://auth.upciwallofhonor.org/oauth2/default",
     "clientId": "0oa115qg74kLONp5Y4x7",

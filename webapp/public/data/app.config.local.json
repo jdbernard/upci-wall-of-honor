@@ -2,14 +2,10 @@
   "loggingLevel": "TRACE",
   "pageDurationSeconds": 300,
   "userInactivityDurationSeconds": 600,
-  "apiBaseUrl": "https://api.dev.upci-woh.jdb-labs.com/v1",
-  "auth": {
-    "loginUrl": "https://auth.dev.upci-woh.jdb-labs.com/login",
-    "clientId": "3l438vhlu4dd9i4oa3ln2f5vv8"
-  },
+  "apiBaseUrl": "https://api.dev.upciwallofhonor.org/v1",
   "okta": {
-    "issuer": "https://dev-960994.okta.com/oauth2/default",
-    "clientId": "0oa5fesdso8t8RuMF357",
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default",
+    "clientId": "0oa115fxhzKAOY3Db4x7",
     "redirectUri": "http://localhost:8080/admin/login",
     "postLoginRedirectUri": "http://localhost:8080"
   }
