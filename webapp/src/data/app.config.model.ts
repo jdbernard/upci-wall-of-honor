@@ -5,10 +5,6 @@ export interface AppConfig {
   pageDurationSeconds: number;
   userInactivityDurationSeconds: number;
   apiBaseUrl: string;
-  auth: {
-    loginUrl: string;
-    clientId: string;
-  };
   okta: {
     issuer: string;
     clientId: string;
@@ -27,9 +23,5 @@ export const defaultConfig: AppConfig = {
     clientId: '',
     redirectUri: '/admin/login',
     postLoginRedirectUri: '/'
-  },
-  auth: {
-    loginUrl: '',
-    clientId: ''
   }
 };
