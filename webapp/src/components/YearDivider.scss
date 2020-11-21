@@ -6,6 +6,8 @@
   justify-content: center;
   width: 28rem;
 
+  filter: drop-shadow(0 4px 4px var(--color-shadow));
+
   .left, .right {
     height: auto;
     width: 11.5rem;
