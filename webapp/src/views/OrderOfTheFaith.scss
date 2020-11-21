@@ -21,6 +21,10 @@
       flex-direction: row;
       align-items: center;
 
+      a {
+        filter: drop-shadow(0 4px 4px var(--color-shadow));
+      }
+
       .ootf-logo {
         height: $spacer-xl;
         fill: var(--color-fg);
@@ -31,6 +35,7 @@
   }
 
   .divider, .overview, .ministers-page {
+    filter: drop-shadow(0 4px 4px var(--color-shadow));
     transition: opacity 0.5s;
 
     &.updating {

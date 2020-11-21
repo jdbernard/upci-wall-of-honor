@@ -7,7 +7,7 @@ import EditMinisterView from '@/views/admin/EditMinister.vue';
 import MinisterTableView from '@/views/admin/MinisterTable.vue';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
 import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
-import IndexView from '@/views/Index.vue';
+//import IndexView from '@/views/Index.vue';
 import MinisterBiographyView from '@/views/MinisterBiography.vue';
 import { parseSearchQuery } from '@/data/search.model';
 

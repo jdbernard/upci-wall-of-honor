@@ -8,6 +8,7 @@
 // the image uses the same em-based positioning to allow it to also scale
 // appropriately.
 .minister-photo {
+  filter: drop-shadow(0 4px 4px var(--color-shadow));
   width: 11.625em;
 
   &.allowEdit {
