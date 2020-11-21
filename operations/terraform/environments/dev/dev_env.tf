@@ -30,7 +30,7 @@ module "dev_env" {
 
   # Resources defined in the global project setup
   project_bucket_id = data.terraform_remote_state.global.outputs.aws_s3_project_bucket.id
-  route53_zone = data.terraform_remote_state.global.outputs.aws_route53_project_zone
+  route53_zone = data.terraform_remote_state.global.outputs.aws_route53_prod_zone
   verify_jwt_lambda = data.terraform_remote_state.global.outputs.aws_lambda_jwt_verifier
   jwt_verifier_role = data.terraform_remote_state.global.outputs.aws_iam_role_jwt_verifier
   cloudwatch_logger_role = data.terraform_remote_state.global.outputs.aws_iam_role_cloudwatch_logger

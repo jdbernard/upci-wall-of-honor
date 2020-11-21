@@ -35,8 +35,8 @@ resource "aws_codecommit_repository" "repo" {
 }
 
 resource "aws_s3_bucket" "project" {
-  bucket = "upci-wall-of-honor"
-  acl = "log-delivery-write"
+  bucket  = "upci-wall-of-honor"
+  acl     = "log-delivery-write"
 }
 
 resource "aws_dynamodb_table" "dynamodb_terraform_state_lock" {
