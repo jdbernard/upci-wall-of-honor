@@ -1,0 +1,21 @@
+---
+type: object
+required: ['count', 'board_members']
+properties:
+
+  count:
+    description: Number of board member returned in this response.
+    type: number
+
+  ministers:
+    description: The array of General Board members.
+    type: array
+    items:
+      $ref: ./BoardMember.yaml
+
+  nextPageStartsAfter:
+    description: ID of the last board member returned. The presence of this
+      value indicates that there are more results than were returned in this
+      request.  This value can be passed into the `startAfter` parameter of a
+      new `GET /general_board/members` request to fetch the next page.
+    type: string

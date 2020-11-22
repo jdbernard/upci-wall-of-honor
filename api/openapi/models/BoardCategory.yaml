@@ -1,0 +1,18 @@
+---
+type: object
+required: ['id', 'name', 'includeTitles']
+properties:
+
+  id:
+    description: Unique, permanent identifier for this record (UUID).
+    type: string
+
+  name:
+    description: >
+      Visible name of this General Board category (e.g. "Presbyters", "Honorary
+      Presbyters")
+    type: string
+
+  includeTitles:
+    description: Should this category display titles when rendered.
+    type: boolean

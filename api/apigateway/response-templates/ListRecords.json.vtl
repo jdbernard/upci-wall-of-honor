@@ -1,9 +1,9 @@
 #set($inputRoot = $input.path('$'))
 {
   "count": $inputRoot.Count,
-  "ministers": [
-    #foreach ($m in $input.path('$.Items[*].record.S'))
-      #if($foreach.index!=0),#end $util.base64Decode($m)
+  "%LIST_NAME%": [
+    #foreach ($rec in $input.path('$.Items[*].record.S'))
+      #if($foreach.index!=0),#end $util.base64Decode($rec)
     #end
   ] #if($input.path('$.LastEvaluatedKey')),
   "nextPageStartsAfter": $input.json('$.LastEvaluatedKey.id.S')

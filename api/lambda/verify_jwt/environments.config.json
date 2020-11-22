@@ -1,11 +1,11 @@
 {
   "eezg2uaqw1": {
 		"name": "dev",
-    "issuer": "https://dev-960994.okta.com/oauth2/default"
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default"
   },
   "lpxf35cj6l": {
     "name": "demo",
-    "issuer": "https://dev-960994.okta.com/oauth2/default"
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default"
   },
 	"bai1lyqiq2": {
     "name": "prod",

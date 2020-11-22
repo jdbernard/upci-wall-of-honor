@@ -1,0 +1,24 @@
+---
+type: object
+required: ['id', 'name', 'category']
+properties:
+
+  id:
+    description: Unique, permanent identifier for this record (UUID).
+    type: string
+
+  name:
+    description: >
+      Visible name of this General Board category (e.g. "Presbyters", "Honorary
+      Presbyters")
+    type: string
+
+  title:
+    description: >
+      The name of the district, region, or ministry that this board member
+      represents.
+    type: string
+
+  categoryId:
+    description: The ID of the BoardCategory in which this member belongs.
+    type: string
