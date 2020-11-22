@@ -1,0 +1,8 @@
+{
+  "TableName": "%TABLE_NAME%",
+  "Item": {
+    "record_type": {"S": "%RECORD_TYPE%"},
+    "id": {"S": "$input.path('$.id')"},
+    "record": {"S": "$util.base64Encode($input.json('$'))"}
+  }
+}

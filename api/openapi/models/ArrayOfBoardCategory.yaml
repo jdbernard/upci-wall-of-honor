@@ -1,0 +1,21 @@
+---
+type: object
+required: ['count', 'board_categories']
+properties:
+
+  count:
+    description: Number of board categories returned in this response.
+    type: number
+
+  ministers:
+    description: The array of General Board categories.
+    type: array
+    items:
+      $ref: ./BoardCategory.yaml
+
+  nextPageStartsAfter:
+    description: ID of the last category returned. The presence of this value
+      indicates that there are more results than were returned in this request.
+      This value can be passed into the `startAfter` parameter of a new
+      `GET /general_board/categories` request to fetch the next page.
+    type: string

@@ -1,0 +1,21 @@
+---
+type: object
+required: ['count', 'leadership_positions']
+properties:
+
+  count:
+    description: Number of leadership positions returned in this response.
+    type: number
+
+  ministers:
+    description: The array of leadership positions.
+    type: array
+    items:
+      $ref: ./LeadershipPosition.yaml
+
+  nextPageStartsAfter:
+    description: ID of the last position returned. The presence of this value
+      indicates that there are more results than were returned in this request.
+      This value can be passed into the `startAfter` parameter of a new
+      `GET /leadership_positions` request to fetch the next page.
+    type: string

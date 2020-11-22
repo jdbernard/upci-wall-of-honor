@@ -1,13 +1,19 @@
 {
   "TableName":"%TABLE_NAME%",
-  "Limit": 950
-#if ($method.request.querystring.state.length() > 0) ,
-  "FilterExpression": "#S = :stateVal",
-  "ExpressionAttributeNames" : {"#S": "state"},
-  "ExpressionAttributeValues": {
-    ":stateVal": { "S": "$method.request.querystring.state" }
-  }
+  "Limit": 950,
+  "KeyConditionExpression": "record_type = :minister",
+#if ($method.request.querystring.state.length() > 0)
+  "FilterExpression": "#St = :stateVal",
+  "ExpressionAttributeNames": {
+    "#St": "state"
+  },
 #end
+  "ExpressionAttributeValues": {
+    ":minister": { "S": "minister" }
+#if ($method.request.querystring.state.length() > 0) ,
+    ":stateVal": { "S": "$method.request.querystring.state" }
+#end
+  }
 #if ($method.request.querystring.startAfter.length() > 0) ,
   "ExclusiveStartKey": {
     "id": { "S": "$method.request.querystring.startAfter" }

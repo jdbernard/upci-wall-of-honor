@@ -2,7 +2,7 @@
 openapi: 3.0.3
 
 info:
-  version: '1.0.0'
+  version: '1.1.0'
   title: UPCI Wall of Honor API
   description: API to the UPCI Wall of Honor display.
   # termsOfService: https://www.upciwallofhonor.com/terms-of-service # TODO
@@ -14,10 +14,10 @@ info:
     email: jdb@jdb-tech.com
 
 servers:
-  - url: https://api.dev.upci-woh.jdb-labs.com/v1
+  - url: https://api.dev.upciwallofhonor.org/v1
     description: Development server
-  - url: https://api.demo.upci-woh.jdb-labs.com/v1
-    description: Demo server
+  - url: https://api.staging.upciwallofhonor.org/v1
+    description: Staging server
   - url: https://api.upciwallofhonor.org/v1
     description: Production server
 
@@ -72,6 +72,153 @@ paths:
             'application/json':
               schema:
                 $ref: './models/Minister.yaml'
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+
+  /general_board/categories:
+
+    get:
+      summary: List all categories of the General Board
+      operationId: listBoardCategories
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: ./models/ArrayOfBoardCategory.yaml
+          parameters:
+            - name: startAfter
+              in: query
+              description: When fetching multiple pages of results this should
+                be the ID of the last category returned in the previous page.
+              schema:
+                type: string
+              style: form
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+    post:
+      summary: Create a new General Board category.
+      operationId: createBoardCategory
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: ./models/BoardCategory.yaml
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: './models/BoardCategory.yaml'
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+
+  /general_board/members:
+
+    get:
+      summary: List all members of the General Board
+      operationId: listBoardMembers
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: ./models/ArrayOfBoardMember.yaml
+          parameters:
+            - name: startAfter
+              in: query
+              description: When fetching multiple pages of results this should
+                be the ID of the last member returned in the previous page.
+              schema:
+                type: string
+              style: form
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+    post:
+      summary: Create a new General Board member.
+      operationId: createBoardMember
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: ./models/BoardMember.yaml
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: './models/BoardMember.yaml'
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+
+  /leadership_positions:
+
+    get:
+      summary: List all people holding leadership positions.
+      operationId: listLeadershipPositions
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: ./models/ArrayOfLeadershipPosition.yaml
+          parameters:
+            - name: startAfter
+              in: query
+              description: When fetching multiple pages of results this should
+                be the ID of the last position returned in the previous page.
+              schema:
+                type: string
+              style: form
+        default:
+          description: Error
+          content:
+            'application/json':
+              schema:
+                $ref: './models/ErrorResponse.yaml'
+    post:
+      summary: Create a new leadership position.
+      operationId: createLeadershipPosition
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: ./models/LeadershipPosition.yaml
+      responses:
+        2XX:
+          description: Success
+          content:
+            'application/json':
+              schema:
+                $ref: './models/LeadershipPosition.yaml'
         default:
           description: Error
           content:

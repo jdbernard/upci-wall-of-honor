@@ -1,6 +1,7 @@
 {
   "TableName": "%TABLE_NAME%",
   "Item": {
+    "record_type": {"S": "minister"},
     "id": {"S": "$input.path('$.id')"},
     "state": {"S": "$input.path('$.state')"},
     "isDeceased": {"BOOL": "$input.path('$.isDeceased')"},

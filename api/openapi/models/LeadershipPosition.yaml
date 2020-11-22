@@ -1,0 +1,21 @@
+---
+type: object
+required: ['id', 'ministerId', 'title']
+properties:
+
+  id:
+    description: Unique, permanent identifier for this record (UUID).
+    type: string
+
+  ministryId:
+    description: ID of the minister who holds this position.
+    type: string
+
+  ministryName:
+    description: >
+      Name of the department or ministry associated with this position
+      (if any).
+
+  title:
+    description: Title of the position (e.g. Director, President, etc.)
+    type: string

@@ -1,0 +1,8 @@
+{
+  "TableName":"%TABLE_NAME%",
+  "Limit": 950,
+  "KeyConditionExpression": "record_type = :rec_type_val",
+  "ExpressionAttributeValues": {
+    ":rec_type_val": { "S": "%RECORD_TYPE%" }
+  }
+}
