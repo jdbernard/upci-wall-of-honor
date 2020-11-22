@@ -16,18 +16,6 @@ terraform {
   }
 }
 
-resource "aws_dynamodb_table" "admin_edit_lock" {
-  name            = "admin-edit-locks.upci-wall-of-honor"
-  hash_key        = "LockID"
-  read_capacity   = 10
-  write_capacity  = 10
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-}
-
 resource "aws_codecommit_repository" "repo" {
   repository_name = "upci-wall-of-honor"
   description = "UPCI Wall of Honor display and administrative application."
