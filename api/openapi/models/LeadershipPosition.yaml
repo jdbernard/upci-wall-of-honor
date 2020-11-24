@@ -19,3 +19,7 @@ properties:
   title:
     description: Title of the position (e.g. Director, President, etc.)
     type: string
+
+  sortOrder:
+    description: Index used to sort the positions.
+    type: number

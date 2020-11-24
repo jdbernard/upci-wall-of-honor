@@ -16,3 +16,7 @@ properties:
   includeTitles:
     description: Should this category display titles when rendered.
     type: boolean
+
+  sortOrder:
+    description: Index used to sort the categories.
+    type: number
