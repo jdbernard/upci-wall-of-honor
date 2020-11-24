@@ -83,25 +83,44 @@ locals {
     list_board_categories = replace(replace(
       file("../../../../api/apigateway/request-templates/ListRecords.json.vtl"),
       "%TABLE_NAME%", aws_dynamodb_table.database.name),
-      "%RECORD_TYPE%", "board_categories"
+      "%RECORD_TYPE%", "board_category"
     )
 
     list_board_members = replace(replace(
       file("../../../../api/apigateway/request-templates/ListRecords.json.vtl"),
       "%TABLE_NAME%", aws_dynamodb_table.database.name),
-      "%RECORD_TYPE%", "board_members"
+      "%RECORD_TYPE%", "board_member"
     )
 
     list_leadership_positions = replace(replace(
       file("../../../../api/apigateway/request-templates/ListRecords.json.vtl"),
       "%TABLE_NAME%", aws_dynamodb_table.database.name),
-      "%RECORD_TYPE%", "leadership_positions"
+      "%RECORD_TYPE%", "leadership_position"
     )
 
     list_ministers = replace(
       file("../../../../api/apigateway/request-templates/ListMinisters.json.vtl"),
       "%TABLE_NAME%", aws_dynamodb_table.database.name
     )
+
+    delete_board_category = replace(replace(
+      file("../../../../api/apigateway/request-templates/DeleteRecord.json.vtl"),
+      "%TABLE_NAME%", aws_dynamodb_table.database.name),
+      "%RECORD_TYPE%", "board_category"
+    )
+
+    delete_board_member = replace(replace(
+      file("../../../../api/apigateway/request-templates/DeleteRecord.json.vtl"),
+      "%TABLE_NAME%", aws_dynamodb_table.database.name),
+      "%RECORD_TYPE%", "board_member"
+    )
+
+    delete_leadership_position = replace(replace(
+      file("../../../../api/apigateway/request-templates/DeleteRecord.json.vtl"),
+      "%TABLE_NAME%", aws_dynamodb_table.database.name),
+      "%RECORD_TYPE%", "leadership_position"
+    )
+
   }
 
   response_templates = {
@@ -113,23 +132,27 @@ locals {
 
     list_board_categories = replace(
       file("../../../../api/apigateway/response-templates/ListRecords.json.vtl"),
-      "%LIST_NAME%", "board_categories"
+      "%LIST_NAME%", "boardCategories"
     )
 
     list_board_members = replace(
       file("../../../../api/apigateway/response-templates/ListRecords.json.vtl"),
-      "%LIST_NAME%", "board_members"
+      "%LIST_NAME%", "boardMembers"
     )
 
     list_leadership_positions = replace(
       file("../../../../api/apigateway/response-templates/ListRecords.json.vtl"),
-      "%LIST_NAME%", "leadership_positions"
+      "%LIST_NAME%", "leadershipPositions"
     )
 
     list_ministers = replace(
       file("../../../../api/apigateway/response-templates/ListRecords.json.vtl"),
       "%LIST_NAME%", "ministers"
     )
+
+    delete_board_category       = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
+    delete_board_member         = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
+    delete_leadership_position  = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
   }
 }
 
@@ -241,13 +264,13 @@ resource "aws_api_gateway_model" "Error" {
 resource "aws_api_gateway_resource" "general_board" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_rest_api.api.root_resource_id
-  path_part     = "general_board"
+  path_part     = "general-board"
 }
 
 resource "aws_api_gateway_resource" "board_categories" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_resource.general_board.id
-  path_part     = "board_categories"
+  path_part     = "board-categories"
 }
 
 resource "aws_api_gateway_method" "BoardCategoriesOptions" {
@@ -461,7 +484,7 @@ resource "aws_api_gateway_integration_response" "ListBoardCategories" {
 resource "aws_api_gateway_resource" "board_members" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_resource.general_board.id
-  path_part     = "board_members"
+  path_part     = "board-members"
 }
 
 resource "aws_api_gateway_method" "BoardMembersOptions" {
@@ -675,7 +698,7 @@ resource "aws_api_gateway_integration_response" "ListBoardMembers" {
 resource "aws_api_gateway_resource" "leadership_positions" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_rest_api.api.root_resource_id
-  path_part     = "leadership_positions"
+  path_part     = "leadership-positions"
 }
 
 resource "aws_api_gateway_method" "LeadershipPositionsOptions" {
@@ -883,6 +906,138 @@ resource "aws_api_gateway_integration_response" "ListLeadershipPositions" {
   depends_on = [
     aws_api_gateway_integration.ListLeadershipPositions,
     aws_api_gateway_method_response.ListLeadershipPositions_200
+  ]
+}
+
+resource "aws_api_gateway_resource" "leadership_position_record" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  parent_id     = aws_api_gateway_resource.leadership_positions.id
+  path_part     = "{id}"
+}
+
+resource "aws_api_gateway_method" "LeadershipPositionRecordOptions" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  resource_id   = aws_api_gateway_resource.leadership_position_record.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "LeadershipPositionRecordOptions" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.leadership_position_record.id
+  http_method             = aws_api_gateway_method.LeadershipPositionRecordOptions.http_method
+  type                    = "MOCK"
+  cache_key_parameters    = []
+  request_parameters      = {}
+  passthrough_behavior    = "WHEN_NO_MATCH"
+
+  request_templates = {
+    "application/json" = jsonencode({
+      statusCode = 200
+    })
+  }
+}
+
+resource "aws_api_gateway_method_response" "LeadershipPositionRecordOptions" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.leadership_position_record.id
+  http_method = aws_api_gateway_method.LeadershipPositionRecordOptions.http_method
+  status_code = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+    "method.response.header.Access-Control-Allow-Headers" = false
+    "method.response.header.Access-Control-Allow-Methods" = false
+  }
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
+resource "aws_api_gateway_integration_response" "LeadershipPositionRecordOptions" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.leadership_position_record.id
+  http_method = aws_api_gateway_method.LeadershipPositionRecordOptions.http_method
+  status_code = 200
+
+  response_templates = {
+    "application/json" = ""
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,DELETE,OPTIONS'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.LeadershipPositionRecordOptions,
+    aws_api_gateway_method_response.LeadershipPositionRecordOptions
+  ]
+}
+
+resource "aws_api_gateway_method" "DeleteLeadershipPositionRecord" {
+  rest_api_id           = aws_api_gateway_rest_api.api.id
+  resource_id           = aws_api_gateway_resource.leadership_position_record.id
+  http_method           = "DELETE"
+  authorization         = "CUSTOM"
+  authorizer_id         = aws_api_gateway_authorizer.lambda_okta_jwt.id
+  request_validator_id  = aws_api_gateway_request_validator.Body.id
+
+  request_parameters = {
+    "method.request.path.id" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "DeleteLeadershipPositionRecord" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.leadership_position_record.id
+  http_method             = aws_api_gateway_method.DeleteLeadershipPositionRecord.http_method
+  credentials             = aws_iam_role.db_write.arn
+  type                    = "AWS"
+  uri                     = "arn:aws:apigateway:us-east-2:dynamodb:action/DeleteItem"
+  integration_http_method = "POST"
+  cache_key_parameters    = []
+  request_parameters      = { "integration.request.path.id" = "method.request.path.id" }
+  passthrough_behavior    = "NEVER"
+
+  request_templates = {
+    "application/json" = local.request_templates.delete_leadership_position
+  }
+
+  depends_on = [aws_dynamodb_table.database]
+}
+
+resource "aws_api_gateway_method_response" "DeleteLeadershipPositionRecord_200" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.leadership_position_record.id
+  http_method = aws_api_gateway_method.DeleteLeadershipPositionRecord.http_method
+  status_code = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+  }
+}
+
+resource "aws_api_gateway_integration_response" "DeleteLeadershipPositionRecord" {
+  rest_api_id       = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.leadership_position_record.id
+  http_method       = aws_api_gateway_method.DeleteLeadershipPositionRecord.http_method
+  status_code       = 200
+  selection_pattern = 200
+
+  response_templates = {
+    "application/json" = local.response_templates.delete_leadership_position
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.DeleteLeadershipPositionRecord,
+    aws_api_gateway_method_response.DeleteLeadershipPositionRecord_200
   ]
 }
 
@@ -1256,11 +1411,26 @@ resource "aws_api_gateway_deployment" "api" {
       local.models.minister,
       local.models.array_of_minister,
       local.models.error,
+      local.models.board_category,
+      local.models.board_member,
+      local.models.leadership_position,
       local.request_templates.create_minister,
       local.request_templates.list_ministers,
+      local.request_templates.create_board_category,
+      local.request_templates.list_board_categories,
+      local.request_templates.create_board_member,
+      local.request_templates.list_board_members,
+      local.request_templates.create_leadership_position,
+      local.request_templates.list_leadership_positions,
       local.response_templates.create_minister,
       local.response_templates.list_ministers,
-      "force"
+      local.response_templates.create_board_category,
+      local.response_templates.list_board_categories,
+      local.response_templates.create_board_member,
+      local.response_templates.list_board_members,
+      local.response_templates.create_leadership_position,
+      local.response_templates.list_leadership_positions,
+      "force-2"
     ]))
   }
 
