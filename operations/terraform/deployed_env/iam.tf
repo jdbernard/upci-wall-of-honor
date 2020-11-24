@@ -71,7 +71,7 @@ resource "aws_iam_role_policy_attachment" "db_read" {
 
 data "aws_iam_policy_document" "db_write" {
   statement {
-    actions   = [ "dynamodb:PutItem" ]
+    actions   = [ "dynamodb:PutItem", "dynamodb:DeleteItem" ]
     effect    = "Allow"
     resources = [ aws_dynamodb_table.database.arn ]
   }
