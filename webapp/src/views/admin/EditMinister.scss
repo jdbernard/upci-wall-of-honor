@@ -2,9 +2,11 @@
 @import "~@/styles/forSize.mixin";
 
 #edit-minister.admin-content-view {
-  .header {
+  header > div {
     align-items: flex-end;
     border-bottom: solid thin var(--color-fg);
+
+    .record-options { margin-left: auto; }
   }
 
   .minister-details {
@@ -36,7 +38,7 @@
   #edit-minister.admin-content-view {
     height: 100vh;
 
-    .header {
+    header {
       margin-top: 7.05rem;
 
       .record-options > * { display: block; }
@@ -180,7 +182,7 @@
     }
 
     &.preview {
-      .header, .minister-details, .actions {
+      header, .minister-details, .actions {
         filter: blur(2px);
       }
     }
@@ -204,7 +206,7 @@
 
 @include forSize(ultrawide) {
   #edit-minister.admin-content-view {
-    .header { margin-top: 9.45rem; }
+    header { margin-top: 9.45rem; }
     .minister-details {
       margin-top: $spacer-lg 0;
 

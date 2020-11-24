@@ -1,0 +1,33 @@
+@import "~@/styles/vars";
+
+.minister-select {
+  position: relative;
+
+  .minister-list {
+    background-color: var(--color-bg);
+    border: solid thin var(--color-fg);
+    display: none;
+    padding: 0.25em 0.5em;
+    position: absolute;
+    top: 1.3em;
+    width: 100%;
+    z-index: 1;
+
+    li {
+      list-style: none;
+    }
+  }
+
+  &:focus, &:focus-within {
+    .minister-list {
+      display: block;
+      &.hidden { display: none; }
+
+      .no-matches {
+        font-style: italic;
+        font-size: 0.8em;
+        padding-top: 0.25em;
+      }
+    }
+  }
+}

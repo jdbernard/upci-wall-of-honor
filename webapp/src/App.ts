@@ -9,19 +9,25 @@ import {
   faAngleDoubleRight,
   faAngleLeft,
   faAngleRight,
+  faBuilding,
   faCheck,
   faCheckCircle,
   faExclamationTriangle,
+  faGripLines,
   faInfoCircle,
+  faPencilAlt,
   faSearch,
   faSearchMinus,
   faSearchPlus,
   faSitemap,
   faSpinner,
   faTimes,
+  faTrash,
   faUpload,
   faUser,
-  faUserPlus
+  faUserPlus,
+  faUsers,
+  faUserTie
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -29,11 +35,14 @@ library.add(
   faAngleDoubleRight,
   faAngleLeft,
   faAngleRight,
+  faBuilding,
   faCheck,
   faCheckCircle,
   faCheckSquare as IconDefinition,
   faExclamationTriangle,
+  faGripLines,
   faInfoCircle,
+  faPencilAlt,
   faSearch,
   faSearchMinus,
   faSearchPlus,
@@ -41,9 +50,12 @@ library.add(
   faSpinner,
   faSquare as IconDefinition,
   faTimes,
+  faTrash,
   faUpload,
   faUser,
-  faUserPlus
+  faUserPlus,
+  faUsers,
+  faUserTie
 );
 
 @Component({})

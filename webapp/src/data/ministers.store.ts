@@ -3,7 +3,7 @@ import { List, Set } from 'immutable';
 import { ReplaySubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { logService } from '@jdbernard/logging';
-import apiHttp from '@/data/api-client';
+import { default as apiHttp, fetchAllPages } from '@/data/api-client';
 import {
   Minister,
   fromDTO,
@@ -16,29 +16,17 @@ const logger = logService.getLogger('/data/ministers.store');
 
 export class MinistersStore {
   private http: AxiosInstance;
-  private initialLoad = true;
   private _ministers = List<Minister>();
   private _ministers$ = new ReplaySubject<List<Minister>>(1);
+  private _livingMinistersWithBio$: null | Observable<List<Minister>> = null;
 
   private _ministersForState$: {
     [key: string]: Observable<List<Minister>>;
   } = {};
 
   constructor(http: AxiosInstance) {
-    (window as any).MinisterStore = this;
     this.http = http;
     this._ministers$.subscribe(list => (this._ministers = list));
-  }
-
-  public getMinistersForState$(state: RecordState): Observable<List<Minister>> {
-    if (!this._ministersForState$[state]) {
-      this._ministersForState$[state] = this._ministers$.pipe(
-        map(l => l.filter(m => m.state === state))
-      );
-      this.fetchMinisters(state);
-    }
-
-    return this._ministersForState$[state];
   }
 
   public get ministers$(): Observable<List<Minister>> {
@@ -57,6 +45,27 @@ export class MinistersStore {
     }
 
     return this._ministers$;
+  }
+
+  public get livingMinistersWithBio$(): Observable<List<Minister>> {
+    if (!this._livingMinistersWithBio$) {
+      this._livingMinistersWithBio$ = this.ministers$.pipe(
+        map(list => list.filter(m => !m.isDeceased && m.details))
+      );
+    }
+
+    return this._livingMinistersWithBio$;
+  }
+
+  public getMinistersForState$(state: RecordState): Observable<List<Minister>> {
+    if (!this._ministersForState$[state]) {
+      this._ministersForState$[state] = this._ministers$.pipe(
+        map(l => l.filter(m => m.state === state))
+      );
+      this.fetchMinisters(state);
+    }
+
+    return this._ministersForState$[state];
   }
 
   public async persistMinister(m: Minister): Promise<Minister> {
@@ -86,22 +95,13 @@ export class MinistersStore {
 
     try {
       // Fetch and parse the ministers list
-      let newList = List<Minister>();
-      let resp = await this.http.get(
+      const pages = await fetchAllPages(
+        this.http,
         '/ministers' + (state ? `?state=${state}` : '')
       );
-      newList = List<Minister>(resp.data.ministers.map(fromDTO));
-
-      while (resp.data.nextPageStartsAfter) {
-        resp = await this.http.get(
-          '/ministers?startAfter=' +
-            resp.data.nextPageStartsAfter +
-            (state ? `?state=${state}` : '')
-        );
-        newList = newList.concat(
-          List<Minister>(resp.data.ministers.map(fromDTO))
-        );
-      }
+      const newList = List<Minister>(
+        pages.reduce((acc, page) => acc.concat(page.ministers), []).map(fromDTO)
+      );
 
       if (state) {
         // If we've pulled a specific state we need to merge it with our

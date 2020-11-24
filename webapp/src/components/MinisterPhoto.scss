@@ -23,7 +23,6 @@
   .photo-frame {
     background: #464225;
     border-radius: 2px;
-    margin-bottom: $spacer;
     padding: 0.125em;
     width: 11.625em;
 
@@ -46,6 +45,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-top: $spacer;
 
     > * { margin: 0 $spacer-sm $spacer-sm $spacer-sm; }
   }
@@ -80,5 +80,5 @@
 }
 
 @include forSize(ultrawide) {
-  .minister-photo .photo-frame { margin-bottom: $spacer-md; }
+  .minister-photo .edit-controls { margin-top: $spacer-md; }
 }

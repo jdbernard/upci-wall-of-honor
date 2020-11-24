@@ -165,7 +165,7 @@ export default class MinisterPhotoComponent extends Vue {
         this.$emit('change', photo);
         this.uploading = false;
       })
-      .catch(err => {
+      .catch(() => {
         toastService.makeToast({
           type: 'error',
           duration: 10000,

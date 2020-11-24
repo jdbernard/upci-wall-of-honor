@@ -1,6 +1,6 @@
 <template>
   <div id="minister-biography">
-    <div v-if="minister && minister.ootfYearInducted" class="header">
+    <header v-if="minister && minister.ootfYearInducted">
       <div class="logo-and-title">
         <OotFLogo />
         <div>
@@ -8,12 +8,12 @@
           <h2>United Pentecostal Church International</h2>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div v-else class="header">
+    <header v-else>
       <h1>Wall of Honor</h1>
       <h2>Deceased Ministers of the UPCI</h2>
-    </div>
+    </header>
 
     <div class="divider">
       <img src="../assets/img/decorative-line.svg" />

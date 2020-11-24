@@ -1,6 +1,6 @@
 <template>
   <div id="order-of-the-faith">
-    <div class="header">
+    <header>
       <div class="logo-and-title">
         <router-link :to="{ name: 'OrderOfTheFaith' }">
           <OotFLogo v-if="!onOverview" />
@@ -15,7 +15,7 @@
         @search="doSearch"
         :years="years"
       ></SearchBarComponent>
-    </div>
+    </header>
 
     <div v-if="onOverview" :class="{ updating }" class="divider">
       <img src="../assets/img/decorative-line.svg" />

@@ -1,6 +1,6 @@
 <template>
   <div id="ministers-table" class="admin-content-view" :class="filter">
-    <div class="header">
+    <header>
       <div>
         <h1 v-if="filter == 'all'">All Ministers</h1>
         <h1 v-else-if="filter == 'ootf'">Order of the Faith Ministers</h1>
@@ -13,11 +13,11 @@
             v-model="tableFilters.name.value"
           />
         </div>
+        <router-link class="button action" :to="{ name: 'AdminAddMinister' }">
+          <fa-icon icon="user-plus"></fa-icon> Add
+        </router-link>
       </div>
-      <router-link class="button action" :to="{ name: 'AdminAddMinister' }">
-        <fa-icon icon="user-plus"></fa-icon> Add
-      </router-link>
-    </div>
+    </header>
     <div v-if="!loading" class="table-container" pageSize="50">
       <v-table
         :data="ministerRowData"

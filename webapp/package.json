@@ -41,6 +41,7 @@
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^8.5.1",
     "vue-router": "^3.4.3",
+    "vuedraggable": "^2.24.3",
     "vuejs-smart-table": "0.0.5"
   },
   "devDependencies": {

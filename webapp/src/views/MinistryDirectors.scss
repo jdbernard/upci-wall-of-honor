@@ -1,0 +1,68 @@
+@import "~@/styles/vars";
+
+#ministry-directors {
+  .curtain {
+    width: 100%;
+
+    .drapes {
+      background-color: var(--color-bg);
+      opacity: 1;
+      padding-top: $spacer-md;
+    }
+
+    .fringe {
+      background-image: linear-gradient(
+        to bottom,
+        var(--color-bg), rgba(18, 24, 32, 0)
+      );
+    }
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+
+    .drapes {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .leaders-list {
+    list-style: none;
+    margin: 10rem auto $spacer-md auto;
+    width: 28rem;
+
+    li {
+      margin-bottom: $spacer;
+
+      a {
+        color: var(--color-fg);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        text-decoration: none;
+
+        .minister-photo { font-size: 16px; }
+        > div { margin-left: $spacer; }
+
+        .name {
+          text-shadow: 0px 4px 4px var(--color-shadow);
+          font-family: var(--header-font-family);
+          font-size: 2em;
+          font-weight: 400;
+        }
+        .ministry-name, .title {
+          text-shadow: 0px 4px 4px var(--color-shadow);
+          font-family: var(--body-font-family);
+          font-size: 1.125em;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

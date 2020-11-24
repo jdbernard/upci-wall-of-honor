@@ -1,0 +1,48 @@
+@import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
+
+#admin-ministry-directors.admin-content-view {
+}
+
+
+@include forSize(notMobile) {
+  #admin-ministry-directors.admin-content-view {
+    .table-container {
+      margin-top: 1em;
+
+      table {
+        width: 100%;
+
+        input[type="text"] {
+          width: 100%;
+        }
+
+        td:last-child {
+          width: 8em;
+        }
+
+        .row-actions {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+          height: 1.7em;
+
+          button:not(.action) { opacity: 0; }
+        }
+
+        tr:hover, tr:focus, tr:focus-within {
+          .row-actions button { opacity: 1; }
+        }
+      }
+    }
+  }
+}
+
+@include forSize(ultrawide) {
+  #admin-ministry-directors.admin-content-view {
+    .table-container {
+      margin-top: 1.2em;
+    }
+  }
+}

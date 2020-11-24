@@ -16,14 +16,32 @@
           <span class="link-title">Order of the Faith</span>
         </router-link>
       </li>
-      <!--
       <li>
-        <router-link :to="{ name: 'AdminAllMinistersTable' }">
+        <router-link :to="{ name: 'AdminLeadership' }">
           <div><fa-icon icon="sitemap"></fa-icon></div>
-          <span class="link-title">Executive Leadership</span>
+          <span class="link-title">Leadership</span>
         </router-link>
+        <ul>
+          <li>
+            <router-link :to="{ name: 'AdminGeneralOfficials' }">
+              <div><fa-icon icon="user-tie"></fa-icon></div>
+              <span class="link-title">General Officials</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'AdminMinistryDirectors' }">
+              <div><fa-icon icon="building"></fa-icon></div>
+              <span class="link-title">Ministry Directors</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'AdminGeneralBoard' }">
+              <div><fa-icon icon="users"></fa-icon></div>
+              <span class="link-title">General Board</span>
+            </router-link>
+          </li>
+        </ul>
       </li>
-      -->
     </ul>
 
     <div class="debug-info">

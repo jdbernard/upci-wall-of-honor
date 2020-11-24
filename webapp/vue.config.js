@@ -10,14 +10,14 @@ process.env.VUE_APP_UPCI_WOH_GIT_HASH = JSON.stringify(
 module.exports = {
   devServer: {
     host: 'localhost'
-  },
+  }
 
-  configureWebpack: {
+  /*configureWebpack: {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
         routes: ['/', '/deceased-ministers', '/order-of-the-faith', '/admin']
       })
     ]
-  }
+  }*/
 };
