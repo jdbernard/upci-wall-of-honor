@@ -3,12 +3,16 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import Auth from '@okta/okta-vue';
 //import AdminLoginView from '@/views/admin/AdminLogin.vue';
 import AdministrationView from '@/views/admin/Administration.vue';
+import AdminGeneralOfficialsView from '@/views/admin/GeneralOfficials.vue';
+import AdminMinistryDirectorsView from '@/views/admin/MinistryDirectors.vue';
+import AdminGeneralBoardView from '@/views/admin/GeneralBoard.vue';
 import EditMinisterView from '@/views/admin/EditMinister.vue';
 import MinisterTableView from '@/views/admin/MinisterTable.vue';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
 import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
-//import IndexView from '@/views/Index.vue';
 import MinisterBiographyView from '@/views/MinisterBiography.vue';
+import GeneralOfficialsView from '@/views/GeneralOfficials.vue';
+import MinistryDirectorsView from '@/views/MinistryDirectors.vue';
 import { parseSearchQuery } from '@/data/search.model';
 
 Vue.use(VueRouter);
@@ -28,6 +32,29 @@ const routes: Array<RouteConfig> = [
     meta: { title: 'Order of the Faith - UPCI Wall Of Honor' },
     component: OrderOfTheFaithView,
     props: route => ({ searchState: parseSearchQuery(route) })
+  },
+  {
+    path: '/leadership/executive',
+    name: 'GeneralOfficials',
+    meta: { title: 'Executive Leadership - UPCI Wall Of Honor' },
+    component: GeneralOfficialsView
+  },
+  {
+    path: '/leadership/ministries',
+    name: 'MinistryDirectors',
+    meta: { title: 'Ministries Leadership - UPCI Wall Of Honor' },
+    component: MinistryDirectorsView
+  },
+  {
+    path: '/leadership/general-board',
+    name: 'GeneralBoard',
+    meta: { title: 'General Board - UPCI Wall Of Honor' },
+    component: GeneralOfficialsView
+  },
+  {
+    path: '/leadership',
+    name: 'Leadership',
+    redirect: { name: 'GeneralOfficials' }
   },
   {
     path: '/minister-bio/:slug',
@@ -70,6 +97,38 @@ const routes: Array<RouteConfig> = [
           title: 'Order of the Faith - UPCI Wall of Honor'
         },
         props: { filter: 'ootf' }
+      },
+      {
+        path: 'leadership',
+        name: 'AdminLeadership',
+        redirect: { name: 'AdminGeneralOfficials' }
+      },
+      {
+        path: 'leadership/executive',
+        name: 'AdminGeneralOfficials',
+        component: AdminGeneralOfficialsView,
+        meta: {
+          requiresAuth: true,
+          title: 'Executive Leadership - UPCI Wall of Honor'
+        }
+      },
+      {
+        path: 'leadership/ministries',
+        name: 'AdminMinistryDirectors',
+        component: AdminMinistryDirectorsView,
+        meta: {
+          requiresAuth: true,
+          title: 'Ministry Directors - UPCI Wall of Honor'
+        }
+      },
+      {
+        path: 'leadership/general-board',
+        name: 'AdminGeneralBoard',
+        component: AdminGeneralBoardView,
+        meta: {
+          requiresAuth: true,
+          title: 'General Board - UPCI Wall of Honor'
+        }
       },
       {
         path: 'edit-minister/:slug',

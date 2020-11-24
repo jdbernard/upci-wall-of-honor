@@ -4,9 +4,9 @@
   "userInactivityDurationSeconds": 600,
   "apiBaseUrl": "https://api.dev.upciwallofhonor.org/v1",
   "okta": {
-    "issuer": "https://auth.upciwallofhonor.org/oath2/default",
+    "issuer": "https://auth.upciwallofhonor.org/oauth2/default",
     "clientId": "0oa115fxhzKAOY3Db4x7",
-    "redirectUri": "https://dev.upci-woh.jdb-labs.com/admin/login",
-    "postLoginRedirectUri": "https://dev.upci-woh.jdb-labs.com"
+    "redirectUri": "https://dev.upciwallofhonor.org/admin/login",
+    "postLoginRedirectUri": "https://dev.upciwallofhonor.org"
   }
 }

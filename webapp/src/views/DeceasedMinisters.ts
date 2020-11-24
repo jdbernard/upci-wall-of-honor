@@ -2,7 +2,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Collection, List } from 'immutable';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import MinistersStore from '@/data/ministers.store';
+import ministersStore from '@/data/ministers.store';
 import MinisterNameplate from '@/components/MinisterNameplate.vue';
 import SearchBarComponent from '@/components/SearchBar.vue';
 import YearDividerComponent from '@/components/YearDivider.vue';
@@ -27,7 +27,7 @@ export default class DeceasedMinistersView extends Vue {
   >([]);
   public ministers = List<Minister>();
 
-  private destroyed$ = new Subject();
+  private destroyed$ = new Subject<void>();
 
   get matchingMinisters(): List<Minister> {
     return this.ministers.filter(m => {
@@ -91,7 +91,7 @@ export default class DeceasedMinistersView extends Vue {
 
   private async mounted() {
     // (window as any).DCM = this;
-    MinistersStore.ministers$
+    ministersStore.ministers$
       .pipe(takeUntil(this.destroyed$))
       .subscribe(this.updateMinisters);
 

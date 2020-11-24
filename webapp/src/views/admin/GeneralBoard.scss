@@ -1,0 +1,11 @@
+@import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
+
+#admin-general-officials.admin-content-view {
+}
+
+
+@include forSize(notMobile) {
+  #admin-general-officials.admin-content-view {
+  }
+}

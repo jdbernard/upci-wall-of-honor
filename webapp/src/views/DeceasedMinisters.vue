@@ -1,6 +1,6 @@
 <template>
   <div id="deceased-ministers">
-    <div class="header curtain">
+    <header class="curtain">
       <div class="drapes">
         <h1>Wall of Honor</h1>
         <h2>Deceased Ministers of the UPCI</h2>
@@ -11,7 +11,7 @@
         ></SearchBarComponent>
       </div>
       <div class="fringe"></div>
-    </div>
+    </header>
     <div
       v-if="!loading && !(searchState.type === 'by-name' && searchState.value)"
       @mouseover="pauseScroll()"

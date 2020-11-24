@@ -25,4 +25,8 @@ export default class PowerToolsComponent extends Vue {
   public mounted() {
     logger.info('PowerTools enabled.');
   }
+
+  public perform10to11Migration() {
+    logger.info({ function: 'perform10to11Migration' });
+  }
 }

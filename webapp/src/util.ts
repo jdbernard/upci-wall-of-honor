@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { List, Map } from 'immutable';
 
 export function momentComparator(a?: Moment, b?: Moment) {
   if (!a && !b) {
@@ -70,4 +71,25 @@ export function stringifyQuery(obj: { [key: string]: string }): string {
         .join('&')
     : null;
   return res ? `?${res}` : '';
+}
+
+export function keyBy<
+  K extends string | number | symbol,
+  V extends Record<string, any> /* eslint-disable-line */
+>(list: List<V>, propName: string): Map<K, List<V>> {
+  const rawMap = {} as Record<K, V[]>;
+  list.forEach(item => {
+    const key: K = item[propName];
+    if (!rawMap[key]) {
+      rawMap[key] = [item];
+    } else {
+      rawMap[key].push(item);
+    }
+  });
+
+  return Map<K, List<V>>().withMutations(map => {
+    for (const key in rawMap) {
+      map.set(key, List<V>(rawMap[key]));
+    }
+  });
 }

@@ -22,4 +22,17 @@
   label {
     font-style: italic;
   }
+
+  a {
+    color: var(--color-fg);
+    text-shadow: 0px 0px 4px var(--color-fg)
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+
+    &:visited {
+      text-shadow: unset;
+    }
+  }
 }

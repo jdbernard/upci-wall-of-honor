@@ -18,7 +18,7 @@
         font-family: "Gotham XNarrow";
         text-align: left;
         text-decoration: none;
-        height: 3.5rem;
+        height: 1.75em;
         width: 100%;
 
         div {
@@ -57,7 +57,23 @@
           }
         }
       }
+
+      ul {
+        display: none;
+        padding: 0;
+
+        li {
+          font-size: 1.5rem;
+
+          a { padding-left: 3em; }
+        }
+      }
+
+      .router-link-active + ul {
+        display: block;
+      }
     }
+
   }
 
   .debug-info {
@@ -171,6 +187,8 @@
 
     ul {
       padding: $spacer 0;
+
+      li ul { padding: 0; }
 
       a {
         padding: 0.5rem 0;

@@ -7,20 +7,22 @@
     v-if="minister"
     @submit.prevent.stop=""
   >
-    <div class="header">
-      <h1>{{ minister | nameDisplay }}</h1>
-      <div class="record-options">
-        <CheckboxComponent :checked="ootfChecked" @change="setOotF"
-          >Order of the Faith</CheckboxComponent
-        >
-        <CheckboxComponent
-          :checked="bioChecked"
-          :disabled="ootfChecked"
-          @change="setHasBio"
-          >Include a biography</CheckboxComponent
-        >
+    <header>
+      <div>
+        <h1>{{ minister | nameDisplay }}</h1>
+        <div class="record-options">
+          <CheckboxComponent :checked="ootfChecked" @change="setOotF"
+            >Order of the Faith</CheckboxComponent
+          >
+          <CheckboxComponent
+            :checked="bioChecked"
+            :disabled="ootfChecked"
+            @change="setHasBio"
+            >Include a biography</CheckboxComponent
+          >
+        </div>
       </div>
-    </div>
+    </header>
     <div class="minister-details" v-if="minister">
       <MinisterPhotoComponent
         v-if="bioChecked"
