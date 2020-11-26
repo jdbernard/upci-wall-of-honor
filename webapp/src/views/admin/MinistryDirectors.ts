@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Ref, Vue } from 'vue-property-decorator';
 import draggable from 'vuedraggable';
 import { List, Map } from 'immutable';
 import { combineLatest, Subject } from 'rxjs';
@@ -41,6 +41,9 @@ export default class AdminMinistryDirectorsView extends Vue {
   public loading = true;
   public leaders = Array<LeadershipPosition>();
   public livingMinisters = Map<string, Minister>();
+
+  @Ref('firstInput') readonly firstInput!: HTMLInputElement;
+
   private destroyed$ = new Subject<void>();
 
   public newData: RowEditData = {
@@ -85,11 +88,12 @@ export default class AdminMinistryDirectorsView extends Vue {
         this.newData.saving = false;
         this.newData.ministerId = null;
         this.newData.ministryName = '';
+        this.firstInput.focus();
       })
       .catch(error => {
         toastService.makeToast({
           duration: 10000,
-          type: 'success',
+          type: 'error',
           message:
             'Unable to add the ' + newLeader.ministryName ||
             '' + ' ' + newLeader.title
@@ -99,7 +103,7 @@ export default class AdminMinistryDirectorsView extends Vue {
       });
   }
 
-  public editPosition(l: LeadershipPosition) {
+  public editDirector(l: LeadershipPosition) {
     Vue.set(this.rowEdits, l.id, {
       title: l.title,
       ministerId: l.ministerId,
@@ -113,7 +117,7 @@ export default class AdminMinistryDirectorsView extends Vue {
     logger.trace({ function: 'cancelEdit' });
   }
 
-  public removePosition(l: LeadershipPosition) {
+  public removeDirector(l: LeadershipPosition) {
     leadershipPositionsStore
       .removeLeadershipPosition(l)
       .then(() => {
@@ -133,7 +137,7 @@ export default class AdminMinistryDirectorsView extends Vue {
       });
   }
 
-  public savePosition(l: LeadershipPosition) {
+  public saveDirector(l: LeadershipPosition) {
     const validData = this.validateAndReport(this.rowEdits[l.id]);
     if (!validData) return;
 
@@ -188,7 +192,7 @@ export default class AdminMinistryDirectorsView extends Vue {
       return { message: 'No data provided.', isValid: false };
     }
 
-    if (!d.title) {
+    if (!d.title || !d.title.trim()) {
       return {
         message: 'Missing value for the position title.',
         isValid: false
@@ -206,8 +210,35 @@ export default class AdminMinistryDirectorsView extends Vue {
     return { message: '', isValid: true, validData: d as ValidRowData };
   }
 
+  public reorder!: () => void;
+
+  private reorderImpl() {
+    logger.trace({ function: 'reorder' });
+    Promise.all(
+      this.leaders.map((l, idx) => {
+        l.sortOrder = idx;
+        return leadershipPositionsStore.persistLeadershipPosition(l);
+      })
+    )
+      .then(() => {
+        toastService.makeToast({
+          duration: 5000,
+          type: 'success',
+          message: 'Re-ordered list saved.'
+        });
+      })
+      .catch(() => {
+        toastService.makeToast({
+          duration: 10000,
+          type: 'error',
+          message: 'Unable to re-order the list.'
+        });
+        this.leaders.sort((a, b) => a.sortOrder - b.sortOrder);
+      });
+  }
+
   private async mounted() {
-    //this.reorder = debounce(this.reorderImpl, 4000);
+    this.reorder = debounce(this.reorderImpl, 4000);
 
     combineLatest(
       leadershipPositionsStore.leadershipPositions$,

@@ -31,6 +31,7 @@
                 type="text"
                 name="title"
                 v-model="rowEdits[l.id].ministryName"
+                @keyup.enter="saveDirector(l)"
               />
               <span v-else>{{ l.ministryName }}</span>
             </td>
@@ -40,6 +41,7 @@
                 type="text"
                 name="title"
                 v-model="rowEdits[l.id].title"
+                @keyup.enter="saveDirector(l)"
               />
               <span v-else>{{ l.title }}</span>
             </td>
@@ -56,14 +58,14 @@
               <div class="row-actions">
                 <button
                   class="low-profile"
-                  @click="editPosition(l)"
+                  @click="editDirector(l)"
                   v-if="!rowEdits[l.id]"
                 >
                   <fa-icon icon="pencil-alt"></fa-icon>
                 </button>
                 <button
                   class="low-profile"
-                  @click="removePosition(l)"
+                  @click="removeDirector(l)"
                   v-if="!rowEdits[l.id]"
                 >
                   <fa-icon icon="trash"></fa-icon>
@@ -78,7 +80,7 @@
                 <button
                   class="action"
                   :disabled="!validateEdits(rowEdits[l.id]).isValid"
-                  @click="savePosition(l)"
+                  @click="saveDirector(l)"
                   v-if="rowEdits[l.id]"
                 >
                   <span v-if="rowEdits[l.id].saving">
@@ -96,9 +98,11 @@
             <td>
               <input
                 type="text"
-                name="new-title"
+                name="new-ministry-name"
                 placeholder="enter new ministry name"
                 v-model="newData.ministryName"
+                ref="firstInput"
+                @keyup.enter="addDirector"
               />
             </td>
             <td>
@@ -107,6 +111,7 @@
                 name="new-title"
                 placeholder="enter new title"
                 v-model="newData.title"
+                @keyup.enter="addDirector"
               />
             </td>
             <td>

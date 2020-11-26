@@ -30,6 +30,7 @@
                 type="text"
                 name="title"
                 v-model="rowEdits[l.id].title"
+                @keyup.enter="saveLeader(l)"
               />
               <span v-else>{{ l.title }}</span>
             </td>
@@ -46,14 +47,14 @@
               <div class="row-actions">
                 <button
                   class="low-profile"
-                  @click="editPosition(l)"
+                  @click="editLeader(l)"
                   v-if="!rowEdits[l.id]"
                 >
                   <fa-icon icon="pencil-alt"></fa-icon>
                 </button>
                 <button
                   class="low-profile"
-                  @click="removePosition(l)"
+                  @click="removeLeader(l)"
                   v-if="!rowEdits[l.id]"
                 >
                   <fa-icon icon="trash"></fa-icon>
@@ -68,7 +69,7 @@
                 <button
                   class="action"
                   :disabled="!validateEdits(rowEdits[l.id]).isValid"
-                  @click="savePosition(l)"
+                  @click="saveLeader(l)"
                   v-if="rowEdits[l.id]"
                 >
                   <span v-if="rowEdits[l.id].saving">
@@ -89,6 +90,8 @@
                 name="new-title"
                 placeholder="enter new title"
                 v-model="newData.title"
+                ref="firstInput"
+                @keyup.enter="addLeader"
               />
             </td>
             <td>

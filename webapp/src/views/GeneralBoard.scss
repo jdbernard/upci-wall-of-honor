@@ -1,7 +1,6 @@
 @import "~@/styles/vars";
 
-#deceased-ministers {
-
+#general-board {
   .curtain {
     width: 100%;
 
@@ -29,75 +28,77 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-
-      .search {
-        margin-top: $spacer;
-      }
     }
 
     .fringe { height: $spacer; }
   }
 
-  .ministers-list, .loading {
-    margin-top: 9.5rem;
+  .member-list, .loading {
+    list-style: none;
+    margin-top: 7.5rem;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 4rem;
     opacity: 1;
+    padding: 0;
     transition: opacity 1s;
     width: 28rem;
 
-    ul {
+    ul.member-nameplates {
       list-style: none;
       padding: 0;
       margin: 0;
 
       li {
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
         padding: 0;
-        margin: 0;
+        margin: 0 $spacer-xs;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+
+        .name {
+          font-family: var(--header-font-family);
+          font-size: 1.5em;
+        }
+
+        .title {
+          font-family: var(--body-font-family);
+          font-size: 1.125em;
+        }
+
+        hr {
+          background-color: var(--color-fg);
+          height: 1px;
+          flex-grow: 1;
+          margin: 0 $spacer-sm;
+          opacity: 0.15;
+          z-index: -1;
+        }
+      }
+
+      &.no-title li {
+        width: 48%;
+
+        hr { display: none; }
       }
     }
 
     .curtain {
-      margin-top: $spacer-md;
       position: sticky;
-      top: 9rem;
+      top: 7rem;
 
       .drapes { padding-top: 1rem; }
       .fringe { height: $spacer-md; }
     }
 
-    .minister-nameplates {
+    .member-nameplates {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       align-items: flex-end;
-      justify-content: center;
-    }
-
-    &.reset { opacity: 0; }
-  }
-
-  .loading {
-    ul.minister-nameplates li {
-      animation: 2s ease-in infinite alternate pulseOpacity;
-      background-color: var(--color-accent1);
-      border-radius: 4px;
-      height: 4rem;
-      margin-top: 10.5rem;
-      margin: 1rem;
-      width: 12rem;
+      justify-content: space-between;
     }
   }
-}
-
-html, body {
-  scrollbar-width: none;
-}
-
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }

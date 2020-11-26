@@ -7,6 +7,13 @@
 
 @include forSize(notMobile) {
   #admin-general-officials.admin-content-view {
+    header {
+      display: flex;
+      align-items: baseline;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
     .table-container {
       margin-top: 1em;
 
