@@ -1,0 +1,40 @@
+@import "~@/styles/vars.scss";
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 28rem;
+
+  > * { filter: drop-shadow(0 4px 4px var(--color-shadow)); }
+
+  .left, .right {
+    flex-grow: 1;
+    position: relative;
+
+    hr {
+      position: absolute;
+      width: calc(100% - 2em);
+      top: 0.9em
+    }
+
+    img {
+      position: absolute;
+      height: 0.15em;
+      width: auto;
+      top: calc(50% - 0.075em);
+    }
+  }
+
+  .left img, .right hr { right: 0; }
+  .right img, .left hr { left: 0; }
+  .right img { transform: scaleX(-1); }
+
+  .name-label {
+    font-family: var(--body-font-family);
+    font-size: var(--header-font-size-sm);
+    font-weight: 500;
+    margin: 0 .5rem;
+    white-space: nowrap;
+  }
+}
