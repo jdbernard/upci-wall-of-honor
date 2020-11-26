@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { List, Map } from 'immutable';
+import { BoardMember } from '@/data/board-member.model';
 
 export function momentComparator(a?: Moment, b?: Moment) {
   if (!a && !b) {
@@ -99,4 +100,26 @@ export interface HasSortOrder {
 }
 export function bySortOrder(a: HasSortOrder, b: HasSortOrder): number {
   return a.sortOrder - b.sortOrder;
+}
+
+const KNOWN_SUFFIXES = ['jr', 'jr.', 'sr', 'sr.', 'i', 'ii', 'iii', 'iv', 'v'];
+export function byLastName(a: BoardMember, b: BoardMember): number {
+  const aParts = a.name.split(' ');
+  const bParts = b.name.split(' ');
+
+  let idxA = aParts.length - 1;
+  let idxB = bParts.length - 1;
+
+  let lastA = aParts[idxA].toLowerCase();
+  let lastB = bParts[idxB].toLowerCase();
+
+  while (idxA > 0 && KNOWN_SUFFIXES.indexOf(lastA) >= 0) {
+    lastA = aParts[--idxA].toLowerCase();
+  }
+
+  while (idxB > 0 && KNOWN_SUFFIXES.indexOf(lastB) >= 0) {
+    lastB = bParts[--idxB].toLowerCase();
+  }
+
+  return lastA.localeCompare(lastB);
 }

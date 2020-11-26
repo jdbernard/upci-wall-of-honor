@@ -65,4 +65,12 @@
       }
     }
   }
+
+  .button-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: $spacer-md auto;
+    width: 28rem;
+  }
 }

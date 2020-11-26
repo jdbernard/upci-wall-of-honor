@@ -39,6 +39,14 @@
         </router-link>
       </li>
     </ul>
+    <div class="button-bar">
+      <router-link class="button" :to="{ name: 'GeneralOfficials' }">
+        Executive Leadership
+      </router-link>
+      <router-link class="button" :to="{ name: 'GeneralBoard' }">
+        General Board
+      </router-link>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./MinistryDirectors.ts"></script>

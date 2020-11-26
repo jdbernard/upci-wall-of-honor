@@ -9,7 +9,7 @@ import boardCategoriesStore from '@/data/board-categories.store';
 import boardMembersStore from '@/data/board-members.store';
 import NamedDivider from '@/components/NamedDivider.vue';
 import { AutoScrollService } from '@/services/auto-scroll.service.ts';
-import { keyBy, bySortOrder } from '@/util';
+import { keyBy, byLastName, bySortOrder } from '@/util';
 
 const logger = logService.getLogger('/leadership/general-board');
 
@@ -64,17 +64,8 @@ export default class GeneralBoardView extends Vue {
     value: [List<BoardCategory>, List<BoardMember>]
   ) {
     this.categories = value[0].sort(bySortOrder);
-    this.members = keyBy(value[1].sort(this.byLastName), 'categoryId');
+    this.members = keyBy(value[1].sort(byLastName), 'categoryId');
     this.loading = false;
-  }
-
-  private byLastName(a: BoardMember, b: BoardMember): number {
-    const aParts = a.name.split(' ');
-    const bParts = b.name.split(' ');
-    const lastA = aParts[aParts.length - 1];
-    const lastB = bParts[bParts.length - 1];
-
-    return lastA.localeCompare(lastB);
   }
 
   private onScrollEnd() {
