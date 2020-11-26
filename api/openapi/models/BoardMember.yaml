@@ -1,6 +1,6 @@
 ---
 type: object
-required: ['id', 'name', 'category']
+required: ['id', 'name', 'categoryId']
 properties:
 
   id:
@@ -22,7 +22,3 @@ properties:
   categoryId:
     description: The ID of the BoardCategory in which this member belongs.
     type: string
-
-  sortOrder:
-    description: Index used to sort the members.
-    type: number
