@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import ministersStore from '@/data/ministers.store';
 import { Minister } from '@/data/minister.model';
 import { nameDisplay } from '@/filters/name-display.filter';
+import AdminLoadingPlaceholder from '@/components/admin/LoadingPlaceholder.vue';
 
 const logger = logService.getLogger('/admin/minister-table');
 const DATE_FORMAT = 'MMM. D, YYYY';
@@ -23,7 +24,9 @@ export interface MinisterRowData {
   slug: string;
 }
 
-@Component({})
+@Component({
+  components: { AdminLoadingPlaceholder }
+})
 export default class MinisterTableView extends Vue {
   @Prop({ default: 'all' })
   public filter!: string;

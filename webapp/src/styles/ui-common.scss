@@ -157,3 +157,8 @@ select {
 }
 
 .divider { text-align: center; }
+
+hr {
+  background-color: var(--color-fg);
+  height: 1px;
+}

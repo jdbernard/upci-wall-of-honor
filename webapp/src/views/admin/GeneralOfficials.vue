@@ -112,6 +112,10 @@
         </draggable>
       </table>
     </div>
+    <AdminLoadingPlaceholder
+      v-if="loading"
+      resourceName="officials"
+    ></AdminLoadingPlaceholder>
   </div>
 </template>
 <script lang="ts" src="./GeneralOfficials.ts"></script>

@@ -7,11 +7,18 @@ import { BoardCategory } from '@/data/board-category.model';
 import { BoardMember } from '@/data/board-member.model';
 import boardCategoriesStore from '@/data/board-categories.store';
 import boardMembersStore from '@/data/board-members.store';
-import { keyBy } from '@/util';
+import AdminLoadingPlaceholder from '@/components/admin/LoadingPlaceholder.vue';
+import toastService from '@/components/admin/toast.service';
+import { keyBy, bySortOrder } from '@/util';
 
 const logger = logService.getLogger('/admin/leadership/executive');
 
-@Component({})
+@Component({
+  components: {
+    AdminLoadingPlaceholder,
+    draggable
+  }
+})
 export default class AdminGeneralBoardView extends Vue {
   public loading = true;
   public categories = List<BoardCategory>();
