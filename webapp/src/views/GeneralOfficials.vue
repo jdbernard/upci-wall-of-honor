@@ -32,6 +32,14 @@
         </router-link>
       </li>
     </ul>
+    <div class="button-bar">
+      <router-link class="button" :to="{ name: 'GeneralBoard' }">
+        General Board
+      </router-link>
+      <router-link class="button" :to="{ name: 'MinistryDirectors' }">
+        Ministry Directors
+      </router-link>
+    </div>
   </div>
 </template>
 <script lang="ts" src="./GeneralOfficials.ts"></script>

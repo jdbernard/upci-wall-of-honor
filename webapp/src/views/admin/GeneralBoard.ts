@@ -11,7 +11,7 @@ import boardCategoriesStore from '@/data/board-categories.store';
 import boardMembersStore from '@/data/board-members.store';
 import AdminLoadingPlaceholder from '@/components/admin/LoadingPlaceholder.vue';
 import toastService from '@/components/admin/toast.service';
-import { keyBy, bySortOrder } from '@/util';
+import { keyBy, byLastName, bySortOrder } from '@/util';
 
 const logger = logService.getLogger('/admin/leadership/executive');
 
@@ -223,21 +223,12 @@ export default class AdminGeneralBoardView extends Vue {
     this.destroyed$.complete();
   }
 
-  private byLastName(a: BoardMember, b: BoardMember): number {
-    const aParts = a.name.split(' ');
-    const bParts = b.name.split(' ');
-    const lastA = aParts[aParts.length - 1];
-    const lastB = bParts[bParts.length - 1];
-
-    return lastA.localeCompare(lastB);
-  }
-
   private updateCategoriesAndMembers(
     value: [List<BoardCategory>, List<BoardMember>]
   ) {
     this.categories = value[0].sort(bySortOrder);
     this.members = keyBy(
-      value[1].sort(this.byLastName),
+      value[1].sort(byLastName),
       'categoryId'
     ).toJS() as Record<string, BoardMember[]>;
     this.loading = false;
