@@ -85,16 +85,7 @@
         :totalPages="totalPages"
       ></smart-pagination>
     </div>
-    <div v-if="loading" class="loading-placeholder">
-      <div>Loading ministers...</div>
-      <div class="loading-animation">
-        <div class="rect1"></div>
-        <div class="rect2"></div>
-        <div class="rect3"></div>
-        <div class="rect4"></div>
-        <div class="rect5"></div>
-      </div>
-    </div>
+    <AdminLoadingPlaceholder v-if="loading"></AdminLoadingPlaceholder>
   </div>
 </template>
 <script lang="ts" src="./MinisterTable.ts"></script>

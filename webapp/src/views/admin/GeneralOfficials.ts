@@ -15,6 +15,7 @@ import ministersStore from '@/data/ministers.store';
 import { Minister } from '@/data/minister.model';
 import MinisterSelect from '@/components/MinisterSelect.vue';
 import toastService from '@/components/admin/toast.service';
+import AdminLoadingPlaceholder from '@/components/admin/LoadingPlaceholder.vue';
 
 const logger = logService.getLogger('/admin/leadership/executive');
 
@@ -31,6 +32,7 @@ interface ValidRowData {
 
 @Component({
   components: {
+    AdminLoadingPlaceholder,
     MinisterSelect,
     draggable
   }
