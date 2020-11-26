@@ -11,6 +11,7 @@ import MinisterTableView from '@/views/admin/MinisterTable.vue';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
 import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
 import MinisterBiographyView from '@/views/MinisterBiography.vue';
+import GeneralBoardView from '@/views/GeneralBoard.vue';
 import GeneralOfficialsView from '@/views/GeneralOfficials.vue';
 import MinistryDirectorsView from '@/views/MinistryDirectors.vue';
 import { parseSearchQuery } from '@/data/search.model';
@@ -49,7 +50,7 @@ const routes: Array<RouteConfig> = [
     path: '/leadership/general-board',
     name: 'GeneralBoard',
     meta: { title: 'General Board - UPCI Wall Of Honor' },
-    component: GeneralOfficialsView
+    component: GeneralBoardView
   },
   {
     path: '/leadership',

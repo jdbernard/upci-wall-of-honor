@@ -1,11 +1,53 @@
 @import "~@/styles/vars";
 @import "~@/styles/forSize.mixin";
 
-#admin-general-officials.admin-content-view {
+#admin-general-board.admin-content-view {
+  ul.board-categories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+
+    li {
+      opacity: 0.6;
+      margin-right: $spacer-md;
+
+      h3 button { padding: 0; }
+
+      &.active-category {
+        opacity: 1;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .category-contents {
+    display: none;
+
+    &.active-category { display: block; }
+
+    .no-match { display: none; }
+  }
 }
 
 
 @include forSize(notMobile) {
-  #admin-general-officials.admin-content-view {
+  #admin-general-board.admin-content-view {
+    .table-container {
+      margin-top: 0.7em;
+
+      table { margin-top: $spacer; }
+    }
+  }
+}
+
+@include forSize(ultrawide) {
+  #admin-general-board.admin-content-view {
+    .table-container {
+      margin-top: 1.3rem;
+
+      table { margin-top: $spacer; }
+    }
   }
 }

@@ -12,7 +12,7 @@
     <ul
       class="leaders-list"
       @mouseover="pauseScroll()"
-      @mouseOut="scroll(1000)"
+      @mouseout="scroll(1000)"
       v-if="!loading"
     >
       <li v-for="l in leaders" :key="l.id">

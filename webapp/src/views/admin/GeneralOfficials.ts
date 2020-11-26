@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Ref, Vue } from 'vue-property-decorator';
 import draggable from 'vuedraggable';
 import { List, Map } from 'immutable';
 import { combineLatest, Subject } from 'rxjs';
@@ -50,6 +50,7 @@ export default class AdminGeneralOfficialsView extends Vue {
 
   public rowEdits = {} as Record<string, RowEditData>;
   private destroyed$ = new Subject<void>();
+  @Ref('firstInput') readonly firstInput!: HTMLInputElement;
 
   public addLeader() {
     const validData = this.validateAndReport(this.newData);
@@ -79,11 +80,12 @@ export default class AdminGeneralOfficialsView extends Vue {
         this.newData.title = '';
         this.newData.saving = false;
         this.newData.ministerId = null;
+        this.firstInput.focus();
       })
       .catch(error => {
         toastService.makeToast({
           duration: 10000,
-          type: 'success',
+          type: 'error',
           message: 'Unable to add the ' + newLeader.title + ' position.'
         });
         this.newData.saving = false;
@@ -91,7 +93,7 @@ export default class AdminGeneralOfficialsView extends Vue {
       });
   }
 
-  public editPosition(l: LeadershipPosition) {
+  public editLeader(l: LeadershipPosition) {
     Vue.set(this.rowEdits, l.id, {
       title: l.title,
       ministerId: l.ministerId,
@@ -104,7 +106,7 @@ export default class AdminGeneralOfficialsView extends Vue {
     logger.trace({ function: 'cancelEdit' });
   }
 
-  public removePosition(l: LeadershipPosition) {
+  public removeLeader(l: LeadershipPosition) {
     leadershipPositionsStore
       .removeLeadershipPosition(l)
       .then(() => {
@@ -123,7 +125,7 @@ export default class AdminGeneralOfficialsView extends Vue {
       });
   }
 
-  public savePosition(l: LeadershipPosition) {
+  public saveLeader(l: LeadershipPosition) {
     const validData = this.validateAndReport(this.rowEdits[l.id]);
     if (!validData) return;
 
@@ -174,7 +176,7 @@ export default class AdminGeneralOfficialsView extends Vue {
       return { message: 'No data provided.', isValid: false };
     }
 
-    if (!d.title) {
+    if (!d.title || !d.title.trim()) {
       return {
         message: 'Missing value for the position title.',
         isValid: false

@@ -93,3 +93,10 @@ export function keyBy<
     }
   });
 }
+
+export interface HasSortOrder {
+  sortOrder: number;
+}
+export function bySortOrder(a: HasSortOrder, b: HasSortOrder): number {
+  return a.sortOrder - b.sortOrder;
+}
