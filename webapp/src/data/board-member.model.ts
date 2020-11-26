@@ -5,15 +5,13 @@ export interface BoardMember {
   name: string;
   title?: string;
   categoryId: string;
-  sortOrder: number;
 }
 
 export function newBoardMember(): BoardMember {
   return {
     id: uuid(),
     name: '',
-    categoryId: '',
-    sortOrder: 0
+    categoryId: ''
   };
 }
 
