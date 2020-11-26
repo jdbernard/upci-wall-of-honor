@@ -270,7 +270,7 @@ resource "aws_api_gateway_resource" "general_board" {
 resource "aws_api_gateway_resource" "board_categories" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_resource.general_board.id
-  path_part     = "board-categories"
+  path_part     = "categories"
 }
 
 resource "aws_api_gateway_method" "BoardCategoriesOptions" {
@@ -484,7 +484,7 @@ resource "aws_api_gateway_integration_response" "ListBoardCategories" {
 resource "aws_api_gateway_resource" "board_members" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_resource.general_board.id
-  path_part     = "board-members"
+  path_part     = "members"
 }
 
 resource "aws_api_gateway_method" "BoardMembersOptions" {
@@ -694,6 +694,140 @@ resource "aws_api_gateway_integration_response" "ListBoardMembers" {
     aws_api_gateway_method_response.ListBoardMembers_200
   ]
 }
+
+resource "aws_api_gateway_resource" "board_member_record" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  parent_id     = aws_api_gateway_resource.board_members.id
+  path_part     = "{id}"
+}
+
+resource "aws_api_gateway_method" "BoardMemberRecordOptions" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  resource_id   = aws_api_gateway_resource.board_member_record.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "BoardMemberRecordOptions" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.board_member_record.id
+  http_method             = aws_api_gateway_method.BoardMemberRecordOptions.http_method
+  type                    = "MOCK"
+  cache_key_parameters    = []
+  request_parameters      = {}
+  passthrough_behavior    = "WHEN_NO_MATCH"
+
+  request_templates = {
+    "application/json" = jsonencode({
+      statusCode = 200
+    })
+  }
+}
+
+resource "aws_api_gateway_method_response" "BoardMemberRecordOptions" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.board_member_record.id
+  http_method = aws_api_gateway_method.BoardMemberRecordOptions.http_method
+  status_code = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+    "method.response.header.Access-Control-Allow-Headers" = false
+    "method.response.header.Access-Control-Allow-Methods" = false
+  }
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
+
+resource "aws_api_gateway_integration_response" "BoardMemberRecordOptions" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.board_member_record.id
+  http_method = aws_api_gateway_method.BoardMemberRecordOptions.http_method
+  status_code = 200
+
+  response_templates = {
+    "application/json" = ""
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'DELETE,OPTIONS'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.BoardMemberRecordOptions,
+    aws_api_gateway_method_response.BoardMemberRecordOptions
+  ]
+}
+
+
+resource "aws_api_gateway_method" "DeleteBoardMemberRecord" {
+  rest_api_id           = aws_api_gateway_rest_api.api.id
+  resource_id           = aws_api_gateway_resource.board_member_record.id
+  http_method           = "DELETE"
+  authorization         = "CUSTOM"
+  authorizer_id         = aws_api_gateway_authorizer.lambda_okta_jwt.id
+  request_validator_id  = aws_api_gateway_request_validator.Body.id
+
+  request_parameters = {
+    "method.request.path.id" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "DeleteBoardMemberRecord" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.board_member_record.id
+  http_method             = aws_api_gateway_method.DeleteBoardMemberRecord.http_method
+  credentials             = aws_iam_role.db_write.arn
+  type                    = "AWS"
+  uri                     = "arn:aws:apigateway:us-east-2:dynamodb:action/DeleteItem"
+  integration_http_method = "POST"
+  cache_key_parameters    = []
+  request_parameters      = { "integration.request.path.id" = "method.request.path.id" }
+  passthrough_behavior    = "NEVER"
+
+  request_templates = {
+    "application/json" = local.request_templates.delete_board_member
+  }
+
+  depends_on = [aws_dynamodb_table.database]
+}
+
+resource "aws_api_gateway_method_response" "DeleteBoardMemberRecord_200" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.board_member_record.id
+  http_method = aws_api_gateway_method.DeleteBoardMemberRecord.http_method
+  status_code = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+  }
+}
+
+resource "aws_api_gateway_integration_response" "DeleteBoardMemberRecord" {
+  rest_api_id       = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.board_member_record.id
+  http_method       = aws_api_gateway_method.DeleteBoardMemberRecord.http_method
+  status_code       = 200
+  selection_pattern = 200
+
+  response_templates = {
+    "application/json" = local.response_templates.delete_board_member
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.DeleteBoardMemberRecord,
+    aws_api_gateway_method_response.DeleteBoardMemberRecord_200
+  ]
+}
+
 
 resource "aws_api_gateway_resource" "leadership_positions" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
@@ -1430,7 +1564,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.response_templates.list_board_members,
       local.response_templates.create_leadership_position,
       local.response_templates.list_leadership_positions,
-      "force-2"
+      "forceits"
     ]))
   }
 
