@@ -61,6 +61,18 @@ export class BoardMembersStore {
       throw error;
     }
   }
+
+  public async removeBoardMember(p: BoardMember): Promise<void> {
+    logger.trace({ function: 'removeBoardMember' });
+    try {
+      await this.http.delete('/board-members/' + p.id);
+      const idx = this._members.findIndex(x => x.id === p.id);
+      this._members$.next(this._members.splice(idx, 1));
+    } catch (error) {
+      logger.error({ function: 'removeBoardMember', error });
+      throw error;
+    }
+  }
 }
 
 export default new BoardMembersStore(apiHttp);
