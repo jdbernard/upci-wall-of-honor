@@ -1,4 +1,3 @@
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
 const path = require('path');
 
 process.env.VUE_APP_UPCI_WOH_VERSION = require('./package.json').version;
@@ -10,28 +9,30 @@ process.env.VUE_APP_UPCI_WOH_GIT_HASH = JSON.stringify(
 module.exports = {
   devServer: {
     host: 'localhost'
-  }
+  },
 
-  configureWebpack: {
-    plugins: [
-      new PrerenderSPAPlugin({
-        staticDir: path.join(__dirname, 'dist'),
-        routes: [
-          '/',
-          '/deceased-ministers',
-          '/order-of-the-faith',
-          '/leadership',
-          '/leadership/executive',
-          '/leadership/general-board',
-          '/leadership/ministries',
-          '/admin',
-          '/admin/all-ministers',
-          '/admin/leadership/executive',
-          '/admin/leadership/general-board',
-          '/admin/leadership/ministries',
-          '/admin/order-of-the-faith'
-        ]
-      })
-    ]
+  pluginOptions: {
+    prerenderSpa: {
+      registry: undefined,
+      renderRoutes: [
+        '/',
+        '/deceased-ministers',
+        '/order-of-the-faith',
+        '/leadership',
+        '/leadership/executive',
+        '/leadership/ministries',
+        '/leadership/general-board',
+        '/admin',
+        '/admin/all-ministers',
+        '/admin/order-of-the-faith',
+        '/admin/leadership',
+        '/admin/leadership/executive',
+        '/admin/leadership/ministries',
+        '/admin/leadership/general-board'
+      ],
+      useRenderEvent: false,
+      headless: true,
+      onlyProduction: true
+    }
   }
 };

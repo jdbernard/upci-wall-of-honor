@@ -4,5 +4,4 @@ import { logService } from '@jdbernard/logging';
 const logger = logService.getLogger('LOGGER_NAME');
 
 @Component({})
-export default class ComponentTemplate extends Vue {
-}
+export default class ComponentTemplate extends Vue {}

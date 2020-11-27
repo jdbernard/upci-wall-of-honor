@@ -1,22 +1,17 @@
 {
   "name": "upci-wall-of-honor-webapp",
   "version": "1.1.0-rc3",
-  "author": "Jonathan Bernard <jonathan@jdbernard.com>",
   "description": "UPCI Wall of Honor display application.",
-  "license": "SEE LICENSE IN LICENSE",
+  "author": "Jonathan Bernard <jonathan@jdbernard.com>",
   "scripts": {
     "serve": "npx servor dist",
-    "vue-serve": "vue-cli-service serve",
     "build": "npm run test:unit && vue-cli-service build",
-    "build-no-test": "vue-cli-service build",
-    "build-dev": "vue-cli-service test:unit && vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://git.jdb-labs.com/jdb-labs/upci-wall-of-honor.git"
+    "lint": "vue-cli-service lint",
+    "build-dev": "vue-cli-service test:unit && vue-cli-service build --mode development",
+    "build-no-test": "vue-cli-service build",
+    "vue-serve": "vue-cli-service serve"
   },
   "dependencies": {
     "@cfworker/uuid": "^1.5.0",
@@ -64,10 +59,16 @@
     "eslint-plugin-vue": "^6.2.2",
     "git-describe": "^4.0.4",
     "node-sass": "^4.14.1",
-    "prerender-spa-plugin": "^3.4.0",
+    "prerender-spa-plugin": "^3.2.1",
     "sass-loader": "^8.0.2",
     "servor": "^4.0.2",
     "typescript": "~3.8.3",
+    "vue-cli-plugin-prerender-spa": "~1.1.6",
     "vue-template-compiler": "^2.6.12"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://git.jdb-labs.com/jdb-labs/upci-wall-of-honor.git"
   }
 }
