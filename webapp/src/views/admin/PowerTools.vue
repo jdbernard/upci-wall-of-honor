@@ -10,7 +10,11 @@
         <button class="primary" @click="m11LoadMinisters">
           1.1 Migration: Load Ministers
         </button>
-        <button class="primary" @click="m11BatchPersistMinisters(allMinisters)">
+        <button
+          class="primary"
+          @click="m11BatchPersistMinisters(allMinisters)"
+          :disabled="runningBatchPersist"
+        >
           1.1 Migration: Persist Ministers
         </button>
       </div>
