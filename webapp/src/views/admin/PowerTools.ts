@@ -15,6 +15,11 @@ import { nameDisplay } from '@/filters/name-display.filter';
 
 const logger = logService.getLogger('/admin/power-tools');
 
+interface BatchPersistResults<T> {
+  succeeded: List<T>;
+  failed: List<T>;
+}
+
 @Component({})
 export default class PowerToolsComponent extends Vue {
   public minister = {
@@ -28,10 +33,18 @@ export default class PowerToolsComponent extends Vue {
 
   public mounted() {
     logger.info('PowerTools enabled.');
+    /* eslint-disable */
+    (window as any).PowerTools = this;
+    console.log((window as any).PowerTools);
+    /* eslint-enable */
   }
 
   public allMinisters = List<Minister>();
-  public failedRecords = List<Minister>();
+  public persistResults = {
+    succeeded: List<Minister>(),
+    failed: List<Minister>()
+  } as BatchPersistResults<Minister>;
+
   public output = '';
 
   public m11LoadMinisters() {
@@ -47,48 +60,84 @@ export default class PowerToolsComponent extends Vue {
     });
   }
 
-  public async m11PersistMinisters() {
-    let toPersist = List<Minister>(this.allMinisters);
-    this.failedRecords = List<Minister>();
+  public async m11BatchPersistMinisters() {
+    const results = await this.m11PersistInBatches({
+      toPersist: this.allMinisters,
+      reportProgress: msg => (this.output += msg + '<br/>')
+    });
 
-    while (toPersist.size > 0) {
-      const batch = toPersist.take(50);
-      toPersist = toPersist.skip(50);
-      this.output +=
-        'Persisting next batch of 50. ' +
-        toPersist.size +
-        ' records to follow.';
-      const batchResult = await this.m11PersistBatch(batch);
-      this.failedRecords = this.failedRecords.concat(batchResult.failed);
-      if (batchResult.failed.size === batch.size) {
-        this.output += 'Batch failed completely. Aborting.';
-        return;
-      }
-    }
+    this.persistResults = results.reduce((acc, res) => ({
+      succeeded: acc.succeeded.concat(res.succeeded),
+      failed: acc.failed.concat(res.failed)
+    }));
 
     this.output +=
       'Persisted ' +
-      (this.allMinisters.size - this.failedRecords.size) +
+      this.persistResults.succeeded.size +
       '. <span class="error">Failed to update ' +
-      this.failedRecords.size +
+      this.persistResults.failed.size +
       ' records.<br/>';
   }
 
-  private async m11PersistBatch(
-    batch: List<Minister>
-  ): Promise<{ failed: List<Minister> }> {
-    const failedRecordsInBatch = List<Minister>();
+  private async m11PersistInBatches(params: {
+    toPersist: List<Minister>;
+    batchSize?: number;
+    batchDelayInMs?: number;
+    results?: List<BatchPersistResults<Minister>>;
+    reportProgress?: (msg: string) => void;
+  }): Promise<List<BatchPersistResults<Minister>>> {
+    const results = params.results || List<BatchPersistResults<Minister>>();
+    const { toPersist, reportProgress } = params;
+
+    if (toPersist.size === 0) return results;
+
+    const batchSize = params.batchSize || 50;
+    const batchDelayInMs = params.batchDelayInMs || 500;
+    const batch = toPersist.take(batchSize);
+    const good: Minister[] = [];
+    const bad: Minister[] = [];
+
+    if (reportProgress) {
+      reportProgress(
+        'Persisting batch of ' +
+          batchSize +
+          '. ' +
+          Math.max(0, toPersist.size - batchSize) +
+          ' records to follow.'
+      );
+    }
+
     return Promise.allSettled(
-      batch.map(m =>
-        ministersStore.persistMinister(m).catch(error => {
-          this.output +=
-            '<span class="error">Failed to persist ' +
-            nameDisplay(m) +
-            '.<br/>';
-          logger.error({ function: 'm11PersistMinisters', error });
-          failedRecordsInBatch.push(m);
-        })
-      )
-    ).then(() => ({ failed: failedRecordsInBatch }));
+      batch
+        .map(m =>
+          ministersStore
+            .persistMinister(m)
+            .then(() => good.push(m))
+            .catch(() => {
+              if (reportProgress) {
+                reportProgress(
+                  '<span class="error">Failed to persist ' +
+                    nameDisplay(m) +
+                    '.<br/>'
+                );
+              }
+              bad.push(m);
+            })
+        )
+        .push(
+          new Promise<void>(resolve => setTimeout(resolve, batchDelayInMs))
+        )
+    ).then(() =>
+      this.m11PersistInBatches({
+        toPersist: toPersist.skip(batchSize),
+        batchSize: batchSize,
+        batchDelayInMs: batchDelayInMs,
+        results: results.push({
+          succeeded: List<Minister>(good),
+          failed: List<Minister>(bad)
+        }),
+        reportProgress: reportProgress
+      })
+    );
   }
 }
