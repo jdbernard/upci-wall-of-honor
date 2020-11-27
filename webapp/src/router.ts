@@ -8,6 +8,7 @@ import AdminMinistryDirectorsView from '@/views/admin/MinistryDirectors.vue';
 import AdminGeneralBoardView from '@/views/admin/GeneralBoard.vue';
 import EditMinisterView from '@/views/admin/EditMinister.vue';
 import MinisterTableView from '@/views/admin/MinisterTable.vue';
+import AdminPowerToolsView from '@/views/admin/PowerTools.vue';
 import DeceasedMinistersView from '@/views/DeceasedMinisters.vue';
 import OrderOfTheFaithView from '@/views/OrderOfTheFaith.vue';
 import MinisterBiographyView from '@/views/MinisterBiography.vue';
@@ -147,6 +148,15 @@ const routes: Array<RouteConfig> = [
         meta: {
           requiresAuth: true,
           title: 'Add Minister - UPCI Wall of Honor'
+        }
+      },
+      {
+        path: 'power-tools',
+        name: 'PowerTools',
+        component: AdminPowerToolsView,
+        meta: {
+          requiresAuth: true,
+          title: 'PowerTools - USE CAUTION'
         }
       }
     ]
