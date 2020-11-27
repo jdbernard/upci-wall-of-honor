@@ -231,6 +231,8 @@ resource "aws_api_gateway_model" "ArrayOfBoardCategory" {
   name          = "ArrayOfBoardCategory"
   content_type  = "application/json"
   schema        = local.models.array_of_board_category
+
+  depends_on = [ aws_api_gateway_model.BoardCategory ]
 }
 
 resource "aws_api_gateway_model" "ArrayOfBoardMember" {
@@ -238,6 +240,8 @@ resource "aws_api_gateway_model" "ArrayOfBoardMember" {
   name          = "ArrayOfBoardMember"
   content_type  = "application/json"
   schema        = local.models.array_of_board_member
+
+  depends_on = [ aws_api_gateway_model.BoardMember ]
 }
 
 resource "aws_api_gateway_model" "ArrayOfLeadershipPosition" {
@@ -245,6 +249,8 @@ resource "aws_api_gateway_model" "ArrayOfLeadershipPosition" {
   name          = "ArrayOfLeadershipPosition"
   content_type  = "application/json"
   schema        = local.models.array_of_leadership_position
+
+  depends_on = [ aws_api_gateway_model.LeadershipPosition ]
 }
 
 resource "aws_api_gateway_model" "ArrayOfMinister" {
@@ -252,6 +258,8 @@ resource "aws_api_gateway_model" "ArrayOfMinister" {
   name          = "ArrayOfMinister"
   content_type  = "application/json"
   schema        = local.models.array_of_minister
+
+  depends_on = [ aws_api_gateway_model.Minister ]
 }
 
 resource "aws_api_gateway_model" "Error" {
@@ -1564,7 +1572,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.response_templates.list_board_members,
       local.response_templates.create_leadership_position,
       local.response_templates.list_leadership_positions,
-      "forceits"
+      "force"
     ]))
   }
 
