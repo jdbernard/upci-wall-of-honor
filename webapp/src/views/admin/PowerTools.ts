@@ -47,30 +47,48 @@ export default class PowerToolsComponent extends Vue {
     });
   }
 
-  public m11PersistMinisters() {
-    Promise.allSettled(
-      this.allMinisters.map(m => {
-        return ministersStore.persistMinister(m).catch(error => {
+  public async m11PersistMinisters() {
+    let toPersist = List<Minister>(this.allMinisters);
+    this.failedRecords = List<Minister>();
+
+    while (toPersist.size > 0) {
+      const batch = toPersist.take(50);
+      toPersist = toPersist.skip(50);
+      this.output +=
+        'Persisting next batch of 50. ' +
+        toPersist.size +
+        ' records to follow.';
+      const batchResult = await this.m11PersistBatch(batch);
+      this.failedRecords = this.failedRecords.concat(batchResult.failed);
+      if (batchResult.failed.size === batch.size) {
+        this.output += 'Batch failed completely. Aborting.';
+        return;
+      }
+    }
+
+    this.output +=
+      'Persisted ' +
+      (this.allMinisters.size - this.failedRecords.size) +
+      '. <span class="error">Failed to update ' +
+      this.failedRecords.size +
+      ' records.<br/>';
+  }
+
+  private async m11PersistBatch(
+    batch: List<Minister>
+  ): Promise<{ failed: List<Minister> }> {
+    const failedRecordsInBatch = List<Minister>();
+    return Promise.allSettled(
+      batch.map(m =>
+        ministersStore.persistMinister(m).catch(error => {
           this.output +=
             '<span class="error">Failed to persist ' +
             nameDisplay(m) +
             '.<br/>';
           logger.error({ function: 'm11PersistMinisters', error });
-          this.failedRecords.push(m);
-        });
-      })
-    ).then(() => {
-      logger.info({
-        function: 'm11PrsistMinisters',
-        ministersPersisted: this.allMinisters.size - this.failedRecords.size,
-        failedRecords: this.failedRecords.size
-      });
-      this.output +=
-        'Persisted ' +
-        (this.allMinisters.size - this.failedRecords.size) +
-        '. <span class="error">Failed to update ' +
-        this.failedRecords.size +
-        ' records.<br/>';
-    });
+          failedRecordsInBatch.push(m);
+        })
+      )
+    ).then(() => ({ failed: failedRecordsInBatch }));
   }
 }
