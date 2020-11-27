@@ -44,6 +44,7 @@ export default class PowerToolsComponent extends Vue {
     succeeded: List<Minister>(),
     failed: List<Minister>()
   } as BatchPersistResults<Minister>;
+  public runningBatchPersist = false;
 
   public output = '';
 
@@ -61,6 +62,7 @@ export default class PowerToolsComponent extends Vue {
   }
 
   public async m11BatchPersistMinisters() {
+    this.runningBatchPersist = true;
     const results = await this.m11PersistInBatches({
       toPersist: this.allMinisters,
       reportProgress: msg => (this.output += msg + '<br/>')
@@ -77,6 +79,8 @@ export default class PowerToolsComponent extends Vue {
       '. <span class="error">Failed to update ' +
       this.persistResults.failed.size +
       ' records.<br/>';
+
+    this.runningBatchPersist = false;
   }
 
   private async m11PersistInBatches(params: {
