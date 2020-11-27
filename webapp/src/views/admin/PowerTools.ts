@@ -11,6 +11,7 @@ import {
   toDTO
 } from '@/data/minister.model';
 import ministersStore from '@/data/ministers.store';
+import { nameDisplay } from '@/filters/name-display.filter';
 
 const logger = logService.getLogger('/admin/power-tools');
 
@@ -31,10 +32,13 @@ export default class PowerToolsComponent extends Vue {
 
   public allMinisters = List<Minister>();
   public failedRecords = List<Minister>();
+  public output = '';
 
   public m11LoadMinisters() {
     ministersStore.ministers$.pipe(take(1)).subscribe(m => {
       this.allMinisters = m;
+      this.output +=
+        'Loaded ' + this.allMinisters.size + ' minister records.<br/>';
       logger.info({
         function: 'm11LoadMinisters',
         ministersLoaded: this.allMinisters.size,
@@ -47,6 +51,10 @@ export default class PowerToolsComponent extends Vue {
     Promise.allSettled(
       this.allMinisters.map(m => {
         return ministersStore.persistMinister(m).catch(error => {
+          this.output +=
+            '<span class="error">Failed to persist ' +
+            nameDisplay(m) +
+            '.<br/>';
           logger.error({ function: 'm11PersistMinisters', error });
           this.failedRecords.push(m);
         });
@@ -57,6 +65,12 @@ export default class PowerToolsComponent extends Vue {
         ministersPersisted: this.allMinisters.size - this.failedRecords.size,
         failedRecords: this.failedRecords.size
       });
+      this.output +=
+        'Persisted ' +
+        (this.allMinisters.size - this.failedRecords.size) +
+        '. <span class="error">Failed to update ' +
+        this.failedRecords.size +
+        ' records.<br/>';
     });
   }
 }

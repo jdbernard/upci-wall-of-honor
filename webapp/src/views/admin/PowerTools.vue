@@ -6,12 +6,16 @@
     </header>
     <div>
       <hr />
-      <button class="primary" @click="m11LoadMinisters">
-        1.1 Migration: Load Ministers
-      </button>
-      <button class="primary" @click="m11PersistMinisters">
-        1.1 Migration: Persist Ministers
-      </button>
+      <div class="buttons">
+        <button class="primary" @click="m11LoadMinisters">
+          1.1 Migration: Load Ministers
+        </button>
+        <button class="primary" @click="m11PersistMinisters">
+          1.1 Migration: Persist Ministers
+        </button>
+      </div>
+      <div class="output" v-html="output"></div>
+      <button @click="output = ''">Clear Output</button>
     </div>
   </div>
 </template>

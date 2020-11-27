@@ -1,4 +1,5 @@
 @import "~@/styles/vars";
+@import "~@/styles/forSize.mixin";
 
 #power-tools {
   // height: 0;
@@ -6,10 +7,19 @@
   // opacity: 0;
 
   & > div {
-    margin-top: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 2.85rem;
 
-    button {
-      margin: $spacer-sm;
-    }
+    button { margin: $spacer-sm; }
+
+    .output { flex-grow: 1; }
+
+    > button { margin-left: auto; }
   }
+}
+
+@include forSize(ultrawide) {
+  #power-tools > div { margin-top: 3.8rem; }
 }
