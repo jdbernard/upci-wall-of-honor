@@ -1,22 +1,16 @@
+#set ($hasState = $method.request.querystring.state.length() > 0)
+#set ($hasStartId = $method.request.querystring.startAfter.length() > 0)
 {
-  "TableName":"%TABLE_NAME%",
+  "TableName": "%TABLE_NAME%",
   "Limit": 950,
-  "KeyConditionExpression": "record_type = :minister",
-#if ($method.request.querystring.state.length() > 0)
-  "FilterExpression": "#St = :stateVal",
-  "ExpressionAttributeNames": {
-    "#St": "state"
-  },
+  "KeyConditionExpression": "record_type = :minister #if ($hasStartId) AND id > :startId#end",
+#if ($hasState)
+  "FilterExpression": "#st = ":stateVal",
+  "ExpressionAttributeNames": { "#st": "state" },
 #end
   "ExpressionAttributeValues": {
     ":minister": { "S": "minister" }
-#if ($method.request.querystring.state.length() > 0) ,
-    ":stateVal": { "S": "$method.request.querystring.state" }
-#end
+#if ($hasStartId) , ":startId": { "S": "$method.request.querystring.startAfter" }  #end
+#if ($hasState)   , ":stateVal": { "S": "$method.request.querystring.state" }      #end
   }
-#if ($method.request.querystring.startAfter.length() > 0) ,
-  "ExclusiveStartKey": {
-    "id": { "S": "$method.request.querystring.startAfter" }
-  }
-#end
 }
