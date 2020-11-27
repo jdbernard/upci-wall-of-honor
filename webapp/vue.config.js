@@ -12,12 +12,26 @@ module.exports = {
     host: 'localhost'
   }
 
-  /*configureWebpack: {
+  configureWebpack: {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        routes: ['/', '/deceased-ministers', '/order-of-the-faith', '/admin']
+        routes: [
+          '/',
+          '/deceased-ministers',
+          '/order-of-the-faith',
+          '/leadership',
+          '/leadership/executive',
+          '/leadership/general-board',
+          '/leadership/ministries',
+          '/admin',
+          '/admin/all-ministers',
+          '/admin/leadership/executive',
+          '/admin/leadership/general-board',
+          '/admin/leadership/ministries',
+          '/admin/order-of-the-faith'
+        ]
       })
     ]
-  }*/
+  }
 };
