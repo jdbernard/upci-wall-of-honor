@@ -121,6 +121,12 @@ locals {
       "%RECORD_TYPE%", "leadership_position"
     )
 
+    get_leadership_position_record = replace(replace(
+      file("../../../../api/apigateway/request-templates/GetRecord.json.vtl"),
+      "%TABLE_NAME%", aws_dynamodb_table.database.name),
+      "%RECORD_TYPE%", "leadership_position"
+    )
+
   }
 
   response_templates = {
@@ -153,6 +159,7 @@ locals {
     delete_board_category       = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
     delete_board_member         = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
     delete_leadership_position  = file("../../../../api/apigateway/response-templates/EmptyResponse.json.vtl")
+    get_leadership_position_record = file("../../../../api/apigateway/response-templates/SimpleRecord.json.vtl")
   }
 }
 
@@ -1183,6 +1190,97 @@ resource "aws_api_gateway_integration_response" "DeleteLeadershipPositionRecord"
   ]
 }
 
+resource "aws_api_gateway_method" "GetLeadershipPositionRecord" {
+  rest_api_id           = aws_api_gateway_rest_api.api.id
+  resource_id           = aws_api_gateway_resource.leadership_position_record.id
+  http_method           = "GET"
+  authorization         = "NONE"
+  request_validator_id  = aws_api_gateway_request_validator.Parameters.id
+
+  request_parameters = {
+    "method.request.path.id" = true
+  }
+}
+
+resource "aws_api_gateway_integration" "GetLeadershipPositionRecord" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.leadership_position_record.id
+  http_method             = aws_api_gateway_method.GetLeadershipPositionRecord.http_method
+  credentials             = aws_iam_role.db_read.arn
+  type                    = "AWS"
+  uri                     = "arn:aws:apigateway:us-east-2:dynamodb:action/GetItem"
+  integration_http_method = "POST"
+  cache_key_parameters    = []
+  request_parameters      = { "integration.request.path.id" = "method.request.path.id" }
+  passthrough_behavior    = "NEVER"
+
+  request_templates = {
+    "application/json" = local.request_templates.get_leadership_position_record
+  }
+
+  depends_on = [aws_dynamodb_table.database]
+}
+
+resource "aws_api_gateway_method_response" "GetLeadershipPositionRecord_200" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.leadership_position_record.id
+  http_method = aws_api_gateway_method.GetLeadershipPositionRecord.http_method
+  status_code = 200
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+  }
+}
+
+resource "aws_api_gateway_integration_response" "GetLeadershipPositionRecord_200" {
+  rest_api_id       = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.leadership_position_record.id
+  http_method       = aws_api_gateway_method.GetLeadershipPositionRecord.http_method
+  status_code       = 200
+  selection_pattern = 200
+
+  response_templates = {
+    "application/json" = local.response_templates.get_leadership_position_record
+  }
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.GetLeadershipPositionRecord,
+    aws_api_gateway_method_response.GetLeadershipPositionRecord_200
+  ]
+}
+
+resource "aws_api_gateway_method_response" "GetLeadershipPositionRecord_404" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  resource_id = aws_api_gateway_resource.leadership_position_record.id
+  http_method = aws_api_gateway_method.GetLeadershipPositionRecord.http_method
+  status_code = 404
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = false
+  }
+}
+
+resource "aws_api_gateway_integration_response" "GetLeadershipPositionRecord_404" {
+  rest_api_id       = aws_api_gateway_rest_api.api.id
+  resource_id       = aws_api_gateway_resource.leadership_position_record.id
+  http_method       = aws_api_gateway_method.GetLeadershipPositionRecord.http_method
+  status_code       = 404
+  selection_pattern = 404
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'*'"
+  }
+
+  depends_on = [
+    aws_api_gateway_integration.GetLeadershipPositionRecord,
+    aws_api_gateway_method_response.GetLeadershipPositionRecord_404
+  ]
+}
+
 resource "aws_api_gateway_resource" "ministers" {
   rest_api_id   = aws_api_gateway_rest_api.api.id
   parent_id     = aws_api_gateway_rest_api.api.root_resource_id
@@ -1564,6 +1662,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.request_templates.list_board_members,
       local.request_templates.create_leadership_position,
       local.request_templates.list_leadership_positions,
+      local.request_templates.get_leadership_position_record,
       local.response_templates.create_minister,
       local.response_templates.list_ministers,
       local.response_templates.create_board_category,
