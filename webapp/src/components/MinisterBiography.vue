@@ -25,7 +25,6 @@
     <div v-if="minister.ootfYearInducted" class="vital-date">
       <label>Inducted:</label> {{ minister.ootfYearInducted }}
     </div>
-    <hr />
 
     <span v-html="minister.details.biography"></span>
   </article>
