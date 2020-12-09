@@ -1,5 +1,3 @@
-const path = require('path');
-
 process.env.VUE_APP_UPCI_WOH_VERSION = require('./package.json').version;
 
 process.env.VUE_APP_UPCI_WOH_GIT_HASH = JSON.stringify(
@@ -16,19 +14,19 @@ module.exports = {
       registry: undefined,
       renderRoutes: [
         '/',
-        '/deceased-ministers',
-        '/order-of-the-faith',
-        '/leadership',
-        '/leadership/executive',
-        '/leadership/ministries',
-        '/leadership/general-board',
-        '/admin',
-        '/admin/all-ministers',
-        '/admin/order-of-the-faith',
-        '/admin/leadership',
-        '/admin/leadership/executive',
-        '/admin/leadership/ministries',
-        '/admin/leadership/general-board'
+        '/deceased-ministers/',
+        '/order-of-the-faith/',
+        '/leadership/',
+        '/leadership/executive/',
+        '/leadership/ministries/',
+        '/leadership/general-board/',
+        '/admin/',
+        '/admin/all-ministers/',
+        '/admin/order-of-the-faith/',
+        '/admin/leadership/',
+        '/admin/leadership/executive/',
+        '/admin/leadership/ministries/',
+        '/admin/leadership/general-board/'
       ],
       useRenderEvent: false,
       headless: true,
