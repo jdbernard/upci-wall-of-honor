@@ -26,6 +26,15 @@ export class LeadershipPositionsStore {
     return this._leaders$;
   }
 
+  public async findLeadershipPositionById(
+    leadershipPositionId: string
+  ): Promise<LeadershipPosition> {
+    const foundLeader = this._leaders.find(x => x.id === leadershipPositionId);
+    if (foundLeader) return foundLeader;
+
+    return this.fetchLeadershipPosition(leadershipPositionId);
+  }
+
   public async fetchLeadershipPositions() {
     logger.trace({ function: 'fetchLeadershipPositions' });
 
@@ -42,20 +51,27 @@ export class LeadershipPositionsStore {
     }
   }
 
+  public async fetchLeadershipPosition(
+    leadershipPositionId: string
+  ): Promise<LeadershipPosition> {
+    const resp = await this.http.get(
+      '/leadership-positions/' + leadershipPositionId
+    );
+    const leader = resp.data;
+    this.updateLeaders(leader);
+
+    return leader;
+  }
+
   public async persistLeadershipPosition(
     p: LeadershipPosition
   ): Promise<LeadershipPosition> {
-    logger.trace({ function: 'persisLeadershipPosition' });
+    logger.trace({ function: 'persistLeadershipPosition' });
     try {
       const response = await this.http.post('/leadership-positions', p);
       logger.trace({ function: 'persistMinister', response });
 
-      const existingIdx = this._leaders.findIndex(x => x.id === p.id);
-      if (existingIdx < 0) {
-        this._leaders$.next(this._leaders.push(p));
-      } else {
-        this._leaders$.next(this._leaders.set(existingIdx, p));
-      }
+      this.updateLeaders(p);
 
       return p;
     } catch (error) {
@@ -73,6 +89,15 @@ export class LeadershipPositionsStore {
     } catch (error) {
       logger.error({ function: 'removeLeadershipPosition', error });
       throw error;
+    }
+  }
+
+  private updateLeaders(p: LeadershipPosition) {
+    const existingIdx = this._leaders.findIndex(x => x.id === p.id);
+    if (existingIdx < 0) {
+      this._leaders$.next(this._leaders.push(p));
+    } else {
+      this._leaders$.next(this._leaders.set(existingIdx, p));
     }
   }
 }

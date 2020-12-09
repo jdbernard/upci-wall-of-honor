@@ -62,7 +62,10 @@ const routes: Array<RouteConfig> = [
     path: '/minister-bio/:slug',
     name: 'MinisterBiography',
     meta: { title: "Minister's Biography - UPCI Wall of Honor" },
-    component: MinisterBiographyView
+    component: MinisterBiographyView,
+    props: route => ({
+      leadershipPositionId: route.query?.lid
+    })
   },
   {
     path: '/admin/login',

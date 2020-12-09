@@ -19,7 +19,8 @@
         <router-link
           :to="{
             name: 'MinisterBiography',
-            params: { slug: l.minister.slug }
+            params: { slug: l.minister.slug },
+            query: { lid: l.id }
           }"
         >
           <MinisterPhoto :photo="l.minister.details.photo"></MinisterPhoto>

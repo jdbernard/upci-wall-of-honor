@@ -5,7 +5,18 @@
       :photo="minister.details.photo"
     ></MinisterPhotoComponent>
     <h3>{{ minister | nameDisplay }}</h3>
-    <div v-if="minister.dateOfBirth" class="vital-date">
+    <div v-if="leadershipPosition" class="leadership-title">
+      <div
+        v-if="
+          leadershipPosition.ministryName &&
+            leadershipPosition.ministryName !== IGNORED_MINISTRY_NAME
+        "
+      >
+        {{ leadershipPosition.ministryName }}
+      </div>
+      <div>{{ leadershipPosition.title }}</div>
+    </div>
+    <div v-if="!leadershipPosition && minister.dateOfBirth" class="vital-date">
       <label>Born:</label> {{ birthFormatted }}
     </div>
     <div v-if="minister.dateOfDeath" class="vital-date">

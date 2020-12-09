@@ -10,9 +10,17 @@
       </div>
     </header>
 
-    <header v-else>
+    <header v-if="minister && minister.isDeceased">
       <h1>Wall of Honor</h1>
       <h2>Deceased Ministers of the UPCI</h2>
+    </header>
+
+    <header v-if="leadershipPositionId">
+      <h1>UPCI Leadership</h1>
+    </header>
+
+    <header v-else>
+      <h1>Wall of Honor</h1>
     </header>
 
     <div class="divider">
@@ -22,6 +30,7 @@
     <MinisterBiographyComponent
       v-if="minister"
       :minister="minister"
+      :leadershipPosition="leadershipPosition"
     ></MinisterBiographyComponent>
 
     <div class="button-bar">
