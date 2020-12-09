@@ -1,4 +1,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import {
+  LeadershipPosition,
+  GENERAL_OFFICIALS_MINISTRY
+} from '@/data/leadership-position.model';
 import { Minister } from '@/data/minister.model';
 import MinisterPhotoComponent from '@/components/MinisterPhoto.vue';
 
@@ -7,6 +11,9 @@ const dateFormat = 'MMM. D, YYYY';
 @Component({ components: { MinisterPhotoComponent } })
 export default class MinisterBiographyComponent extends Vue {
   @Prop() public minister!: Minister;
+  @Prop() public leadershipPosition!: LeadershipPosition | undefined;
+
+  public IGNORED_MINISTRY_NAME = GENERAL_OFFICIALS_MINISTRY;
 
   public get deathFormatted(): string {
     if (this.minister) {
