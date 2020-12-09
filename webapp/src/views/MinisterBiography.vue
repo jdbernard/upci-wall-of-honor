@@ -10,12 +10,12 @@
       </div>
     </header>
 
-    <header v-if="minister && minister.isDeceased">
+    <header v-else-if="minister && minister.isDeceased">
       <h1>Wall of Honor</h1>
       <h2>Deceased Ministers of the UPCI</h2>
     </header>
 
-    <header v-if="leadershipPositionId">
+    <header v-else-if="leadershipPositionId">
       <h1>UPCI Leadership</h1>
     </header>
 
