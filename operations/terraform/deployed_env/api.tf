@@ -1671,7 +1671,7 @@ resource "aws_api_gateway_deployment" "api" {
       local.response_templates.list_board_members,
       local.response_templates.create_leadership_position,
       local.response_templates.list_leadership_positions,
-      "force"
+      "force-1"
     ]))
   }
 

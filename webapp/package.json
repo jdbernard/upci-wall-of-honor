@@ -1,6 +1,6 @@
 {
   "name": "upci-wall-of-honor-webapp",
-  "version": "1.1.0",
+  "version": "1.1.1-alpha",
   "description": "UPCI Wall of Honor display application.",
   "author": "Jonathan Bernard <jonathan@jdbernard.com>",
   "scripts": {

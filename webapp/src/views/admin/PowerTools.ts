@@ -4,13 +4,30 @@ import { take } from 'rxjs/operators';
 import { logService } from '@jdbernard/logging';
 import {
   Minister,
-  exactEquals,
-  deepClone,
+  exactEquals as mExactEquals,
+  deepClone as mDeepClone,
   fromDTO,
   newMinister,
   toDTO
 } from '@/data/minister.model';
 import ministersStore from '@/data/ministers.store';
+import {
+  exactEquals as lpExactEquals,
+  deepClone as lpDeepClone
+} from '@/data/leadership-position.model';
+import leadershipPositionsStore from '@/data/leadership-positions.store';
+import {
+  newBoardCategory,
+  exactEquals as bcExactEquals,
+  deepClone as bcDeepClone
+} from '@/data/board-category.model';
+import boardCategoriesStore from '@/data/board-categories.store';
+import {
+  newBoardMember,
+  exactEquals as bmExactEquals,
+  deepClone as bmDeepClone
+} from '@/data/board-member.model';
+import boardMembersStore from '@/data/board-members.store';
 import { nameDisplay } from '@/filters/name-display.filter';
 
 const logger = logService.getLogger('/admin/power-tools');
@@ -24,11 +41,33 @@ interface BatchPersistResults<T> {
 export default class PowerToolsComponent extends Vue {
   public minister = {
     newMinister,
-    deepClone,
+    deepClone: mDeepClone,
     fromDTO,
     toDTO,
-    exactEquals,
+    exactEquals: mExactEquals,
     store: ministersStore
+  };
+
+  public leadership = {
+    exactEquals: lpExactEquals,
+    deepClone: lpDeepClone,
+    store: leadershipPositionsStore
+  };
+
+  public generalBoard = {
+    categories: {
+      newBoardCategory,
+      deepClone: bcDeepClone,
+      exactEquals: bcExactEquals,
+      store: boardCategoriesStore
+    },
+
+    members: {
+      newBoardMember,
+      deepClone: bmDeepClone,
+      exactEquals: bmExactEquals,
+      store: boardMembersStore
+    }
   };
 
   public mounted() {
